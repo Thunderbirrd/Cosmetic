@@ -1,0 +1,50 @@
+header {
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+header .wrap_header {
+    background-color: white;
+    padding-top: 15px;
+}
+
+header .menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+header .menu li{
+    flex-grow: 1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+header .menu li:hover{
+    background-color: #b4ba8a;
+    cursor: pointer;
+}
+
+header .basket {
+    background-image: url("../img/basket.svg");
+    width: var(--basket-width);
+    cursor: pointer;
+} 
+
+.wrap_basket {
+    display: flex;
+    justify-content: flex-end;
+    -webkit-align-items: flex-end;
+    position: relative;
+    left: var(--basket-width);
+}
+
+#count_productes {
+    background-color: red;
+    color: white;
+    position: fixed;
+    padding: 3px;
+    font-size: 11pt;
+    border-radius: 100%;
+}
