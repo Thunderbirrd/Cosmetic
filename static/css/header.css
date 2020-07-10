@@ -48,3 +48,7 @@ header .basket {
     font-size: 11pt;
     border-radius: 100%;
 }
+
+#count_productes:hover{
+    cursor: pointer;
+}

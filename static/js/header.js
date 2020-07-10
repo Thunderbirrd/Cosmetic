@@ -36,7 +36,17 @@ const _setVisibilityShoppingBasket = () => {
     }
 }
 
+// задаёт отступы кружочка корзинки покупок
+const _setPaddingShoppingBasket = () => {
+    if (count_productes.textContent.length === 1) {
+        count_productes.style.padding = '3px 7px'
+    } else {
+        count_productes.style.padding = '3px'
+    }
+}
+
 // задаём начальные настройки кружочка корзинки покупок
+_setPaddingShoppingBasket()
 _setVisibilityShoppingBasket()
 _setPositionShoppingBasketCircle()
 
@@ -44,12 +54,7 @@ _setPositionShoppingBasketCircle()
 const setCountProductes = (count) => {
     count_productes.textContent = count
 
-    if (count_productes.textContent.length === 1) {
-        count_productes.style.padding = '3px 7px'
-    } else {
-        count_productes.style.padding = '3px'
-    }
-
+    _setPaddingShoppingBasket()
     _setVisibilityShoppingBasket()
     _setPositionShoppingBasketCircle()
 }
@@ -60,19 +65,33 @@ const setCountProductes = (count) => {
 
     elementsMenu.forEach(item => {
         item.addEventListener('click', () => {
-            //window.history.pushState({path: item.getAttribute('data-path')})
-            window.location = Paths[item.getAttribute('data-path')]
+            window.history.replaceState({
+                type: FORWARD,
+                newPath: Paths[item.getAttribute('data-path')]
+            }, '')
+
+            window.history.pushState({
+                type: DO_ACTION
+            }, '', Paths[item.getAttribute('data-path')])
+
+            window.history.back()
         })
     })
 
     const goToBasket = () => {
-        window.location = Paths.BASKET
+        window.history.replaceState({
+            type: FORWARD,
+            newPath: Paths.BASKET
+        }, '')
+
+        window.history.pushState({
+            type: DO_ACTION
+        }, '', Paths.BASKET)
+
+        window.history.back()
     }
 
     basket.addEventListener('click', goToBasket)
     count_productes.addEventListener('click', goToBasket)
 })()
-
-//для проверки
-basket.addEventListener('dblclick', () => { setCountProductes(2) })
 
