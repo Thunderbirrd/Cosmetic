@@ -26,6 +26,10 @@ header .menu li:hover{
     cursor: pointer;
 }
 
+header .menu li.active {
+    background-color: #b0be41;
+}
+
 header .basket {
     background-image: url("../img/basket.svg");
     width: var(--basket-width);
@@ -34,10 +38,7 @@ header .basket {
 
 .wrap_basket {
     display: flex;
-    justify-content: flex-end;
-    -webkit-align-items: flex-end;
-    position: relative;
-    left: var(--basket-width);
+    position: fixed;
 }
 
 #count_productes {

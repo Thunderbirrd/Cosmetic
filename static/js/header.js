@@ -16,6 +16,21 @@ window.addEventListener('scroll', () => {
 const count_productes = document.getElementById('count_productes')
 const basket = document.querySelector('.wrap_basket img')
 
+// задаёт положение корзинки покупок
+const _setPositionShoppingBasket = () => {
+    const wrapHeader = document.querySelector('.wrap_header')
+
+    const wrapHeaderBox = wrapHeader.getBoundingClientRect()
+
+    const wrapBasket = document.querySelector('.wrap_basket')
+
+    let left = wrapHeader.clientWidth + wrapHeaderBox.left
+    wrapBasket.style.left = left + 'px'
+
+    let top = wrapHeader.clientHeight + wrapHeaderBox.top
+    wrapBasket.style.top = top + 'px'
+}
+
 // задаёт положение кружочка корзинки покупок
 const _setPositionShoppingBasketCircle = () => {
     let basketBox = basket.getBoundingClientRect()
@@ -45,7 +60,8 @@ const _setPaddingShoppingBasket = () => {
     }
 }
 
-// задаём начальные настройки кружочка корзинки покупок
+// задаём начальные настройки кружочка корзинки покупок и самой корзинки
+_setPositionShoppingBasket()
 _setPaddingShoppingBasket()
 _setVisibilityShoppingBasket()
 _setPositionShoppingBasketCircle()
@@ -54,6 +70,7 @@ _setPositionShoppingBasketCircle()
 const setCountProductes = (count) => {
     count_productes.textContent = count
 
+    _setPositionShoppingBasket()
     _setPaddingShoppingBasket()
     _setVisibilityShoppingBasket()
     _setPositionShoppingBasketCircle()
@@ -94,4 +111,17 @@ const setCountProductes = (count) => {
     basket.addEventListener('click', goToBasket)
     count_productes.addEventListener('click', goToBasket)
 })()
+
+//добавляет класс active элементу меню, если соотетсвует url данному элементу
+const addClassNameActiveMenu = () => {
+    const elementsMenu = document.querySelectorAll('.menu li')
+
+    elementsMenu.forEach(item => {
+        if (Paths[item.getAttribute('data-path')] === window.location.pathname){
+            item.classList.add('active')
+        } else {
+            item.classList.remove()
+        }
+    })
+}
 

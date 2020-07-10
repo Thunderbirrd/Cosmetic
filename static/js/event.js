@@ -1,4 +1,5 @@
 window.addEventListener('resize', () => {
+    _setPositionShoppingBasket()
     _setPositionShoppingBasketCircle()
 })
 
@@ -20,6 +21,8 @@ window.onpopstate = (event) => {
 //переход по url
 //можно вставлять сюда свои функции, чтобы отлавливать переход по url
 const doActionByCurentURL = () => {
+    addClassNameActiveMenu()
+
     switch (window.location.pathname) {
         case Paths.HOME:
             console.log(window.location.pathname)
