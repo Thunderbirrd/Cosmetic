@@ -120,7 +120,7 @@ const addClassNameActiveMenu = () => {
         if (Paths[item.getAttribute('data-path')] === window.location.pathname){
             item.classList.add('active')
         } else {
-            item.classList.remove()
+            item.classList.remove('active')
         }
     })
 }
