@@ -1,3 +1,11 @@
+window.onload = () => {
+    // задаём начальные настройки кружочка корзинки покупок и самой корзинки
+    _setPositionShoppingBasket()
+    _setPaddingShoppingBasket()
+    _setVisibilityShoppingBasket()
+    _setPositionShoppingBasketCircle()
+}
+
 window.addEventListener('resize', () => {
     _setPositionShoppingBasket()
     _setPositionShoppingBasketCircle()

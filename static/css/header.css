@@ -37,7 +37,9 @@ header .basket {
 } 
 
 .wrap_basket {
+    justify-content: flex-end;
     display: flex;
+    -webkit-align-items: flex-end;
     position: fixed;
 }
 

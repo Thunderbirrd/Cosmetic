@@ -3,3 +3,27 @@
     margin: 0 auto;
     text-align: center;
 }
+
+@media screen and (max-width: 1100px){
+    .wrap {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .wrap {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 900px){
+    .wrap {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .wrap {
+        width: 100%;
+    }
+}

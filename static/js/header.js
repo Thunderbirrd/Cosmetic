@@ -60,12 +60,6 @@ const _setPaddingShoppingBasket = () => {
     }
 }
 
-// задаём начальные настройки кружочка корзинки покупок и самой корзинки
-_setPositionShoppingBasket()
-_setPaddingShoppingBasket()
-_setVisibilityShoppingBasket()
-_setPositionShoppingBasketCircle()
-
 // изменяет количество продуктов в кружочке
 const setCountProductes = (count) => {
     count_productes.textContent = count
