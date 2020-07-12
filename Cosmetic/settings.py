@@ -76,8 +76,11 @@ WSGI_APPLICATION = 'Cosmetic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'heroku_c220680016e049f',
+        'HOST': 'eu-cdbr-west-03.cleardb.net',
+        'USER': 'ba74cd430384f1',
+        'PASSWORD': '3000f7bb'
     }
 }
 
