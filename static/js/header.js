@@ -2,8 +2,8 @@ const initialHeaderPaddingTop = document.querySelector('header').style.paddingTo
 const header = document.querySelector('header')
 const main = document.querySelector('main')
 
-// при прокрутке странице делаем header фиксированным
-window.addEventListener('scroll', () => {
+// задаёт header статическое или фиксированное положение в зависимости от прокрутки страницы
+const _setPositionHeader = () => {
     if (window.pageYOffset > 0) {
         header.style.position = 'fixed'
         main.style.paddingTop = header.offsetHeight + 'px'
@@ -11,7 +11,7 @@ window.addEventListener('scroll', () => {
         header.style.position = 'static'
         main.style.paddingTop = initialHeaderPaddingTop
     }
-})
+}
 
 const count_productes = document.getElementById('count_productes')
 const basket = document.querySelector('.wrap_basket img')
