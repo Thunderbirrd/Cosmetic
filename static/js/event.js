@@ -1,10 +1,16 @@
 window.onload = () => {
+    //задаём header статическое или фиксированное положение в зависимости от прокрутки страницы
+    _setPositionHeader()
+
     // задаём начальные настройки кружочка корзинки покупок и самой корзинки
     _setPositionShoppingBasket()
     _setPaddingShoppingBasket()
     _setVisibilityShoppingBasket()
     _setPositionShoppingBasketCircle()
 }
+
+// при прокрутке странице делаем header фиксированным
+window.addEventListener('scroll', _setPositionHeader)
 
 window.addEventListener('resize', () => {
     _setPositionShoppingBasket()

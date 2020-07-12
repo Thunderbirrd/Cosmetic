@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'Cosmetic.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {#подключение бд конкретно MySQL    mysql://ba74cd430384f1:3000f7bb@eu-cdbr-west-03.cleardb.net/heroku_c220680016e049f?reconnect=true
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'heroku_c220680016e049f',
