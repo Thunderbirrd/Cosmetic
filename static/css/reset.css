@@ -1,0 +1,16 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+textarea, input, button {
+    outline: none;
+}
+
+ul, ol{
+    list-style: none;
+}
+
+li{
+    display: block;
+}
