@@ -12,24 +12,21 @@ class ShopUser(AbstractUser):
 
 
 class Category(models.Model):
-    #id = models.AutoField(primary_key=True, db_index=True)
-    name = models.TextField(verbose_name="название категории", unique=True, db_index=True)
+    name = models.CharField(verbose_name="название категории", unique=True, db_index=True, max_length=25)
 
     def __str__(self):
         return self.name
 
 
 class Brand(models.Model):
-    #id = models.AutoField(primary_key=True, db_index=True)
-    name = models.TextField(verbose_name="название бренда", unique=True, db_index=True)
+    name = models.CharField(verbose_name="название бренда", unique=True, db_index=True, max_length=25)
 
     def __str__(self):
         return self.name
 
 
 class Product(models.Model):
-    #id = models.AutoField(primary_key=True)
-    name = models.TextField(verbose_name="название товара", unique=True, db_index=True, null=False)
+    name = models.CharField(verbose_name="название товара", unique=True, db_index=True, null=False, max_length=64)
     price = models.DecimalField(verbose_name="цена", default=0, max_digits=8, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
@@ -40,8 +37,7 @@ class Product(models.Model):
 
 
 class Service(models.Model):
-    #id = models.AutoField(primary_key=True, db_index=True)
-    name = models.TextField(verbose_name="название услуги", unique=True)
+    name = models.CharField(verbose_name="название услуги", unique=True, max_length=25)
     price = models.DecimalField(verbose_name="цена", default=0, max_digits=8, decimal_places=2)
 
     def __str__(self):
@@ -49,7 +45,6 @@ class Service(models.Model):
 
 
 class Visit(models.Model):
-    #id = models.AutoField(primary_key=True, db_index=True)
     client = models.ForeignKey(ShopUser, on_delete=models.CASCADE, db_index=True)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     date = models.DateTimeField(verbose_name="время посещения", unique=True, null=False)
@@ -57,7 +52,6 @@ class Visit(models.Model):
 
 
 class Stock(models.Model):
-    #id = models.AutoField(primary_key=True, db_index=True)
     service_list = models.ManyToManyField(Service, verbose_name="список услуг")
     price = models.IntegerField(verbose_name="стоимость акции", null=False)
     datetime_1 = models.DateTimeField(verbose_name="время начала", unique=True, null=False)
