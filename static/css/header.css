@@ -31,7 +31,6 @@ header .menu li.active {
 }
 
 header .basket {
-    background-image: url("../img/shopping-cart.svg");
     width: var(--basket-width);
     cursor: pointer;
 }

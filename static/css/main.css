@@ -30,3 +30,6 @@ main {
     display: table-cell;
 }
 
+section {
+    margin-bottom: 25px;
+}
