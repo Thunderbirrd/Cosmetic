@@ -1,0 +1,12 @@
+#footer_site{
+    width: 100%;
+    text-align: center;
+}
+
+.footer_content li{
+    display: inline-block;
+}
+
+.footer_header{
+
+}
