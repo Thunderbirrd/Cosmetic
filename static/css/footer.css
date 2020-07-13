@@ -1,0 +1,18 @@
+#footer_site{
+    width: 100%;
+    text-align: center;
+    background: radial-gradient(#fff 1%, transparent 10%) 0 0, radial-gradient(rgba(0,0,0,.1) 1%, transparent 1%) 50px 50px;
+    background-color: #000;
+    background-size: 40px 40px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.footer_content{
+    color: white;
+}
+
+.social_media{
+
+
+}
