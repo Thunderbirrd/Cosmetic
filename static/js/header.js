@@ -54,9 +54,9 @@ const _setVisibilityShoppingBasket = () => {
 // задаёт отступы кружочка корзинки покупок
 const _setPaddingShoppingBasket = () => {
     if (count_productes.textContent.length === 1) {
-        count_productes.style.padding = '3px 7px'
+        count_productes.style.padding = '1px 7px'
     } else {
-        count_productes.style.padding = '3px'
+        count_productes.style.padding = '2px 3px'
     }
 }
 
