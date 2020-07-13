@@ -20,5 +20,5 @@ from Cosmetic import view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^', view.home)
+    re_path(r'^', view.home),
 ]

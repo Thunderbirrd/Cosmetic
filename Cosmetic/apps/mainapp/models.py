@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 class ShopUser(AbstractUser):
     email = models.EmailField(unique=True, verbose_name="электронная почта")
+    phone = models.CharField(unique=True, verbose_name="номер телефона", max_length=11, default="")
     is_staff = models.BooleanField(verbose_name="является ли пользователь админом", default=False)
     sale = models.FloatField(verbose_name="скидка пользователя", default=1.0)
 
