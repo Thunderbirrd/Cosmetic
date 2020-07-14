@@ -3,10 +3,7 @@ window.onload = () => {
     _setPositionHeader()
 
     // задаём начальные настройки кружочка корзинки покупок и самой корзинки
-    _setPositionShoppingBasket()
-    _setPaddingShoppingBasket()
-    _setVisibilityShoppingBasket()
-    _setPositionShoppingBasketCircle()
+    setCountProductes()
 }
 
 // при прокрутке странице делаем header фиксированным

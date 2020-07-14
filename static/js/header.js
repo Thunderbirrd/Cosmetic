@@ -61,7 +61,7 @@ const _setPaddingShoppingBasket = () => {
 }
 
 // изменяет количество продуктов в кружочке
-const setCountProductes = (count) => {
+const setCountProductes = (count=store.stateBasket.length) => {
     count_productes.textContent = count
 
     _setPositionShoppingBasket()

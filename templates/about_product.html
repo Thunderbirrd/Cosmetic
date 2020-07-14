@@ -27,11 +27,13 @@
     </div>
 
     <div>
-        <input class="count" type="text" placeholder="Количество:">
+        {% with value=1 type="number" min="1" %}
+        {% include "components/my_input.html" %}
+        {% endwith %}
     </div>
 
     <div>
-        <button class="add_product">Добавить товар</button>
+        {% include "components/my_button.html" %}
     </div>
 
 </section>
