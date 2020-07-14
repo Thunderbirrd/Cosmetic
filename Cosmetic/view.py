@@ -12,5 +12,6 @@ def shop(request):
 def contacts(request):
     return render(request, 'contacts.html')
 
+
 def shipping(request):
     return render(request, 'shipping_and_playment.html')

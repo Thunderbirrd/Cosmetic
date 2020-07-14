@@ -22,6 +22,6 @@ from Cosmetic import view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('form_basket/', include('orderapp.urls')),
-    re_path(r'^', view.home, name = 'home'),
+    path('form_basket/', include('Cosmetic.apps.orderapp.urls')),
+    re_path(r'^', view.home, name='home'),
 ]

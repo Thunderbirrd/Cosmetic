@@ -44,7 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Cosmetic.apps.mainapp'
+    'Cosmetic.apps.mainapp',
+    'Cosmetic.apps.orderapp',
+    'Cosmetic.apps.adminapp',
+    'Cosmetic.apps.authapp',
 ]
 
 MIDDLEWARE = [
