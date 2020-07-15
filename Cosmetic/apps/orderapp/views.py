@@ -35,17 +35,15 @@ def form_basket(request):
 
         thread = threading.Thread(target=return_products, args=(basket_list, False,), daemon=True)
         thread.start()
-        thread.join()
 
-        return HttpResponse(json.dumps(basket_list))
-    else:
-        return HttpResponse('Success')
+    return HttpResponse(json.dumps(basket_list))
 
 
 def return_products(product_list, immediately):
     if not immediately:
         time.sleep(10)
     # проверка заказа
+    # Если заказа нет, выполнить
     queryset = Product.objects.all()
     for product_basket in product_list:
         product = queryset.values().get(name=product_basket)
@@ -58,5 +56,7 @@ def return_products(product_list, immediately):
 
 
 def form_order(request):
+    # Определиться с полями
     # Добавить заказ в таблицу
+    # Нужно узнать id и имя клиента!
     return None
