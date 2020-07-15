@@ -7,18 +7,23 @@ const divTitle = document.querySelector(".about_product .card__title")
 //div цены товара
 const divPrice = document.querySelector(".about_product .card__price")
 
+//img товара
+const imgProduct = document.querySelector(".about_product .card__image img")
+
 //добавляем товар в корзину
 const addProductToShop = () => {
-    let product = store.stateBasket.find(item => item.title === divTitle.textContent)
-
-    if (product !== undefined) {
-        product.count += Number(inputCount.value)
+    if (store.hasItemInBasket(divTitle.textContent)) {
+        store.changeCountBasket(divTitle.textContent, Number(inputCount.value))
+        updateCountProducts(divTitle.textContent, Number(inputCount.value))
     } else {
         store.stateBasket.push({
+            src: imgProduct.src,
             title: divTitle.textContent,
             count: Number(inputCount.value),
             price: divPrice.textContent
         })
+
+        createListItem(imgProduct.src, divTitle.textContent, divPrice.textContent, Number(inputCount.value))
     }
 
     setCountProductes(store.stateBasket.length)

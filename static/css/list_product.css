@@ -4,7 +4,7 @@
 
 .list_product {
     position: fixed;
-    top: 148px;
+    top: 155px;
     right: calc(-1 * var(--width-list-product));
     box-sizing: border-box;
     background-color: white;
