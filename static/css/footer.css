@@ -13,6 +13,23 @@
 }
 
 .social_media{
+    margin-left: 80%;
+}
 
+.widget{
+    display: flex;
+    flex-direction: row;
+}
 
+.line{
+    margin-right: 20%;
+    background-color: white;
+    height: 80px;
+    width: 3px;
+    border: none;
+}
+
+.content{
+    color: white;
+    margin-top: 8%;
 }
