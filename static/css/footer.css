@@ -17,6 +17,7 @@
 }
 
 .widget{
+    margin-left: 5px;
     display: flex;
     flex-direction: row;
 }
@@ -24,16 +25,36 @@
 .line{
     margin-right: 20%;
     background-color: white;
-    height: 80px;
+    height: 85px;
     width: 5px;
     border: none;
+}
+
+.text{
+    margin-top: 7%;
+    color: white;
+    width: 50px;
+    overflow: hidden;
+    -webkit-transition: width 1s ease-out 0s;
+    -moz-transition: width 1s ease-out 0s;
+    -o-transition: width 1s ease-out 0s;
+    transition: width 1s ease-out 0s;
+}
+
+.text.hidden{
+    -webkit-transition: width 1s ease-out 0s;
+    -moz-transition: width 1s ease-out 0s;
+    -o-transition: width 1s ease-out 0s;
+    transition: width 1s ease-out 0s;
+    width: 0;
+    overflow: hidden;
+    color: white;
 }
 
 .content{
     width: 0;
     overflow: hidden;
     color: white;
-    margin-top: 8%;
     -webkit-transition: width 1s ease-out 0s;
     -moz-transition: width 1s ease-out 0s;
     -o-transition: width 1s ease-out 0s;
