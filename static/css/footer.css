@@ -34,9 +34,18 @@
     overflow: hidden;
     color: white;
     margin-top: 8%;
+    -webkit-transition: width 1s ease-out 0s;
+    -moz-transition: width 1s ease-out 0s;
+    -o-transition: width 1s ease-out 0s;
+    transition: width 1s ease-out 0s;
 }
 
 .content.show{
     width: 100px;
+    overflow: visible;
+}
+
+.content.show:hover{
+    width: 20px;
     overflow: visible;
 }
