@@ -42,10 +42,4 @@
 
 .content.show{
     width: 100px;
-    overflow: visible;
-}
-
-.content.show:hover{
-    width: 20px;
-    overflow: visible;
 }
