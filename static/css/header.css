@@ -70,6 +70,7 @@ header .dropdown_content{
     display: flex;
     -webkit-align-items: flex-end;
     position: fixed;
+    top: 113px
 }
 
 #count_productes {

@@ -51,7 +51,7 @@ const doActionByCurentURL = () => {
             console.log(window.location.pathname)
             return;
         case Paths.BASKET:
-            console.log(window.location.pathname)
+            showListProduct()
             return;
         default:
             console.log(`not found url: ${window.location.pathname}`)
