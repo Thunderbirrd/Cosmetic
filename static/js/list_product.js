@@ -93,7 +93,7 @@ const _createCount = (title, count) => {
     input.maxLength = "2"
     input.minLength = "1"
     input.value = count
-    input.onkeypress = (e) => {
+    input.onkeypress = (event) => {
         const data = String.fromCharCode(e.charCode)
 
         if (data < "0" || data > "9") event.preventDefault();

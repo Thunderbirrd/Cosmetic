@@ -1,5 +1,5 @@
 //input количества товара
-const inputCount = document.querySelector(".about_product .my_input")
+const inputCount = document.querySelector(".about_product .input_count")
 
 //div названия товара
 const divTitle = document.querySelector(".about_product .card__title")

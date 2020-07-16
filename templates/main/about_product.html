@@ -27,8 +27,8 @@
     </div>
 
     <div>
-        {% with value=1 type="number" min="1" max="99" %}
-        {% include "../components/my_input.html" %}
+        {% with value=1 minLength="1" maxLength="2" className="input_count" size="2" %}
+        {% include "../components/number_input.html" %}
         {% endwith %}
         
         {% include "../components/my_button.html" %}
