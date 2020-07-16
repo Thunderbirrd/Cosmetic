@@ -98,11 +98,13 @@ const _createCount = (title, count) => {
 
         if (data < "0" || data > "9") event.preventDefault();
     }
-    input.onchange = () => {
+    input.oninput = () => {
         store.changeCountBasket(title, input.value)
 
         setAmountProductes()
         setTextInSpanAmount()
+
+        console.log(store.stateBasket[0].count)
     }
 
     const buttonMinus = document.createElement("button")

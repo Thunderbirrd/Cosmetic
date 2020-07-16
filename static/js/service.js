@@ -1,6 +1,6 @@
 const selected = document.querySelector(".selected");
 const options_container = document.querySelector(".options_container");
-const optionslist = document.querySelector(".option");
+const optionslist = document.querySelectorAll(".option");
 
 selected.addEventListener("click", () => {
     options_container.classList.toggle("active");
