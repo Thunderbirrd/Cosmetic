@@ -1,5 +1,5 @@
 :root {
-    --width-list-product: 366px;
+    --width-list-product: 400px;
 }
 
 .list_product {
@@ -55,11 +55,13 @@
 .list_product .delete button {
     border: none;
     background: transparent;
+    opacity: 0.5;
     height: 25px;
 }
 
 .list_product .delete button:hover {
     cursor: pointer;
+    opacity: 1;
 }
 
 .list_product .delete img {
@@ -93,13 +95,28 @@
     grid-column: 3;
 }
 
+.list_product .count input {
+    margin: 0 5px;
+    text-align: center;
+}
+
+.list_product .count button {
+    width: 22px;
+    padding: 2px 5px;
+    border-radius: 100%;
+    color: white;
+    background-color: rgb(0, 151, 0);
+    border: none;
+    cursor: pointer;
+}
+
 .list_product .delete {
     grid-row: 2;
     grid-column: 3;
 }
 
 .list_product .checkout {
-    margin: 20px 10px 0 10px;
+    margin: 10px 10px 0 10px;
 }
 
 .checkout button {
@@ -110,4 +127,8 @@
     color: white;
     padding: 10px;
     cursor: pointer;
+}
+
+.amount {
+    font-size: 1.2rem;
 }

@@ -1,13 +1,22 @@
 const list_product = document.querySelector(".list_product")
 const ulListProduct = list_product.querySelector("ul")
 const listIsEmpty = document.querySelector(".listIsEmpty")
+const divAmount = document.querySelector(".list_product .amount")
+const spanAmount = divAmount.querySelector("span")
+
+//задаёт сумму в span 
+const setTextInSpanAmount = () => {
+    spanAmount.textContent = store.getAmountBasket()
+}
 
 //переключает видимость сообщение о том что пуста ли корзина покупок
 const togleDisplayListIsEmpty = () => {
     if (store.stateBasket.length === 0) {
         listIsEmpty.style.display = "block"
+        divAmount.style.display = "none"
     } else {
         listIsEmpty.style.display = "none"
+        divAmount.style.display = "block"
     }
 }
 
@@ -79,16 +88,52 @@ const _createCount = (title, count) => {
     div.classList.add("count")
     
     const input = document.createElement("input")
-    input.type = "number"
-    input.max = "99"
-    input.min = "1"
+    input.type = "text"
+    input.size = "2"
+    input.maxLength = "2"
+    input.minLength = "1"
     input.value = count
+    input.onkeypress = (e) => {
+        const data = String.fromCharCode(e.charCode)
+
+        if (data < "0" || data > "9") event.preventDefault();
+    }
     input.onchange = () => {
-        console.log(title, input.value)
         store.changeCountBasket(title, input.value)
+
+        setAmountProductes()
+        setTextInSpanAmount()
     }
 
+    const buttonMinus = document.createElement("button")
+    buttonMinus.textContent = "-"
+    buttonMinus.addEventListener("click", () => {
+        if (Number(input.value) === 1) return;
+
+        input.value--
+
+        store.changeCountBasket(title, input.value)
+        
+        setAmountProductes()
+        setTextInSpanAmount()
+    })
+
+    const buttonPlus = document.createElement("button")
+    buttonPlus.textContent = "+"
+    buttonPlus.addEventListener("click", () => {
+        if (Number(input.value) === 99) return;
+
+        input.value++
+
+        store.changeCountBasket(title, input.value)
+
+        setAmountProductes()
+        setTextInSpanAmount()
+    })
+
+    div.appendChild(buttonMinus)
     div.appendChild(input)
+    div.appendChild(buttonPlus)
 
     return div 
 }
@@ -96,14 +141,15 @@ const _createCount = (title, count) => {
 //удаляет в всплывающем окне запись
 const deleteListItem = (title) => {
     //удаляем из store
-    let index = store.stateBasket.findIndex( item => item.title === title )
-    store.stateBasket.splice(index, 1)
+    store.deleteProductFromBasket(title)
 
     //удаляем из списка
     ulListProduct.removeChild(document.querySelector(`.list_product li[data-title='${title}']`))
     
-    //проверяем видимость
+    //проверяем видимость надписи, что список пуст
     togleDisplayListIsEmpty()
+
+    setAmountProductes()
 }
 
 const _createDelete = (title) => {
@@ -116,8 +162,8 @@ const _createDelete = (title) => {
     })
     
     const img = document.createElement("img")
-    img.src = "/static/img/X.svg"
-    img.alt = "X"
+    img.src = "/static/img/basket.png"
+    img.alt = "удалить"
 
     button.appendChild(img)
 

@@ -44,7 +44,7 @@ const _setPositionShoppingBasketCircle = () => {
 
 // задаёт видимость кружочка корзинки покупок
 const _setVisibilityShoppingBasket = () => {
-    if (count_productes.textContent && Number(count_productes.textContent) !== 0) {
+    if (store.getAmountBasket() > 0) {
         count_productes.style.visibility = 'visible'
     } else {
         count_productes.style.visibility = 'hidden'
@@ -61,8 +61,8 @@ const _setPaddingShoppingBasket = () => {
 }
 
 // изменяет количество продуктов в кружочке
-const setCountProductes = (count=store.stateBasket.length) => {
-    count_productes.textContent = count
+const setAmountProductes = (amount=store.getAmountBasket()) => {
+    count_productes.innerHTML = `${amount} &#8381;`
 
     _setPositionShoppingBasket()
     _setPaddingShoppingBasket()

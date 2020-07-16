@@ -3,7 +3,7 @@ window.onload = () => {
     _setPositionHeader()
 
     // задаём начальные настройки кружочка корзинки покупок и самой корзинки
-    setCountProductes()
+    setAmountProductes()
 }
 
 // при прокрутке странице делаем header фиксированным
@@ -51,6 +51,7 @@ const doActionByCurentURL = () => {
             console.log(window.location.pathname)
             return;
         case Paths.BASKET:
+            setTextInSpanAmount()
             showListProduct()
             return;
         default:

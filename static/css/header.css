@@ -79,7 +79,7 @@ header .dropdown_content{
     position: fixed;
     padding: 3px;
     font-size: 11pt;
-    border-radius: 100%;
+    border-radius: 20px;
 }
 
 #count_productes:hover{
