@@ -94,7 +94,7 @@ const _createCount = (title, count) => {
     input.minLength = "1"
     input.value = count
     input.onkeypress = (event) => {
-        const data = String.fromCharCode(e.charCode)
+        const data = String.fromCharCode(event.charCode)
 
         if (data < "0" || data > "9") event.preventDefault();
     }
@@ -108,7 +108,8 @@ const _createCount = (title, count) => {
     }
 
     const buttonMinus = document.createElement("button")
-    buttonMinus.textContent = "-"
+    buttonMinus.classList.add("minus")
+    buttonMinus.innerHTML = "&#8211;"
     buttonMinus.addEventListener("click", () => {
         if (Number(input.value) === 1) return;
 
@@ -121,6 +122,7 @@ const _createCount = (title, count) => {
     })
 
     const buttonPlus = document.createElement("button")
+    buttonPlus.classList.add("plus")
     buttonPlus.textContent = "+"
     buttonPlus.addEventListener("click", () => {
         if (Number(input.value) === 99) return;

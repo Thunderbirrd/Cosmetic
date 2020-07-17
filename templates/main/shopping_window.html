@@ -1,7 +1,51 @@
+<!-- вводит пользователь: номер, адрес, фамилия, имя, тип доставки -->
+<!-- программа: id, время доставки -->
+
 <section class="shopping_window">
     <h2>Оформеление заказа</h2>
-    <ul></ul>
-    <div class="amount"></div>
-    <input type="text" placeholder="Телефон">
-    <button>Купить</button>
+
+    <div class="wrap">
+        <div>
+            <ul></ul>
+            <div class="amount"></div>
+        </div>
+
+        <div class=".data_fields">
+
+            <p class="number">
+                +7
+                {% with type="text" placeholder="Номер" %}
+                {% include "../components/my_input.html" %}
+                {% endwith %}
+            </p>
+
+            <div class="address">
+                {% with type="text" placeholder="Город" %}
+                {% include "../components/my_input.html" %}
+                {% endwith %}
+
+                {% with type="text" placeholder="Улица" %}
+                {% include "../components/my_input.html" %}
+                {% endwith %}
+
+                {% with type="text" placeholder="Дом" %}
+                {% include "../components/my_input.html" %}
+                {% endwith %}
+            </div>
+
+            {% with type="text" placeholder="Фамилия" %}
+            {% include "../components/my_input.html" %}
+            {% endwith %}
+
+            {% with type="text" placeholder="Имя" %}
+            {% include "../components/my_input.html" %}
+            {% endwith %}
+
+            {% with type="text" placeholder="Тип доставки" %}
+            {% include "../components/my_input.html" %}
+            {% endwith %}
+
+            <button>Купить</button>
+        </div>
+    </div>
 </section>

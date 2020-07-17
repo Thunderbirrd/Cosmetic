@@ -66,6 +66,7 @@ header .dropdown_content{
 }
 
 .wrap_basket {
+    z-index: -1;
     justify-content: flex-end;
     display: flex;
     -webkit-align-items: flex-end;
