@@ -14,9 +14,11 @@ class Order(models.Model):
 
     CITY = "YKT"
     OUT = "OUT"
+    SAM = "SAM"
     ORDER_TYPE_CHOICES = (
         (CITY, 'По городу'),
-        (OUT, 'Почтой РФ')
+        (OUT, 'Почтой РФ'),
+        (SAM, 'Самовывоз')
     )
 
     client_phone = models.CharField(verbose_name='номер клиента', max_length=13, default="", db_index=True)
