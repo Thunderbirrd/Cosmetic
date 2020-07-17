@@ -9,7 +9,7 @@
 
 .service_content{
     margin-top: 5%;
-    margin-left: 10%;
+    margin-left: 5%;
     display: flex;
     flex-direction: row;
 }
@@ -151,4 +151,25 @@
 
 .btn:hover::before{
     height: 360%;
+}
+
+.approve{
+    text-align: center;
+}
+
+.approvebtn{
+    background-color: #2f3640;
+    outline: none;
+    position: relative;
+    display: inline-grid;
+    color: white;
+    font-size: 14px;
+    font-family: "Lucida Grande";
+    text-decoration: none;
+    margin: 15px 0;
+    border: 1px solid #ff7675;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 1s all ease;
 }
