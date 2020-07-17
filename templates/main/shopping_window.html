@@ -3,49 +3,64 @@
 
 <section class="shopping_window">
     <h2>Оформеление заказа</h2>
+    <div class="list">
+        <ul>
+            <li>
+                <div class="img_product">
+                    <img width="80" height="80" src="./static/img/200x200.jpeg" alt="Фото продукта">
+                </div>
+                <div class="title">
+                    <p>Палмолив нежный гель</p>
+                </div>
+                <div class="price">
+                    <p>Цена: 100 &#8381;</p>
+                </div>
+                <div class="count">
+                    <p>Количество: 10</p>
+                </div>
+                <div class="amount">
+                    <p>Сумма: 1000 &#8381;</p>
+                </div>
+            </li>
+        </ul>
+        <div class="total_amount"></div>
+    </div>
 
-    <div class="wrap">
-        <div>
-            <ul></ul>
-            <div class="amount"></div>
+    <div class="data_fields">
+
+        <div class="number">
+            <span class="prefix">+7</span>
+            {% with type="text" placeholder="Номер" minlength="10" maxlength="10" %}
+            {% include "../components/my_input.html" %}
+            {% endwith %}
         </div>
 
-        <div class=".data_fields">
-
-            <p class="number">
-                +7
-                {% with type="text" placeholder="Номер" %}
-                {% include "../components/my_input.html" %}
-                {% endwith %}
-            </p>
-
-            <div class="address">
-                {% with type="text" placeholder="Город" %}
-                {% include "../components/my_input.html" %}
-                {% endwith %}
-
-                {% with type="text" placeholder="Улица" %}
-                {% include "../components/my_input.html" %}
-                {% endwith %}
-
-                {% with type="text" placeholder="Дом" %}
-                {% include "../components/my_input.html" %}
-                {% endwith %}
-            </div>
-
-            {% with type="text" placeholder="Фамилия" %}
+        <div class="address">
+            {% with type="text" placeholder="Город" %}
             {% include "../components/my_input.html" %}
             {% endwith %}
 
-            {% with type="text" placeholder="Имя" %}
+            {% with type="text" placeholder="Улица" %}
             {% include "../components/my_input.html" %}
             {% endwith %}
 
-            {% with type="text" placeholder="Тип доставки" %}
+            {% with type="text" placeholder="Дом" %}
             {% include "../components/my_input.html" %}
             {% endwith %}
-
-            <button>Купить</button>
         </div>
+
+        {% with type="text" placeholder="Фамилия" %}
+        {% include "../components/my_input.html" %}
+        {% endwith %}
+
+        {% with type="text" placeholder="Имя" %}
+        {% include "../components/my_input.html" %}
+        {% endwith %}
+
+        {% with type="text" placeholder="Тип доставки" %}
+        {% include "../components/my_input.html" %}
+        {% endwith %}
+
+        <button class="buy">Купить</button>
     </div>
 </section>

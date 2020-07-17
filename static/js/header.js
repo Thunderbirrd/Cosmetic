@@ -76,30 +76,12 @@ const setAmountProductes = (amount=store.getAmountBasket()) => {
 
     elementsMenu.forEach(item => {
         item.addEventListener('click', () => {
-            window.history.replaceState({
-                type: FORWARD,
-                newPath: Paths[item.getAttribute('data-path')]
-            }, '')
-
-            window.history.pushState({
-                type: DO_ACTION
-            }, '', Paths[item.getAttribute('data-path')])
-
-            window.history.back()
+            Urls.goToUrl(Paths[item.getAttribute('data-path')])
         })
     })
 
     const goToBasket = () => {
-        window.history.replaceState({
-            type: FORWARD,
-            newPath: Paths.BASKET
-        }, '')
-
-        window.history.pushState({
-            type: DO_ACTION
-        }, '', Paths.BASKET)
-
-        window.history.back()
+        Urls.goToUrl(Paths.BASKET)
     }
 
     basket.addEventListener('click', goToBasket)

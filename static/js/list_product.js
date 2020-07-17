@@ -30,18 +30,18 @@ const hideListProduct = () => {
     list_product.classList.remove("show")
 }
 
-jQuery(function($){
-    $(document).mouseup(function (e){ // событие клика по веб-документу
+jQuery(function ($) {
+    $(document).mouseup(function (e) { // событие клика по веб-документу
         let list_product = $(".list_product")
         let basket = $(".wrap_basket")
 
-		if (!list_product.is(e.target) // если клик был не по списку товаров
+        if (!list_product.is(e.target) // если клик был не по списку товаров
             && list_product.has(e.target).length === 0 // и не по дочерним элементам списка товаров
             && !basket.is(e.target)// и не по корзине
-            && basket.has(e.target).length === 0){ // и не по дочерним элементам корзины
-                hideListProduct()
-		}
-	});
+            && basket.has(e.target).length === 0) { // и не по дочерним элементам корзины
+            hideListProduct()
+        }
+    });
 });
 
 const _createImgProduct = (src) => {
@@ -62,7 +62,7 @@ const _createImgProduct = (src) => {
 const _createTitle = (title) => {
     const div = document.createElement("div")
     div.classList.add("title")
-    
+
     const p = document.createElement("p")
     p.textContent = title
 
@@ -74,19 +74,19 @@ const _createTitle = (title) => {
 const _createPrice = (price) => {
     const div = document.createElement("div")
     div.classList.add("price")
-    
+
     const p = document.createElement("p")
     p.textContent = price
 
     div.appendChild(p)
 
-    return div 
+    return div
 }
 
 const _createCount = (title, count) => {
     const div = document.createElement("div")
     div.classList.add("count")
-    
+
     const input = document.createElement("input")
     input.type = "text"
     input.size = "2"
@@ -116,7 +116,7 @@ const _createCount = (title, count) => {
         input.value--
 
         store.changeCountBasket(title, input.value)
-        
+
         setAmountProductes()
         setTextInSpanAmount()
     })
@@ -139,7 +139,7 @@ const _createCount = (title, count) => {
     div.appendChild(input)
     div.appendChild(buttonPlus)
 
-    return div 
+    return div
 }
 
 //удаляет в всплывающем окне запись
@@ -149,7 +149,7 @@ const deleteListItem = (title) => {
 
     //удаляем из списка
     ulListProduct.removeChild(document.querySelector(`.list_product li[data-title='${title}']`))
-    
+
     //проверяем видимость надписи, что список пуст
     togleDisplayListIsEmpty()
 
@@ -164,7 +164,7 @@ const _createDelete = (title) => {
     button.addEventListener("click", () => {
         deleteListItem(title)
     })
-    
+
     const img = document.createElement("img")
     img.src = "/static/img/basket.png"
     img.alt = "удалить"
@@ -195,15 +195,19 @@ const updateCountProducts = (title, count) => {
     document.querySelector(`.list_product li[data-title='${title}'] .count input`).value = count
 }
 
-//оформляем заказ при клике на кнопку
-document.querySelector(".checkout button").addEventListener("click", () => {
-    const data = {}
+const addClickListenerForCheckoutButton = () => {
+    //оформляем заказ при клике на кнопку
+    document.querySelector(".checkout button").addEventListener("click", () => {
+        const data = {}
 
-    const list = ulListProduct.children
+        const list = ulListProduct.children
 
-    for (let i = 0; i < list.length; i++) {
-        data[list[i].dataset.title] = list[i].querySelector(".count input").value      
-    }
+        for (let i = 0; i < list.length; i++) {
+            data[list[i].dataset.title] = list[i].querySelector(".count input").value
+        }
 
-    Urls.checkout(data) 
-})
+        Urls.checkout(data)
+
+        loadingShoppingList()
+    })
+}

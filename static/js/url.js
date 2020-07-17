@@ -1,4 +1,16 @@
 const Urls = {
+    goToUrl(url){
+        window.history.replaceState({
+            type: FORWARD,
+            newPath: url
+        }, '')
+
+        window.history.pushState({
+            type: DO_ACTION
+        }, '', url)
+
+        window.history.back()
+    },
     async checkout(data) {
         let responce = await fetch("/form_basket/", {
             method: "Post",

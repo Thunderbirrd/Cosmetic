@@ -127,7 +127,7 @@
     margin: 10px 10px 0 10px;
 }
 
-.checkout button {
+.list_product .checkout button {
     font-size: 1.2rem;
     width: 100%;
     border: none;
@@ -137,6 +137,6 @@
     cursor: pointer;
 }
 
-.amount {
+.list_product .amount {
     font-size: 1.2rem;
 }
