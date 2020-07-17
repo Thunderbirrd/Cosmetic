@@ -11,7 +11,21 @@ class Order(models.Model):
         (READY, 'готов к выдаче'),
         (ON_WAY, 'в пути')
     )
-    client = models.ForeignKey(m.ShopUser, on_delete=models.CASCADE)
+
+    CITY = "YKT"
+    OUT = "OUT"
+    SAM = "SAM"
+    ORDER_TYPE_CHOICES = (
+        (CITY, 'По городу'),
+        (OUT, 'Почтой РФ'),
+        (SAM, 'Самовывоз')
+    )
+
+    client_phone = models.CharField(verbose_name='номер клиента', max_length=13, default="", db_index=True)
+    client_name = models.CharField(verbose_name='имя клиента', max_length=25, default="")
+    client_surname = models.CharField(verbose_name='фамилия клиента', max_length=25, default="")
+    client_address = models.CharField(verbose_name='адрес клиента', max_length=192, default="")
+    order_type = models.CharField(verbose_name='тип доставки', max_length=3, choices=ORDER_TYPE_CHOICES, default="")
     created = models.DateTimeField(verbose_name='создан', auto_now_add=True)
     status = models.CharField(verbose_name='статус', max_length=4, choices=ORDER_STATUS_CHOICES, default=PROCEEDED)
 
