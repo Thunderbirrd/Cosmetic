@@ -9,17 +9,11 @@
         {% endif %}
         {{ login_form.as_p }}
         <br>
-        <input class="form-control" type="submit" value="войти">
+        <input class="log_in" type="submit" value="Войти">
     </form>
-    <button class="btn btn-round form-control">
+    <button class="btnreg">
         <a href="{% url 'auth:register' %}" class="">
             Зарегистрироваться
         </a>
-    </button>
-
-    <button class="btn btn-round form-control">
-    </button>
-
-    <button class="btn btn-round form-control">
     </button>
 {% endblock %}

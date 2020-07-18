@@ -2,22 +2,19 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>
-        {% block title %}
-            {{ title|title }}
-        {% endblock %}
-    </title>
+    {% load static %}
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
         <div class="login">
-            <div class="h2 text-center head">
+            <div class="h2 text-center head" style="font-size: 40px; text-align: center ">
                 Аутентификация
-            </div>            
-            
-            {% block content %}
+            </div>
 
+            {% block content %}
             {% endblock %}
+
         </div>
 	</div>
 </body>
