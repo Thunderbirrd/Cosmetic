@@ -2,6 +2,7 @@ header {
     width: 100%;
     top: 0;
     left: 0;
+    position: fixed;
 }
 
 header .wrap_header {
@@ -85,4 +86,19 @@ header .dropdown_content{
 
 #count_productes:hover{
     cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+    header {
+        bottom: 0;
+        top: auto;
+    }
+
+    header h1 {
+        display: none;
+    }
+
+    header .wrap_header {
+        padding-top: 0;
+    }
 }

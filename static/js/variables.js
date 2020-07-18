@@ -8,3 +8,6 @@ const FORWARD = 'FORWARD'
 
 //не совершать никаких действий при переходе на новый url
 const NOT_DO_POPSTATE = 'NOT_DO_POPSTATE'
+
+//макимальная ширина для мобильного устройства
+const WIDTH_MOBILE_SCREEN = 400

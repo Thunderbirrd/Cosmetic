@@ -13,6 +13,7 @@ window.onload = () => {
 window.addEventListener('scroll', _setPositionHeader)
 
 window.addEventListener('resize', () => {
+    _setPositionHeader()
     _setPositionShoppingBasket()
     _setPositionShoppingBasketCircle()
 })
