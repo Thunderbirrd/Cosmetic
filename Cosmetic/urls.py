@@ -26,5 +26,4 @@ urlpatterns = [
     re_path(r'^form_service/', include('Cosmetic.apps.serviceapp.urls')),
     re_path(r'^auth/', include('Cosmetic.apps.authapp.urls', namespace='auth')),
     re_path(r'^', view.home, name='home'),
-    re_path(r'^contacts', view.contacts),
 ]

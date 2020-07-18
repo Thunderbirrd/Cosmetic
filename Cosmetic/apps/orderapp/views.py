@@ -13,7 +13,7 @@ def form_basket(request):
     is_correct = True
     lst = []
     basket_list = json.load(request)  # Список в корзине
-    queryset = Product.objects.all()  # Set из таблицы
+    queryset = Product.objects.filter(is_active=True)  # Set из таблицы
 
     # создание пустого заказа
     new_order = Order()
