@@ -14,21 +14,13 @@
     grid-row: 2;
 }
 
-.shopping_window .data_fields .address{
+.shopping_window .data_fields .address {
     display: flex;
     flex-direction: column;
 }
 
 :root {
     --margin-bottom: 10px;
-}
-
-.shopping_window .data_fields .address input{
-    margin-bottom: var(--margin-bottom);
-}
-
-.shopping_window .data_fields > input {
-    margin-bottom: var(--margin-bottom);
 }
 
 .shopping_window .data_fields {
@@ -46,26 +38,33 @@
     padding: 10px;
 }
 
-:root {
-    --width-prefix: 20px;
-    --margin-right-prefix: 2px
+.shopping_window .data_fields .field.number {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto auto 1fr;
 }
 
-.shopping_window .data_fields .number{
-    display: flex;
-    justify-content: center;
+.shopping_window .data_fields .number .prefix {
+    margin-right: 3px;
+}
+
+.shopping_window .data_fields .field p{
+    margin-right: 7px;
+}
+
+.shopping_window .data_fields .field{
+    display: grid;
+    grid-template-columns: auto 1fr;
     align-items: center;
     margin-bottom: var(--margin-bottom);
 }
 
-.shopping_window .data_fields .number .prefix {
-    width: var(--width-prefix);
-    text-align: center;
-    margin-right: var(--margin-right-prefix);
+.shopping_window .data_fields .field.city{
+    grid-template-columns: auto auto auto 1fr;    
 }
 
-.shopping_window .data_fields .number input {
-    width: calc(100% - var(--width-prefix) - 2px - var(--margin-right-prefix));
+.shopping_window .data_fields .field.city .additionally {
+    display: grid;
 }
 
 .shopping_window .list {
@@ -75,8 +74,8 @@
 
 .shopping_window .list li {
     display: grid;
-    grid-template-columns: repeat(auto, 4);
-    grid-template-rows: auto auto;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: 80px 20px;
 }
 
 .shopping_window .list .img_product {
@@ -100,7 +99,7 @@
     justify-content: center;
     align-items: center;
     grid-column: 2;
-    grid-row: 1/2;        
+    grid-row: 1/3;
 }
 
 .shopping_window .list .count {
@@ -108,7 +107,7 @@
     justify-content: center;
     align-items: center;
     grid-column: 3;
-    grid-row: 1/2;    
+    grid-row: 1/3;
 }
 
 .shopping_window .list .amount {
@@ -116,5 +115,71 @@
     justify-content: center;
     align-items: center;
     grid-column: 4;
-    grid-row: 1/2;        
+    grid-row: 1/3;
+}
+
+.cityYakutsk {
+    display: flex;
+    align-items: center;
+    margin-right: 7px;
+}
+
+.cityYakutsk input, label {
+    cursor: pointer;
+}
+
+#isCityYakutsk{
+    margin: 0 2px 2px 0;
+}
+
+@media screen and (max-width: 1249px) {
+    .shopping_window .list li {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+    }
+
+    .shopping_window .list .price {
+        grid-column: 2;
+        grid-row: 1/3;
+        align-items: flex-start;
+        margin-top: 25px;
+    }
+
+    .shopping_window .list .count {
+        grid-column: 2;
+        grid-row: 1/3;
+        align-items: flex-end;
+        margin-bottom: 25px;
+    }
+
+    .shopping_window .list .amount {
+        grid-column: 3;
+    }
+}
+
+@media screen and (max-width: 1049px) {
+    .shopping_window .list li {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+    }
+
+    .shopping_window .list .price {
+        grid-column: 2;
+        grid-row: 1/3;
+        align-items: flex-start;
+        margin-top: 15px;
+    }
+
+    .shopping_window .list .count {
+        grid-column: 2;
+        grid-row: 1/3;
+        align-items: center;
+        margin-bottom: 0;
+    }
+
+    .shopping_window .list .amount {
+        grid-column: 2;
+        align-items: flex-end;
+        margin-bottom: 15px;
+    }
 }

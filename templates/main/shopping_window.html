@@ -28,38 +28,66 @@
 
     <div class="data_fields">
 
-        <div class="number">
+        <div class="field number">
+            <p>Номер телефона:</p>
             <span class="prefix">+7</span>
-            {% with type="text" placeholder="Номер" minlength="10" maxlength="10" %}
+            {% with type="text" placeholder="Номер телефона" minlength="10" maxlength="10" %}
             {% include "../components/my_input.html" %}
             {% endwith %}
         </div>
 
         <div class="address">
-            {% with type="text" placeholder="Город" %}
-            {% include "../components/my_input.html" %}
-            {% endwith %}
+            <div class="field city">
+                <p>Город:</p>
+                <div class="cityYakutsk">
+                    <input type="checkbox" name="isCityYakutsk" id="isCityYakutsk">
+                    <label for="isCityYakutsk">Якутск</label>
+                </div>
 
-            {% with type="text" placeholder="Улица" %}
-            {% include "../components/my_input.html" %}
-            {% endwith %}
+                <p class="additionally">или</p>
+                
+                <div class="additionally">
+                    {% with type="text" placeholder="Город" %}
+                    {% include "../components/my_input.html" %}
+                    {% endwith %}
+                </div>
+            </div>
 
-            {% with type="text" placeholder="Дом" %}
+            <div class="field additionally">
+                <p>Улица:</p>
+                {% with type="text" placeholder="Улица" %}
+                {% include "../components/my_input.html" %}
+                {% endwith %}
+            </div>
+
+            <div class="field additionally">
+                <p>Номер дома:</p>
+                {% with type="text" placeholder="Дом" %}
+                {% include "../components/my_input.html" %}
+                {% endwith %}
+            </div>
+        </div>
+
+        <div class="field">
+            <p>Фамилия:</p>
+            {% with type="text" placeholder="Фамилия" %}
             {% include "../components/my_input.html" %}
             {% endwith %}
         </div>
 
-        {% with type="text" placeholder="Фамилия" %}
-        {% include "../components/my_input.html" %}
-        {% endwith %}
+        <div class="field">
+            <p>Имя:</p>
+            {% with type="text" placeholder="Имя" %}
+            {% include "../components/my_input.html" %}
+            {% endwith %}
+        </div>
 
-        {% with type="text" placeholder="Имя" %}
-        {% include "../components/my_input.html" %}
-        {% endwith %}
-
-        {% with type="text" placeholder="Тип доставки" %}
-        {% include "../components/my_input.html" %}
-        {% endwith %}
+        <div class="field">
+            <p>Тип доставки:</p>
+            {% with type="text" placeholder="Тип доставки" %}
+            {% include "../components/my_input.html" %}
+            {% endwith %}
+        </div>
 
         <button class="buy">Купить</button>
     </div>
