@@ -11,7 +11,7 @@
     margin-right: auto;
     width: 100%;
     height: 35px;
-    background-color: #c8a4c2;
+    background-color: #d8d8d8;
     border-radius: 8px;
     font-size: 18px;
     font-family: "Lucida Grande";
@@ -23,7 +23,23 @@
     margin-top: 10px;
     width: 40%;
     text-align: center;
-    background-color: #c8a4c2;
+    background-color: #858585;
     border-radius: 8px;
     alignment: center;
+    height: 35px;
+}
+.register{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    text-align: center;
+    background-color: #858585;
+    border: 1px solid black;
+    border-radius: 8px;
+    alignment: center;
+    height: 35px;
+}
+.texthelp{
+    font-size: 20px;
 }
