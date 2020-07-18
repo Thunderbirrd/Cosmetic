@@ -8,7 +8,6 @@ from Cosmetic.apps.orderapp.models import Order
 from Cosmetic.apps.orderapp.models import OrderItem
 
 
-
 @csrf_exempt  # Почитать что это!
 def form_basket(request):
     is_correct = True
