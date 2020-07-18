@@ -5,13 +5,19 @@ from .settings import LOW_CACHE
 
 
 def home(request):
+    title = 'Главная'
     if LOW_CACHE:
         key = 'products'
         product_list = cache.get(key)
         if product_list is None:
             product_list = Product.objects.filter(is_active=True)
             cache.set(key, product_list)
-        return render(request, product_list, 'index.html')
+
+        content = {
+            'title': title,
+            'products': product_list
+        }
+        return render(request, 'index.html', content)
 
 
 def contacts(request):
