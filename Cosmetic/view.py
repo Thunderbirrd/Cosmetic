@@ -18,11 +18,3 @@ def home(request):
             'products': product_list
         }
         return render(request, 'index.html', content)
-
-
-def contacts(request):
-    return render(request, 'contacts.html')
-
-
-def shipping(request):
-    return render(request, 'shipping_and_playment.html')
