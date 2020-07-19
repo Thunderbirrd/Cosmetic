@@ -1,30 +1,18 @@
 <main>
     <div class="wrap">
-
-
-        <section>
+        <section class="shop">
             <div class="row">
-
-                {% include "components/column_card.html" %}
-                {% include "components/column_card.html" %}
-                {% include "components/column_card.html" %}
-
+                {% for product in products  %}
+                    {% with id=product.id image=product.image name=product.name price=product.price %}
+                        {% include "components/column_card.html" %}
+                    {% endwith %}
+                {% endfor %}
             </div>
 
             <div class="row">
-
-                {% include "components/column_card.html" %}
-                {% include "components/column_card.html" %}
-                {% include "components/column_card.html" %}
-
             </div>
 
             <div class="row">
-
-                {% include "components/column_card.html" %}
-                {% include "components/column_card.html" %}
-                {% include "components/column_card.html" %}
-
             </div>
         </section>
 

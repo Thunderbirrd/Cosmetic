@@ -208,6 +208,6 @@ const addClickListenerForCheckoutButton = () => {
 
         Urls.checkout(data)
 
-        loadingShoppingList()
+        showShoppingWindow()
     })
 }

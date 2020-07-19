@@ -18,16 +18,29 @@ main {
     color: #F72464;
 }
 
-.card{
-    margin-left: var(--test);
-}
-
 .row{
-    display: table-row;
+    display: flex;
+    justify-content: space-between;
+    overflow-y: hidden;
+    overflow-x: auto;
 }
 
-.col-md3{
-    display: table-cell;
+.row .card:not(:last-child) {
+    margin-right: 10px;
+}
+
+.row .card:hover {
+    cursor: pointer;
+}
+
+.row::-webkit-scrollbar{
+    -webkit-appearance: none;
+    height: 7px;
+}
+
+.row::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 section {

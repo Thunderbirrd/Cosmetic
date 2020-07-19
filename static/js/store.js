@@ -11,7 +11,18 @@ const store = {
     stateBasket: [],
 
     //хранилище списка магазина
-    stateShop: [],
+    //{
+    // name
+    // price
+    // category
+    // brand
+    // image
+    // quantity
+    // is_active 
+    //}
+    get stateShop() {
+        return arrayProducts
+    },
 
     hasItemInBasket(title) {
         return this.stateBasket.findIndex(item => item.title === title) > -1
@@ -22,7 +33,7 @@ const store = {
     },
 
     deleteProductFromBasket(title) {
-        let index = this.stateBasket.findIndex( item => item.title === title )
+        let index = this.stateBasket.findIndex(item => item.title === title)
         this.stateBasket.splice(index, 1)
     },
 

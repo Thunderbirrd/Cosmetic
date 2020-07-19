@@ -37,13 +37,33 @@
 </head>
 
 <body>
+    <script>
+        const arrayProducts = []
 
+        // name
+        // price
+        // category
+        // brand
+        // image
+        // quantity
+        // is_active 
+        
+        {% for product in products  %}
+            arrayProducts.push({ 
+                id: {{ product.id }},
+                name: "{{ product.name }}",
+                price: parseInt({{ product.price }}),
+                category: "{{ product.category }}",
+                brand: "{{ product.brand }}",
+                image: "{{ product.image }}",
+                quantity: {{ product.quantity }},
+                is_active: "{{ product.is_active }}" === "True"
+            })
+        {% endfor %}
+    </script>
 
     {% include "header.html" %}
     {% include "main.html" %}
-    {% for product in products  %}
-    <p>{{ product.id }}</p>
-    {% endfor %}
     {% include "footer.html" %}
 
     <script src="./static/js/store.js"></script>
@@ -57,6 +77,7 @@
     <script src="./static/js/list_product.js"></script>
     <script src="./static/js/shop_basket.js"></script>
     <script src="./static/js/about_product.js"></script>
+    <script src="./static/js/shop.js"></script>
     <script src="./static/js/media.js"></script>
     <script src="./static/js/service.js"></script>
     <script src="./static/js/shopping_window.js"></script>

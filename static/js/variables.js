@@ -14,3 +14,9 @@ const WIDTH_MOBILE_SCREEN = 400
 
 //проверка на то что сейчас размер экрана мобильного устройства
 const isWidthMobileScreen = () => window.innerWidth <= WIDTH_MOBILE_SCREEN
+
+//ширина маленьких экранов
+const WIDTH_SMALL_SCREEN = 1000
+
+//проверка на то что сейчас размер маленький экрана 
+const isWidthSmallScreen = () => window.innerWidth <= WIDTH_SMALL_SCREEN

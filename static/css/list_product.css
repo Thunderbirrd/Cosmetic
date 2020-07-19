@@ -140,3 +140,36 @@
 .list_product .amount {
     font-size: 1.2rem;
 }
+
+@media screen and (max-width: 1000px) {
+    .list_product {
+        left: calc(-1 * var(--width-list-product));
+        right: unset;
+        border-radius: 0 20px 20px 0;
+        -webkit-transition: left 1s ease-out 0s;
+        -moz-transition: left 1s ease-out 0s;
+        -o-transition: left 1s ease-out 0s;
+        transition: left 1s ease-out 0s;
+    }
+    .list_product.show {
+        left: 0;
+    }
+}
+
+@media screen and (max-width: 416px) {
+    :root {
+        --width-list-product: 100%;
+    }
+    .list_product {
+        top: 52px;
+    }
+    .list_product li {
+        grid-template-columns: 80px auto auto;
+    }
+}
+
+@media screen and (max-height: 547px) {
+    .list_product ul {
+        max-height: calc(100vh - 196px);
+    }
+}

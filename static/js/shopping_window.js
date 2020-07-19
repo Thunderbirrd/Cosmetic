@@ -81,7 +81,15 @@ const loadingShoppingList = () => {
     })
 }
 
-//loadingShoppingList()
+loadingShoppingList()
+
+const shoppingWindow = document.querySelector(".shopping_window")
+
+//показ shopping_window
+const showShoppingWindow = () => {
+    scrollToElement(shoppingWindow)
+    loadingShoppingList()
+}
 
 //в поле номер телефона вводить можно только числа
 document.querySelector(".shopping_window .data_fields .number").addEventListener("keypress", (event) => {

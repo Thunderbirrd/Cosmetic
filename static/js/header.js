@@ -2,6 +2,12 @@ const initialHeaderPaddingTop = document.querySelector('header').style.paddingTo
 const header = document.querySelector('header')
 const main = document.querySelector('main')
 
+//прокрутка к элементу element
+const scrollToElement = (element) => {
+    element.scrollIntoView()
+    scrollBy(0, -1 * header.offsetHeight)
+}
+
 // задаёт header статическое или фиксированное положение в зависимости от прокрутки страницы
 const _setPositionHeader = () => {
     if (isWidthMobileScreen()) {
@@ -29,8 +35,12 @@ const _setPositionShoppingBasket = () => {
         return;
     }
 
-    let left = wrapHeader.clientWidth + wrapHeaderBox.left
-    wrapBasket.style.left = left + 'px'
+    if (isWidthSmallScreen()) {
+        wrapBasket.style.left = 10 + 'px'
+    } else {
+        let left = wrapHeader.clientWidth + wrapHeaderBox.left
+        wrapBasket.style.left = left + 'px'
+    }
 
     let top = wrapHeader.clientHeight + wrapHeaderBox.top
     wrapBasket.style.top = top + 'px'
