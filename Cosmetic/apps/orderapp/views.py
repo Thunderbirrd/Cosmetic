@@ -14,6 +14,8 @@ def form_basket(request):
     is_correct = True
     lst = []
     basket_list = json.load(request)  # Список в корзине
+    if not basket_list:
+        return HttpResponse('Error. Empty request.')
     queryset = Product.objects.filter(is_active=True)  # Set из таблицы
     # создание пустого заказа
     new_order = Order()
@@ -58,7 +60,7 @@ def form_basket(request):
 
 
 def return_products(product_list, order_id):
-    time.sleep(30)
+    time.sleep(15)
     orders = Order.objects.filter(id=order_id)
     order = orders.get(id=order_id)
     # проверка на наличие заказа
