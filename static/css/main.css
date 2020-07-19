@@ -33,3 +33,9 @@ main {
 section {
     padding: 25px;
 }
+
+@media screen and (max-width: 449px) {
+    section {
+        padding: 5px;
+    } 
+}

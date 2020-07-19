@@ -58,7 +58,7 @@ def form_basket(request):
 
 
 def return_products(product_list, order_id):
-    time.sleep(30)
+    time.sleep(3)
     orders = Order.objects.filter(id=order_id)
     order = orders.get(id=order_id)
     # проверка на наличие заказа

@@ -42,7 +42,7 @@ const _createCountShoppingWindow = (count) => {
     div.classList.add("count")
 
     const p = document.createElement("p")
-    p.innerHTML = `Количество: ${count};`
+    p.innerHTML = `Количество: ${count}`
 
     div.appendChild(p)
 
@@ -81,7 +81,7 @@ const loadingShoppingList = () => {
     })
 }
 
-loadingShoppingList()
+//loadingShoppingList()
 
 //в поле номер телефона вводить можно только числа
 document.querySelector(".shopping_window .data_fields .number").addEventListener("keypress", (event) => {
@@ -92,21 +92,11 @@ document.querySelector(".shopping_window .data_fields .number").addEventListener
 
 (() => {
     const additionallyFields = document.querySelectorAll(".shopping_window .data_fields .address .additionally")
-    const initDisplayFields = []
 
-    //сохраняем начальный display у additionallyFields (не должна изменятся их последовательность) 
-    additionallyFields.forEach((field, key) => {
-        initDisplayFields[key] = field.style.display
-    })
-
-    //при клике что город Якутск убираем поля название города, улицы и номер дома
+    //при клике что город Якутск показываем поля название улицы и номер дома, убираем поле город
     document.getElementById("isCityYakutsk").onchange = (ev) => {
-        additionallyFields.forEach((field, key) => {
-            if (ev.target.checked) {
-                field.style.display = "none"
-            } else {
-                field.style.display = initDisplayFields[key]
-            }
+        additionallyFields.forEach(field => {
+            field.classList.toggle("hide")
         })
     }
 })()

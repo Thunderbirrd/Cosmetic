@@ -30,3 +30,15 @@ h3 {
 h4 {
     font-size: 1.25em;
 }
+
+@media screen and (max-width: 405px) {
+    html {
+        font-size: 0.75em;
+    }
+}
+
+@media screen and (max-width: 329px) {
+    html {
+        font-size: 0.7em;
+    }
+}

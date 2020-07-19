@@ -3,10 +3,10 @@ header {
     top: 0;
     left: 0;
     position: fixed;
+    background-color: white;
 }
 
 header .wrap_header {
-    background-color: white;
     padding-top: 15px;
 }
 

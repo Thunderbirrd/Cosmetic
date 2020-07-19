@@ -4,7 +4,7 @@ const main = document.querySelector('main')
 
 // задаёт header статическое или фиксированное положение в зависимости от прокрутки страницы
 const _setPositionHeader = () => {
-    if (document.documentElement.clientWidth < WIDTH_MOBILE_SCREEN) {
+    if (isWidthMobileScreen()) {
         main.style.paddingTop = initialHeaderPaddingTop
     } else {
         main.style.paddingTop = header.offsetHeight + 'px'
@@ -23,7 +23,7 @@ const _setPositionShoppingBasket = () => {
     const wrapBasket = document.querySelector('.wrap_basket')
 
     
-    if (document.documentElement.clientWidth < WIDTH_MOBILE_SCREEN) {
+    if (isWidthMobileScreen()) {
         wrapBasket.style.left = 10 + 'px'
         wrapBasket.style.top = 10 + 'px'
         return;

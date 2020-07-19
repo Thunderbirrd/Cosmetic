@@ -11,3 +11,6 @@ const NOT_DO_POPSTATE = 'NOT_DO_POPSTATE'
 
 //макимальная ширина для мобильного устройства
 const WIDTH_MOBILE_SCREEN = 400
+
+//проверка на то что сейчас размер экрана мобильного устройства
+const isWidthMobileScreen = () => window.innerWidth <= WIDTH_MOBILE_SCREEN
