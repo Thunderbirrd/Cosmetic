@@ -5,8 +5,8 @@
     <form class="form-horizontal" action="{% url 'auth:register' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <p>
-            <label for="id_phone">Номер телефона:</label>
-            <input type="text" name="phone" maxlength="13" class="form-control" required="" id="id_phone">
+            <label for="id_phone">Номер телефона: (+7)</label>
+            <input type="text" name="phone" maxlength="10" class="form-control" required="" id="id_phone">
         </p>
         <p>
             <label for="id_email">Электронная почта:</label>
