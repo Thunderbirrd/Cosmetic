@@ -27,11 +27,11 @@ class Brand(models.Model):
 
 class Product(models.Model):
     name = models.CharField(verbose_name="название товара", unique=True, db_index=True, null=False, max_length=64)
-    price = models.DecimalField(verbose_name="цена", default=0, max_digits=8, decimal_places=2)
+    price = models.PositiveIntegerField(verbose_name="цена", default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="product_img/", blank=True)
-    quantity = models.PositiveIntegerField(verbose_name='количество на складе', default=0)
+    quantity = models.PositiveIntegerField(verbose_name='количество на складе', default=0, null=False)
     is_active = models.BooleanField(verbose_name='активен ли продукт', default=True)
 
     def __str__(self):
@@ -40,7 +40,7 @@ class Product(models.Model):
 
 class Service(models.Model):
     name = models.CharField(verbose_name="название услуги", unique=True, max_length=25)
-    price = models.DecimalField(verbose_name="цена", default=0, max_digits=8, decimal_places=2)
+    price = models.PositiveIntegerField(verbose_name="цена", default=0)
 
     def __str__(self):
         return self.name
@@ -50,12 +50,12 @@ class Visit(models.Model):
     client = models.ForeignKey(ShopUser, on_delete=models.CASCADE, db_index=True)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     date = models.DateTimeField(verbose_name="время посещения", unique=True, null=False)
-    price = models.IntegerField(verbose_name="стоимость посещения", null=False)
+    price = models.PositiveIntegerField(verbose_name="стоимость посещения", null=False, default=0)
 
 
 class Stock(models.Model):
     service_list = models.ManyToManyField(Service, verbose_name="список услуг")
-    price = models.IntegerField(verbose_name="стоимость акции", null=False)
+    price = models.PositiveIntegerField(verbose_name="стоимость акции", null=False, default=0)
     datetime_1 = models.DateTimeField(verbose_name="время начала", unique=True, null=False)
     datetime_2 = models.DateTimeField(verbose_name="время конца", unique=True, null=False)
     expires = models.DateField(verbose_name="дата окончания акции")
