@@ -5,10 +5,20 @@ const main = document.querySelector('main')
 //прокрутка к элементу element
 const scrollToElement = (element) => {
     element.scrollIntoView()
-    scrollBy(0, -1 * header.offsetHeight)
+
+    let top = element.getBoundingClientRect().top
+    let delta = header.offsetHeight - top
+    scrollBy(0, -1 * delta)
 }
 
-// задаёт header статическое или фиксированное положение в зависимости от прокрутки страницы
+const scrollToAboutProduct = () => { scrollToElement(aboutProduct) }
+const scrollToShoppingWindow = () => { scrollToElement(shoppingWindow) }
+const scrollToShop = () => { scrollToElement(shop) }
+const scrollToShippingAndPlayment = () => { scrollToElement(shipping_and_playment) }
+const scrollToContacts = () => { scrollToElement(contacts) }
+const scrollToService = () => { scrollToElement(service) }
+
+//задаём header отступы main в зависимости от ширины экрана (ширина мобильного устройтва или компьютера)
 const _setPositionHeader = () => {
     if (isWidthMobileScreen()) {
         main.style.paddingTop = initialHeaderPaddingTop

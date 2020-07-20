@@ -1,5 +1,7 @@
+const shop = document.querySelector(".shop")
+
 //замена прокрутки по оси OY на ось OX
-document.querySelectorAll(".shop .row").forEach(el => {
+shop.querySelectorAll(".row").forEach(el => {
     el.addEventListener("wheel", (e) => {
         e = e || event
 
@@ -13,7 +15,7 @@ document.querySelectorAll(".shop .row").forEach(el => {
 })
 
 //при щелчке по карточке в магазине показывать подробную информацию о продукте
-document.querySelectorAll(".shop .card").forEach(el => {
+shop.querySelectorAll(".card").forEach(el => {
     el.addEventListener("click", () => {
         showAboutProduct(el.dataset.id)
     })

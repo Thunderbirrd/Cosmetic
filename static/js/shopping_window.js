@@ -87,8 +87,14 @@ const shoppingWindow = document.querySelector(".shopping_window")
 
 //показ shopping_window
 const showShoppingWindow = () => {
-    scrollToElement(shoppingWindow)
+    shoppingWindow.classList.remove("hide")
+    scrollToShoppingWindow()
     loadingShoppingList()
+}
+
+//спрятать shopping_window
+const hideShoppingWindow = () => {
+    shoppingWindow.classList.add("hide")
 }
 
 //в поле номер телефона вводить можно только числа
@@ -122,22 +128,26 @@ const nameInput = shoppingWindow.querySelector(".data_fields .name .my_input")
 
 const surnameInput = shoppingWindow.querySelector(".data_fields .surname .my_input")
 
-const orderTypeInput = shoppingWindow.querySelector(".data_fields .order_type .my_input")
+const orderTypeInput = document.getElementById("order_type")
+
+//подъезд квартира
 
 //событие покупки товаров при клике по кнопке "Купить"
 document.querySelector(".shopping_window .data_fields .buy").onclick = () => {
     //id, address, phone, name, surname, order_type
 
     const id = store.stateCheckout.id
-    const address = cityCheckbox.checked 
-        ?"Якутск" 
-        :`${cityInput.value} ${streetInput.value} ${homeInput.value}`
+    const address = cityCheckbox.checked
+        ? "Якутск"
+        : `${cityInput.value} ${streetInput.value} ${homeInput.value}`
     const phone = phoneInput.value
     const name = nameInput.value
     const surname = surnameInput.value
-    const orderType = orderTypeInput.value
+    const orderType = orderTypeInput.value;
 
-    console.log(id, address, phone, name, surname, orderType)
+    (async () => {
+        showMessage(await Urls.buyProducts(id, address, phone, name, surname, orderType))
+    })()
 
-    Urls.buyProducts(id, address, phone, name, surname, orderType)
+    hideShoppingWindow()
 }

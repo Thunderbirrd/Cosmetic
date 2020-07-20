@@ -210,6 +210,7 @@ const addClickListenerForCheckoutButton = () => {
 
         Urls.checkout(data)
 
+        hideListProduct()
         showShoppingWindow()
     })
 }

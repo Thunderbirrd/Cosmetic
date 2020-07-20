@@ -1,5 +1,5 @@
 window.onload = () => {
-    //задаём header статическое или фиксированное положение в зависимости от прокрутки страницы
+    //задаём header отступы main в зависимости от ширины экрана (ширина мобильного устройтва или компьютера)
     _setPositionHeader()
 
     // задаём начальные настройки кружочка корзинки покупок и самой корзинки
@@ -7,10 +7,13 @@ window.onload = () => {
 
     //добавляем событие клика для оформления покупок в корзину
     addClickListenerForCheckoutButton()
+
+    //делаем действия при начальной загрузке страницы
+    doActionByCurentURL()
 }
 
 // при прокрутке странице делаем header фиксированным
-window.addEventListener('scroll', _setPositionHeader)
+// window.addEventListener('scroll', _setPositionHeader)
 
 window.addEventListener('resize', () => {
     _setPositionHeader()
@@ -22,15 +25,20 @@ window.onpopstate = (event) => {
     switch (event.state.type) {
         case DO_ACTION:
             doActionByCurentURL()
-            return;
+            break;
         case FORWARD:
             window.history.forward()
-            return;
+            break;
         case NOT_DO_POPSTATE:
-            return;
+            break;
         default:
-            return;
+            break;
     }
+}
+
+//выключаю прокрутку страницы автоматически
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
 }
 
 //переход по url
@@ -40,29 +48,26 @@ const doActionByCurentURL = () => {
 
     switch (window.location.pathname) {
         case Paths.HOME:
-            console.log(window.location.pathname)
-            return;
+            scrollToShop()
+            break;
         case Paths.SHOP:
-            console.log(window.location.pathname)
-            return;
+            scrollToShop()
+            break;
         case Paths.SHIPPING_AND_PLAYMENT:
-            console.log(window.location.pathname)
-            return;
+            scrollToShippingAndPlayment()
+            break;
         case Paths.SERVICES:
-            console.log(window.location.pathname)
-            return;
+            scrollToService()
+            break;
         case Paths.CONTACTS:
-            console.log(window.location.pathname)
-            return;
+            scrollToContacts()
+            break;
         case Paths.BASKET:
             setTextInSpanAmount()
             showListProduct()
-            return;
+            break;
         default:
             console.log(`not found url: ${window.location.pathname}`)
-            return;
+            break;
     }
 }
-
-//делаем действия при начальной загрузке страницы
-doActionByCurentURL()

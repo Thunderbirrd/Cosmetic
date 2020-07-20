@@ -2,6 +2,10 @@ main {
     margin-top: calc(-1 * var(--basket-width) + 5);
 }
 
+main .hide {
+    display: none;
+}
+
 .card__title{
     color: #222;
     font-family: 'Lucida Grande';

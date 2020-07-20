@@ -23,3 +23,7 @@ const isWidthSmallScreen = () => window.innerWidth <= WIDTH_SMALL_SCREEN
 
 //статическая папка
 const STATIC = "/static/"
+
+const shipping_and_playment = document.querySelector(".shipping_and_playment")
+const contacts = document.querySelector(".contacts")
+const service = document.getElementById("service")

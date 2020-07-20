@@ -34,6 +34,6 @@ const Urls = {
             })
         })
 
-        console.log(await responce.json())
+        return await responce.json()
     }
 }
