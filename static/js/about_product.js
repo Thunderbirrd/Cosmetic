@@ -13,7 +13,7 @@ const showAboutProduct = (id) => {
     const product = store.stateShop.find(product => product.id === id)
 
     aboutProductTitle.textContent = product.name
-    aboutProductImage.src = product.image
+    aboutProductImage.src = STATIC + product.image
     aboutProductPrice.textContent = product.price
 
     scrollToElement(aboutProduct)

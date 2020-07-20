@@ -20,3 +20,6 @@ const WIDTH_SMALL_SCREEN = 1000
 
 //проверка на то что сейчас размер маленький экрана 
 const isWidthSmallScreen = () => window.innerWidth <= WIDTH_SMALL_SCREEN
+
+//статическая папка
+const STATIC = "/static/"

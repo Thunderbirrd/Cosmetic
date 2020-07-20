@@ -24,6 +24,16 @@ const store = {
         return arrayProducts
     },
 
+    _stateCheckout: {},
+
+    get stateCheckout() {
+        return this._stateCheckout
+    },
+
+    set stateCheckout(value) {
+        this._stateCheckout = {...value}
+    },
+
     hasItemInBasket(title) {
         return this.stateBasket.findIndex(item => item.title === title) > -1
     },

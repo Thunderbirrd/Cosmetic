@@ -1,6 +1,8 @@
 <div class="card" data-id="{{ id }}">
     <div class="card__image">
-        <img src="{{ image }}" alt="product">
+        {% load static %}
+        {% static "" as baseUrl %}
+        <img src="{{ baseUrl }}{{ image }}" alt="product">
     </div>
 
     <div class="card__title">{{ name }}</div>

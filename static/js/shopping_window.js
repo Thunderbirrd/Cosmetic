@@ -108,3 +108,36 @@ document.querySelector(".shopping_window .data_fields .number").addEventListener
         })
     }
 })()
+
+const cityCheckbox = document.getElementById("isCityYakutsk")
+const cityInput = shoppingWindow.querySelector(".data_fields .city .my_input")
+
+const streetInput = shoppingWindow.querySelector(".data_fields .street .my_input")
+
+const homeInput = shoppingWindow.querySelector(".data_fields .home .my_input")
+
+const phoneInput = shoppingWindow.querySelector(".data_fields .number .my_input")
+
+const nameInput = shoppingWindow.querySelector(".data_fields .name .my_input")
+
+const surnameInput = shoppingWindow.querySelector(".data_fields .surname .my_input")
+
+const orderTypeInput = shoppingWindow.querySelector(".data_fields .order_type .my_input")
+
+//событие покупки товаров при клике по кнопке "Купить"
+document.querySelector(".shopping_window .data_fields .buy").onclick = () => {
+    //id, address, phone, name, surname, order_type
+
+    const id = store.stateCheckout.id
+    const address = cityCheckbox.checked 
+        ?"Якутск" 
+        :`${cityInput.textContent} ${streetInput.textContent} ${homeInput.textContent}`
+    const phone = phoneInput.textContent
+    const name = nameInput.textContent
+    const surname = surnameInput.textContent
+    const orderType = orderTypeInput.textContent
+
+    console.log(id, address, phone, name, surname, orderType)
+
+    Urls.buyProducts(id, address, phone, name, surname, orderType)
+}

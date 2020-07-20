@@ -20,8 +20,20 @@ const Urls = {
             body: JSON.stringify(data)
         })
 
-        let result = await responce.json()
+        store.stateCheckout = await responce.json()
+    },
+    async buyProducts(id, address, phone, name, surname, order_type) {
+        let responce = await fetch("/form_basket/form_order/", {
+            method: "Post",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                id,
+                list: {address, phone, name, surname, order_type}
+            })
+        })
 
-        console.log(result)
+        console.log(await responce.json())
     }
 }

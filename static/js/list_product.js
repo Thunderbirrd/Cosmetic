@@ -203,7 +203,9 @@ const addClickListenerForCheckoutButton = () => {
         const list = ulListProduct.children
 
         for (let i = 0; i < list.length; i++) {
-            data[list[i].dataset.title] = list[i].querySelector(".count input").value
+            let product = store.stateShop.find(item => item.name === list[i].dataset.title )
+
+            data[product.id] = Number(list[i].querySelector(".count input").value)
         }
 
         Urls.checkout(data)
