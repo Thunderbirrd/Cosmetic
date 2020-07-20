@@ -131,11 +131,11 @@ document.querySelector(".shopping_window .data_fields .buy").onclick = () => {
     const id = store.stateCheckout.id
     const address = cityCheckbox.checked 
         ?"Якутск" 
-        :`${cityInput.textContent} ${streetInput.textContent} ${homeInput.textContent}`
-    const phone = phoneInput.textContent
-    const name = nameInput.textContent
-    const surname = surnameInput.textContent
-    const orderType = orderTypeInput.textContent
+        :`${cityInput.value} ${streetInput.value} ${homeInput.value}`
+    const phone = phoneInput.value
+    const name = nameInput.value
+    const surname = surnameInput.value
+    const orderType = orderTypeInput.value
 
     console.log(id, address, phone, name, surname, orderType)
 
