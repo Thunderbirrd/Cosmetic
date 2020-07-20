@@ -173,3 +173,14 @@
     overflow: hidden;
     transition: 1s all ease;
 }
+
+@media screen and (max-width: 780px) {
+    .service_content{
+    margin-top: 5%;
+    margin-left: 5%;
+    display: table;
+}
+    .cont_time{
+    margin-top: 5%;
+}
+}
