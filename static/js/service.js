@@ -17,7 +17,8 @@ optionslist.forEach(o => {
 
 buttom.forEach(item => {
     item.addEventListener("click", () => {
-        buttons.classList.remove("active");
+        document.querySelectorAll(".active").forEach(b => {b.classList
+            .remove("active")});
         item.classList.add("active");
     });
 });
