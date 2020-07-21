@@ -4,6 +4,7 @@ header {
     left: 0;
     position: fixed;
     background-color: white;
+    z-index: 1;
 }
 
 header .wrap_header {
