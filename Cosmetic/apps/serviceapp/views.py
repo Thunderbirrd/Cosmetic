@@ -1,18 +1,20 @@
 import json
 from django.shortcuts import render
+from Cosmetic.apps.mainapp import models
+from django.contrib.auth.decorators import login_required
 
 
+# Формирование визита НУЖЕН ДЕБАГ
+@login_required
 def form_service(request):
     queryset = json.load(request)
-    # Оформление услуги для клиента
+    queryset = queryset['list']
+    visit = models.Visit()
+    visit.client = request.user.id
+    visit.date = queryset['date']
+    visit.service = models.Service.get_id_by_name(queryset['service'])
+    visit.price = models.ShopUser.get_sale(visit.client) * models.Service.get_price(visit.service)
 
-    # С 9: 30 до 20, 1, 5 часа без перерывов:
-    # 9: 30 - 11
-    # 11 - 12: 30
-    # 12: 30 - 14
-    # 14 - 15: 30
-    # 15: 30 - 17
-    # 17 - 18: 30
-    # 18: 30 - 20
-    # Выходные: среда, воскресенье
-    return None
+    visit.save()
+
+    return render(request, 'index.html')

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'Cosmetic.apps.orderapp',
     'Cosmetic.apps.adminapp',
     'Cosmetic.apps.authapp',
+    'Cosmetic.apps.serviceapp',
 ]
 
 MIDDLEWARE = [

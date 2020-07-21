@@ -10,6 +10,11 @@ class ShopUser(AbstractUser):
     def __str__(self):
         return self.email
 
+    @staticmethod
+    def get_sale(idx):
+        user = ShopUser.objects.filter(id=idx).first()
+        return user.sale
+
 
 class Category(models.Model):
     name = models.CharField(verbose_name="название категории", unique=True, db_index=True, max_length=25)
@@ -44,6 +49,16 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
+
+    @staticmethod
+    def get_price(idx):
+        service = Service.objects.filter(id=idx).first()
+        return service.price
+
+    @staticmethod
+    def get_id_by_name(name):
+        service = Service.objects.filter(name=name).first()
+        return service.id
 
 
 class Visit(models.Model):
