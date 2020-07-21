@@ -12,7 +12,7 @@ class ShopUser(AbstractUser):
 
     @staticmethod
     def get_sale(idx):
-        user = ShopUser.objects.filter(id=idx).first()
+        user = ShopUser.objects.get(id=idx)
         return user.sale
 
 
