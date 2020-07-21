@@ -22,4 +22,4 @@ def form_service(request):
     visit.save()
 
     return render(request, 'index.html')
-    # return HttpResponse("response") для проверки
+    # return HttpResponse("response") # для проверки
