@@ -35,7 +35,8 @@ def login(request):
     content = {
         'title': title,
         'login_form': login_form,
-        'next': next
+        'next': next,
+        'auth': True,
     }
 
     return render(request, 'authapp/login.html', content)
