@@ -64,7 +64,7 @@ class Service(models.Model):
 class Visit(models.Model):
     client = models.ForeignKey(ShopUser, on_delete=models.CASCADE, db_index=True)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    date = models.DateTimeField(verbose_name="время посещения", unique=True, null=False)
+    date = models.CharField(verbose_name="время посещения", unique=True, null=False, default="", max_length=32)
     price = models.PositiveIntegerField(verbose_name="стоимость посещения", null=False, default=0)
 
 
