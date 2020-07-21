@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.cache import cache
-from .apps.mainapp.models import Product
+from .apps.mainapp.models import Product, Visit
 from .settings import LOW_CACHE
 
 
@@ -15,6 +15,17 @@ def home(request):
 
         content = {
             'title': title,
-            'products': product_list
+            'products': product_list,
+            'occupied_dates': service(),
         }
         return render(request, 'index.html', content)
+
+
+def service():
+    visit_list = Visit.objects.all()
+    occupied_dates = []
+
+    for visit in visit_list:
+        occupied_dates.append({'date': visit.date[:10], 'time': visit.date[11:]})
+
+    return occupied_dates

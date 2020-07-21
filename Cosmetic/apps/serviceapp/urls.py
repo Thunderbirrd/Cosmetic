@@ -6,5 +6,5 @@ from . import views
 app_name = "serviceapp"
 
 urlpatterns = [
-    path('', views.form_service, name='from_service')
+    path('', views.form_service, name='form_service')
 ]
