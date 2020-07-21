@@ -7,20 +7,8 @@
         {% if next %}
             <input type="hidden" name="next" value="{{ next }}">
         {% endif %}
+
         {{ login_form.as_p}}
-{#    <ul class="errorlist nonfield"><li>Пожалуйста, введите правильный телефон и пароль.#}
-{#        Поле пароль может быть чувствительно к регистру.</li></ul>#}
-{#    <p>#}
-{#        <label for="id_username" style="font-size: 18px"> Телефон: (+7)</label>#}
-{#         <input type="tel" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="10"#}
-{#                class="form-control" required id="id_username" placeholder="введите телефон" style="height: 25px">#}
-{#    </p>#}
-{#    <p>#}
-{#         <label for="id_password"  style="font-size: 18px"> Пароль: </label>#}
-{#         <input type="password" name="password" autocomplete="current-password"#}
-{#                class="form-control" required id="id_password" placeholder="введите пароль" style="height: 25px">#}
-{#    </p>#}
-{#        <br>#}
         <input class="log_in" type="submit" value="Войти">
     </form>
     <button class="btnreg">

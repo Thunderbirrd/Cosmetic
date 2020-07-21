@@ -5,6 +5,14 @@ from django import forms
 
 
 class ShopUserLoginForm(AuthenticationForm):
+
+    def get_invalid_login_error(self):
+        return forms.ValidationError(
+            self.error_messages['invalid_login'],
+            code='invalid_login',
+            params={'username': 'телефон'},
+        )
+
     class Meta:
         model = ShopUser
         fields = ('phone', 'password')
@@ -15,6 +23,7 @@ class ShopUserLoginForm(AuthenticationForm):
             self.fields[fieldname].label = 'Телефон: (+7)'
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+
 
 class ShopUserRegisterForm(UserCreationForm):
     class Meta:
@@ -52,6 +61,3 @@ class ShopUserEditForm(UserChangeForm):
         user.username = user.phone
         user.save()
         return user
-
-
-
