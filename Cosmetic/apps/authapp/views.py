@@ -23,6 +23,14 @@ def login(request):
                 return HttpResponseRedirect(request.POST['next'])
             else:
                 return HttpResponseRedirect(reverse('home'))
+        else:
+            content = {
+                'title': title,
+                'login_form': login_form,
+                'next': next,
+                'auth': False,
+            }
+            return render(request, 'authapp/login.html', content)
 
     content = {
         'title': title,
