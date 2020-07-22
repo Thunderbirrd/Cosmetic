@@ -31,7 +31,7 @@ const store = {
     },
 
     set stateCheckout(value) {
-        this._stateCheckout = {...value}
+        this._stateCheckout = value
     },
 
     hasItemInBasket(title) {

@@ -128,7 +128,7 @@ const nameInput = shoppingWindow.querySelector(".data_fields .name .my_input")
 
 const surnameInput = shoppingWindow.querySelector(".data_fields .surname .my_input")
 
-const orderTypeInput = document.getElementById("order_type")
+const orderTypeTitle = shoppingWindow.querySelector("#order_type .title")
 
 //подъезд квартира
 
@@ -143,7 +143,7 @@ document.querySelector(".shopping_window .data_fields .buy").onclick = () => {
     const phone = phoneInput.value
     const name = nameInput.value
     const surname = surnameInput.value
-    const orderType = orderTypeInput.value;
+    const orderType = orderTypeTitle.dataset.value;
 
     (async () => {
         showMessage(await Urls.buyProducts(id, address, phone, name, surname, orderType))
@@ -152,3 +152,25 @@ document.querySelector(".shopping_window .data_fields .buy").onclick = () => {
     hideShoppingWindow()
     scrollToShop()
 }
+
+//список видов доставок
+const orderType = document.getElementById("order_type")
+
+//переключение класса active
+document.querySelector("#order_type .title").addEventListener("click", () => {
+    orderType.classList.toggle("active")
+})
+
+//прячит список типов доставок
+const hideOrderTypeList = () => {
+    orderType.classList.remove("active")
+}
+
+//выбор пункта из списка
+orderType.querySelectorAll(".order_type_option").forEach(el => {
+    el.addEventListener("click", () => {
+        orderTypeTitle.textContent = el.textContent
+        orderTypeTitle.dataset.value = el.dataset.value
+        hideOrderTypeList()
+    })
+})

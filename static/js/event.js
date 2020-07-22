@@ -90,12 +90,24 @@ jQuery(function ($) {
         const options_container = $(".options_container")
         const selected = $(".selected")
 
-        if (!options_container.is(e.target) && 
+        if (!options_container.is(e.target) &&
             options_container.has(e.target).length === 0 &&
-            !selected.is(e.target) && 
+            !selected.is(e.target) &&
             selected.has(e.target).length === 0) {
 
             hideOptionsContainer()
+        }
+
+        //закрываем если пикнуто не по order_type_list_options или не по его дочерним элементам
+        const orderTypeTitle = $("#order_type .title")
+        const orderTypeListOptions = $("#order_type .order_type_list_options")
+
+        if (!orderTypeTitle.is(e.target) &&
+            orderTypeTitle.has(e.target).length === 0 &&
+            !orderTypeListOptions.is(e.target) &&
+            orderTypeListOptions.has(e.target).length === 0) {
+
+            hideOrderTypeList()
         }
     });
 });

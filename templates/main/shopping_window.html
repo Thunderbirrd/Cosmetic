@@ -1,7 +1,8 @@
 <!-- вводит пользователь: номер, адрес, фамилия, имя, тип доставки -->
 <!-- программа: id, время доставки -->
 
-<section class="shopping_window hide">
+<!-- <section class="shopping_window hide"> -->
+<section class="shopping_window">
     <h2>Оформление заказа</h2>
     <div class="list">
         <ul>
@@ -81,11 +82,16 @@
 
         <div class="field order_type">
             <p>Тип доставки:</p>
-            <select name="order_type" id="order_type">
-                <option value="YKT">По городу</option>
-                <option value="OUT">Почтой РФ</option>
-                <option value="SAM">Самовывоз</option>
-            </select>
+            <div id="order_type">
+                <div class="title">
+                    Тип доставки
+                </div>
+                <ul class="order_type_list_options">
+                    <li class="order_type_option" data-value="YKT">По городу</li>
+                    <li class="order_type_option" data-value="OUT">Почтой РФ</li>
+                    <li class="order_type_option" data-value="SAM">Самовывоз</li>
+                </ul>
+            </div>
         </div>
 
         <button class="buy">Купить</button>
