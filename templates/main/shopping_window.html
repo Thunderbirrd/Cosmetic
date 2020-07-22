@@ -49,6 +49,20 @@
                 {% include "../components/my_input.html" %}
                 {% endwith %}
             </div>
+
+            <div class="field additionally hide entrance">
+                <p>Номер подъезда:</p>
+                {% with type="text" placeholder="Подъезд" %}
+                {% include "../components/my_input.html" %}
+                {% endwith %}
+            </div>
+
+            <div class="field additionally hide flat">
+                <p>Номер квартиры:</p>
+                {% with type="text" placeholder="Квартира" %}
+                {% include "../components/my_input.html" %}
+                {% endwith %}
+            </div>
         </div>
 
         <div class="field surname">

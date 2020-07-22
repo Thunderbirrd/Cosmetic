@@ -19,7 +19,7 @@ const showAboutProduct = (id) => {
 
     aboutProductTitle.textContent = product.name
     aboutProductImage.src = STATIC + product.image
-    aboutProductPrice.textContent = product.price
+    aboutProductPrice.innerHTML = product.price + " &#8381;"
     aboutProductCount.value = 1
 
     if (aboutProduct.classList.contains("hide")){

@@ -63,7 +63,7 @@ const _createAmountShoppingWindow = (price, count) => {
 
 //загрузка списка покупок
 const loadingShoppingList = () => {
-    const list = document.querySelector(".shopping_window .list")
+    const list = document.querySelector(".shopping_window .list ul")
 
     list.innerHTML = ''
 
@@ -150,4 +150,5 @@ document.querySelector(".shopping_window .data_fields .buy").onclick = () => {
     })()
 
     hideShoppingWindow()
+    scrollToShop()
 }

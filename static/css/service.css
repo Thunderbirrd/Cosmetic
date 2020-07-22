@@ -15,8 +15,6 @@
     text-align: center;
 }
 
-.service_content li {}
-
 .date {
     margin-top: 5%;
 }
@@ -34,6 +32,7 @@
     display: flex;
     width: 300px;
     flex-direction: column;
+    position: relative;
 }
 
 .select_box .options_container {
@@ -47,6 +46,9 @@
     overflow: hidden;
     order: 1;
     margin-bottom: 10px;
+    position: absolute;
+    top: 52px;
+    z-index: 1;
 }
 
 .select_box .option, .selected {

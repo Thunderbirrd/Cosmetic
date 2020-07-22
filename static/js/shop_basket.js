@@ -20,7 +20,7 @@ const addProductToShop = () => {
             src: imgProduct.src,
             title: divTitle.textContent,
             count: Number(inputCount.value),
-            price: Number(divPrice.textContent)
+            price: Number(divPrice.textContent.slice(0, divPrice.textContent.length - 2))
         })
 
         createListItem(imgProduct.src, divTitle.textContent, divPrice.textContent, Number(inputCount.value))
