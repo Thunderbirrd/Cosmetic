@@ -7,11 +7,15 @@ selected.addEventListener("click", () => {
     options_container.classList.toggle("active");
 });
 
+const hideOptionsContainer = () => {
+    options_container.classList.remove("active");
+}
+
 /////// Service type   //////
 optionslist.forEach(o => {
     o.addEventListener("click", () => {
         selected.innerHTML = o.querySelector("label").innerHTML;
-        options_container.classList.remove("active");
+        hideOptionsContainer()
     });
 });
 

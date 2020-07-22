@@ -71,3 +71,32 @@ const doActionByCurentURL = () => {
             break;
     }
 }
+
+//событие отпускания кнопки мыши
+jQuery(function ($) {
+    $(document).mouseup(function (e) {
+        //закрываем list_product если пикнуто не по нему или не по его дочерним элементам
+        const list_product = $(".list_product")
+        const basket = $(".wrap_basket")
+
+        if (!list_product.is(e.target) // если клик был не по списку товаров
+            && list_product.has(e.target).length === 0 // и не по дочерним элементам списка товаров
+            && !basket.is(e.target)// и не по корзине
+            && basket.has(e.target).length === 0) { // и не по дочерним элементам корзины
+            hideListProduct()
+        }
+
+        //закрываем если пикнуто не по options_container или не по его дочерним элементам
+        const options_container = $(".options_container")
+        const selected = $(".selected")
+
+        if (!options_container.is(e.target) && 
+            options_container.has(e.target).length === 0 &&
+            !selected.is(e.target) && 
+            selected.has(e.target).length === 0) {
+
+            hideOptionsContainer()
+        }
+    });
+});
+
