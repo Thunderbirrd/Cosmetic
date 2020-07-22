@@ -113,13 +113,13 @@
 }
 
 .time {
-    cursor: pointer;
     margin-left: 10%;
     margin-top: 5%;
     transform: translate(-10%, -10%);
 }
 
 .btn {
+    cursor: pointer;
     outline: none;
     position: relative;
     display: inline-grid;
