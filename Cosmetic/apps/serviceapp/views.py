@@ -1,24 +1,29 @@
 import json
 
+from django.db import IntegrityError
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from Cosmetic.apps.mainapp import models
 from django.contrib.auth.decorators import login_required
+
+from Cosmetic.view import home
 
 
 @csrf_exempt
 @login_required
 def form_service(request):
     queryset = json.load(request)
-    visit = models.Visit()
-    visit.client_id = queryset['user_id']
-    visit.date = queryset['date']
-    visit.service_id = models.Service.get_id_by_name(queryset['service'])
-    visit.price = models.ShopUser.get_sale(visit.client_id) * models.Service.get_price(visit.service_id)
+    try:
+        visit = models.Visit()
+        visit.client_id = queryset['user_id']
+        visit.date = queryset['date']
+        visit.service_id = models.Service.get_id_by_name(queryset['service_name'])
+        visit.price = models.ShopUser.get_sale(visit.client_id) * models.Service.get_price(visit.service_id)
 
-    visit.save()
+        visit.save()
+    except IntegrityError:
+        return HttpResponse(json.dumps("Shit"))
 
-    return render(request, 'index.html')
+    return home(request)
     # return HttpResponse("response") # для проверки
