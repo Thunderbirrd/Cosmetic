@@ -11,7 +11,7 @@ from Cosmetic.view import home
 
 
 @csrf_exempt
-@login_required  # при проверке закоментить
+@login_required
 def form_service(request):
     queryset = json.load(request)
     try:
