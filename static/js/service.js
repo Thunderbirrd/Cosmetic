@@ -33,29 +33,14 @@ buttom.forEach(item => {
 });
 
 (() => {
-    const dataInput = document.getElementById("date-input")
+    const dateInput = document.getElementById("date-input")
 
     //отправка данных на сервер и запись на услугу
     document.querySelector("#service .approvebtn").addEventListener("click", async () => {
-        console.log(JSON.stringify({
-            user_id: 21,
-            service_id: selected.textContent,
-            date: `${dataInput.value} ${document.querySelector(".btn.active").textContent}` 
-        }));
+        const dateArr = String(dateInput.value).split('/')
+        const date = [dateArr[2], dateArr[0], dateArr[1]].join('-')
 
-        let response = await fetch("/form_service/", {
-            method: "Post",
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-                'X-CSRFToken': CRF_TOKEN + ""
-            },
-            body: JSON.stringify({
-                user_id: 21,
-                service_id: selected.textContent,
-                date: `${dataInput.value} ${document.querySelector(".btn.active").textContent}` 
-            })
-        })
-    
-        alert(await response.text())
+        Urls.signUpForServices(21, selected.textContent, 
+            `${date} ${document.querySelector(".btn.active").textContent}`)
     })
 })()

@@ -35,5 +35,27 @@ const Urls = {
         })
 
         return await responce.json()
+    },
+    async signUpForServices(user_id, service_name, date) {
+        const data = JSON.stringify({
+            user_id,
+            service_name,
+            date 
+        })
+
+        console.log(data);
+
+        const response = await fetch("/form_service/", {
+            method: "Post",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'X-CSRFToken': CRF_TOKEN + ""
+            },
+            body: data
+        })
+        
+        const result = await response.text()
+        console.log(result)
+        return result
     }
 }
