@@ -34,10 +34,4 @@ def visits():
 
 
 def services():
-    service_list = Service.objects.all()
-    names = []
-
-    for service in service_list:
-        names.append(service.name)
-
-    return names
+    return Service.objects.all()
