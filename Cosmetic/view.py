@@ -26,6 +26,7 @@ def service():
     occupied_dates = []
 
     for visit in visit_list:
-        occupied_dates.append({'date': visit.date[:10], 'time': visit.date[11:]})
+        if visit.status == "PAY":
+            occupied_dates.append({'date': visit.date[:10], 'time': visit.date[11:]})
 
     return occupied_dates

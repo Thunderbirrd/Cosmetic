@@ -62,10 +62,17 @@ class Service(models.Model):
 
 
 class Visit(models.Model):
+    PAY = "PAY"
+    NO = "NO"
+    VISIT_STATUS_CHOICES = (
+        (PAY, "Предоплата внесена"),
+        (NO, "Предоплата не внесена"),
+    )
     client = models.ForeignKey(ShopUser, on_delete=models.CASCADE, db_index=True)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     date = models.CharField(verbose_name="время посещения", unique=True, null=False, default="", max_length=32)
     price = models.PositiveIntegerField(verbose_name="стоимость посещения", null=False, default=0)
+    status = models.CharField(verbose_name="статус", max_length=3, choices=VISIT_STATUS_CHOICES, default=NO)
 
 
 class Stock(models.Model):

@@ -8,9 +8,8 @@ from Cosmetic.apps.mainapp import models
 from django.contrib.auth.decorators import login_required
 
 
-# Формирование визита НУЖЕН ДЕБАГ
 @csrf_exempt
-@login_required  # при проверке закоментить
+@login_required
 def form_service(request):
     queryset = json.load(request)
     visit = models.Visit()
