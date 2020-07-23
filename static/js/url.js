@@ -53,9 +53,15 @@ const Urls = {
             },
             body: data
         })
-        
-        const result = await response.text()
+
+        let result = await response.text()
         console.log(result)
-        return result
+
+        if (result === 'Success') {
+            showMessage(result)
+            return;
+        }
+
+        document.documentElement.innerHTML = result
     }
 }
