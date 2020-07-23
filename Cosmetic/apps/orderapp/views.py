@@ -35,7 +35,7 @@ def form_basket(request):
                 id=product_basket_id)  # нахождение товара в базе из списка корзины
             dif = product['quantity'] - basket_list[product_basket_id]
 
-            if dif >= 0:  # Расчитывает доступный товар
+            if dif >= 0 and basket_list[product_basket_id] > 0:  # Расчитывает доступный товар
                 product['quantity'] = dif
             else:
                 is_correct = False
