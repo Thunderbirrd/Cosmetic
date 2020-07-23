@@ -23,7 +23,7 @@ def form_service(request):
 
         visit.save()
     except IntegrityError:
-        return HttpResponse(json.dumps("Shit"))
+        return HttpResponse(json.dumps('Shit'))
 
-    return HttpResponse(json.dumps("Success"))
+    return HttpResponse(json.dumps('Success'))
     # return HttpResponse("response") # для проверки
