@@ -25,5 +25,5 @@ def form_service(request):
     except IntegrityError:
         return HttpResponse(json.dumps("Shit"))
 
-    return home(request)
+    return HttpResponse(json.dumps("Success"))
     # return HttpResponse("response") # для проверки
