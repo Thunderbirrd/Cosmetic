@@ -9,7 +9,10 @@ document.querySelectorAll(".number_input").forEach(div => {
     const buttonPlus = div.querySelector(".plus")
 
     buttonMinus.addEventListener("click", (event) => {
-        if (Number(input.value) === 1) return;
+        if (Number(input.value) <= 1) {
+            input.value = 1
+            return;
+        }
 
         input.value--
     })
@@ -20,8 +23,19 @@ document.querySelectorAll(".number_input").forEach(div => {
         if (data < "0" || data > "9") event.preventDefault();
     }
 
+    input.oninput = () => {
+        if (input.value !== "" && Number(input.value) === 0) input.value = 1
+    }
+
+    input.onchange = () => {
+        if (Number(input.value) === 0) input.value = 1
+    }
+
     buttonPlus.addEventListener("click", (event) => {
-        if (Number(input.value) === 99) return;
+        if (Number(input.value) >= 99) {
+            input.value = 99
+            return;
+        }
 
         input.value++
     })

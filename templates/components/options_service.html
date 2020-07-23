@@ -1,3 +1,4 @@
+{% for name in service_names %}
 <div class="option">
     <input
             type="radio"
@@ -5,9 +6,11 @@
             id="cleaning"
             name="category"
     />
-    <label for="cleaning">Чистка лица</label>
+    <label for="cleaning">{{ name }}</label>
 </div>
-<div class="option">
+{% endfor %}
+
+<!-- <div class="option">
     <input
             type="radio"
             class="radio"
@@ -52,4 +55,4 @@
             name="category"
     />
     <label for="botox">Ботокс</label>
-</div>
+</div> -->

@@ -1,6 +1,10 @@
 :root {
     --max-height-list-1: 367px;
     --max-height-list-2: 316px;
+    --border-color: rgb(0, 0, 0);
+    --background-color-list: rgb(136, 136, 136);
+    --background-color-list-item: rgb(255, 255, 255);
+    --color-list-item: black;
 }
 
 .shopping_window {
@@ -14,15 +18,9 @@
     padding: 2px 4px;
     margin: 1px;
     position: relative;
-    border: 2px solid rgb(85, 81, 81);
-    background-color: rgb(92, 92, 92);
-    color: white
-}
-
-:root {
-    --border-color: rgb(59, 57, 57);
-    --background-color-list: rgb(136, 136, 136);
-    --background-color-list-item: rgb(92, 92, 92);
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color-list-item);
+    color: var(--color-list-item)
 }
 
 #order_type .title {
@@ -31,7 +29,7 @@
 
 #order_type .title::after{
     content: "";
-    background-image: url("/static/img/arrow-down.svg");
+    background-image: url("/static/img/arrow-down-black.svg");
     background-size: contain;
     background-repeat: no-repeat;
     height: 24px;
@@ -53,10 +51,9 @@
     height: 0;
     position: absolute; 
     top: 32px;
-    right: -3px;
+    right: -2px;
     width: 100%;
-    background-color: white;
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--border-color);
     border-radius: 20px;
     background-color: var(--background-color-list);
     cursor: pointer;
@@ -238,6 +235,15 @@
 
 #isCityYakutsk {
     margin: 0 2px 2px 0;
+}
+
+.shopping_window .field .error_message {
+    color: red;
+    font-size: 8pt;
+}
+
+.shopping_window .field.number .error_message {
+    grid-column: 1/4;
 }
 
 @media screen and (max-width: 1249px) {

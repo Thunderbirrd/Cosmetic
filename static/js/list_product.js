@@ -89,17 +89,24 @@ const _createCount = (title, count) => {
 
         setAmountProductes()
         setTextInSpanAmount()
-
-        console.log(store.stateBasket[0].count)
+    }
+    input.onchange = () => {
+        if (Number(input.value) <= 0) {
+            deleteListItem(title)
+            return;
+        }
     }
 
     const buttonMinus = document.createElement("button")
     buttonMinus.classList.add("minus")
     buttonMinus.innerHTML = "&#8211;"
     buttonMinus.addEventListener("click", () => {
-        if (Number(input.value) === 1) return;
-
         input.value--
+
+        if (Number(input.value) <= 0) {
+            deleteListItem(title)
+            return;
+        }
 
         store.changeCountBasket(title, input.value)
 
@@ -111,7 +118,10 @@ const _createCount = (title, count) => {
     buttonPlus.classList.add("plus")
     buttonPlus.textContent = "+"
     buttonPlus.addEventListener("click", () => {
-        if (Number(input.value) === 99) return;
+        if (Number(input.value) >= 99) {
+            input.value = 99
+            return;
+        }
 
         input.value++
 

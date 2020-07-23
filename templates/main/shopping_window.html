@@ -18,6 +18,7 @@
             {% with type="text" placeholder="Номер телефона" minlength="10" maxlength="10" %}
             {% include "../components/my_input.html" %}
             {% endwith %}
+            <span class="error_message">В номере должно быть 10 цифр, не считая +7</span>
         </div>
 
         <div class="address">
@@ -29,7 +30,7 @@
                 </div>
 
                 <p class="additionally">или</p>
-                
+
                 <div class="additionally">
                     {% with type="text" placeholder="Город" %}
                     {% include "../components/my_input.html" %}
@@ -85,6 +86,7 @@
             <div id="order_type">
                 <div class="title">
                     Тип доставки
+                    <!-- <span class="arrow"></span> -->
                 </div>
                 <ul class="order_type_list_options">
                     <li class="order_type_option" data-value="YKT">По городу</li>

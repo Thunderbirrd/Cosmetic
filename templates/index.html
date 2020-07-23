@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-
+    
     {% load static %}
 
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
@@ -69,6 +69,7 @@
     {% include "main.html" %}
     {% include "footer.html" %}
 
+    <script src="{% static 'js/cookie.js' %}"></script>
     <script src="{% static 'js/store.js' %}"></script>
     <script src="{% static 'js/variables.js' %}"></script>
     <script src="{% static 'js/paths.js' %}"></script>
