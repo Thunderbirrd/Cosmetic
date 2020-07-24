@@ -7,7 +7,7 @@ from Cosmetic.apps.mainapp.models import Product
 from Cosmetic.apps.orderapp.models import Order
 from Cosmetic.apps.orderapp.models import OrderItem
 from django.core.exceptions import ObjectDoesNotExist
-from .bot import Data
+from .bot import Data, main
 
 
 @csrf_exempt  # Почитать что это!
@@ -95,6 +95,7 @@ def form_order(request):
         order.save()
         data = Data(order.client_phone, order.order_type, order.client_name, order.client_surname,
                     get_order_items_list(data['id']))
+        main(data)
     except ObjectDoesNotExist:
         return HttpResponse(json.dumps('Error. Product not found.'))
     return HttpResponse(json.dumps('Success'))

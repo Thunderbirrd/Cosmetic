@@ -37,7 +37,7 @@ def do_echo(bot: Bot, update: Update, phone, order_type, name, surname, items: d
         )
 
 
-def main():
+def main(data: Data):
     bot = Bot(
         token=token,
     )
@@ -49,6 +49,7 @@ def main():
     updater.start_polling()
     updater.idle()
 
-
+'''
 if __name__ == '__main__':
     main()
+'''
