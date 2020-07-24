@@ -1,5 +1,5 @@
 from telegram import Bot, Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler
 from .bot_constants import token
 
 
@@ -37,7 +37,7 @@ def do_echo(bot: Bot, update: Update, phone, order_type, name, surname, items: d
         )
 
 
-def main(data: Data):
+def main():
     bot = Bot(
         token=token,
     )
@@ -49,7 +49,6 @@ def main(data: Data):
     updater.start_polling()
     updater.idle()
 
-'''
+
 if __name__ == '__main__':
     main()
-'''
