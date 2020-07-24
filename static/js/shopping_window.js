@@ -85,6 +85,169 @@ loadingShoppingList()
 
 const shoppingWindow = document.querySelector(".shopping_window")
 
+const shopButton = document.querySelector(".shopping_window .data_fields .buy")
+
+const errorMessages = shoppingWindow.querySelectorAll(".field .error_message")
+
+//отключить кнопку shopButton
+const disableShopButton = () => {
+    shopButton.disabled = true
+}
+
+//включить кнопку shopButton
+const enableShopButton = () => {
+    shopButton.disabled = false
+}
+
+//прячем все сообщения об ошибках в начале
+errorMessages.forEach(el => {
+    el.classList.add("hide")
+})
+
+//логика показа сообщений ошибок кроме order_type
+shoppingWindow.querySelectorAll(".field:not(.order_type)").forEach(el => {
+    const my_input = el.querySelector(".my_input")
+    const error_message = el.querySelector(".error_message")
+
+    if (el.classList.contains("number")) {
+        const inputHandler = () => {
+            if (my_input.value.length === 10) {
+                error_message.classList.add("hide")
+            } else {
+                error_message.classList.remove("hide")
+            }
+        }
+
+        //для поля номера телефона
+        my_input.addEventListener("blur", () => {
+            if (my_input.value.length !== 10) {
+                error_message.classList.remove("hide")
+                my_input.addEventListener("input", inputHandler)
+            } else {
+                error_message.classList.add("hide")
+                my_input.removeEventListener("input", inputHandler)
+            }
+        })
+        
+    } else {
+        const inputHandler = () => {
+            const arraySpace = my_input.value.match(/ /g)
+
+            if ((arraySpace === null ||
+                arraySpace.length !== my_input.value.length) &&
+                my_input.value !== ''){
+                
+                error_message.classList.add("hide")
+            } else {
+                error_message.classList.remove("hide")
+            }
+        }
+
+        //для остальных полей
+        //строка ,начинающиеся и заканчивающиеся пробелом /^ $/
+        my_input.addEventListener("blur", () => {
+            const arraySpace = my_input.value.match(/ /g)
+
+            if (arraySpace !== null &&
+                arraySpace.length ===  my_input.value.length || 
+                my_input.value === '') {
+                error_message.classList.remove("hide")
+                my_input.addEventListener("input", inputHandler)
+            } else {
+                error_message.classList.add("hide")
+                my_input.removeEventListener("input", inputHandler)
+            }
+        })
+    }
+});
+
+//проверка на правильность полей
+const checkCorrect = () => {
+    let flag = true
+
+    shoppingWindow.querySelectorAll(".field:not(.order_type)").forEach(el => {
+        const my_input = el.querySelector(".my_input")
+        const error_message = el.querySelector(".error_message")
+    
+        if (el.classList.contains("number")) {
+            const inputHandler = () => {
+                if (my_input.value.length === 10) {
+                    error_message.classList.add("hide")
+                } else {
+                    error_message.classList.remove("hide")
+                }
+            }
+    
+            //для поля номера телефона
+            const isNotCorrect = my_input.value.length !== 10
+
+            if (isNotCorrect) {
+                error_message.classList.remove("hide")
+                my_input.addEventListener("input", inputHandler)
+            }
+
+            flag = flag && !isNotCorrect
+                        
+        } else {
+            const inputHandler = () => {
+                const arraySpace = my_input.value.match(/ /g)
+    
+                if ((arraySpace === null ||
+                    arraySpace.length !== my_input.value.length) &&
+                    my_input.value !== ''){
+                    
+                    error_message.classList.add("hide")
+                } else {
+                    error_message.classList.remove("hide")
+                }
+            }
+    
+            //для города проверяем ещё чекбокс
+            const inputIsCityYakutsk = document.getElementById("isCityYakutsk")
+            let isCityYakutsk = true
+
+            if (el.classList.contains("city")) {
+                isCityYakutsk = inputIsCityYakutsk.checked
+            }
+
+            //для остальных полей
+            //строка ,начинающиеся и заканчивающиеся пробелом /^ $/
+            const arraySpace = my_input.value.match(/ /g)
+            
+            const isNotCorrect = arraySpace !== null &&
+                arraySpace.length ===  my_input.value.length || 
+                my_input.value === ''
+
+            if (isNotCorrect) {
+                error_message.classList.remove("hide")
+                my_input.addEventListener("input", inputHandler)
+            }
+
+            flag = flag && (!isNotCorrect || isCityYakutsk)
+        }
+    });
+
+    const order_type = shoppingWindow.querySelector(".order_type")
+    const title = order_type.querySelector(".title")
+    const error_message = order_type.querySelector(".error_message")
+
+    const isNotCorrect = title.dataset.value === title.dataset.default
+
+    if (isNotCorrect) {
+        error_message.classList.remove("hide")
+
+        order_type.querySelectorAll(".order_type_option").forEach(el => {
+            el.addEventListener("click", () => {
+                error_message.classList.add("hide")
+            })
+        })
+    }
+
+    flag = flag && !isNotCorrect
+
+    return flag
+}
+
 //показ shopping_window
 const showShoppingWindow = () => {
     shoppingWindow.classList.remove("hide")
@@ -133,8 +296,10 @@ const orderTypeTitle = shoppingWindow.querySelector("#order_type .title")
 //подъезд квартира
 
 //событие покупки товаров при клике по кнопке "Купить"
-document.querySelector(".shopping_window .data_fields .buy").onclick = () => {
+shopButton.onclick = () => {
     //id, address, phone, name, surname, order_type
+
+    if (!checkCorrect()) return;
 
     const id = store.stateCheckout.id
     const address = cityCheckbox.checked
