@@ -8,7 +8,7 @@
 }
 
 .service_content {
-    margin-top: 5%;
+    margin-top: 12%;
     display: flex;
     justify-content: space-around;
     flex-direction: row;
@@ -16,7 +16,6 @@
 }
 
 .date {
-    margin-top: 5%;
 }
 
 .text_service {
@@ -157,21 +156,24 @@
 }
 
 .approve {
+    margin-top: 5%;
     text-align: center;
 }
 
 .approvebtn {
+    width: 200px;
+    height: 50px;
     background-color: #2f3640;
     outline: none;
     position: relative;
     display: inline-grid;
     color: white;
-    font-size: 14px;
+    font-size: 18px;
     font-family: "Lucida Grande";
     text-decoration: none;
     margin: 15px 0;
     border: 1px solid #ff7675;
-    padding: 5px 10px;
+    padding: 5px 10px 6px;
     text-transform: uppercase;
     overflow: hidden;
     transition: 1s all ease;

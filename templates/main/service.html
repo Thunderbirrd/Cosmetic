@@ -19,12 +19,19 @@
 
 
         <li class="date">
-            <span class="text_service" style="margin-top: 5%">Выберите дату посещения</span>
+            <span class="text_service">Выберите дату посещения</span>
             <br>
             <input style="margin-top: 2%; background-color: #2f3640; color: white; border-color: #2f3640;
                  border-style: dashed; font-size: 1.2rem; padding: 10px; text-align: center;
-                 border-radius: 8px" data-dd-theme="calendar" id="date-input" data-dd-lang="ru" data-dd-modal="true"
-                data-dd-large="true" type="text">
+                 border-radius: 8px"
+                   data-dd-format="d-m-Y"
+                   data-dd-theme="calendar"
+                   id="date-input"
+                   data-dd-lang="ru"
+                   data-dd-modal="true"
+                   data-dd-large-only="true"
+                   data-dd-show-only-enabled-days="true"
+                   type="text">
             <script>$('#date-input').dateDropper();</script>
         </li>
 
