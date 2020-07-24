@@ -1,8 +1,7 @@
 <!-- вводит пользователь: номер, адрес, фамилия, имя, тип доставки -->
 <!-- программа: id, время доставки -->
 
-<!-- <section class="shopping_window hide"> -->
-<section class="shopping_window">
+<section class="shopping_window hide">\
     <h2>Оформление заказа</h2>
     <div class="list">
         <ul>
@@ -36,6 +35,8 @@
                     {% include "../components/my_input.html" %}
                     {% endwith %}
                 </div>
+
+                <span class="error_message additionally">Поле не указано</span>
             </div>
 
             <div class="field additionally hide street">
@@ -43,6 +44,8 @@
                 {% with type="text" placeholder="Улица" %}
                 {% include "../components/my_input.html" %}
                 {% endwith %}
+
+                <span class="error_message">Поле не указано</span>
             </div>
 
             <div class="field additionally hide home">
@@ -50,6 +53,8 @@
                 {% with type="text" placeholder="Дом" %}
                 {% include "../components/my_input.html" %}
                 {% endwith %}
+
+                <span class="error_message">Поле не указано</span>
             </div>
 
             <div class="field additionally hide entrance">
@@ -57,6 +62,8 @@
                 {% with type="text" placeholder="Подъезд" %}
                 {% include "../components/my_input.html" %}
                 {% endwith %}
+
+                <span class="error_message">Поле не указано</span>
             </div>
 
             <div class="field additionally hide flat">
@@ -64,6 +71,8 @@
                 {% with type="text" placeholder="Квартира" %}
                 {% include "../components/my_input.html" %}
                 {% endwith %}
+
+                <span class="error_message">Поле не указано</span>
             </div>
         </div>
 
@@ -72,6 +81,8 @@
             {% with type="text" placeholder="Фамилия" %}
             {% include "../components/my_input.html" %}
             {% endwith %}
+
+            <span class="error_message">Поле не указано</span>
         </div>
 
         <div class="field name">
@@ -79,14 +90,15 @@
             {% with type="text" placeholder="Имя" %}
             {% include "../components/my_input.html" %}
             {% endwith %}
+
+            <span class="error_message">Поле не указано</span>
         </div>
 
         <div class="field order_type">
             <p>Тип доставки:</p>
             <div id="order_type">
-                <div class="title">
+                <div class="title" data-value="NONE" data-default="NONE">
                     Тип доставки
-                    <!-- <span class="arrow"></span> -->
                 </div>
                 <ul class="order_type_list_options">
                     <li class="order_type_option" data-value="YKT">По городу</li>
@@ -94,6 +106,8 @@
                     <li class="order_type_option" data-value="SAM">Самовывоз</li>
                 </ul>
             </div>
+
+            <span class="error_message">Поле не указано</span>
         </div>
 
         <button class="buy">Купить</button>

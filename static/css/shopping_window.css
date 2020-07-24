@@ -240,10 +240,8 @@
 .shopping_window .field .error_message {
     color: red;
     font-size: 8pt;
-}
-
-.shopping_window .field.number .error_message {
-    grid-column: 1/4;
+    text-align: end;
+    grid-column: 1/-1;
 }
 
 @media screen and (max-width: 1249px) {
