@@ -1,6 +1,6 @@
 from telegram import Bot, Update
 from telegram.ext import Updater, CommandHandler
-from .bot_constants import token
+from .bot_constants import token  # все работает кроме этого говна
 
 
 class Data:
@@ -23,18 +23,6 @@ def do_start(bot: Bot, update: Update):
         chat_id=update.message.chat_id,
         text="Здравствуйте, Виктория!"
     )
-
-
-def do_echo(bot: Bot, update: Update, phone, order_type, name, surname, items: dict):
-        bot.send_message(
-            chat_id=update.message.chat_id,
-            text=f"Оформлен новый заказ!\n"
-                 f"Номер клиента: {phone}\n"
-                 f"Тип заказа: {order_type}\n"
-                 f"Имя и фамилиия клиента: {name} {surname}\n"
-                 f"Список товаров {items.keys()}"
-                 f"Их количество(соответсвенно) {items.items()}"
-        )
 
 
 def main(data: Data):

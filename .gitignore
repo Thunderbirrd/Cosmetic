@@ -50,7 +50,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
-bot_constants.py
+Cosmetic/apps/orderapp/bot_constants.py
 
 # Translations
 *.mo

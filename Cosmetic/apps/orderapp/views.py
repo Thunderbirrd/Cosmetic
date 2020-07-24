@@ -1,16 +1,17 @@
 import json
 import threading
 import time
+import requests
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from Cosmetic.apps.mainapp.models import Product
 from Cosmetic.apps.orderapp.models import Order
 from Cosmetic.apps.orderapp.models import OrderItem
 from django.core.exceptions import ObjectDoesNotExist
-from .bot import Data, main
+from Cosmetic.apps.orderapp.bot_constants import token, chatID
 
 
-@csrf_exempt  # Почитать что это!
+@csrf_exempt
 def form_basket(request):
     is_correct = True
     lst = []
@@ -93,9 +94,24 @@ def form_order(request):
         order.client_surname = order_information['surname']
         order.order_type = order_information['order_type']
         order.save()
-        data = Data(order.client_phone, order.order_type, order.client_name, order.client_surname,
-                    get_order_items_list(data['id']))
-        main(data)
+
+        price = order.get_total_cost()
+        product_list = get_order_items_list(data['id'])
+        text = 'Оформлен новый заказ!\nНомер клиента: ' + \
+               '\nТип заказа: ' + order_information['order_type'] + \
+               '\nИмя и фамилиия клиента: ' + order_information['name'] + order_information['surname'] + \
+               '\nСумма заказа: ' + str(price) + ' р.'\
+               '\nСписок товаров:'
+        first = True
+        for name in product_list:
+            if not first:
+                text += ','
+            else:
+                first = False
+            text += ' ' + name + ' - ' + str(product_list[name])
+
+        requests.get('https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chatID + '&text=' + text)
+
     except ObjectDoesNotExist:
         return HttpResponse(json.dumps('Error. Product not found.'))
     return HttpResponse(json.dumps('Success'))
@@ -123,7 +139,7 @@ def delete_order(request):  # удаление заказа по id при ух�
 
 
 def get_order_items_list(order_id):
-    items = OrderItem.objects.filter(id=order_id).all()
+    items = OrderItem.objects.filter(order_id=order_id).all()
     items_dict = {}
     for item in items:
         items_dict[f"{item.product}"] = item.quantity
