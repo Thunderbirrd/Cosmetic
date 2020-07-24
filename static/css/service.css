@@ -175,6 +175,7 @@
     text-transform: uppercase;
     overflow: hidden;
     transition: 1s all ease;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1000px) {
