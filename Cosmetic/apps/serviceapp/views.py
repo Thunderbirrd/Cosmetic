@@ -20,7 +20,7 @@ def form_service(request):
         visit.date = queryset['date']
         visit.service_id = models.Service.get_id_by_name(queryset['service_name'])
         visit.price = models.ShopUser.get_sale(visit.client_id) * models.Service.get_price(visit.service_id)
-
+        visit.status = "NO"
         visit.save()
     except IntegrityError:
         return HttpResponse(json.dumps('Shit'))

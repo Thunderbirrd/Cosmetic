@@ -7,6 +7,7 @@ from Cosmetic.apps.mainapp.models import Product
 from Cosmetic.apps.orderapp.models import Order
 from Cosmetic.apps.orderapp.models import OrderItem
 from django.core.exceptions import ObjectDoesNotExist
+from .bot import Data
 
 
 @csrf_exempt  # Почитать что это!
@@ -92,6 +93,8 @@ def form_order(request):
         order.client_surname = order_information['surname']
         order.order_type = order_information['order_type']
         order.save()
+        data = Data(order.client_phone, order.order_type, order.client_name, order.client_surname,
+                    get_order_items_list(data['id']))
     except ObjectDoesNotExist:
         return HttpResponse(json.dumps('Error. Product not found.'))
     return HttpResponse(json.dumps('Success'))
@@ -116,3 +119,12 @@ def delete_order(request):  # удаление заказа по id при ух�
     except ObjectDoesNotExist:
         return HttpResponse(json.dumps('Error. Product not found.'))
     return HttpResponse(json.dumps('Success'))
+
+
+def get_order_items_list(order_id):
+    items = OrderItem.objects.filter(id=order_id).all()
+    items_dict = {}
+    for item in items:
+        items_dict[f"{item.product}"] = item.quantity
+
+    return items_dict
