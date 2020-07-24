@@ -1,0 +1,25 @@
+:root {
+    --border-table: 1px solid black;
+}
+
+.calendar table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.calendar tbody {
+    width: 100%;
+}
+
+.calendar tr:not(:last-child) td:not(:first-child){
+    border: var(--border-table);
+}
+
+.calendar tr td:first-child{
+    border-top: var(--border-table);
+    width: 90px;
+}
+
+.calendar tr td p {
+    height: 50px;
+}

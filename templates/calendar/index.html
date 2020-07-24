@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/wrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/calendar/style.css' %}">
+</head>
+<body>
+    <main>
+        <section class="calendar">
+            <div class="wrap">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th><p>24 июля</p></th>
+                            <th><p>Виктория</p></th>
+                        </tr>
+                        <tr>
+                            <td><p>09:30</p></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><p>11:00</p></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><p>12:30</p></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><p>14:00</p></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><p>15:30</p></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><p>17:00</p></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><p>18:30</p></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="{% static 'js/calendar/script.js' %}"></script>
+</body>
+</html>

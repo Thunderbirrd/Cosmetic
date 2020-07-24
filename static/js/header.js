@@ -6,9 +6,11 @@ const main = document.querySelector('main')
 const scrollToElement = (element) => {
     element.scrollIntoView()
 
-    let top = element.getBoundingClientRect().top
-    let delta = header.offsetHeight - top
-    scrollBy(0, -1 * delta)
+    if (!isWidthMobileScreen()) {
+        let top = element.getBoundingClientRect().top
+        let delta = header.offsetHeight - top
+        scrollBy(0, -1 * delta)
+    }
 }
 
 const scrollToAboutProduct = () => { scrollToElement(aboutProduct) }

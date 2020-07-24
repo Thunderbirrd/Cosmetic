@@ -25,5 +25,6 @@ urlpatterns = [
     re_path(r'^form_basket/', include('Cosmetic.apps.orderapp.urls')),
     re_path(r'^form_service/', include('Cosmetic.apps.serviceapp.urls')),
     re_path(r'^auth/', include('Cosmetic.apps.authapp.urls', namespace='auth')),
+    re_path(r'^calendar/', view.calendar, name='calendar'),
     re_path(r'^', view.home, name='home'),
 ]
