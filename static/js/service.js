@@ -43,4 +43,34 @@ buttom.forEach(item => {
         Urls.signUpForServices(21, selected.textContent, 
             `${date} ${document.querySelector(".btn.active").textContent}`)
     })
-})()
+})();
+
+const formatDate = (date) => {
+    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+};
+
+//блокируем даты записи среду и воскресенье
+(() => {
+    let resultArr = []
+    let currentDate = new Date()
+
+    const finalDay = new Date()
+    finalDay.setMonth(finalDay.getMonth() + 3)
+    const finalDayMilliseconds = finalDay.getTime()
+
+    while(currentDate.getTime() <= finalDayMilliseconds){
+        if(currentDate.getDay() === 0 || currentDate.getDay() === 3){
+            resultArr.push(formatDate(currentDate))
+        }
+        
+        //увеличваем дату
+        currentDate.setDate(currentDate.getDate() + 1)
+    }
+
+    $('#date-input').dateDropper({
+        disabledDays: resultArr.join(","),
+        minDate: new Date()
+    });
+
+    console.log(resultArr.join(","))
+})();
