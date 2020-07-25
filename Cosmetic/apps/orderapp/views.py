@@ -97,7 +97,8 @@ def form_order(request):
 
         price = order.get_total_cost()
         product_list = get_order_items_list(data['id'])
-        text = 'Оформлен новый заказ!\nНомер клиента: ' + \
+        text = 'Оформлен новый заказ!' \
+               '\nНомер клиента: ' + order_information['phone'] + \
                '\nТип заказа: ' + order_information['order_type'] + \
                '\nИмя и фамилиия клиента: ' + order_information['name'] + order_information['surname'] + \
                '\nСумма заказа: ' + str(price) + ' р.'\
