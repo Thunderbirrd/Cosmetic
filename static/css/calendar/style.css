@@ -1,5 +1,6 @@
 :root {
     --border-table: 1px solid black;
+    --margin-table: 10px;
 }
 
 body {
@@ -18,21 +19,86 @@ a:link, a:visited {
 
 .calendar table {
     border-collapse: collapse;
-    width: 100%;
-}
-
-.calendar tbody {
-    width: 100%;
+    margin: var(--margin-table);
 }
 
 .calendar tr td{
     border: var(--border-table);
 }
 
+.calendar tr td p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .calendar tr td:first-child{
     width: 90px;
 }
 
-.calendar tr td p {
-    height: 50px;
+.calendar tr td:last-child{
+    width: 500px;
+}
+
+.calendar tr td:first-child p {
+    min-height: 50px;
+}
+
+/* paid not_paid */
+.calendar .card {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    min-height: 50px;
+}
+
+.calendar .card.paid {
+    background-color: chartreuse;
+}
+
+.calendar .card.not_paid {
+    background-color: rgb(255, 251, 36);
+}
+
+@media screen and (max-width: 611px) {
+    .calendar tbody {
+        width: 100%;
+    }
+
+    .calendar table {
+        width: calc(100% - 2 * var(--margin-table));
+    }
+
+    .calendar tr td:last-child {
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .calendar .card {
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .calendar .card .service{
+        grid-column: 1/-1 ;
+        grid-row: 2;
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .calendar .card {
+        display: grid;
+        grid-template-columns: 1fr ;
+        grid-template-rows: repeat(3, 1fr);
+    }
+
+    .calendar .card p:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    .calendar .card .service{
+        grid-column: 1/-1 ;
+        grid-row: 3;
+    }
 }
