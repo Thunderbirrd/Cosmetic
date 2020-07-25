@@ -1,6 +1,5 @@
-from telegram import Bot, Update
-from telegram.ext import Updater, CommandHandler
-from .bot_constants import token  # все работает кроме этого говна
+from telegram import Bot
+from .bot_constants import token, chatID
 
 
 class Data:
@@ -8,36 +7,41 @@ class Data:
     order_type = ""
     name = ""
     surname = ""
+    price = 0
     items = {}
 
-    def __init__(self, phone, order_type, name, surname, items):
+    def __init__(self, phone, order_type, name, surname, price, items):
         self.phone = phone
         self.order_type = order_type
         self.name = name
         self.surname = surname
+        self.price = price
         self.items = items
 
 
-def do_start(bot: Bot, update: Update):
+def do_echo(bot: Bot, data):
+    text = ''
+    first = True
+    for name in data.items:
+        if not first:
+            text += ','
+        else:
+            first = False
+        text += ' ' + name + ' - ' + str(data.items[name])
     bot.send_message(
-        chat_id=update.message.chat_id,
-        text="Здравствуйте, Виктория!"
+        chat_id=chatID,
+        text=f"Оформлен новый заказ!\n"
+             f"Номер клиента: {data.phone}\n"
+             f"Тип заказа: {data.order_type}\n"
+             f"Имя и фамилиия клиента: {data.name} {data.surname}\n"
+             f"Сумма заказа: {data.price} р.\n"
+             f"Список товаров:"+text
     )
 
 
 def main(data: Data):
-    bot = Bot(
-        token=token,
-    )
-    updater = Updater(bot=bot)
+    bot = Bot(token=token)
+    do_echo(bot, data)
 
-    start_handler = CommandHandler("start", do_start)
-    updater.dispatcher.add_handler(start_handler)
-
-    updater.start_polling()
-    updater.idle()
-
-'''
-if __name__ == '__main__':
-    main()
-'''
+# if __name__ == '__main__': Нужно ли???
+#     main()

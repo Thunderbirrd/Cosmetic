@@ -1,14 +1,15 @@
 import json
 import threading
 import time
-import requests
+
+from . import bot
+from .bot import Data
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from Cosmetic.apps.mainapp.models import Product
 from Cosmetic.apps.orderapp.models import Order
 from Cosmetic.apps.orderapp.models import OrderItem
 from django.core.exceptions import ObjectDoesNotExist
-from Cosmetic.apps.orderapp.bot_constants import token
 
 
 @csrf_exempt
@@ -97,21 +98,10 @@ def form_order(request):
 
         price = order.get_total_cost()
         product_list = get_order_items_list(data['id'])
-        text = 'Оформлен новый заказ!' \
-               '\nНомер клиента: ' + order_information['phone'] + \
-               '\nТип заказа: ' + order_information['order_type'] + \
-               '\nИмя и фамилиия клиента: ' + order_information['name'] + order_information['surname'] + \
-               '\nСумма заказа: ' + str(price) + ' р.'\
-               '\nСписок товаров:'
-        first = True
-        for name in product_list:
-            if not first:
-                text += ','
-            else:
-                first = False
-            text += ' ' + name + ' - ' + str(product_list[name])
-
-        requests.get('https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chatID + '&text=' + text)
+        data = Data(order_information['phone'], order_information['order_type'],
+                    order_information['name'], order_information['surname'],
+                    price, product_list)
+        bot.main(data)
 
     except ObjectDoesNotExist:
         return HttpResponse(json.dumps('Error. Product not found.'))
