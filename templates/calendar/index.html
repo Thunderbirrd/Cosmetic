@@ -9,9 +9,12 @@
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/wrap.css' %}">
 
+    <link rel="stylesheet" href="{% static 'css/calendar/header.css' %}">
+
     <link rel="stylesheet" href="{% static 'css/calendar/style.css' %}">
 </head>
 <body>
+    {% include "calendar/header.html" %}
     <main>
         <section class="calendar">
             <div class="wrap">
