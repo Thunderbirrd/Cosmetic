@@ -1,0 +1,2 @@
+$('#visit-input').dateDropper({
+    });

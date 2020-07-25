@@ -5,17 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
 
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/wrap.css' %}">
 
+    <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
     <link rel="stylesheet" href="{% static 'css/calendar/header.css' %}">
-
     <link rel="stylesheet" href="{% static 'css/calendar/style.css' %}">
 </head>
 <body>
     {% include "calendar/header.html" %}
     <main>
+        <section class="visitdata">
+            <span class="visit-text">Выберите дату</span>
+            <br>
+            <input style="margin-top: 2%; background-color: black; color: white; border-color: #2f3640;
+                 border-style: dashed; font-size: 1.2rem; padding: 10px; text-align: center;
+                 border-radius: 8px"
+                   data-dd-format="m-d-Y"
+                   data-dd-theme="calendar"
+                   data-dd-lang="ru"
+                   data-dd-modal="true"
+                   data-dd-large-only="true"
+                   data-dd-show-only-enabled-days="true"
+                   type="text" id="visit-input">
+
+        </section>
         <section class="calendar">
             <div class="wrap">
                 <table>
@@ -64,6 +83,9 @@
         </section>
     </main>
 
+    <script src="{% static 'js/datedropper.pro.min.js' %}"></script>
+    <script src="https://cdn.datedropper.com/get/mgonsm03x0cb8urluhctqkwkmd70wnec"></script>
     <script src="{% static 'js/calendar/script.js' %}"></script>
+
 </body>
 </html>

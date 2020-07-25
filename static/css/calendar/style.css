@@ -102,3 +102,15 @@ a:link, a:visited {
         grid-row: 3;
     }
 }
+
+.visitdata{
+    margin-top: 5%;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 50px;
+}
+
+.visit-text{
+    font-size: 25px;
+}
