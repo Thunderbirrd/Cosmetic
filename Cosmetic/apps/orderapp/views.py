@@ -8,7 +8,7 @@ from Cosmetic.apps.mainapp.models import Product
 from Cosmetic.apps.orderapp.models import Order
 from Cosmetic.apps.orderapp.models import OrderItem
 from django.core.exceptions import ObjectDoesNotExist
-from Cosmetic.apps.orderapp.bot_constants import token, chatID
+from Cosmetic.apps.orderapp.bot_constants import token
 
 
 @csrf_exempt

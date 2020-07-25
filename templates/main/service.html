@@ -24,15 +24,23 @@
             <input style="margin-top: 2%; background-color: #2f3640; color: white; border-color: #2f3640;
                  border-style: dashed; font-size: 1.2rem; padding: 10px; text-align: center;
                  border-radius: 8px"
-                   data-dd-format="d-m-Y"
+                   data-dd-format="m-d-Y"
                    data-dd-theme="calendar"
                    id="date-input"
                    data-dd-lang="ru"
                    data-dd-modal="true"
                    data-dd-large-only="true"
                    data-dd-show-only-enabled-days="true"
-                   type="text">
-            <script>$('#date-input').dateDropper();</script>
+                   type="text" id="date-input">
+            <script>
+                $('#date-input').dateDropper(
+                {
+                    disabledDays: '07/26/2020',
+                    minDate: new Date()
+                });
+                </script>
+
+
         </li>
 
 
