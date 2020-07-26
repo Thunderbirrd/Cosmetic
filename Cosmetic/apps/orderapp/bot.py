@@ -42,6 +42,3 @@ def do_echo(bot: Bot, data):
 def main(data: Data):
     bot = Bot(token=token)
     do_echo(bot, data)
-
-# if __name__ == '__main__': Нужно ли???
-#     main()
