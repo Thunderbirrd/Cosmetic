@@ -69,8 +69,7 @@ const formatDate = (date) => {
 
     $('#date-input').dateDropper({
         disabledDays: resultArr.join(","),
-        lock: 'from'
+        lock: 'from',
+        maxDate: formatDate(finalDay)
     });
-
-    console.log(resultArr.join(","))
 })();
