@@ -36,5 +36,6 @@ def visits():
 def services():
     return Service.objects.all()
 
+
 def calendar(request):
     return render(request, 'calendar/index.html')

@@ -5,4 +5,9 @@ from Cosmetic.apps.mainapp.models import Visit
 
 @user_passes_test(lambda user: user.is_superuser)
 def visits_calendar(request):
-    pass
+    title = "Календарь записи клиентов"
+    content = {
+        'title': title,
+        'visits': Visit.objects.all()
+    }
+    # render(request, какой-то TEMPLATE, content)
