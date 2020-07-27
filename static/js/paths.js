@@ -13,9 +13,6 @@ const Paths = {
     get CONTACTS(){
         return '/contacts'
     },
-    get BASKET(){
-        return '/basket'
-    },
     get HOME() {
         return '/'
     }

@@ -62,10 +62,6 @@ const doActionByCurentURL = () => {
         case Paths.CONTACTS:
             scrollToContacts()
             break;
-        case Paths.BASKET:
-            setTextInSpanAmount()
-            showListProduct()
-            break;
         default:
             console.log(`not found url: ${window.location.pathname}`)
             break;

@@ -34,6 +34,32 @@ const store = {
         this._stateCheckout = value
     },
 
+    brands: [],
+
+    filter: {
+        _name: "",
+
+        get name() {
+            return this._name
+        },
+
+        set name(value) {
+            this._name = value
+            showProductByFilter(this._name, this._brand)
+        },
+
+        _brand: "",
+
+        get brand() {
+            return this._brand
+        },
+
+        set brand(value) {
+            this._brand = value
+            showProductByFilter(this._name, this._brand)
+        }
+    },
+
     hasItemInBasket(title) {
         return this.stateBasket.findIndex(item => item.title === title) > -1
     },
@@ -57,3 +83,10 @@ const store = {
         return amount
     }
 }
+
+//заполняем список брендов
+arrayProducts.forEach(product => {
+    if (!store.brands.includes(product.brand)) {
+        store.brands.push(product.brand)
+    }
+})

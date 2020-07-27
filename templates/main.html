@@ -1,9 +1,11 @@
 <main>
     <div class="wrap">
         <section class="shop">
+            {% include "components/loupe.html" %}
+
             <div class="row">
                 {% for product in products  %}
-                    {% with id=product.id image=product.image name=product.name price=product.price %}
+                    {% with id=product.id image=product.image name=product.name price=product.price brand=product.brand %}
                         {% include "components/column_card.html" %}
                     {% endwith %}
                 {% endfor %}

@@ -27,3 +27,6 @@ const STATIC = "/static/"
 const shipping_and_playment = document.querySelector(".shipping_and_playment")
 const contacts = document.querySelector(".contacts")
 const service = document.getElementById("service")
+
+//карточки товаров в магазине
+const shopCard = document.querySelectorAll("main .shop .card")

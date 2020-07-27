@@ -108,7 +108,8 @@ const setAmountProductes = (amount=store.getAmountBasket()) => {
     })
 
     const goToBasket = () => {
-        Urls.goToUrl(Paths.BASKET)
+        setTextInSpanAmount()
+        showListProduct()
     }
 
     basket.addEventListener('click', goToBasket)
@@ -128,3 +129,30 @@ const addClassNameActiveMenu = () => {
     })
 }
 
+//функция показывающая список продуктов с указанным brand, если brand не указан то показываются все товары
+const showProductByBrand = (brand) => {
+    store.filter.brand = brand
+}
+
+//добавляем список брендов в всплывающем меню в поле магазин в header
+(() => {
+    const dropdownContent = document.querySelector("header .dropdown_content")
+
+    store.brands.forEach(brand => {
+        let a = document.createElement("a")
+        a.href = "#"
+        a.textContent = brand
+
+        a.addEventListener("click", (e) => {
+            e.preventDefault()
+            showProductByBrand(brand)
+        })
+
+        dropdownContent.appendChild(a)
+    })
+})();
+
+//показываем все продукты, убираем фильтры при клике по "магазину"
+document.querySelector("header .menu .shop").addEventListener("click", () => {
+    showProductByBrand()
+})

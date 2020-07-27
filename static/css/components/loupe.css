@@ -1,0 +1,30 @@
+:root {
+    --search-padding-top: 3px;
+    --search-padding-right: 7px;
+    --search-border-size: 1px;
+}
+
+.search_wrap {
+    display: flex;
+    justify-content: center ;
+}
+
+.search_input {
+    font-size: 1.2rem;
+    border: none;
+    padding-right: var(--search-padding-right);
+}
+
+.search {
+    position: relative;
+    padding: var(--search-padding-top) var(--search-padding-right);
+    border: var(--search-border-size) solid black;
+    border-radius: calc(var(--search-padding-right) + 2px);
+    display: flex;
+    align-items: center;
+}
+
+.search img {
+    height: 1.2rem;
+    opacity: 0.5;
+}
