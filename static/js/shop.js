@@ -23,17 +23,28 @@ shop.querySelectorAll(".card").forEach(el => {
 
 const shopSearchInput = shop.querySelector(".search_input")
 
+const divNothingFound = shop.querySelector(".nothing_found")
+
 const showProductByFilter = (name, brand) => {
     const all = ""
+
+    let isNothingFound = true
 
     shopCard.forEach(el => {
         if ((brand === all || el.dataset.brand === brand) &&
             String(el.dataset.name).toLocaleLowerCase().includes(name.toLocaleLowerCase())) {
             el.classList.remove("hide")
+            isNothingFound = false
         } else {
             el.classList.add("hide")
         }
     })
+
+    if (isNothingFound) {
+        divNothingFound.classList.remove("hide")
+    } else {
+        divNothingFound.classList.add("hide")
+    }
 }
 
 //показывает продукты названия которых совпадают с "name"

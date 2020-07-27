@@ -37,7 +37,7 @@ buttom.forEach(item => {
 
     //отправка данных на сервер и запись на услугу
     document.querySelector("#service .approvebtn").addEventListener("click", async () => {
-        const dateArr = String(dateInput.value).split('/')
+        const dateArr = String(dateInput.value).split('-')
         const date = [dateArr[2], dateArr[0], dateArr[1]].join('-')
 
         Urls.signUpForServices(21, selected.textContent, 

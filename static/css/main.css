@@ -47,6 +47,11 @@ section {
     padding: 25px;
 }
 
+.nothing_found {
+    font-size: 20pt;
+    margin: 20px 0;
+}
+
 @media screen and (max-width: 449px) {
     section {
         padding: 5px;

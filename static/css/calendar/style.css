@@ -1,6 +1,7 @@
 :root {
     --border-table: 1px solid black;
     --margin-table: 10px;
+    --table-width: 600px;
 }
 
 body {
@@ -37,7 +38,7 @@ a:link, a:visited {
 }
 
 .calendar tr td:last-child{
-    width: 500px;
+    width: var(--table-width);
 }
 
 .calendar tr td:first-child p {
@@ -47,7 +48,7 @@ a:link, a:visited {
 /* paid not_paid */
 .calendar .card {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     min-height: 50px;
 }
 
@@ -59,9 +60,9 @@ a:link, a:visited {
     background-color: rgb(255, 251, 36);
 }
 
-@media screen and (max-width: 611px) {
+@media screen and (max-width: 700px) {
     .calendar tbody {
-        width: 100%;
+        width: calc(100% - 2 * var(--margin-table));
     }
 
     .calendar table {
@@ -73,33 +74,61 @@ a:link, a:visited {
     }
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 700px) {
     .calendar .card {
-        display: grid;
-        grid-template-columns: 1fr 1fr ;
+        grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr;
     }
 
-    .calendar .card .service{
-        grid-column: 1/-1 ;
+    .calendar .card .surname{
+        grid-column: 1;
+        grid-row: 2;
+    }
+}
+
+@media screen and (max-width: 570px) {
+    .calendar .card {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+
+    .calendar .card .phone {
+        grid-column: 2;
         grid-row: 2;
     }
 }
 
 @media screen and (max-width: 440px) {
+    :root {
+        --calendar-margin-card-item: 5px
+    }
     .calendar .card {
         display: grid;
         grid-template-columns: 1fr ;
-        grid-template-rows: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 1fr);
     }
 
     .calendar .card p:not(:last-child) {
-        margin-bottom: 10px;
+        margin-bottom: var(--calendar-margin-card-item);
+    }
+
+    .calendar .card p:first-child {
+        margin-top: var(--calendar-margin-card-item);
+    }
+
+    .calendar .card p:last-child {
+        display: flex;
+        align-items: flex-start;
     }
 
     .calendar .card .service{
-        grid-column: 1/-1 ;
+        grid-column: 1;
         grid-row: 3;
+    }
+
+    .calendar .card .phone {
+        grid-column: 1;
+        grid-row: 4;
     }
 }
 
