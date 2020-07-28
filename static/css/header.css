@@ -43,7 +43,6 @@ header .basket {
 }
 
 header .dropdown_content{
-    margin-top: 10px;
     display: none;
     position: absolute;
     min-width: 160px;
@@ -69,8 +68,13 @@ header .dropdown_content{
     display: block;
 }
 
-.dropdown{
+header .menu li.dropdown{
     position: relative;
+    padding: 0;
+}
+
+.dropdown .shop {
+    padding: 10px 0;
 }
 
 .wrap_basket {

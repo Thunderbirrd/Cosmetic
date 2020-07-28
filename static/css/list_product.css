@@ -8,6 +8,7 @@
     right: calc(-1 * var(--width-list-product));
     box-sizing: border-box;
     background-color: white;
+    color: black;
     border-radius: 20px 0 0 20px;
     border: 1px solid black;
     padding: 20px 0 20px 0;
