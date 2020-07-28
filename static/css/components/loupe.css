@@ -83,3 +83,25 @@
     height: 1.2rem;
     opacity: 0.5;
 }
+
+@media screen and (max-width: 450px){
+    .search_wrap{
+        margin-top: 3%;
+        position: absolute;
+        right: 1%;
+        left: auto;
+    }
+
+    .inclicked{
+    width: 150px;
+    border-radius: 0;
+    }
+
+    .search{
+    margin-top: 5px;
+    text-align: center;
+    position: unset;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+}
