@@ -19,6 +19,7 @@ const store = {
     // image
     // quantity
     // is_active 
+    // description
     //}
     get stateShop() {
         return arrayProducts
