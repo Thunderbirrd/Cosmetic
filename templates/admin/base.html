@@ -36,7 +36,7 @@
                 <strong>{% firstof user.get_short_name user.get_username %}</strong>.
             {% endblock %}
             {% block userlinks %}
-                <a href="/admin_app/visits/">Календарь</a> /
+                <a href="/calendar/">Календарь</a> /
                 {% if site_url %}
                     <a href="{{ site_url }}">{% trans 'View site' %}</a> /
                 {% endif %}
