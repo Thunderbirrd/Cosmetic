@@ -8,7 +8,7 @@ const scrollToElement = (element) => {
 
     if (!isWidthMobileScreen()) {
         let top = element.getBoundingClientRect().top
-        let delta = header.offsetHeight - top
+        let delta = header.offsetHeight - top - 1
         scrollBy(0, -1 * delta)
     }
 }
@@ -50,11 +50,11 @@ const _setPositionShoppingBasket = () => {
     if (isWidthSmallScreen()) {
         wrapBasket.style.left = 10 + 'px'
     } else {
-        let left = wrapHeader.clientWidth + wrapHeaderBox.left
+        let left = wrapHeader.clientWidth + wrapHeaderBox.left + 10
         wrapBasket.style.left = left + 'px'
     }
 
-    let top = wrapHeader.clientHeight + wrapHeaderBox.top
+    let top = wrapHeader.clientHeight + wrapHeaderBox.top + 10
     wrapBasket.style.top = top + 'px'
 }
 
