@@ -1,19 +1,21 @@
-from django.shortcuts import render
 from django.contrib.auth.decorators import user_passes_test
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
 from Cosmetic.apps.mainapp.models import Visit
-from django.shortcuts import render, get_object_or_404
+import json
 
 
+@csrf_exempt
 @user_passes_test(lambda user: user.is_superuser)
 def visits_calendar(request):
-    title = "Календарь записи клиентов"
-    content = {
-        'title': title,
-        'visits': Visit.objects.all()
-    }
-    # render(request, какой-то TEMPLATE, content)
+    date = json.loads(request)
+    queryset = Visit.objects.filter(date=date)
+
+    return HttpResponse(json.dumps(queryset))
 
 
+@csrf_exempt
 @user_passes_test(lambda user: user.is_superuser)
 def current_visit(request, pk):
     title = f"Запись №{pk}"
@@ -23,4 +25,7 @@ def current_visit(request, pk):
         'title': title,
         'all client visits': all_client_visits
     }
-    #return render(request, TEMLATE, content)
+    # return render(request, TEMLATE, content)
+
+
+
