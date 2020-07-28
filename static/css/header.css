@@ -33,6 +33,7 @@ header .menu li:hover{
 }
 
 header .menu li.active {
+    color: black;
     background-color: #fffee8;
 }
 
