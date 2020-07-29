@@ -13,7 +13,7 @@ def form_service(request):
     queryset = json.load(request)
     try:
         visit = models.Visit()
-        visit.client_id = queryset['user_id']
+        visit.client_id = request.user.id
         data = queryset['date'].split()
         visit.date = data[0]
         visit.time = data[1]
@@ -23,6 +23,6 @@ def form_service(request):
         visit.save()
 
     except IntegrityError:
-        return HttpResponse(json.dumps('Что-то пошло не так.', ensure_ascii=False))
+        return HttpResponse(json.dumps('Error. Something went wrong.'))
 
     return HttpResponse('Success')

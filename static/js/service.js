@@ -41,7 +41,7 @@ buttom.forEach(item => {
         const date = [dateArr[2], dateArr[0], dateArr[1]].join('-')
 
         //Исправить id
-        Urls.signUpForServices(21, selected.textContent, 
+        Urls.signUpForServices(selected.textContent, 
             `${date} ${document.querySelector(".btn.active").textContent}`)
     })
 })();

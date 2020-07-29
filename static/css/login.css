@@ -48,3 +48,9 @@
         width: 40%;
     }
 }
+
+@media screen and (max-width: 400px) {
+    .form-horizontal {
+        width: unset;
+    }
+}
