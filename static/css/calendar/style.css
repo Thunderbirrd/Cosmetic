@@ -53,11 +53,39 @@ a:link, a:visited {
 }
 
 .calendar .card.paid {
-    background-color: chartreuse;
+    background: linear-gradient(45deg,
+      rgba(0, 0, 0, 0) 55%,
+      white 10%
+      ), linear-gradient(45deg,
+      white 33%,
+      rgba(0, 0, 0, 0) 25%
+      );
+  background-size: 9.3em 8em;
+  background-color: chartreuse;
 }
 
 .calendar .card.not_paid {
-    background-color: rgb(255, 251, 36);
+    background: linear-gradient(30deg,
+      rgba(0, 0, 0, 0) 65%,
+      white 10%
+      ), linear-gradient(30deg,
+      white 33%,
+      rgba(0, 0, 0, 0) 25%
+      );
+  background-size: 9.3em 8em;
+  background-color: red;
+}
+
+.calendar.card.empty {
+    background: linear-gradient(60deg,
+      rgba(0, 0, 0, 0) 65%,
+      white 10%
+      ), linear-gradient(60deg,
+      white 33%,
+      rgba(0, 0, 0, 0) 25%
+      );
+  background-size: 9.3em 8em;
+  background-color: grey;
 }
 
 @media screen and (max-width: 700px) {
