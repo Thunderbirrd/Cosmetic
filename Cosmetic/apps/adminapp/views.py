@@ -2,8 +2,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from Cosmetic.apps.mainapp.models import Visit, Service
-from Cosmetic.apps.mainapp.models import ShopUser
+from Cosmetic.apps.mainapp.models import Visit, Service, ShopUser
 import json
 
 
@@ -32,8 +31,17 @@ def current_visit(request, pk):
     title = f"Запись №{pk}"
     visit = get_object_or_404(Visit, pk=pk)
     all_client_visits = Visit.objects.filter(client=visit.client).all()
+    client = ShopUser.objects.get(id=visit.client)
+    for visit in all_client_visits:
+        visit.service = Service.objects.filter(id=visit.service).first()
+
     content = {
         'title': title,
-        'all client visits': all_client_visits
+        'all client visits': all_client_visits,
+        "client's phone": client.phone,
+        "client's sale": (client.sale - 1) * 100,
+        "client's name": client.first_name,
+        "client's surname": client.last_name,
+        "client's email": client.email
     }
     # return render(request, TEMLATE, content)
