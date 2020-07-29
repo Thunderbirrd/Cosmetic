@@ -10,6 +10,7 @@
 }
 
 .search_input {
+    color: white;
     width: 30px;
     background: none;
     height: 30px;
@@ -25,6 +26,7 @@
 }
 
 .inclicked{
+    color: black;
     width: 360px;
     border-radius: 0;
     padding: 5px 30px 5px 10px;
@@ -71,6 +73,7 @@
 }
 
 .close::after{
+    color: white;
     transform: rotate(45deg);
 }
 
@@ -91,7 +94,7 @@
     .search_wrap{
         margin-top: 3%;
         position: absolute;
-        right: 1%;
+        right: 3%;
         left: auto;
     }
 
