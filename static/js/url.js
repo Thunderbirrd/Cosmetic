@@ -36,9 +36,8 @@ const Urls = {
 
         return await responce.json()
     },
-    async signUpForServices(user_id, service_name, date) {
+    async signUpForServices(service_name, date) {
         const data = JSON.stringify({
-            user_id,
             service_name,
             date 
         })
