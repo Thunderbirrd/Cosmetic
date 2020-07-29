@@ -4,7 +4,7 @@
 
 .list_product {
     position: fixed;
-    top: 155px;
+    top: 165px;
     right: calc(-1 * var(--width-list-product));
     box-sizing: border-box;
     background-color: white;
@@ -17,6 +17,15 @@
     -moz-transition: right 1s ease-out 0s;
     -o-transition: right 1s ease-out 0s;
     transition: right 1s ease-out 0s;
+}
+
+.list_product li.warning_item {
+    background-color: wheat;
+}
+
+.list_product li .warning {
+    background-color: wheat;
+    grid-column: 1/-1;
 }
 
 .list_product.show {
@@ -73,7 +82,7 @@
 .list_product li {
     display: grid;
     grid-template-columns: 90px auto auto;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto;
 }
 
 .list_product .img_product {

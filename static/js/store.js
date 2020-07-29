@@ -61,6 +61,23 @@ const store = {
         }
     },
 
+    setQuantityById(id, quantity){
+        this.getProductById(id).quantity = quantity
+        aboutProductOptions.maxNumber = quantity
+    },
+
+    getIdByTitle(title){
+        return this.getProductByTitle(title).id
+    },
+
+    getProductByTitle(title){
+        return this.stateShop.find(product => product.name === title)
+    },
+
+    getProductById(id){
+        return this.stateShop.find(product => product.id === id)
+    },
+
     hasItemInBasket(title) {
         return this.stateBasket.findIndex(item => item.title === title) > -1
     },

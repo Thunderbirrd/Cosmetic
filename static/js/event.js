@@ -111,5 +111,5 @@ jQuery(function ($) {
 //доделать
 $(window).ready(function(){
 	/* делаем плавное появление */
-        $("header").fadeIn('slow');
+    $("header").fadeIn('slow');
 });

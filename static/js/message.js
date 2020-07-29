@@ -1,17 +1,39 @@
 const body = document.querySelector("body")
 
-const showMessage = (text) => {
-    const p = document.createElement("p")
-    p.classList.add("message")
-    p.textContent = text
+const message = {
+    get SUCCESS() { 
+        return "SUCCESS" 
+    },
 
-    body.appendChild(p)
-    
-    let top = document.documentElement.clientHeight / 2 - p.clientHeight / 2
-    let left = document.documentElement.clientWidth / 2 - p.clientWidth / 2
+    get WARNING() { 
+        return "WARNING" 
+    },
 
-    p.style.top = top + 'px'
-    p.style.left = left + 'px'
+    get ERROR() { 
+        return "ERROR" 
+    },
 
-    setTimeout(() => { body.removeChild(p) }, 4000)
+    showMessage(text, status=this.SUCCESS, time=4000) {
+        const p = document.createElement("p")
+        p.classList.add("message")
+        p.textContent = text
+
+        if (status === this.SUCCESS) {
+            p.classList.add("succes")
+        } else if (status === this.WARNING) {
+            p.classList.add("warning")
+        } else if (status === this.ERROR) {
+            p.classList.add("error")
+        }
+
+        body.appendChild(p)
+
+        let top = document.documentElement.clientHeight / 2 - p.clientHeight / 2
+        let left = document.documentElement.clientWidth / 2 - p.clientWidth / 2
+
+        p.style.top = top + 'px'
+        p.style.left = left + 'px'
+
+        setTimeout(() => { body.removeChild(p) }, 4000)
+    }
 }

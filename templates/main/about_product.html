@@ -10,17 +10,35 @@
 
 
     </div>
-    
+
     <div class="description">
         <p>
         </p>
     </div>
 
-    <div>
-        {% with value=1 minLength="1" maxLength="2" className="input_count" size="2" %}
+    <div class="about_product_inputs">
+        <!-- {% with value=1 minLength="1" maxLength="2" className="input_count" size="2" %}
         {% include "../components/number_input.html" %}
-        {% endwith %}
-        
+        {% endwith %} -->
+        <script>
+            const aboutProductOptions = {
+                maxNumber: 99,
+                minNumber: 1
+            }
+
+            //создаём number input
+            const numberInput = createNumberInput({
+                defaultValue: 1,
+                minLength: 1,
+                maxLength: 2,
+                classNameInput: "input_count",
+                size: 2,
+                options: aboutProductOptions
+            })
+
+            document.querySelector(".about_product_inputs").appendChild(numberInput)
+        </script>
+
         {% include "../components/my_button.html" %}
     </div>
 

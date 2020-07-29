@@ -42,16 +42,19 @@ document.querySelectorAll(".number_input").forEach(div => {
 })
 
 //создаёт number_input
-const createNumberInput = (defaultValue="", maxLength="", minLength="", size="",
+const createNumberInput = ({defaultValue="", maxLength="", minLength="", size="", className="",
+    classNameInput="",
     keypressHandler = (event, inputValue, parentElement) => {}, 
     inputHandler = (event, inputValue, parentElement) => {}, 
     clickButtonMinusHandler = (event, inputValue, parentElement) => {}, 
-    clickButtonPlusHandler = (event, inputValue, parentElement) => {}) => {
+    clickButtonPlusHandler = (event, inputValue, parentElement) => {}, options={maxNumber:99, minNumber:1}}) => {
 
     const div = document.createElement("div")
+    div.className = className
     div.classList.add("number_input")
     
     const input = document.createElement("input")
+    input.className = classNameInput
     input.type = "text"
     input.size = size
     input.maxLength = maxLength
@@ -65,14 +68,32 @@ const createNumberInput = (defaultValue="", maxLength="", minLength="", size="",
         keypressHandler(event, input.value, div)
     }
     input.oninput = (event) => {
+        const maxNumber = Math.min(99, options.maxNumber)
+
+        if (Number(input.value) >= maxNumber) {
+            input.value = maxNumber
+        }
+
         inputHandler(event, input.value, div)
+    }
+    input.onchange = () => {
+        const minNumber = Math.max(1, options.minNumber)
+
+        if (Number(input.value) <= minNumber) {
+            input.value = minNumber
+        }
     }
 
     const buttonMinus = document.createElement("button")
     buttonMinus.classList.add("minus")
-    buttonMinus.textContent = "-"
+    buttonMinus.textContent = "–"
     buttonMinus.addEventListener("click", (event) => {
-        if (Number(input.value) === 1) return;
+        const minNumber = Math.max(1, options.minNumber)
+
+        if (Number(input.value) <= minNumber) {
+            input.value = minNumber
+            return;
+        }
 
         input.value--
 
@@ -83,7 +104,12 @@ const createNumberInput = (defaultValue="", maxLength="", minLength="", size="",
     buttonPlus.classList.add("plus")
     buttonPlus.textContent = "+"
     buttonPlus.addEventListener("click", (event) => {
-        if (Number(input.value) === 99) return;
+        const maxNumber = Math.min(99, options.maxNumber)
+
+        if (Number(input.value) >= maxNumber) {
+            input.value = maxNumber
+            return;
+        }
 
         input.value++
 

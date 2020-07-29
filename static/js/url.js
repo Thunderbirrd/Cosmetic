@@ -23,10 +23,12 @@ const Urls = {
     
             if (!responce.ok) throw Error(`Ошибка ${responce.status}`)
 
-            store.stateCheckout = await responce.json()
+            return await responce.json()
         } catch (error) {
             console.error(error)
         }
+
+        return null
     },
     async buyProducts(id, address, phone, name, surname, order_type) {
         let responce = await fetch("/form_basket/form_order/", {
@@ -67,7 +69,7 @@ const Urls = {
             console.log(result)
 
             if (result === 'Success') {
-                showMessage(result)
+                message.showMessage(result)
                 return;
             }
 

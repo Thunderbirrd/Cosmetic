@@ -4,17 +4,26 @@
 }
 
 .message {
-    background-color: rgb(144, 255, 144);
-    border: 5px solid rgb(10, 151, 10);
-    color: rgb(10, 151, 10);
     padding: 10px;
     position: fixed;
     text-align: center;
-    /* width: var(--width-message);
-    height: var(--height-message);
-    top: calc(50% - var(--height-message) / 2);
-    left: calc(50% - var(--width-message) / 2);
-    display: flex;
-    align-items: center;
-    justify-content: center; */
+    z-index: 3;
+}
+
+.message.success {
+    background-color: rgb(144, 255, 144);
+    border: 5px solid rgb(10, 151, 10);
+    color: rgb(10, 151, 10);
+}
+
+.message.warning {
+    background-color: rgb(231, 255, 144);
+    border: 5px solid rgb(142, 151, 10);
+    color: rgb(142, 151, 10);
+}
+
+.message.error {
+    background-color: rgb(255, 144, 144);
+    border: 5px solid rgb(151, 10, 10);
+    color: rgb(151, 10, 10);
 }

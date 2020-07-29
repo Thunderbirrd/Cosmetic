@@ -1,5 +1,10 @@
 const aboutProduct = document.querySelector(".about_product")
 
+document.querySelector(".about_product_inputs").insertBefore(
+    numberInput,
+    document.querySelector(".about_product_inputs .my_button")
+)
+
 aboutProduct.querySelector(".my_button").addEventListener("click", () => {
     addProductToShop()
     scrollToShop()
@@ -23,6 +28,8 @@ const showAboutProduct = (id) => {
     aboutProductPrice.innerHTML = product.price + " &#8381;"
     aboutProductCount.value = 1
     aboutProductDescription.textContent = product.description
+
+    aboutProductOptions.maxNumber = store.getProductById(id).quantity
 
     if (aboutProduct.classList.contains("hide")){
         aboutProduct.classList.remove("hide")

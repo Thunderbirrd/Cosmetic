@@ -60,7 +60,7 @@
         // is_active 
         // description
         
-        {% for product in products  %}
+        {% for product in products %}
             arrayProducts.push({ 
                 id: {{ product.id }},
                 name: "{{ product.name }}",
@@ -93,6 +93,7 @@
 
     console.log(servicecontent);
     </script>
+    <script src="{% static 'js/number_input.js' %}"></script>
 
     {% include "header.html" %}
     {% include "main.html" %}
@@ -105,7 +106,6 @@
     <script src="{% static 'js/url.js' %}"></script>
 
     <script src="{% static 'js/message.js' %}"></script>
-    <script src="{% static 'js/number_input.js' %}"></script>
 
     <script src="{% static 'js/header.js' %}"></script>
     <script src="{% static 'js/list_product.js' %}"></script>

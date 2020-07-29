@@ -311,7 +311,7 @@ shopButton.onclick = () => {
     const orderType = orderTypeTitle.dataset.value;
 
     (async () => {
-        showMessage(await Urls.buyProducts(id, address, phone, name, surname, orderType))
+        message.showMessage(await Urls.buyProducts(id, address, phone, name, surname, orderType))
     })()
 
     hideShoppingWindow()

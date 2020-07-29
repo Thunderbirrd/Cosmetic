@@ -86,12 +86,13 @@ dateedInput.onchange = function () {
             if ("09:30" == service.time) {
                 console.log("succeed")
                 // Надо добавлять класс occupied кнопке, value которой совпадает с service.time
-                // buttom.forEach(knopka => {
-                //     if (knopka.value == service.time) {
-                //         knopka.classList.add("occupied")
-                //         console.log("success")
-                //     }
-                // })
+                buttom.forEach(knopka => {
+                    console.log(knopka.textContent, service.time)
+                    if (knopka.textContent == service.time) {
+                        knopka.classList.add("occupied")
+                        console.log("success")
+                    }
+                })
             }
         } else {
             console.log(dateedInput.value)
