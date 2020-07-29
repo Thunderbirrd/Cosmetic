@@ -2,6 +2,9 @@ const selected = document.querySelector(".selected");
 const options_container = document.querySelector(".options_container");
 const optionslist = document.querySelectorAll(".option");
 const buttom = document.querySelectorAll(".btn");
+const currservice = document.getElementsByClassName("radio");
+const currdate = document.getElementById("date-input");
+const currtime = document.getElementsByClassName("btn");
 
 selected.addEventListener("click", () => {
     options_container.classList.toggle("active");
@@ -74,3 +77,27 @@ const formatDate = (date) => {
         maxDate: formatDate(finalDay)
     });
 })();
+
+const dateedInput = document.getElementById("date-input")
+
+dateedInput.onchange = function () {
+    servicecontent.forEach(service => {
+        if (service.date == dateedInput.value) {
+            if ("09:30" == service.time) {
+                console.log("succeed")
+                // Надо добавлять класс occupied кнопке, value которой совпадает с service.time
+                // buttom.forEach(knopka => {
+                //     if (knopka.value == service.time) {
+                //         knopka.classList.add("occupied")
+                //         console.log("success")
+                //     }
+                // })
+            }
+        } else {
+            console.log(dateedInput.value)
+        }
+    })
+}
+
+
+

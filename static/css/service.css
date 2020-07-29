@@ -185,6 +185,10 @@
     background-color: #f5dd5d;
 }
 
+.occupied{
+    display: none;
+}
+
 @media screen and (max-width: 1000px) {
     .service_content {
         display: grid;
@@ -228,5 +232,11 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+}
+
+@media screen and (max-width: 330px){
+    .select_box{
+        width: 200px;
     }
 }

@@ -74,6 +74,25 @@
             })
         {% endfor %}
     </script>
+    <script>
+     const servicecontent = []
+
+       //   occupied_dates
+       //   service_names
+
+        {% for dates in occupied_dates  %}
+            {% for services in service_names  %}
+            servicecontent.push({
+                service: "{{ services.name }}",
+                date: "{{ dates.date }}",
+                time: "{{ dates.time }}"
+            });
+            {% endfor %}
+        {% endfor %}
+
+
+    console.log(servicecontent);
+    </script>
 
     {% include "header.html" %}
     {% include "main.html" %}
