@@ -23,4 +23,4 @@ def current_visit(request, pk):
         'title': title,
         'all client visits': all_client_visits
     }
-    #return render(request, TEMLATE, content)
+    # return render(request, TEMLATE, content)
