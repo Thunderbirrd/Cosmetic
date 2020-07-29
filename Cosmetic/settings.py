@@ -138,3 +138,5 @@ STATICFILES_DIRS = [STATIC_DIR]
 LOGIN_URl = '/auth/login/'
 
 LOW_CACHE = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
