@@ -37,11 +37,11 @@ def current_visit(request, pk):
 
     content = {
         'title': title,
-        'all client visits': all_client_visits,
-        "client's phone": client.phone,
-        "client's sale": (client.sale - 1) * 100,
-        "client's name": client.first_name,
-        "client's surname": client.last_name,
-        "client's email": client.email
+        'all_client_visits': all_client_visits,
+        "client's_phone": client.phone,
+        "client's_sale": (client.sale - 1) * 100,
+        "client's_name": client.first_name,
+        "client's_surname": client.last_name,
+        "client's_email": client.email
     }
     # return render(request, TEMLATE, content)
