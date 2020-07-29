@@ -18,6 +18,7 @@
     box-sizing: border-box;
     outline: none;
     transition: width 0.4s ease-in-out,
+                height 0.4s ease-in-out,
                 border-radius 0.8s ease-in-out,
                 padding 0.2s;
     transition-delay: 0.4s;
@@ -26,6 +27,8 @@
 .inclicked{
     width: 360px;
     border-radius: 0;
+    padding: 5px 30px 5px 10px;
+    font-size: 1.2rem;
 }
 
 .btnsearch{

@@ -4,13 +4,14 @@ const main = document.querySelector('main')
 
 //прокрутка к элементу element
 const scrollToElement = (element) => {
-    element.scrollIntoView()
+    let scrollTop = jQuery(element).offset().top
 
     if (!isWidthMobileScreen()) {
-        let top = element.getBoundingClientRect().top
-        let delta = header.offsetHeight - top - 1
-        scrollBy(0, -1 * delta)
+        scrollTop -= header.offsetHeight - 1
     }
+
+    //задаём параметры анимации прокрутки
+    jQuery('html, body').animate({ scrollTop })
 }
 
 const scrollToAboutProduct = () => { scrollToElement(aboutProduct) }
