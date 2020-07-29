@@ -76,6 +76,9 @@ class Visit(models.Model):
     price = models.PositiveIntegerField(verbose_name="стоимость посещения", null=False, default=0)
     status = models.CharField(verbose_name="статус", max_length=3, choices=VISIT_STATUS_CHOICES, default=NO)
 
+    class Meta:
+        unique_together = (('date', 'time'),)
+
 
 class Stock(models.Model):
     service_list = models.ManyToManyField(Service, verbose_name="список услуг")
