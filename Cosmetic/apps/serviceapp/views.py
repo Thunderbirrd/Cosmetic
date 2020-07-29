@@ -3,11 +3,8 @@ import json
 from django.db import IntegrityError
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-
 from Cosmetic.apps.mainapp import models
 from django.contrib.auth.decorators import login_required
-
-from Cosmetic.view import home
 
 
 @csrf_exempt
@@ -17,13 +14,15 @@ def form_service(request):
     try:
         visit = models.Visit()
         visit.client_id = queryset['user_id']
-        visit.date = queryset['date']
+        data = queryset['date'].split()
+        visit.date = data[0]
+        visit.time = data[1]
         visit.service_id = models.Service.get_id_by_name(queryset['service_name'])
         visit.price = models.ShopUser.get_sale(visit.client_id) * models.Service.get_price(visit.service_id)
         visit.status = "NO"
         visit.save()
+
     except IntegrityError:
-        return HttpResponse(json.dumps('Shit'))
+        return HttpResponse(json.dumps('Что-то пошло не так.', ensure_ascii=False))
 
     return HttpResponse('Success')
-    # return HttpResponse("response") # для проверки
