@@ -20,7 +20,7 @@ main .hide {
 
 .row{
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     overflow-y: hidden;
     overflow-x: auto;
 }

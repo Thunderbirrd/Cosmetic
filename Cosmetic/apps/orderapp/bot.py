@@ -31,7 +31,7 @@ def do_echo(bot: Bot, data):
     bot.send_message(
         chat_id=chatID,
         text=f"Оформлен новый заказ!\n"
-             f"Номер клиента: {data.phone}\n"
+             f"Номер клиента: 8{data.phone}\n"
              f"Тип заказа: {data.order_type}\n"
              f"Имя и фамилиия клиента: {data.name} {data.surname}\n"
              f"Сумма заказа: {data.price} р.\n"

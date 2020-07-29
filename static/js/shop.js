@@ -55,4 +55,10 @@ const showProductByName = (name) => {
 //ищем продукты по названию
 shopSearchInput.addEventListener("input", (e) => {
     showProductByName(shopSearchInput.value)
-})
+});
+
+//Анимация лупы
+$(".btnsearch").on("click", function () {
+    $(".search_input").toggleClass("inclicked");
+    $(".btnsearch").toggleClass("close");
+        });

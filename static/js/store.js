@@ -19,6 +19,7 @@ const store = {
     // image
     // quantity
     // is_active 
+    // description
     //}
     get stateShop() {
         return arrayProducts
@@ -43,7 +44,7 @@ const store = {
             return this._name
         },
 
-        set name(value) {
+        set name(value="") {
             this._name = value
             showProductByFilter(this._name, this._brand)
         },
@@ -54,7 +55,7 @@ const store = {
             return this._brand
         },
 
-        set brand(value) {
+        set brand(value="") {
             this._brand = value
             showProductByFilter(this._name, this._brand)
         }

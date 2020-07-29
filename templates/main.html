@@ -4,11 +4,6 @@
             {% include "components/loupe.html" %}
 
             <div class="row">
-                {% for product in products  %}
-                    {% with id=product.id image=product.image name=product.name price=product.price brand=product.brand %}
-                        {% include "components/column_card.html" %}
-                    {% endwith %}
-                {% endfor %}
             </div>
 
             <div class="row">
@@ -16,6 +11,51 @@
 
             <div class="row">
             </div>
+
+            <script>
+                const rowsInShop = document.querySelectorAll("main .shop .row")
+
+                //создаёт карточку
+                const createCardInShop = (id, brand, name, price, image) => {
+                    const divCard = document.createElement("div")
+                    divCard.dataset.id = id
+                    divCard.dataset.brand = brand
+                    divCard.dataset.name = name
+                    divCard.classList.add("card")
+
+                    const divCardImage = document.createElement("div")
+                    divCardImage.classList.add("card__image")
+
+                    const img = document.createElement("img")
+                    img.src = "/static/" + image
+                    img.alt = "product"
+
+                    divCardImage.appendChild(img)
+
+                    divCard.appendChild(divCardImage)
+
+                    const divCardTitle = document.createElement("div")
+                    divCardTitle.classList.add("card__title")
+                    divCardTitle.textContent = name
+
+                    divCard.appendChild(divCardTitle)
+
+                    const divCardPrice = document.createElement("div")
+                    divCardPrice.classList.add("card__price")
+                    divCardPrice.innerHTML = price + " &#8381;"
+
+                    divCard.appendChild(divCardPrice)
+
+                    return divCard
+                }
+
+                //создаём карточки товаров в магазине
+                arrayProducts.forEach((p, i) => {
+                    rowsInShop[i % 3].appendChild(
+                        createCardInShop(p.id, p.brand, p.name, p.price, p.image)
+                    )
+                });
+            </script>
 
             <div class="nothing_found hide">Ничего не найдено</div>
         </section>
