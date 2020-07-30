@@ -16,5 +16,11 @@ const Urls = {
         console.log(date, result)
 
         return result
+    },
+    async deleteVisit(visitId){
+        let result= await fetch(`/admin_app/visit/delete/${visitId}/`)
+    },
+    async changeStatusToPay(visitId){
+        let result= await fetch(`/admin_app/visit/change/${visitId}/`)
     }
 }

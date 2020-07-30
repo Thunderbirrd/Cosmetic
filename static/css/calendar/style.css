@@ -4,9 +4,14 @@
     --table-width: 600px;
 }
 
+html {
+    min-height: 100vh;
+}
+
 body {
     margin: 0;
     padding: 0;
+    min-height: 100vh;
     font-size: 14px;
     font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
     color: #333;
@@ -18,12 +23,20 @@ a:link, a:visited {
     text-decoration: none;
 }
 
+.hide {
+    display: none;
+}
+
 .calendar table {
     border-collapse: collapse;
     margin: var(--margin-table);
 }
 
-.calendar tr td {
+.calendar tr th .master_name {
+    font-size: 1.2rem;
+}
+
+.calendar tr td:not(:last-child) {
     border: var(--border-table);
 }
 
@@ -37,7 +50,7 @@ a:link, a:visited {
     width: 90px;
 }
 
-.calendar tr td:last-child {
+.calendar tr td:nth-child(2) {
     width: var(--table-width);
 }
 
@@ -93,6 +106,62 @@ a:link, a:visited {
     background-color: white;
 }
 
+.calendar .buttons div {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 1fr 1fr;
+    height: 51px;
+}
+
+.calendar .buttons button{
+    background-color: white;
+    border: none;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.calendar .buttons button:first-child{
+    border-top: var(--border-table);
+    border-right: var(--border-table);
+    border-bottom: var(--border-table);
+}
+
+.calendar .buttons button:last-child{
+    border-right: var(--border-table);
+    border-bottom: var(--border-table);
+}
+
+.calendar .buttons .status_paid:hover{
+    background-color: var(--color-paid);
+}
+
+.calendar .buttons .delete:hover{
+    background-color: var(--color-not-paid);
+}
+
+.visitdata {
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+.visit-text {
+    font-size: 14pt;
+}
+
+#visit-input {
+    font-size: 14pt;
+    border: 2px solid black;
+    padding: 2px 7px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#visit-input:hover{
+    background-color: rgba(189, 189, 189, 0.4);
+}
+
 @media screen and (max-width: 700px) {
     .calendar tbody {
         width: calc(100% - 2 * var(--margin-table));
@@ -135,6 +204,7 @@ a:link, a:visited {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: repeat(4, 1fr);
+        height: 112.2px;
     }
     .calendar .card p:not(:last-child) {
         margin-bottom: var(--calendar-margin-card-item);
@@ -154,16 +224,7 @@ a:link, a:visited {
         grid-column: 1;
         grid-row: 4;
     }
-}
-
-.visitdata {
-    margin-top: 5%;
-    text-align: center;
-    margin-right: auto;
-    margin-left: auto;
-    margin-bottom: 50px;
-}
-
-.visit-text {
-    font-size: 25px;
+    .calendar .buttons div{
+        height: 113px
+    }
 }

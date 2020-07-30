@@ -23,11 +23,10 @@
     {% include "calendar/header.html" %}
     <main>
         <section class="visitdata">
-            <span class="visit-text">Выберите дату</span>
-            <br>
+            <span class="visit-text">Выберите дату:</span>
             <input style="" data-dd-format="d-m-Y"
                 data-dd-theme="calendar" data-dd-lang="ru" data-dd-modal="true" data-dd-large-only="true"
-                data-dd-show-only-enabled-days="true" type="text" id="visit-input">
+                data-dd-show-only-enabled-days="true" type="text" id="visit-input" size="10">
         </section>
         <section class="calendar">
             <div class="wrap">
@@ -40,66 +39,109 @@
                                 </label>
                             </th>
                             <th>
-                                <p>Виктория</p>
+                                <p class="master_name">Виктория</p>
                             </th>
+                            <th></th>
                         </tr>
-                        <tr>
+                        <tr data-time="09:30">
                             <td>
                                 <p>09:30</p>
                             </td>
                             <td>
-                                <div class="card" data-time="09:30">
+                                <div class="card">
+                                </div>
+                            </td>
+                            <td class="buttons">
+                                <div>
+                                    <button class="status_paid">Оплачено</button>
+                                    <button class="delete">Удалить</button>
                                 </div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-time="11:00">
                             <td>
                                 <p>11:00</p>
                             </td>
                             <td>
-                                <div class="card" data-time="11:00">
+                                <div class="card">
+                                </div>
+                            </td>
+                            <td class="buttons">
+                                <div>
+                                    <button class="status_paid">Оплачено</button>
+                                    <button class="delete">Удалить</button>
                                 </div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-time="12:30">
                             <td>
                                 <p>12:30</p>
                             </td>
                             <td>
-                                <div class="card" data-time="12:30">
+                                <div class="card">
+                                </div>
+                            </td>
+                            <td class="buttons">
+                                <div>
+                                    <button class="status_paid">Оплачено</button>
+                                    <button class="delete">Удалить</button>
                                 </div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-time="14:00">
                             <td>
                                 <p>14:00</p>
                             </td>
                             <td>
-                                <div class="card" data-time="14:00"></div>
+                                <div class="card"></div>
+                            </td>
+                            <td class="buttons">
+                                <div>
+                                    <button class="status_paid">Оплачено</button>
+                                    <button class="delete">Удалить</button>
+                                </div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-time="15:30">
                             <td>
                                 <p>15:30</p>
                             </td>
                             <td>
-                                <div class="card" data-time="15:30"></div>
+                                <div class="card"></div>
+                            </td>
+                            <td class="buttons">
+                                <div>
+                                    <button class="status_paid">Оплачено</button>
+                                    <button class="delete">Удалить</button>
+                                </div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-time="17:00">
                             <td>
                                 <p>17:00</p>
                             </td>
                             <td>
-                                <div class="card" data-time="17:00"></div>
+                                <div class="card"></div>
+                            </td>
+                            <td class="buttons">
+                                <div>
+                                    <button class="status_paid">Оплачено</button>
+                                    <button class="delete">Удалить</button>
+                                </div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-time="18:30">
                             <td>
                                 <p>18:30</p>
                             </td>
                             <td>
-                                <div class="card" data-time="18:30"></div>
+                                <div class="card"></div>
+                            </td>
+                            <td class="buttons">
+                                <div>
+                                    <button class="status_paid">Оплачено</button>
+                                    <button class="delete">Удалить</button>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
