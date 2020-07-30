@@ -20,6 +20,7 @@ def visits_calendar(request):
         dct['last_name'] = user.last_name
         dct['phone'] = user.phone
         dct['service_name'] = Service.objects.get(id=visit.service_id).name
+        dct['status'] = visit.status
         lst.append(dct)
 
     return HttpResponse(json.dumps(lst, ensure_ascii=False))
