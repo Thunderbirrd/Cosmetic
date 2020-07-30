@@ -29,7 +29,7 @@ buttom.forEach(item => {
     item.addEventListener("click", () => {
         document.querySelectorAll(".active").forEach(b => {
             b.classList
-            .remove("active")
+                .remove("active")
         });
         item.classList.add("active");
     });
@@ -41,11 +41,15 @@ buttom.forEach(item => {
     //отправка данных на сервер и запись на услугу
     document.querySelector("#service .approvebtn").addEventListener("click", async () => {
         const dateArr = String(dateInput.value).split('-')
-        const date = [dateArr[2], dateArr[0], dateArr[1]].join('-')
+        const date = [dateArr[2], dateArr[1], dateArr[0]].join('-')
 
         //Исправить id
-        Urls.signUpForServices(selected.textContent, 
+        Urls.signUpForServices(selected.textContent,
             `${date} ${document.querySelector(".btn.active").textContent}`)
+
+        servicecontent = await Urls.refreshServiceContent()
+
+        checkTimeButtons()
     })
 })();
 
@@ -62,11 +66,11 @@ const formatDate = (date) => {
     finalDay.setMonth(finalDay.getMonth() + 3)
     const finalDayMilliseconds = finalDay.getTime()
 
-    while(currentDate.getTime() <= finalDayMilliseconds){
-        if(currentDate.getDay() === 0 || currentDate.getDay() === 3){
+    while (currentDate.getTime() <= finalDayMilliseconds) {
+        if (currentDate.getDay() === 0 || currentDate.getDay() === 3) {
             resultArr.push(formatDate(currentDate))
         }
-        
+
         //увеличваем дату
         currentDate.setDate(currentDate.getDate() + 1)
     }
@@ -80,24 +84,38 @@ const formatDate = (date) => {
 
 const dateedInput = document.getElementById("date-input")
 
-dateedInput.onchange = function () {
-    servicecontent.forEach(service => {
-        if (service.date == dateedInput.value) {
-            // Надо добавлять класс occupied кнопке, value которой совпадает с service.time
-            buttom.forEach(knopka => {
-                if (knopka.textContent == service.time) {
-                    knopka.classList.add("occupied")
-                } else {
-                    knopka.classList.remove("occupied")
-                }
-            })
-            
+//из Y.m.d в d.m.Y
+const changeFromYMDToDMY = (date) => date.split("-").reverse().join("-")
+
+//проверяет время
+const checkTimeButtons = () => {
+    // Надо добавлять класс occupied кнопке, value которой совпадает с service.time
+    buttom.forEach(knopka => {
+        if (servicecontent.findIndex(service => {
+            return service.time === knopka.textContent && service.date == changeFromYMDToDMY(dateedInput.value)
+        }) >= 0) {
+            knopka.classList.add("occupied")
         } else {
-            buttom.forEach(knopka => {
-                knopka.classList.remove("occupied")
-            })
+            knopka.classList.remove("occupied")
         }
     })
+}
+
+const formatDateToDMY = (date) => {
+    let day = date.getDate()
+    day = day < 10 ?`0${day}` :`${day}`
+
+    let month = date.getMonth() + 1
+    month = month < 10 ?`0${month}` :`${month}`
+
+    return `${day}-${month}-${date.getFullYear()}`
+}
+
+dateedInput.value = formatDateToDMY(new Date())
+checkTimeButtons()
+
+dateedInput.onchange = function () {
+    checkTimeButtons()
 }
 
 

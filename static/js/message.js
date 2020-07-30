@@ -13,13 +13,13 @@ const message = {
         return "ERROR" 
     },
 
-    showMessage(text, status=this.SUCCESS, time=3000) {
+    showMessage(text, status=this.SUCCESS, time=4000) {
         const p = document.createElement("p")
         p.classList.add("message")
         p.textContent = text
 
         if (status === this.SUCCESS) {
-            p.classList.add("succes")
+            p.classList.add("success")
         } else if (status === this.WARNING) {
             p.classList.add("warning")
         } else if (status === this.ERROR) {

@@ -20,7 +20,7 @@ const Urls = {
                 },
                 body: JSON.stringify(data)
             })
-    
+
             if (!responce.ok) throw Error(`Ошибка ${responce.status}`)
 
             return await responce.json()
@@ -69,7 +69,7 @@ const Urls = {
             console.log(result)
 
             if (result === 'Success') {
-                message.showMessage(result)
+                message.showMessage(result, message.SUCCESS)
                 return;
             }
 
@@ -78,5 +78,15 @@ const Urls = {
         } catch (e) {
             console.error(e)
         }
+    },
+    async refreshServiceContent() {
+        let responce = await fetch("/refresh/", {
+            method: "Get",
+            headers: {
+                'X-CSRFToken': CRF_TOKEN + ""
+            },
+        })
+
+        return await responce.json()
     }
 }
