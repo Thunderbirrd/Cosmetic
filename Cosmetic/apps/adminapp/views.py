@@ -30,13 +30,18 @@ def visits_calendar(request):
 def current_visit(request, pk):
     title = f"Запись №{pk}"
     visit = get_object_or_404(Visit, pk=pk)
-    all_client_visits = Visit.objects.filter(client=visit.client).all()
+    all_client_visits = list(Visit.objects.filter(client=visit.client).all())
     client = ShopUser.objects.get(id=visit.client)
     for visit in all_client_visits:
         visit.service = Service.objects.filter(id=visit.service).first()
 
+    service = Service.objects.get(id=visit.service)
     content = {
         'title': title,
+        'visit_time': visit.time,
+        'visit_date': visit.date,
+        'service_name': service.name,
+        'visit_price': visit.price,
         'all_client_visits': all_client_visits,
         "client's_phone": client.phone,
         "client's_sale": (client.sale - 1) * 100,

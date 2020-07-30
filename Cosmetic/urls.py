@@ -15,7 +15,8 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView,\
+    PasswordResetCompleteView
 from django.urls import path, re_path, include
 
 from Cosmetic import view
@@ -35,5 +36,6 @@ urlpatterns = [
     re_path(r'^auth/', include('Cosmetic.apps.authapp.urls', namespace='auth')),
     re_path(r'^calendar/', view.calendar, name='calendar'),
     re_path(r'^admin_app/', include('Cosmetic.apps.adminapp.urls', namespace='admin')),
+    re_path(r'^password_reset/complete/', PasswordResetCompleteView.as_view(), name="password_reset_complete"),
     re_path(r'^', view.home, name='home'),
 ]
