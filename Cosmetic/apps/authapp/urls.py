@@ -1,5 +1,3 @@
-from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView
-
 import Cosmetic.apps.authapp.views as authapp
 from django.urls import re_path
 
