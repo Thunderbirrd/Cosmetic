@@ -42,12 +42,21 @@ buttom.forEach(item => {
     document.querySelector("#service .approvebtn").addEventListener("click", async () => {
         const dateArr = String(dateInput.value).split('-')
         const date = [dateArr[2], dateArr[1], dateArr[0]].join('-')
+        const time = document.querySelector(".btn.active").textContent
+
+        store.servicecontent.push({
+            service: selected.textContent,
+            date,
+            time
+        })
+
+        checkTimeButtons()
 
         //Исправить id
-        Urls.signUpForServices(selected.textContent,
-            `${date} ${document.querySelector(".btn.active").textContent}`)
+        await Urls.signUpForServices(selected.textContent,
+            `${date} ${time}`)
 
-        servicecontent = await Urls.refreshServiceContent()
+        store.servicecontent = await Urls.refreshServiceContent()
 
         checkTimeButtons()
     })
@@ -91,7 +100,7 @@ const changeFromYMDToDMY = (date) => date.split("-").reverse().join("-")
 const checkTimeButtons = () => {
     // Надо добавлять класс occupied кнопке, value которой совпадает с service.time
     buttom.forEach(knopka => {
-        if (servicecontent.findIndex(service => {
+        if (store.servicecontent.findIndex(service => {
             return service.time === knopka.textContent && service.date == changeFromYMDToDMY(dateedInput.value)
         }) >= 0) {
             knopka.classList.add("occupied")

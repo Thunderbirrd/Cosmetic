@@ -61,6 +61,8 @@ const store = {
         }
     },
 
+    servicecontent: servicecontent,
+
     setQuantityById(id, quantity){
         this.getProductById(id).quantity = quantity
         aboutProductOptions.maxNumber = quantity
