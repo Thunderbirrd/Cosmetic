@@ -15,6 +15,7 @@ def visits_calendar(request):
     for visit in queryset:
         dct = {}
         user = ShopUser.objects.get(id=visit.client_id)
+        dct['visit_id'] = visit.id
         dct['time'] = visit.time
         dct['first_name'] = user.first_name
         dct['last_name'] = user.last_name
