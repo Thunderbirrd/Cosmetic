@@ -45,4 +45,4 @@ def current_visit(request, pk):
         "client's_surname": client.last_name,
         "client's_email": client.email
     }
-    # return render(request, TEMLATE, content)
+    return HttpResponse(json.dumps(content))
