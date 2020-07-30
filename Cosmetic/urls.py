@@ -26,9 +26,9 @@ urlpatterns = [
     re_path(r'^password_reset/$', PasswordResetView.as_view(template_name="forget_password/email.html"),
             name="password_reset"),
     re_path(r'^password_reset/done/', PasswordResetDoneView.as_view(
-        template_name="forget_password/change_password.html"), name="password_reset_done"),
+        template_name="forget_password/done.html"), name="password_reset_done"),
     re_path(r'^password_reset/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
-            PasswordResetConfirmView.as_view(template_name="forget_password/enter_code.html"),
+            PasswordResetConfirmView.as_view(template_name="forget_password/change_password.html"),
             name='password_reset_confirm'),
     re_path(r'^form_basket/', include('Cosmetic.apps.orderapp.urls')),
     re_path(r'^form_service/', include('Cosmetic.apps.serviceapp.urls')),
