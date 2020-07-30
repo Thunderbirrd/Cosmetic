@@ -1,7 +1,4 @@
 //для шаблонов без функций
-(() => {
-
-})
 
 document.querySelectorAll(".number_input").forEach(div => {
     const input = div.querySelector("input")
@@ -72,6 +69,9 @@ const createNumberInput = ({defaultValue="", maxLength="", minLength="", size=""
 
         if (Number(input.value) >= maxNumber) {
             input.value = maxNumber
+            input.classList.add("show_message")
+        } else {
+            input.classList.remove("show_message")
         }
 
         inputHandler(event, input.value, div)
@@ -103,6 +103,7 @@ const createNumberInput = ({defaultValue="", maxLength="", minLength="", size=""
     const buttonPlus = document.createElement("button")
     buttonPlus.classList.add("plus")
     buttonPlus.textContent = "+"
+    buttonPlus.dataset.title = "Данного товара на складе очень мало"
     buttonPlus.addEventListener("click", (event) => {
         const maxNumber = Math.min(99, options.maxNumber)
 

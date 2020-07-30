@@ -83,19 +83,19 @@ const dateedInput = document.getElementById("date-input")
 dateedInput.onchange = function () {
     servicecontent.forEach(service => {
         if (service.date == dateedInput.value) {
-            if ("09:30" == service.time) {
-                console.log("succeed")
-                // Надо добавлять класс occupied кнопке, value которой совпадает с service.time
-                buttom.forEach(knopka => {
-                    console.log(knopka.textContent, service.time)
-                    if (knopka.textContent == service.time) {
-                        knopka.classList.add("occupied")
-                        console.log("success")
-                    }
-                })
-            }
+            // Надо добавлять класс occupied кнопке, value которой совпадает с service.time
+            buttom.forEach(knopka => {
+                if (knopka.textContent == service.time) {
+                    knopka.classList.add("occupied")
+                } else {
+                    knopka.classList.remove("occupied")
+                }
+            })
+            
         } else {
-            console.log(dateedInput.value)
+            buttom.forEach(knopka => {
+                knopka.classList.remove("occupied")
+            })
         }
     })
 }

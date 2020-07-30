@@ -29,7 +29,7 @@ const showAboutProduct = (id) => {
     aboutProductCount.value = 1
     aboutProductDescription.textContent = product.description
 
-    aboutProductOptions.maxNumber = store.getProductById(id).quantity
+    setMaxNumber(store.getProductById(id).quantity)
 
     if (aboutProduct.classList.contains("hide")){
         aboutProduct.classList.remove("hide")

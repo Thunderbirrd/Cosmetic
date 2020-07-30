@@ -13,7 +13,7 @@ const message = {
         return "ERROR" 
     },
 
-    showMessage(text, status=this.SUCCESS, time=4000) {
+    showMessage(text, status=this.SUCCESS, time=3000) {
         const p = document.createElement("p")
         p.classList.add("message")
         p.textContent = text
@@ -34,6 +34,11 @@ const message = {
         p.style.top = top + 'px'
         p.style.left = left + 'px'
 
-        setTimeout(() => { body.removeChild(p) }, 4000)
+        setTimeout(() => { 
+            $(p).fadeOut(400)
+            setTimeout(() => {
+                body.removeChild(p)
+            }, 400)
+        }, time)
     }
 }

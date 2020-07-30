@@ -123,6 +123,7 @@ const _createCount = (title, count) => {
     const buttonPlus = document.createElement("button")
     buttonPlus.classList.add("plus")
     buttonPlus.textContent = "+"
+    buttonPlus.dataset.title = "Данного товара на складе очень мало"
     buttonPlus.addEventListener("click", () => {
         const maxNumber = Math.min(99, store.getProductByTitle(title).quantity)
 
@@ -138,6 +139,11 @@ const _createCount = (title, count) => {
         setAmountProductes()
         setTextInSpanAmount()
     })
+    if (store.getProductByTitle(title).quantity > 10) {
+        buttonPlus.classList.remove("show_tooltip") 
+    } else {
+        buttonPlus.classList.add("show_tooltip") 
+    }
 
     div.appendChild(buttonMinus)
     div.appendChild(input)
@@ -241,10 +247,15 @@ const checkForDataInconsistencies = (userData, serverData) => {
 
 const addClickListenerForCheckoutButton = () => {
     //оформляем заказ при клике на кнопку
-    document.querySelector(".checkout button").addEventListener("click",async () => {
+    document.querySelector(".checkout button").addEventListener("click", async () => {
         const data = {}
 
         const list = ulListProduct.children
+
+        if (list.length === 0) {
+            message.showMessage("Список покупок пуст", message.WARNING, 1000)
+            return;
+        }
 
         for (let i = 0; i < list.length; i++) {
             let product = store.stateShop.find(item => item.name === list[i].dataset.title )

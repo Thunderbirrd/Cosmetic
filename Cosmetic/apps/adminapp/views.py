@@ -15,11 +15,13 @@ def visits_calendar(request):
     for visit in queryset:
         dct = {}
         user = ShopUser.objects.get(id=visit.client_id)
+        dct['visit_id'] = visit.id
         dct['time'] = visit.time
         dct['first_name'] = user.first_name
         dct['last_name'] = user.last_name
         dct['phone'] = user.phone
         dct['service_name'] = Service.objects.get(id=visit.service_id).name
+        dct['status'] = visit.status
         lst.append(dct)
 
     return HttpResponse(json.dumps(lst, ensure_ascii=False))
@@ -49,4 +51,4 @@ def current_visit(request, pk):
         "client's_surname": client.last_name,
         "client's_email": client.email
     }
-    # return render(request, TEMLATE, content)
+    return HttpResponse(json.dumps(content))
