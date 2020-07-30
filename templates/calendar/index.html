@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
 
-     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 
@@ -17,66 +18,89 @@
     <link rel="stylesheet" href="{% static 'css/calendar/header.css' %}">
     <link rel="stylesheet" href="{% static 'css/calendar/style.css' %}">
 </head>
+
 <body>
     {% include "calendar/header.html" %}
     <main>
         <section class="visitdata">
             <span class="visit-text">Выберите дату</span>
             <br>
-            <input style="margin-top: 2%; background-color: white; color: black; border-color: #2f3640;
-                 border-style: dashed; font-size: 1.2rem; padding: 10px; text-align: center;
-                 border-radius: 8px"
-                   data-dd-format="m-d-Y"
-                   data-dd-theme="calendar"
-                   data-dd-lang="ru"
-                   data-dd-modal="true"
-                   data-dd-large-only="true"
-                   data-dd-show-only-enabled-days="true"
-                   type="text" id="visit-input">
-
+            <input style="" data-dd-format="d-m-Y"
+                data-dd-theme="calendar" data-dd-lang="ru" data-dd-modal="true" data-dd-large-only="true"
+                data-dd-show-only-enabled-days="true" type="text" id="visit-input">
         </section>
         <section class="calendar">
             <div class="wrap">
                 <table>
                     <tbody>
                         <tr>
-                            <th><p>24 июля 2020</p></th>
-                            <th><p>Виктория</p></th>
+                            <th>
+                                <label class="input_calendar" for="visit-input">
+                                    30 июня 2020
+                                </label>
+                            </th>
+                            <th>
+                                <p>Виктория</p>
+                            </th>
                         </tr>
                         <tr>
-                            <td><p>09:30</p></td>
                             <td>
-                                <div class="card paid">
-                                    <p class="name">Имя</p>
-                                    <p class="surname">Фамилия</p>
-                                    <p class="service">Услуга</p>
-                                    <p class="phone">+7(800) 555 35-35</p>
+                                <p>09:30</p>
+                            </td>
+                            <td>
+                                <div class="card" data-time="09:30">
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td><p>11:00</p></td>
-                            <td></td>
+                            <td>
+                                <p>11:00</p>
+                            </td>
+                            <td>
+                                <div class="card" data-time="11:00">
+                                </div>
+                            </td>
                         </tr>
                         <tr>
-                            <td><p>12:30</p></td>
-                            <td></td>
+                            <td>
+                                <p>12:30</p>
+                            </td>
+                            <td>
+                                <div class="card" data-time="12:30">
+                                </div>
+                            </td>
                         </tr>
                         <tr>
-                            <td><p>14:00</p></td>
-                            <td></td>
+                            <td>
+                                <p>14:00</p>
+                            </td>
+                            <td>
+                                <div class="card" data-time="14:00"></div>
+                            </td>
                         </tr>
                         <tr>
-                            <td><p>15:30</p></td>
-                            <td></td>
+                            <td>
+                                <p>15:30</p>
+                            </td>
+                            <td>
+                                <div class="card" data-time="15:30"></div>
+                            </td>
                         </tr>
                         <tr>
-                            <td><p>17:00</p></td>
-                            <td></td>
+                            <td>
+                                <p>17:00</p>
+                            </td>
+                            <td>
+                                <div class="card" data-time="17:00"></div>
+                            </td>
                         </tr>
                         <tr>
-                            <td><p>18:30</p></td>
-                            <td></td>
+                            <td>
+                                <p>18:30</p>
+                            </td>
+                            <td>
+                                <div class="card" data-time="18:30"></div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -86,7 +110,9 @@
 
     <script src="{% static 'js/datedropper.pro.min.js' %}"></script>
     <script src="https://cdn.datedropper.com/get/mgonsm03x0cb8urluhctqkwkmd70wnec"></script>
+    <script src="{% static 'js/calendar/urls.js' %}"></script>
     <script src="{% static 'js/calendar/script.js' %}"></script>
 
 </body>
+
 </html>
