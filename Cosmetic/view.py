@@ -35,6 +35,7 @@ def visits():
     return occupied_dates
 
 
+@csrf_exempt
 def refresh(request):
     visit_list = Visit.objects.all()
     occupied_dates = []
