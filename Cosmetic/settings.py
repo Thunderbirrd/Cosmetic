@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Cosmetic.apps.authapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +45,6 @@ INSTALLED_APPS = [
     'Cosmetic.apps.mainapp',
     'Cosmetic.apps.orderapp',
     'Cosmetic.apps.adminapp',
-    'Cosmetic.apps.authapp',
     'Cosmetic.apps.serviceapp',
 ]
 

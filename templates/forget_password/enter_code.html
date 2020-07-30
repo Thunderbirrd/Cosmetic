@@ -6,7 +6,8 @@
     <title>Email</title>
 </head>
 <body>
-    <form action="/authapp/password_reset_confirm/" method="post">
+    <form action="/password_reset_confirm" method="post">
+        {% csrf_token %}
         <p>Введите код, отправленный на вашу почту</p>
         <input type="text" name="code" placeholder="Код">
         <button type="submit">Отправить</button>
