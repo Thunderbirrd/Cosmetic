@@ -42,7 +42,7 @@ def refresh(request):
 
     for visit in visit_list:
         occupied_dates.append({'date': visit.date, 'time': visit.time})
-    return occupied_dates
+    return HttpResponse(json.dumps(occupied_dates))
 
 
 def services():
