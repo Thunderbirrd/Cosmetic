@@ -35,14 +35,13 @@ def visits():
     return occupied_dates
 
 
-@csrf_exempt
-def visits(request):
+def refresh(request):
     visit_list = Visit.objects.all()
     occupied_dates = []
 
     for visit in visit_list:
         occupied_dates.append({'date': visit.date, 'time': visit.time})
-    return HttpResponse(json.dumps(occupied_dates))
+    return occupied_dates
 
 
 def services():
