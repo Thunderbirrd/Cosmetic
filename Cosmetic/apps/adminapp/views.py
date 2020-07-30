@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import user_passes_test
+from django.core.exceptions import ObjectDoesNotExist
+from django.forms import model_to_dict
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from Cosmetic.apps.mainapp.models import Visit, Service, ShopUser
 import json
@@ -30,25 +31,53 @@ def visits_calendar(request):
 @csrf_exempt
 @user_passes_test(lambda user: user.is_superuser)
 def current_visit(request, pk):
-    title = f"Запись №{pk}"
-    visit = get_object_or_404(Visit, pk=pk)
-    all_client_visits = list(Visit.objects.filter(client=visit.client).all())
-    client = ShopUser.objects.get(id=visit.client)
-    for visit in all_client_visits:
-        visit.service = Service.objects.filter(id=visit.service).first()
+    try:
+        title = f"Запись №{pk}"
+        visit = Visit.objects.get(id=pk)
+        all_client_visits = Visit.objects.filter(client=visit.client_id).all()
+        client = ShopUser.objects.get(id=visit.client_id)
+        all_client_visits_list = []
+        for vst in all_client_visits:
+            vst = model_to_dict(vst)
+            vst['service_id'] = Service.objects.filter(id=visit.service_id).first().name
+            all_client_visits_list.append(vst)
+        service = Service.objects.get(id=visit.service_id)
+        content = {
+            'title': title,
+            'visit_time': visit.time,
+            'visit_date': visit.date,
+            'service_name': service.name,
+            'visit_price': visit.price,
+            'all_client_visits': all_client_visits_list,
+            "client's_phone": client.phone,
+            "client's_sale": (client.sale - 1) * 100,
+            "client's_name": client.first_name,
+            "client's_surname": client.last_name,
+            "client's_email": client.email
+        }
+        return HttpResponse(json.dumps(content, ensure_ascii=False))
+    except ObjectDoesNotExist:
+        return HttpResponse('Error')
 
-    service = Service.objects.get(id=visit.service)
-    content = {
-        'title': title,
-        'visit_time': visit.time,
-        'visit_date': visit.date,
-        'service_name': service.name,
-        'visit_price': visit.price,
-        'all_client_visits': all_client_visits,
-        "client's_phone": client.phone,
-        "client's_sale": (client.sale - 1) * 100,
-        "client's_name": client.first_name,
-        "client's_surname": client.last_name,
-        "client's_email": client.email
-    }
-    return HttpResponse(json.dumps(content))
+
+@csrf_exempt
+@user_passes_test(lambda user: user.is_superuser)
+def delete_visit(request, pk):
+    try:
+        visit = Visit.objects.filter(id=pk)
+        visit.delete()
+    except ObjectDoesNotExist:
+        return HttpResponse('Error')
+    return HttpResponse('Success')
+
+
+@csrf_exempt
+@user_passes_test(lambda user: user.is_superuser)
+def change_status(request, pk):
+    try:
+        visit = Visit.objects.get(id=pk)
+        visit.status = 'PAY'
+        visit.save()
+    except ObjectDoesNotExist:
+        return HttpResponse('Error')
+    return HttpResponse('Success')

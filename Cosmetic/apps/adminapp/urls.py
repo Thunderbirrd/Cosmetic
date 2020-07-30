@@ -5,6 +5,8 @@ app_name = "adminapp"
 
 urlpatterns = [
     re_path(r'^visits/', admin_app.visits_calendar, name='visits calendar'),
+    re_path(r'^visit/delete/(?P<pk>\d+)/$', admin_app.delete_visit, name='delete visit'),
+    re_path(r'^visit/change/(?P<pk>\d+)/$', admin_app.change_status, name='change status'),
     re_path(r'^visit/(?P<pk>\d+)/$', admin_app.current_visit, name='current visit')
 ]
 
