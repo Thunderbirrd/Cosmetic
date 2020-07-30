@@ -121,6 +121,7 @@
 }
 
 .list_product .count .plus {
+    position: relative;
     padding: 3px 5px 1px 5px;
 }
 

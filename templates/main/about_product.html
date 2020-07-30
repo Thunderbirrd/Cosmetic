@@ -37,6 +37,19 @@
             })
 
             document.querySelector(".about_product_inputs").appendChild(numberInput)
+
+            const numberInputPlus = numberInput.querySelector(".plus")
+            
+            
+            //изменяет максимальное maxNumber
+            const setMaxNumber = (maxNumber) => {
+                aboutProductOptions.maxNumber = maxNumber
+                if (maxNumber > 10) {
+                    numberInputPlus.classList.remove("show_tooltip") 
+                } else {
+                    numberInputPlus.classList.add("show_tooltip") 
+                }
+            }
         </script>
 
         {% include "../components/my_button.html" %}
