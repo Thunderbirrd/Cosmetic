@@ -138,10 +138,14 @@ STATICFILES_DIRS = [STATIC_DIR]
 LOGIN_URl = '/auth/login/'
 
 LOW_CACHE = True
+'''
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
+'''
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "cosmeticcenter.yakutsk@gmail.com"
+EMAIL_HOST_PASSWORD = "Toria_cosmetic_center1234"
