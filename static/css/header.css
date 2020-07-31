@@ -42,7 +42,7 @@ header .basket {
     cursor: pointer;
 }
 
-header .dropdown_content{
+header .dropdown_content, header .dropup_content{
     display: none;
     position: absolute;
     min-width: 160px;
@@ -53,19 +53,28 @@ header .dropdown_content{
     z-index: 1;
 }
 
-.dropdown_content a:hover{
+.dropdown_content a:hover, .dropup_content a:hover{
     color: black;
     background-color: #fffee8;
 }
-.dropdown_content a{
+.dropdown_content a, .dropup_content a{
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.dropdown:hover .dropdown_content{
+.dropdown:hover .dropdown_content, .dropdown:hover .dropup_content{
     display: block;
+}
+
+.dropdown:hover .dropdown_content.hide, .dropdown:hover .dropup_content.hide{
+    display: none;
+}
+
+header .dropup_content{
+    bottom: 100%;
+    box-shadow: 0px -8px 16px 0px rgba(0,0,0,0.2);
 }
 
 header .menu li.dropdown{

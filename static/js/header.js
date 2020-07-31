@@ -135,10 +135,11 @@ const showProductByBrand = (brand) => {
     store.filter.brand = brand
 }
 
+const dropdownContent = document.querySelector("header .dropdown_content");
+const dropupContent = document.querySelector("header .dropup_content");
+
 //добавляем список брендов в всплывающем меню в поле магазин в header
 (() => {
-    const dropdownContent = document.querySelector("header .dropdown_content")
-
     store.brands.forEach(brand => {
         let a = document.createElement("a")
         a.href = "#"
@@ -149,9 +150,27 @@ const showProductByBrand = (brand) => {
             showProductByBrand(brand)
         })
 
+        let clone = a.cloneNode(true)
+        clone.addEventListener("click", (e) => {
+            e.preventDefault()
+            showProductByBrand(brand)
+        })
+
         dropdownContent.appendChild(a)
+        dropupContent.appendChild(clone)
     })
 })();
+
+//настраивает видимость меню магазина
+const setVisiabilityMenuShop = () => {
+    if (isWidthMobileScreen()) {
+        dropdownContent.classList.add("hide")
+        dropupContent.classList.remove("hide")
+    } else {
+        dropdownContent.classList.remove("hide")
+        dropupContent.classList.add("hide")        
+    }
+}
 
 //показываем все продукты, убираем фильтры при клике по "магазину"
 document.querySelector("header .menu .shop").addEventListener("click", () => {

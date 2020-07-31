@@ -8,6 +8,9 @@ window.onload = () => {
     //добавляем событие клика для оформления покупок в корзину
     addClickListenerForCheckoutButton()
 
+    //настраивает видимость меню магазина
+    setVisiabilityMenuShop()
+
     //делаем действия при начальной загрузке страницы
     doActionByCurentURL()
 }
@@ -19,6 +22,9 @@ window.addEventListener('resize', () => {
     _setPositionHeader()
     _setPositionShoppingBasket()
     _setPositionShoppingBasketCircle()
+
+    //настраивает видимость меню магазина
+    setVisiabilityMenuShop()
 })
 
 window.onpopstate = (event) => {
