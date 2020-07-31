@@ -98,11 +98,11 @@ def change_status(request, pk):
 @csrf_exempt
 @user_passes_test(lambda user: user.is_superuser)
 def create_visit(request):
-    data = json.loads(request)
+    data = json.loads(request.body)
     new_visit = Visit()
     client = ShopUser.objects.filter(first_name=data["name"], last_name=data["surname"], phone=data["phone"]).first()
     new_visit.client_id = client.id
-    new_visit.service_id = Service.objects.get(name=data["service"])
+    new_visit.service_id = Service.objects.get(name=data["service"]).id
     new_visit.time = data["time"]
     new_visit.date = data["date"]
     new_visit.status = "PAY"

@@ -1,0 +1,40 @@
+<section class="create_visit">
+    <div class="wrap">
+        <h2>Создать запись</h2>
+        <form action="#">
+            <!-- // data = { 
+                //     "name": имя клиента, 
+                //     "surname": фамилия клиента, 
+                //     "phone": номер телефона клиента, 
+                //     "date": дата, 
+                //     "time": время, 
+                //     "service": услуга, 
+                // } -->
+    
+            <p>Имя: <input type="text" placeholder="Имя" name="name"></p>
+    
+            <p>Фамилия: <input type="text" placeholder="Фамилия" name="surname"></p>
+    
+            <p>Номер: +7 <input type="text" placeholder="Номер телефона" name="phone" minlength="10" maxlength="10"></p>
+    
+            <p>Дата: <input type="text" placeholder="Дата" id="date_visit_client"data-dd-format="d-m-Y"
+                data-dd-theme="calendar" data-dd-lang="ru" data-dd-modal="true" data-dd-large-only="true"
+                data-dd-show-only-enabled-days="true" type="text" id="visit-input" name="date"></p>
+    
+            <p>Время: <select name="time">
+                    <option selected value="09:30">09:30</option>
+                    <option value="11:00">11:00</option>
+                    <option value="12:30">12:30</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:30">15:30</option>
+                    <option value="17:00">17:00</option>
+                    <option value="18:30">18:30</option>
+                </select>
+            </p>
+    
+            <p>Услуга: <input type="text" placeholder="Услуга" name="service"></p>
+    
+            <button type="submit">Создать</button>
+        </form>  
+    </div>
+</section>

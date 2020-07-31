@@ -110,7 +110,6 @@ a:link, a:visited {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: 1fr 1fr;
-    height: 51px;
 }
 
 .calendar .buttons button{
@@ -204,7 +203,6 @@ a:link, a:visited {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: repeat(4, 1fr);
-        height: 112.2px;
     }
     .calendar .card p:not(:last-child) {
         margin-bottom: var(--calendar-margin-card-item);
@@ -224,7 +222,8 @@ a:link, a:visited {
         grid-column: 1;
         grid-row: 4;
     }
-    .calendar .buttons div{
-        height: 113px
+    .calendar .buttons div button{
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 }

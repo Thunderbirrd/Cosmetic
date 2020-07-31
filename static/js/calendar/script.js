@@ -1,5 +1,6 @@
-$('#visit-input').dateDropper({
-    });
+$('#visit-input').dateDropper({});
+
+$('#date_visit_client').dateDropper({});
 
 const vistInput = document.getElementById("visit-input")
 const labelCalendar = document.querySelector(".input_calendar")
@@ -129,14 +130,27 @@ const fillTable = async (date) => {
     })
 }
 
+//устанавливает время
+const setDate = async (objDdate=new Date()) => {
+    const date = formatDate(objDdate)
+    vistInput.value = date
+    labelCalendar.textContent = formatDateToLabelFromCalendar(date)
+    await fillTable(formatDateToBDFromCalendar(date))
+}
+
+document.querySelector(".create_visit form").onsubmit = async (e) => {
+    e.preventDefault()
+    let {name, surname, phone, date, time, service} = e.target.elements
+    await Urls.createVisit(name.value, surname.value, phone.value, 
+        formatDateToBDFromCalendar(date.value), time.options[time.selectedIndex].value, service.value)
+    await setDate()
+}
+
 vistInput.onchange = () => {
     labelCalendar.textContent = formatDateToLabelFromCalendar(vistInput.value)
     fillTable(formatDateToBDFromCalendar(vistInput.value))
 }
 
 window.onload = () => {
-    const date = formatDate(new Date())
-    vistInput.value = date
-    labelCalendar.textContent = formatDateToLabelFromCalendar(date)
-    fillTable(formatDateToBDFromCalendar(date))
+    setDate()
 }

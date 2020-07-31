@@ -1,0 +1,32 @@
+.create_visit {
+    margin-top: 30px;
+}
+
+.create_visit h2 {
+    margin: 0 10px 15px 10px;
+}
+
+.create_visit .wrap{
+    text-align: start;
+}
+
+.create_visit form {
+    margin: 0 10px;
+}
+
+.create_visit form p {
+    margin-bottom: 8px;    
+}
+
+.create_visit button, .create_visit select {
+    padding: 2px 5px;
+    font-size: 1rem;
+}
+
+.create_visit input {
+    padding: 2px 5px;
+}
+
+.create_visit p, .create_visit input {
+    font-size: 1rem;
+}

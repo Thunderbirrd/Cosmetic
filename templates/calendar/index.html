@@ -16,142 +16,27 @@
 
     <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
     <link rel="stylesheet" href="{% static 'css/calendar/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/calendar/create_visit.css' %}">
     <link rel="stylesheet" href="{% static 'css/calendar/style.css' %}">
 </head>
 
 <body>
     {% include "calendar/header.html" %}
     <main>
+        {% include 'calendar/create_visit.html' %}
         <section class="visitdata">
             <span class="visit-text">Выберите дату:</span>
             <input style="" data-dd-format="d-m-Y"
                 data-dd-theme="calendar" data-dd-lang="ru" data-dd-modal="true" data-dd-large-only="true"
                 data-dd-show-only-enabled-days="true" type="text" id="visit-input" size="10">
         </section>
-        <section class="calendar">
-            <div class="wrap">
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>
-                                <label class="input_calendar" for="visit-input">
-                                    30 июня 2020
-                                </label>
-                            </th>
-                            <th>
-                                <p class="master_name">Виктория</p>
-                            </th>
-                            <th></th>
-                        </tr>
-                        <tr data-time="09:30">
-                            <td>
-                                <p>09:30</p>
-                            </td>
-                            <td>
-                                <div class="card">
-                                </div>
-                            </td>
-                            <td class="buttons">
-                                <div>
-                                    <button class="status_paid">Оплачено</button>
-                                    <button class="delete">Удалить</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr data-time="11:00">
-                            <td>
-                                <p>11:00</p>
-                            </td>
-                            <td>
-                                <div class="card">
-                                </div>
-                            </td>
-                            <td class="buttons">
-                                <div>
-                                    <button class="status_paid">Оплачено</button>
-                                    <button class="delete">Удалить</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr data-time="12:30">
-                            <td>
-                                <p>12:30</p>
-                            </td>
-                            <td>
-                                <div class="card">
-                                </div>
-                            </td>
-                            <td class="buttons">
-                                <div>
-                                    <button class="status_paid">Оплачено</button>
-                                    <button class="delete">Удалить</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr data-time="14:00">
-                            <td>
-                                <p>14:00</p>
-                            </td>
-                            <td>
-                                <div class="card"></div>
-                            </td>
-                            <td class="buttons">
-                                <div>
-                                    <button class="status_paid">Оплачено</button>
-                                    <button class="delete">Удалить</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr data-time="15:30">
-                            <td>
-                                <p>15:30</p>
-                            </td>
-                            <td>
-                                <div class="card"></div>
-                            </td>
-                            <td class="buttons">
-                                <div>
-                                    <button class="status_paid">Оплачено</button>
-                                    <button class="delete">Удалить</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr data-time="17:00">
-                            <td>
-                                <p>17:00</p>
-                            </td>
-                            <td>
-                                <div class="card"></div>
-                            </td>
-                            <td class="buttons">
-                                <div>
-                                    <button class="status_paid">Оплачено</button>
-                                    <button class="delete">Удалить</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr data-time="18:30">
-                            <td>
-                                <p>18:30</p>
-                            </td>
-                            <td>
-                                <div class="card"></div>
-                            </td>
-                            <td class="buttons">
-                                <div>
-                                    <button class="status_paid">Оплачено</button>
-                                    <button class="delete">Удалить</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+        {% include "calendar/table_calendar.html" %}
     </main>
 
     <script src="{% static 'js/datedropper.pro.min.js' %}"></script>
     <script src="https://cdn.datedropper.com/get/mgonsm03x0cb8urluhctqkwkmd70wnec"></script>
+
+    <script src="{% static 'js/cookie.js' %}"></script>
     <script src="{% static 'js/calendar/urls.js' %}"></script>
     <script src="{% static 'js/calendar/script.js' %}"></script>
 
