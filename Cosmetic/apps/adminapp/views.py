@@ -81,3 +81,34 @@ def change_status(request, pk):
     except ObjectDoesNotExist:
         return HttpResponse('Error')
     return HttpResponse('Success')
+
+
+'''
+    request = {
+        "name": имя клиента,
+        "surname": фамилия клиента,
+        "phone": номер телефона клиента,
+        "date": дата,
+        "time": время,
+        "service": услуга,
+    }
+'''
+
+
+@csrf_exempt
+@user_passes_test(lambda user: user.is_superuser)
+def create_visit(request):
+    data = json.loads(request)
+    new_visit = Visit()
+    client = ShopUser.objects.filter(first_name=data["name"], last_name=data["surname"], phone=data["phone"]).first()
+    if client:
+        new_visit.client = client.id
+    else:
+        new_visit.client = 0
+
+    new_visit.service = Service.objects.get(name=data["service"])
+    new_visit.time = data["time"]
+    new_visit.date = data["date"]
+    new_visit.status = "PAY"
+    new_visit.save()
+    return HttpResponse("Success")
