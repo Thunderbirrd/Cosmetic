@@ -101,8 +101,8 @@ def create_visit(request):
     data = json.loads(request)
     new_visit = Visit()
     client = ShopUser.objects.filter(first_name=data["name"], last_name=data["surname"], phone=data["phone"]).first()
-    new_visit.client = client.id
-    new_visit.service = Service.objects.get(name=data["service"])
+    new_visit.client_id = client.id
+    new_visit.service_id = Service.objects.get(name=data["service"])
     new_visit.time = data["time"]
     new_visit.date = data["date"]
     new_visit.status = "PAY"
