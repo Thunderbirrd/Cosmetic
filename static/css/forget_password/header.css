@@ -1,0 +1,48 @@
+header {
+    background: radial-gradient(#fff 1%, transparent 10%) 0 0, radial-gradient(rgba(0,0,0,.1) 1%, transparent 1%) 50px 50px;
+    background-color: #000;
+    background-size: 40px 40px;
+    color: white;
+    z-index: 2;
+}
+
+header a{
+    text-decoration: none;
+    color: white;
+}
+
+header h1 {
+    text-align: center;
+}
+
+header .wrap_header {
+    padding-top: 15px;
+}
+
+header .menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+header .menu li{
+    flex-grow: 1;
+}
+
+header .menu li a{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: block;
+    text-align: center;
+}
+
+header .menu li a:hover{
+    background-color: #fffccf;
+    color: black;
+    cursor: pointer;
+}
+
+header .menu li.active a{
+    color: black;
+    background-color: #fffee8;
+}

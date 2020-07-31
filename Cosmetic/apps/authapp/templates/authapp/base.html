@@ -3,15 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, scale=1.0">
+    <title>Cosmetic Center</title>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/typography.css' %}">
+    <link rel="stylesheet" href="{% static 'css/forget_password/header.css' %}">
     <link href="{% static 'css/login.css' %}" rel="stylesheet">
 </head>
 <body>
+    {% include "forget_password/header.html" %}
+
 	<div class="container">
         <div class="login">
-            <div class="h2 text-center head" style="font-size: 40px; text-align: center ">
+            <h2 class="h2 text-center head">
                 Аутентификация
-            </div>
+            </h2>
 
             {% block content %}
             {% endblock %}

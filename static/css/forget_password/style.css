@@ -1,0 +1,42 @@
+main .container{
+    width: 50%;
+    background-color: #ddc0d8;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 40px auto;
+}
+
+main .container input {
+    font-size: 1.4rem;
+}
+
+main .container p {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 1.2rem;
+}
+
+main h2 {
+    text-align: center;
+}
+
+main .container button{
+    width: 100%;
+    font-size: 18px;
+    padding: 6px 0;
+    background-color: #d8d8d8;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-size: 18px;
+    font-family: "Lucida Grande";
+}
+
+main .container button a{
+    display: block;
+}
+
+@media screen and (max-width: 700px) {
+    main .container{
+        width: 90%;
+    }
+}

@@ -1,3 +1,16 @@
+body {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+}
+
+h2 {
+    margin-top: 0.8em; 
+    text-align: center; 
+}
+
 .form-horizontal{
     background-color: #ddc0d8;
     margin: auto;
@@ -27,6 +40,11 @@
     alignment: center;
     height: 35px;
 }
+
+.btnreg a {
+    display: block;
+}
+
 .register{
     display: block;
     margin-left: auto;
@@ -43,14 +61,15 @@
     font-size: 20px;
 }
 
+@media screen and (max-width: 700px) {
+    .form-horizontal {
+        width: 90%;
+    }
+}
+
 @media screen and (min-width: 555px){
     .btnreg{
         width: 40%;
     }
 }
 
-@media screen and (max-width: 400px) {
-    .form-horizontal {
-        width: unset;
-    }
-}

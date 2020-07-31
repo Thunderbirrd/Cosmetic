@@ -14,3 +14,8 @@ ul, ol{
 li{
     display: block;
 }
+
+a{
+    text-decoration: none;
+    color: black;
+}
