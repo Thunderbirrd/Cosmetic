@@ -77,6 +77,7 @@ const store = {
     },
 
     getProductById(id){
+        id = Number(id)
         return this.stateShop.find(product => product.id === id)
     },
 

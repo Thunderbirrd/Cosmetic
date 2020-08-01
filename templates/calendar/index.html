@@ -25,10 +25,12 @@
     <main>
         {% include 'calendar/create_visit.html' %}
         <section class="visitdata">
-            <span class="visit-text">Выберите дату:</span>
-            <input style="" data-dd-format="d-m-Y"
-                data-dd-theme="calendar" data-dd-lang="ru" data-dd-modal="true" data-dd-large-only="true"
-                data-dd-show-only-enabled-days="true" type="text" id="visit-input" size="10">
+            <div class="wrap">
+                <span class="visit-text">Выберите дату:</span>
+                <input style="" data-dd-format="d-m-Y"
+                    data-dd-theme="calendar" data-dd-lang="ru" data-dd-modal="true" data-dd-large-only="true"
+                    data-dd-show-only-enabled-days="true" type="text" id="visit-input" size="10">
+            </div>
         </section>
         {% include "calendar/table_calendar.html" %}
     </main>
