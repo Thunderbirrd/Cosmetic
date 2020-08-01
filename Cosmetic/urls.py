@@ -39,5 +39,6 @@ urlpatterns = [
     re_path(r'^refresh/', view.refresh, name ='refresh'),
     re_path(r'^password_reset/complete/', PasswordResetCompleteView.as_view(
         template_name="forget_password/complete.html"), name="password_reset_complete"),
+    re_path(r'^history_client/', view.history_client, name="history_client"),
     re_path(r'^', view.home, name='home'),
 ]
