@@ -36,7 +36,7 @@ class Product(models.Model):
     description = models.CharField(verbose_name="описание товара", max_length=256, default="")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="/static/product_img/", blank=True)
+    image = models.ImageField(upload_to="static/product_img/", blank=True)
     quantity = models.PositiveIntegerField(verbose_name='количество на складе', default=0, null=False)
     is_active = models.BooleanField(verbose_name='активен ли продукт', default=True)
 
