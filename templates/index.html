@@ -81,18 +81,22 @@
        //   occupied_dates
        //   service_names
 
-        {% for dates in occupied_dates  %}
-            {% for services in service_names  %}
-            servicecontent.push({
-                service: "{{ services.name }}",
-                date: "{{ dates.date }}",
-                time: "{{ dates.time }}"
-            });
-            {% endfor %}
+        // {% for dates in occupied_dates  %}
+        //     {% for services in service_names  %}
+        //     servicecontent.push({
+        //         service: "{{ services.name }}",
+        //         date: "{{ dates.date }}",
+        //         time: "{{ dates.time }}"
+        //     });
+        //     {% endfor %}
+        // {% endfor %}
+
+        {% for time in occupied_dates  %}
+            servicecontent.push("{{ time }}")
         {% endfor %}
 
 
-    console.log(servicecontent);
+        console.log(servicecontent);
     </script>
     <script src="{% static 'js/number_input.js' %}"></script>
 

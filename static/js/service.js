@@ -35,33 +35,6 @@ buttom.forEach(item => {
     });
 });
 
-(() => {
-    const dateInput = document.getElementById("date-input")
-
-    //отправка данных на сервер и запись на услугу
-    document.querySelector("#service .approvebtn").addEventListener("click", async () => {
-        const dateArr = String(dateInput.value).split('-')
-        const date = [dateArr[2], dateArr[1], dateArr[0]].join('-')
-        const time = document.querySelector(".btn.active").textContent
-
-        store.servicecontent.push({
-            service: selected.textContent,
-            date,
-            time
-        })
-
-        checkTimeButtons()
-
-        //Исправить id
-        await Urls.signUpForServices(selected.textContent,
-            `${date} ${time}`)
-
-        store.servicecontent = await Urls.refreshServiceContent()
-
-        checkTimeButtons()
-    })
-})();
-
 const formatDate = (date) => {
     return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 };
@@ -100,9 +73,7 @@ const changeFromYMDToDMY = (date) => date.split("-").reverse().join("-")
 const checkTimeButtons = () => {
     // Надо добавлять класс occupied кнопке, value которой совпадает с service.time
     buttom.forEach(knopka => {
-        if (store.servicecontent.findIndex(service => {
-            return service.time === knopka.textContent && service.date == changeFromYMDToDMY(dateedInput.value)
-        }) >= 0) {
+        if (store.servicecontent.findIndex(time => time === knopka.textContent) >= 0) {
             knopka.classList.add("occupied")
         } else {
             knopka.classList.remove("occupied")
@@ -121,11 +92,33 @@ const formatDateToDMY = (date) => {
 }
 
 dateedInput.value = formatDateToDMY(new Date())
-checkTimeButtons()
+checkTimeButtons();
 
-dateedInput.onchange = function () {
-    checkTimeButtons()
-}
+(() => {
+    const dateInput = document.getElementById("date-input")
 
+    //отправка данных на сервер и запись на услугу
+    document.querySelector("#service .approvebtn").addEventListener("click", async () => {
+        const dateArr = String(dateInput.value).split('-')
+        const date = [dateArr[2], dateArr[1], dateArr[0]].join('-')
+        const time = document.querySelector(".btn.active").textContent
 
+        store.servicecontent.push(time)
 
+        checkTimeButtons()
+
+        await Urls.signUpForServices(selected.textContent, `${date} ${time}`)
+
+        store.servicecontent = await Urls.refreshServiceContent(date)
+
+        checkTimeButtons()
+    });
+
+    dateedInput.onchange = async () => {
+        const dateArr = String(dateInput.value).split('-')
+        const date = [dateArr[2], dateArr[1], dateArr[0]].join('-')
+    
+        store.servicecontent = await Urls.refreshServiceContent(date)
+        checkTimeButtons()
+    }
+})();

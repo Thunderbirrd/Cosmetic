@@ -79,12 +79,16 @@ const Urls = {
             console.error(e)
         }
     },
-    async refreshServiceContent() {
+    async refreshServiceContent(date) {
         let responce = await fetch("/refresh/", {
-            method: "Get",
+            method: "Post",
             headers: {
+                'Content-type': 'application/json;charset=utf-8',
                 'X-CSRFToken': CRF_TOKEN + ""
             },
+            body: JSON.stringify({
+                date
+            })
         })
 
         return await responce.json()

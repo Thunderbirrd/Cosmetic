@@ -37,7 +37,7 @@ def visits(date):
 
 @csrf_exempt
 def refresh(request):
-    date = json.loads(request)
+    date = json.loads(request.body)["date"]
     return HttpResponse(json.dumps(visits(date)))
 
 
