@@ -25,6 +25,14 @@ main .hide {
     overflow-x: auto;
 }
 
+.row:nth-child(2){
+    margin-top: 50px;
+}
+
+.row:not(:nth-child(2)){
+    margin-top: 20px;
+}
+
 .row .card:not(:last-child) {
     margin-right: 10px;
 }
