@@ -1,0 +1,19 @@
+:root {
+    --time-top: 0.8s;
+    --time-opacity: 1.5s;
+}
+
+.pop_up_element {
+    opacity: 0;
+    position: relative;
+    top: 150px;
+    -webkit-transition: top var(--time-top) ease-out 0s, opacity var(--time-opacity) ease-out 0s;
+    -moz-transition: top var(--time-top) ease-out 0s, opacity var(--time-opacity) ease-out 0s;
+    -o-transition: top var(--time-top) ease-out 0s, opacity var(--time-opacity) ease-out 0s;
+    transition: top var(--time-top) ease-out 0s, opacity var(--time-opacity) ease-out 0s;
+}
+
+.pop_up_element.show_element {
+    top: 0;
+    opacity: 1;
+}

@@ -13,6 +13,9 @@ window.onload = () => {
 
     //делаем действия при начальной загрузке страницы
     doActionByCurentURL()
+    
+    //показывает всплывающие элементы
+    checkPopUpElements()
 }
 
 // при прокрутке странице делаем header фиксированным
@@ -114,8 +117,13 @@ jQuery(function ($) {
     });
 });
 
-//доделать
-$(window).ready(function(){
-	/* делаем плавное появление */
-    $("header").fadeIn('slow');
-});
+window.addEventListener("scroll", () => {
+    //показывает всплывающие элементы
+    checkPopUpElements()
+})
+
+// //доделать
+// $(window).ready(function(){
+// 	/* делаем плавное появление */
+//     $("header").fadeIn('slow');
+// });
