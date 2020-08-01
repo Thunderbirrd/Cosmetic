@@ -44,7 +44,8 @@ def form_basket(request):
                 is_correct = False
                 basket_list[product_basket_id] = product.get('quantity')
 
-            lst.append(Product(product['id'], product['name'], product['price'],
+            lst.append(Product(product['id'], product['name'],
+                               product['price'], product['description'],
                                product['category_id'], product['brand_id'],
                                product['image'], product['quantity']))
 
@@ -52,8 +53,8 @@ def form_basket(request):
         return HttpResponse(json.dumps('Error. Product not found.'))
 
     if is_correct:
-        for x in lst:
-            x.save()
+        for prod in lst:
+            prod.save()
         thread = threading.Thread(target=return_products, args=(basket_list, order_id,), daemon=True)
         thread.start()
     else:
