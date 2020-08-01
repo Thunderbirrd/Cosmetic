@@ -70,6 +70,7 @@ const doActionByCurentURL = () => {
             break;
         case Paths.CONTACTS:
             scrollToContacts()
+            showMedia()
             break;
         default:
             console.log(`not found url: ${window.location.pathname}`)
@@ -133,9 +134,3 @@ window.addEventListener("scroll", () => {
     //показывает всплывающие элементы
     checkPopUpElements()
 })
-
-// //доделать
-// $(window).ready(function(){
-// 	/* делаем плавное появление */
-//     $("header").fadeIn('slow');
-// });

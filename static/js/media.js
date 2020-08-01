@@ -17,3 +17,8 @@ items.addEventListener("mouseenter", function () {
 items.addEventListener("click", function () {
     attention.classList.toggle("hidden");
 });
+
+const showMedia = () => {
+    media.classList.add("show");
+    attention.classList.add("hidden");
+}

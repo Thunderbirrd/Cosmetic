@@ -25,7 +25,7 @@ const isWidthSmallScreen = () => window.innerWidth <= WIDTH_SMALL_SCREEN
 const STATIC = "/static/"
 
 const shipping_and_playment = document.querySelector(".shipping_and_playment")
-const contacts = document.querySelector(".contacts")
+const contacts = document.querySelector("#footer_site")
 const service = document.getElementById("service")
 
 //карточки товаров в магазине
