@@ -24,7 +24,9 @@ const showAboutProduct = (id) => {
     const product = store.stateShop.find(product => product.id === id)
 
     aboutProductTitle.textContent = product.name
-    aboutProductImage.src = STATIC + product.image
+    aboutProductImage.src = product.image
+    aboutProductImage.width = 200
+    aboutProductImage.height = 200
     aboutProductPrice.innerHTML = product.price + " &#8381;"
     aboutProductCount.value = 1
     aboutProductDescription.textContent = product.description

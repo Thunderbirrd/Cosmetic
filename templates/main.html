@@ -27,7 +27,9 @@
                     divCardImage.classList.add("card__image")
 
                     const img = document.createElement("img")
-                    img.src = "/static/" + image
+                    img.src = image
+                    img.width = 200
+                    img.height = 200
                     img.alt = "product"
 
                     divCardImage.appendChild(img)
