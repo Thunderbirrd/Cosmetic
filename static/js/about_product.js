@@ -36,8 +36,6 @@ const showAboutProduct = (id) => {
     if (aboutProduct.classList.contains("hide")){
         aboutProduct.classList.remove("hide")
     }
-
-    scrollToAboutProduct()
 }
 
 //прячет подробные данные о товаре

@@ -81,6 +81,7 @@ const doActionByCurentURL = () => {
 jQuery(function ($) {
     $(document).mouseup(function (e) {
         //закрываем list_product если пикнуто не по нему или не по его дочерним элементам
+        //и не по basket и не по его дочерним элементам
         const list_product = $(".list_product")
         const basket = $(".wrap_basket")
 
@@ -91,7 +92,8 @@ jQuery(function ($) {
             hideListProduct()
         }
 
-        //закрываем если пикнуто не по options_container или не по его дочерним элементам
+        //закрываем selected если пикнуто не по options_container или не по его дочерним элементам
+        //и не по selected и не по его дочерним элементам
         const options_container = $(".options_container")
         const selected = $(".selected")
 
@@ -103,7 +105,8 @@ jQuery(function ($) {
             hideOptionsContainer()
         }
 
-        //закрываем если пикнуто не по order_type_list_options или не по его дочерним элементам
+        //закрываем orderTypeListOptions если пикнуто не по order_type_list_options или не по его дочерним элементам
+        //и не по orderTypeTitle и не по его дочерним элементам
         const orderTypeTitle = $("#order_type .title")
         const orderTypeListOptions = $("#order_type .order_type_list_options")
 
@@ -113,6 +116,15 @@ jQuery(function ($) {
             orderTypeListOptions.has(e.target).length === 0) {
 
             hideOrderTypeList()
+        }
+
+        //закрываем about_product если пикнуто не по wrap_about_product и не по его дочерни элементам
+        const wrapAboutProduct = $('.wrap_about_product')
+
+        if (!wrapAboutProduct.is(e.target) &&
+            wrapAboutProduct.has(e.target).length === 0){
+
+            hideAboutProduct()
         }
     });
 });
