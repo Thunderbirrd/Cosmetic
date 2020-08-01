@@ -5,8 +5,8 @@ const divAmount = document.querySelector(".list_product .amount")
 const spanAmount = divAmount.querySelector("span")
 
 //задаёт сумму в span 
-const setTextInSpanAmount = () => {
-    spanAmount.textContent = store.getAmountBasket()
+const setTextInSpanAmount = (amount=store.getAmountBasket()) => {
+    spanAmount.textContent = amount
 }
 
 //переключает видимость сообщение о том что пуста ли корзина покупок

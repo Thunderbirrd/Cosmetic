@@ -92,6 +92,8 @@ const _setPaddingShoppingBasket = () => {
 const setAmountProductes = (amount=store.getAmountBasket()) => {
     count_productes.innerHTML = `${amount} &#8381;`
 
+    setTextInSpanAmount(amount)
+
     _setPaddingShoppingBasket()
     _setVisibilityShoppingBasket()
     _setPositionShoppingBasket()
