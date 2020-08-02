@@ -1,7 +1,6 @@
 import json
 import threading
 import time
-
 from . import bot
 from .bot import Data
 from django.http import HttpResponse

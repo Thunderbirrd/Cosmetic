@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.forms import model_to_dict
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from Cosmetic.apps.mainapp.models import Visit, Service, ShopUser
+from Cosmetic.apps.mainapp.models import Visit, Service, ShopUser, ForBot
 import json
 
 
@@ -100,11 +100,21 @@ def change_status(request, pk):
 def create_visit(request):
     data = json.loads(request.body)
     new_visit = Visit()
-    client = ShopUser.objects.filter(first_name=data["name"], last_name=data["surname"], phone=data["phone"]).first()
+    client = ShopUser.objects.filter(first_name=data['name'], last_name=data['surname'], phone=data['phone']).first()
     new_visit.client_id = client.id
-    new_visit.service_id = Service.objects.get(name=data["service"]).id
-    new_visit.time = data["time"]
-    new_visit.date = data["date"]
-    new_visit.status = "PAY"
+    new_visit.service_id = Service.objects.get(name=data['service']).id
+    new_visit.time = data['time']
+    new_visit.date = data['date']
+    new_visit.status = 'PAY'
     new_visit.save()
-    return HttpResponse("Success")
+    return HttpResponse('Success')
+
+
+@csrf_exempt
+@user_passes_test(lambda user: user.is_superuser)  # поменять chat_id у бота
+def change_chat(request):
+    new_chat_id = json.loads(request)
+    bot_info = ForBot.objects.first()
+    bot_info.chat_id = new_chat_id
+    bot_info.save()
+    return HttpResponse('Success')

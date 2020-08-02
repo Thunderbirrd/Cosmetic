@@ -1,5 +1,9 @@
 from telegram import Bot
-from .bot_constants import token, chatID
+from Cosmetic.apps.mainapp.models import ForBot
+
+bot_info = ForBot.objects.first()
+chatID = bot_info.chat_id
+token = bot_info.token
 
 
 class Data:

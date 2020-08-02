@@ -86,3 +86,8 @@ class Stock(models.Model):
     datetime_1 = models.DateTimeField(verbose_name="время начала", unique=True, null=False)
     datetime_2 = models.DateTimeField(verbose_name="время конца", unique=True, null=False)
     expires = models.DateField(verbose_name="дата окончания акции")
+
+
+class ForBot(models.Model):
+    token = models.CharField(verbose_name="bot_token", null=False, max_length=60)
+    chat_id = models.CharField(verbose_name="chat_id", null=False, max_length=20)
