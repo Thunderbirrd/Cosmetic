@@ -47,5 +47,16 @@ const Urls = {
         })
 
         console.log(await responce.text())
+    },
+
+    async getAllVisitsByVisitId(visitId) {
+        let responce = await fetch(`/admin_app/visit/${visitId}/`, {
+            method: "Get",
+            headers: {
+                'X-CSRFToken': CRF_TOKEN + ""
+            }
+        })
+
+        return await responce.json()
     }
 }

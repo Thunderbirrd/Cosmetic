@@ -1,30 +1,42 @@
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    font-size: 14px;
-    font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
-    color: #333;
-    background: #fff;
-}
-
-section {
+.history_client section {
     margin-top: 20px;
 }
 
-.wrap {
+.history_client.wrap {
     text-align: start;
+    margin-bottom: 30px;
 }
 
-main .back {
+.history_client .back {
     margin-left: 10px;
     margin-right: 10px;
 }
 
-main .back a{
+.history_client .back a{
     color: #447e9b;
 }
 
-main .back a:hover {
+.history_client .back a:hover {
     color: #036;
+}
+
+.history_client h2 {
+    text-align: center;
+}
+
+.history_client .data {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 660px) {
+    .history_client .data {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column-reverse;
+    }
+
+    .history_client .data .table_visits {
+        margin-top: 20px;
+    }
 }

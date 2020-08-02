@@ -1,26 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmetic Center</title>
+<main class="history_client wrap hide">
+    <section class="back">
+        <a href="#">Назад</a>
+    </section>
+    <h2>История клиента</h2>
 
-    
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
-    <link rel="stylesheet" href="{% static 'css/wrap.css' %}">
-
-    <link rel="stylesheet" href="{% static 'css/calendar/header.css' %}">
-
-    <link rel="stylesheet" href="{% static 'css/history_client/style.css' %}">
-</head>
-<body>
-    {% include "calendar/header.html" %}
-
-    <main class="wrap">
-        <section class="back">
-            <a href="/calendar/">Назад</a>
-        </section>
-    </main>
-</body>
-</html>
+    <section class="data">
+        {% include "history_client/table_visits.html" %}
+        {% include "history_client/about_client.html" %}
+    </section>
+</main>

@@ -18,6 +18,10 @@ body {
     background: #fff;
 }
 
+main {
+    margin-bottom: 30px;
+}
+
 a:link, a:visited {
     color: #447e9b;
     text-decoration: none;
@@ -83,22 +87,24 @@ a:link, a:visited {
     --color-empty: rgba(189, 189, 189, 0.4);
 }
 
-.calendar .card.paid {
+.paid {
     background: linear-gradient(-45deg, var(--transparent) 49.9%, var(--color-paid) 49.9%, var(--color-paid) 75%, var(--transparent) 60%), 
         linear-gradient(-45deg, var(--color-paid) 25%, var(--transparent) 10%);
     background-size: 2em 2em;
     background-color: white;
+    cursor: pointer;
 }
 
-.calendar .card.not_paid {
+.not_paid {
     background: linear-gradient(-45deg, var(--transparent) 49.9%, var(--color-not-paid) 49.9%,
             var(--color-not-paid) 75%, var(--transparent) 60%), 
         linear-gradient(-45deg, var(--color-not-paid) 25%, var(--transparent) 10%);
     background-size: 2em 2em;
     background-color: white;
+    cursor: pointer;
 }
 
-.calendar .card.empty {
+.empty {
     background: linear-gradient(-45deg, var(--transparent) 49.9%, var(--color-empty) 49.9%,
             var(--color-empty) 75%, var(--transparent) 60%), 
         linear-gradient(-45deg, var(--color-empty) 25%, var(--transparent) 10%);

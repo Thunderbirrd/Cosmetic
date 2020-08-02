@@ -18,11 +18,16 @@
     <link rel="stylesheet" href="{% static 'css/calendar/header.css' %}">
     <link rel="stylesheet" href="{% static 'css/calendar/create_visit.css' %}">
     <link rel="stylesheet" href="{% static 'css/calendar/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/history_client/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/history_client/about_client.css' %}">
+    <link rel="stylesheet" href="{% static 'css/history_client/table_visits.css' %}">
 </head>
 
 <body>
     {% include "calendar/header.html" %}
-    <main>
+
+    <main class="сalendar">
         {% include 'calendar/create_visit.html' %}
         <section class="visitdata">
             <div class="wrap">
@@ -35,12 +40,15 @@
         {% include "calendar/table_calendar.html" %}
     </main>
 
+    {% include 'history_client/history_client.html' %}
+
     <script src="{% static 'js/datedropper.pro.min.js' %}"></script>
     <script src="https://cdn.datedropper.com/get/mgonsm03x0cb8urluhctqkwkmd70wnec"></script>
 
     <script src="{% static 'js/cookie.js' %}"></script>
     <script src="{% static 'js/calendar/urls.js' %}"></script>
     <script src="{% static 'js/calendar/script.js' %}"></script>
+    <script src="{% static 'js/calendar/history_client.js' %}"></script>
 
 </body>
 

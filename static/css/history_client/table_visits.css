@@ -1,0 +1,17 @@
+.table_visits {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.table_visits table {
+    border-collapse: collapse;
+}
+
+.table_visits td{
+    padding: 3px 7px;
+    border: 1px solid black;
+}
+
+.table_visits th{
+    padding: 3px 7px;
+}

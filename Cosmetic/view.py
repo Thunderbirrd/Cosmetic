@@ -47,7 +47,3 @@ def services():
 
 def calendar(request):
     return render(request, 'calendar/index.html')
-
-
-def history_client(request):
-    return render(request, 'history_client/history_client.html')

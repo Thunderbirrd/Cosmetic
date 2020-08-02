@@ -68,6 +68,7 @@ const fillTable = async (date) => {
         
         //очищаем
         card.innerHTML = ""
+        card.onclick = () => {}
     })
 
     tdButtons.forEach(td => {
@@ -101,6 +102,9 @@ const fillTable = async (date) => {
 
         const card = tr.querySelector(`.card`)
         card.classList.remove("empty")
+        card.onclick = () => {
+            showHistoryClient(item.visit_id)
+        }
 
         if (item.status === "NO") {
             card.classList.add("not_paid")
@@ -153,4 +157,16 @@ vistInput.onchange = () => {
 
 window.onload = () => {
     setDate()
+}
+
+const calendar = document.querySelector(".сalendar")
+
+//прячет calendar
+const hideCalendar = () => {
+    calendar.classList.add("hide")
+}
+
+//показывает calendar
+const showCalendar = () => {
+    calendar.classList.remove("hide")
 }
