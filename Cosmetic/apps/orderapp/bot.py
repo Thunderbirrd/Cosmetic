@@ -15,14 +15,14 @@ class Data:
     items = {}
     address = ""
 
-    def __init__(self, phone, order_type, name, surname, price, items, addresss):
+    def __init__(self, phone, order_type, name, surname, price, items, address):
         self.phone = phone
         self.order_type = order_type
         self.name = name
         self.surname = surname
         self.price = price
         self.items = items
-        self.address = addresss
+        self.address = address
 
 
 def do_echo(bot: Bot, data):

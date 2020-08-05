@@ -85,7 +85,6 @@ def return_products(product_list, order_id):
 @csrf_exempt
 def form_order(request):
     data = json.load(request)
-
     order_information = data['list']
     try:
         order = Order.objects.get(id=data['id'])
