@@ -13,14 +13,16 @@ class Data:
     surname = ""
     price = 0
     items = {}
+    address = ""
 
-    def __init__(self, phone, order_type, name, surname, price, items):
+    def __init__(self, phone, order_type, name, surname, price, items, addresss):
         self.phone = phone
         self.order_type = order_type
         self.name = name
         self.surname = surname
         self.price = price
         self.items = items
+        self.address = addresss
 
 
 def do_echo(bot: Bot, data):
@@ -32,14 +34,17 @@ def do_echo(bot: Bot, data):
         else:
             first = False
         text += ' ' + name + ' - ' + str(data.items[name])
+    if data.order_type == 'YKT':
+        text1 = f"Адрес доставки: {data.address}.\n"
     bot.send_message(
         chat_id=chatID,
         text=f"Оформлен новый заказ!\n"
              f"Номер клиента: 8{data.phone}\n"
              f"Тип заказа: {data.order_type}\n"
              f"Имя и фамилиия клиента: {data.name} {data.surname}\n"
+             + text1 +
              f"Сумма заказа: {data.price} р.\n"
-             f"Список товаров:"+text
+             f"Список товаров: {text}."
     )
 
 
