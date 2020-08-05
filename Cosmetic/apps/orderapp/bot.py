@@ -27,6 +27,7 @@ class Data:
 
 def do_echo(bot: Bot, data):
     text = ''
+    text1 = ''
     first = True
     for name in data.items:
         if not first:
