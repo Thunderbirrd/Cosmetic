@@ -293,6 +293,10 @@ const surnameInput = shoppingWindow.querySelector(".data_fields .surname .my_inp
 
 const orderTypeTitle = shoppingWindow.querySelector("#order_type .title")
 
+const entranceInput = shoppingWindow.querySelector(".data-fields .entrance .my_input")
+
+const flatInput = shoppingWindow.querySelector(".data-fields .flat .my_input")
+
 //подъезд квартира
 
 //событие покупки товаров при клике по кнопке "Купить"
@@ -304,7 +308,7 @@ shopButton.onclick = () => {
     const id = store.stateCheckout.id
     const address = cityCheckbox.checked
         ? "Якутск"
-        : `${cityInput.value} ${streetInput.value} ${homeInput.value}`
+        : `${cityInput.value} ${streetInput.value} ${homeInput.value} ${entranceInput.value} ${flatInput.value}`
     const phone = phoneInput.value
     const name = nameInput.value
     const surname = surnameInput.value
