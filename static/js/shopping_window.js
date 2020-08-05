@@ -307,8 +307,8 @@ shopButton.onclick = () => {
 
     const id = store.stateCheckout.id
     const address = cityCheckbox.checked
-        ? "Якутск"
-        : `${cityInput.value} ${streetInput.value} ${homeInput.value} ${entranceInput.value} ${flatInput.value}`
+        ? `Якутск ${streetInput.value} ${homeInput.value} ${entranceInput.value} ${flatInput.value}`
+        : `${cityInput.value}`
     const phone = phoneInput.value
     const name = nameInput.value
     const surname = surnameInput.value
