@@ -251,6 +251,7 @@ const checkCorrect = () => {
 //показ shopping_window
 const showShoppingWindow = () => {
     shoppingWindow.classList.remove("hide")
+    hideOrderTypeElementList()
     scrollToShoppingWindow()
     loadingShoppingList()
 }
@@ -267,6 +268,9 @@ document.querySelector(".shopping_window .data_fields .number").addEventListener
     if (data < "0" || data > "9") event.preventDefault();
 });
 
+// скрывает некоторые пункты списка типов доставки
+let hideOrderTypeElementList;
+
 (() => {
     const additionallyFields = document.querySelectorAll(".shopping_window .data_fields .address .additionally:not(.not)")
 
@@ -274,10 +278,31 @@ document.querySelector(".shopping_window .data_fields .number").addEventListener
 
     const errorMessage = document.querySelector(".shopping_window .data_fields .city .error_message")
 
+    const inputIsCityYakutsk = document.getElementById("isCityYakutsk")
+
+    const liYkt = document.querySelector(".shopping_window .order_type_option[data-value='YKT']")
+    const liOut = document.querySelector(".shopping_window .order_type_option[data-value='OUT']")
+    const liSam = document.querySelector(".shopping_window .order_type_option[data-value='SAM']")
+
+    hideOrderTypeElementList = () => {
+        if (inputIsCityYakutsk.checked) {
+            liYkt.classList.remove("hide")
+            liOut.classList.add("hide")
+            liSam.classList.remove("hide")
+        } else {
+            liYkt.classList.add("hide")
+            liOut.classList.remove("hide")
+            liSam.classList.add("hide")
+        }
+    }
+
     //при клике что город Якутск показываем поля название улицы и номер дома, убираем поле город
     document.getElementById("isCityYakutsk").onchange = (ev) => {
-        if (ev.target.checked) 
+        if (ev.target.checked) {
             errorMessage.classList.add("hide")
+        }
+
+        hideOrderTypeElementList()
 
         additionallyFields.forEach(field => {
             if (ev.target.checked) {
