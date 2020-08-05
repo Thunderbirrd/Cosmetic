@@ -63,6 +63,10 @@ const store = {
 
     servicecontent: servicecontent,
 
+    clearStateBasket() {
+        this.stateBasket = []
+    },
+
     setQuantityById(id, quantity){
         this.getProductById(id).quantity = quantity
         aboutProductOptions.maxNumber = quantity

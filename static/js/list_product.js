@@ -213,6 +213,13 @@ const showWarningListItem = (text, id, newQuantity) => {
     store.getProductById(id).quantity = newQuantity
 }
 
+//очищаем список покупок
+const clearListProducts = () => {
+    ulListProduct.innerHTML = ""
+    store.clearStateBasket()
+    setAmountProductes()
+}
+
 //создаёт в всплывающем окне запись
 const createListItem = (src, title, price, count) => {
     const li = document.createElement("li")

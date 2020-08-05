@@ -273,7 +273,11 @@ document.querySelector(".shopping_window .data_fields .number").addEventListener
     //при клике что город Якутск показываем поля название улицы и номер дома, убираем поле город
     document.getElementById("isCityYakutsk").onchange = (ev) => {
         additionallyFields.forEach(field => {
-            field.classList.toggle("hide")
+            if (ev.target.checked) {
+                field.classList.add("hide")
+            } else {
+                field.classList.remove("hide")
+            }
         })
     }
 })()
@@ -293,9 +297,9 @@ const surnameInput = shoppingWindow.querySelector(".data_fields .surname .my_inp
 
 const orderTypeTitle = shoppingWindow.querySelector("#order_type .title")
 
-const entranceInput = shoppingWindow.querySelector(".data-fields .entrance .my_input")
+const entranceInput = shoppingWindow.querySelector(".data_fields .entrance .my_input")
 
-const flatInput = shoppingWindow.querySelector(".data-fields .flat .my_input")
+const flatInput = shoppingWindow.querySelector(".data_fields .flat .my_input")
 
 //подъезд квартира
 
@@ -319,6 +323,7 @@ shopButton.onclick = () => {
     })()
 
     hideShoppingWindow()
+    clearListProducts()
     scrollToShop()
 }
 
