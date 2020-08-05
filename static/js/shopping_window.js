@@ -268,11 +268,26 @@ document.querySelector(".shopping_window .data_fields .number").addEventListener
 });
 
 (() => {
-    const additionallyFields = document.querySelectorAll(".shopping_window .data_fields .address .additionally")
+    const additionallyFields = document.querySelectorAll(".shopping_window .data_fields .address .additionally:not(.not)")
+
+    const additionallyCityFields = document.querySelectorAll(".shopping_window .data_fields .address .additionally.not")
+
+    const errorMessage = document.querySelector(".shopping_window .data_fields .city .error_message")
 
     //при клике что город Якутск показываем поля название улицы и номер дома, убираем поле город
     document.getElementById("isCityYakutsk").onchange = (ev) => {
+        if (ev.target.checked) 
+            errorMessage.classList.add("hide")
+
         additionallyFields.forEach(field => {
+            if (ev.target.checked) {
+                field.classList.remove("hide")
+            } else {
+                field.classList.add("hide")
+            }
+        })
+
+        additionallyCityFields.forEach(field => {
             if (ev.target.checked) {
                 field.classList.add("hide")
             } else {

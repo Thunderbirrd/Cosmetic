@@ -28,15 +28,15 @@
                     <label for="isCityYakutsk">Якутск</label>
                 </div>
 
-                <p class="additionally">или</p>
+                <p class="additionally not">или</p>
 
-                <div class="additionally">
+                <div class="additionally not">
                     {% with type="text" placeholder="Город" %}
                     {% include "../components/my_input.html" %}
                     {% endwith %}
                 </div>
 
-                <span class="error_message additionally">Поле не указано</span>
+                <span class="error_message">Поле не указано</span>
             </div>
 
             <div class="field additionally hide street">
