@@ -27,7 +27,7 @@ class Data:
 
 def do_echo(bot: Bot, data):
     text = ''
-    text1 = ''
+    address = ''
     first = True
     for name in data.items:
         if not first:
@@ -35,15 +35,15 @@ def do_echo(bot: Bot, data):
         else:
             first = False
         text += ' ' + name + ' - ' + str(data.items[name])
-    if data.order_type == 'YKT':
-        text1 = f"Адрес доставки: {data.address}.\n"
+    if data.order_type != 'SAM':
+        address = f"Адрес доставки: {data.address}.\n"
     bot.send_message(
         chat_id=chatID,
         text=f"Оформлен новый заказ!\n"
              f"Номер клиента: 8{data.phone}\n"
              f"Тип заказа: {data.order_type}\n"
              f"Имя и фамилиия клиента: {data.name} {data.surname}\n"
-             + text1 +
+             + address +
              f"Сумма заказа: {data.price} р.\n"
              f"Список товаров: {text}."
     )
