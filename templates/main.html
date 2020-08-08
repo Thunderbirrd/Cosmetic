@@ -52,8 +52,11 @@
                 }
 
                 //создаём карточки товаров в магазине
+                const countInRow = Math.max(10, arrayProducts.length / 3)
+
                 arrayProducts.forEach((p, i) => {
-                    rowsInShop[i % 3].appendChild(
+                    let index = Math.floor( i / countInRow)
+                    rowsInShop[index].appendChild(
                         createCardInShop(p.id, p.brand, p.name, p.price, p.image)
                     )
                 });
