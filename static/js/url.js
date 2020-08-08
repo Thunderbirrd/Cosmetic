@@ -69,7 +69,7 @@ const Urls = {
             console.log(result)
 
             if (result === 'Success') {
-                message.showMessage(result, message.SUCCESS)
+                message.showMessage("Вы успешно записались на услугу", message.SUCCESS)
                 return;
             }
 

@@ -359,7 +359,11 @@ shopButton.onclick = () => {
     const orderType = orderTypeTitle.dataset.value;
 
     (async () => {
-        message.showMessage(await Urls.buyProducts(id, address, phone, name, surname, orderType))
+        if (await Urls.buyProducts(id, address, phone, name, surname, orderType) === "Success"){
+            message.showMessage("Товар успешно заказан! Вам скоро перезвонят для уточнения")
+        } else {
+            message.showMessage("Извините, произошла ошибка", message.ERROR)
+        }
     })()
 
     hideShoppingWindow()
