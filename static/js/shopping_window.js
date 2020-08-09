@@ -360,7 +360,7 @@ shopButton.onclick = () => {
 
     (async () => {
         if (await Urls.buyProducts(id, address, phone, name, surname, orderType) === "Success"){
-            message.showMessage("Товар успешно заказан! Вам скоро перезвонят для уточнения")
+            message.showMessage("Товар успешно заказан! Вам скоро перезвонят для уточнения", message.SUCCESS, 4000, message.CENTER)
         } else {
             message.showMessage("Извините, произошла ошибка", message.ERROR)
         }

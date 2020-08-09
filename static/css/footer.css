@@ -13,6 +13,10 @@
     grid-row: auto auto;
 }
 
+#footer_site.hide {
+    display: none;
+}
+
 #footer_site .address {
     color: white;
     grid-column: 1;
@@ -88,7 +92,7 @@
 @media screen and (max-width: 720px) {
     #footer_site{
         grid-template-columns: auto;
-        grid-row: auto auto auto;
+        grid-template-rows: auto auto auto;
     }
 
     #footer_site .address {

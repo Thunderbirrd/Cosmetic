@@ -13,7 +13,15 @@ const message = {
         return "ERROR" 
     },
 
-    showMessage(text, status=this.SUCCESS, time=4000) {
+    get CENTER() {
+        return "CENTER"
+    },
+
+    get BOTTOM_RIGHT() {
+        return "BOTTOM_RIGHT"
+    },
+
+    showMessage(text, status=this.SUCCESS, time=4000, position=message.BOTTOM_RIGHT) {
         const p = document.createElement("p")
         p.classList.add("message")
         p.textContent = text
@@ -28,11 +36,17 @@ const message = {
 
         body.appendChild(p)
 
-        // let top = document.documentElement.clientHeight / 2 - p.clientHeight / 2
-        // let left = document.documentElement.clientWidth / 2 - p.clientWidth / 2
+        if (position === message.CENTER) {
+            let top = document.documentElement.clientHeight / 2 - p.clientHeight / 2
+            let left = document.documentElement.clientWidth / 2 - p.clientWidth / 2
 
-        // p.style.top = top + 'px'
-        // p.style.left = left + 'px'
+            p.style.top = top + 'px'
+            p.style.left = left + 'px'
+            
+        } else if (position === message.BOTTOM_RIGHT) {
+            p.style.bottom = 0 + 'px'
+            p.style.right = 0 + 'px'
+        }
 
         setTimeout(() => { 
             $(p).fadeOut(400)
