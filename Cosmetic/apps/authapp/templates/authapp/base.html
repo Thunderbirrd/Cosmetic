@@ -23,5 +23,23 @@
 
         </div>
 	</div>
+
+    <script>
+        window.onload = () => {
+            try{document.getElementById("id_username").setAttribute("type", "tel");
+            document.getElementById("id_username").setAttribute("pattern", "[0-9]{10}");
+            document.getElementById("id_username").setAttribute("title", "Номер должен содержать только цифры");
+            }
+            catch (e) {
+
+            }
+            try{document.getElementById("id_phone").setAttribute("type", "tel");
+            document.getElementById("id_phone").setAttribute("pattern", "[0-9]{10}");
+            document.getElementById("id_phone").setAttribute("title", "Номер должен содержать только цифры");
+            }
+            catch (e) {
+            }
+        }
+    </script>
 </body>
 </html>

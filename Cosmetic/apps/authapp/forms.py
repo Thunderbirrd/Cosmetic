@@ -22,9 +22,15 @@ class ShopUserLoginForm(AuthenticationForm):
         for fieldname in ['username']:
             self.fields[fieldname].label = 'Телефон (+7)'
         for field_name, field in self.fields.items():
+
+            if field_name == 'username':
+                field.widget.attrs['maxlength'] = 10
+                field.widget.attrs['minlength'] = 10
+
             field.widget.attrs['class'] = 'form-control'
-            field.widget.attrs['maxlength'] = 10
-            field.widget.attrs['minlength'] = 10
+
+            if field_name == 'password':
+                field.widget.attrs['minlength'] = 6
 
 
 class ShopUserRegisterForm(UserCreationForm):
@@ -35,6 +41,12 @@ class ShopUserRegisterForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(ShopUserRegisterForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
+            for field_name in ['phone']:
+                self.fields[field_name].label = 'Телефон (+7)'
+
+                if field_name == 'phone':
+                    field.widget.attrs['maxlength'] = 10
+                    field.widget.attrs['minlength'] = 10
             field.widget.attrs['class'] = 'form-control'
             field.help_text = ''
 
