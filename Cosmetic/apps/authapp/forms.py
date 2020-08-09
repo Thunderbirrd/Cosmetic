@@ -20,9 +20,11 @@ class ShopUserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(ShopUserLoginForm, self).__init__(*args, **kwargs)
         for fieldname in ['username']:
-            self.fields[fieldname].label = 'Телефон: (+7)'
+            self.fields[fieldname].label = 'Телефон (+7)'
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['maxlength'] = 10
+            field.widget.attrs['minlength'] = 10
 
 
 class ShopUserRegisterForm(UserCreationForm):
