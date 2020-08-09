@@ -17,7 +17,7 @@ class ShopUser(AbstractUser):
 
 
 class Category(models.Model):
-    name = models.CharField(verbose_name="название категории", unique=True, db_index=True, max_length=25)
+    name = models.CharField(verbose_name="название категории", unique=True, db_index=True, max_length=64)
 
     def __str__(self):
         return self.name
@@ -30,14 +30,21 @@ class Brand(models.Model):
         return self.name
 
 
+class Line(models.Model):
+    name = models.CharField(verbose_name="название линейки", max_length=64, default="")
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+
+
 class Product(models.Model):
     name = models.CharField(verbose_name="название товара", unique=True, db_index=True, null=False, max_length=64)
     price = models.PositiveIntegerField(verbose_name="цена", default=0)
     description = models.CharField(verbose_name="описание товара", max_length=256, default="")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    line = models.ForeignKey(Line, on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to="static/product_img/", blank=True)
     quantity = models.PositiveIntegerField(verbose_name='количество на складе', default=0, null=False)
+    discount = models.PositiveIntegerField(verbose_name='скидка на товар в процентах', default=0)
     is_active = models.BooleanField(verbose_name='активен ли продукт', default=True)
 
     def __str__(self):
@@ -80,14 +87,12 @@ class Visit(models.Model):
         unique_together = (('date', 'time'),)
 
 
-class Stock(models.Model):
-    service_list = models.ManyToManyField(Service, verbose_name="список услуг")
-    price = models.PositiveIntegerField(verbose_name="стоимость акции", null=False, default=0)
-    datetime_1 = models.DateTimeField(verbose_name="время начала", unique=True, null=False)
-    datetime_2 = models.DateTimeField(verbose_name="время конца", unique=True, null=False)
-    expires = models.DateField(verbose_name="дата окончания акции")
-
-
 class ForBot(models.Model):
     token = models.CharField(verbose_name="bot_token", null=False, max_length=60)
     chat_id = models.CharField(verbose_name="chat_id", null=False, max_length=20)
+
+
+class Article(models.Model):
+    title = models.CharField(verbose_name="Заголовок", max_length=64, default="")
+    text = models.TextField(verbose_name="Текст статьи", default="", max_length=100000)
+    image = models.ImageField(upload_to="static/article_img/", blank=True)
