@@ -60,6 +60,13 @@ section {
     margin: 20px 0;
 }
 
+.no_products {
+    padding: 5px;
+    font-size: 1.2rem;
+    color: rgb(255, 0, 0);
+    text-align: center;
+}
+
 @media screen and (max-width: 449px) {
     section {
         padding: 5px;

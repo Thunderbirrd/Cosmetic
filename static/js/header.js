@@ -17,7 +17,7 @@ const scrollToElement = (element) => {
 const scrollToAboutProduct = () => { scrollToElement(aboutProduct) }
 const scrollToShoppingWindow = () => { scrollToElement(shoppingWindow) }
 const scrollToShop = () => { scrollToElement(shop) }
-const scrollToShippingAndPlayment = () => { scrollToElement(shipping_and_playment) }
+const scrollToArticles = () => { scrollToElement(articles) }
 const scrollToContacts = () => { scrollToElement(contacts) }
 const scrollToService = () => { scrollToElement(service) }
 

@@ -1,6 +1,6 @@
 <main>
     <div class="wrap">
-        <section class="shop">
+        <section class="shop without_articles">
             {% include "components/loupe.html" %}
 
             <div class="row pop_up_element">
@@ -16,7 +16,7 @@
                 const rowsInShop = document.querySelectorAll("main .shop .row")
 
                 //создаёт карточку
-                const createCardInShop = (id, brand, name, price, image) => {
+                const createCardInShop = (id, brand, name, price, image, quantity) => {
                     const divCard = document.createElement("div")
                     divCard.dataset.id = id
                     divCard.dataset.brand = brand
@@ -32,9 +32,22 @@
                     img.height = 200
                     img.alt = "product"
 
-                    divCardImage.appendChild(img)
-
                     divCard.appendChild(divCardImage)
+                    
+                    divCardImage.appendChild(img)
+                    
+                    if (quantity === 0) {
+                        const divMess = document.createElement("div")
+                        divMess.classList.add("no_products")
+                        divMess.textContent = "ожидается поступление"
+                        divCard.appendChild(divMess)
+                
+                    } else if (quantity > 0) {
+                        //при щелчке по карточке в магазине показывать подробную информацию о продукте
+                        divCard.addEventListener("click", () => {
+                            showAboutProduct(id)
+                        })
+                    }
 
                     const divCardTitle = document.createElement("div")
                     divCardTitle.classList.add("card__title")
@@ -55,9 +68,9 @@
                 const countInRow = Math.max(10, arrayProducts.length / 3)
 
                 arrayProducts.forEach((p, i) => {
-                    let index = Math.floor( i / countInRow)
+                    let index = Math.floor(i / countInRow)
                     rowsInShop[index].appendChild(
-                        createCardInShop(p.id, p.brand, p.name, p.price, p.image)
+                        createCardInShop(p.id, p.brand, p.name, p.price, p.image, p.quantity)
                     )
                 });
             </script>
@@ -68,7 +81,7 @@
         {% include "main/about_product.html" %}
         {% include "main/shopping_window.html" %}
 
-        {% include "main/shipping_and_playment.html" %}
+        {% include "main/articles.html" %}
 
     </div>
 

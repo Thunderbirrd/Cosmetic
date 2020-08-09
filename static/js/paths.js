@@ -7,8 +7,8 @@ const Paths = {
     get SERVICES() {
         return "/services"
     },
-    get SHIPPING_AND_PLAYMENT() {
-        return '/shipping_and_playment'
+    get ARTICLES() {
+        return '/articles'
     },
     get CONTACTS(){
         return '/contacts'

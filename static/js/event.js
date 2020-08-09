@@ -57,18 +57,22 @@ const doActionByCurentURL = () => {
 
     switch (window.location.pathname) {
         case Paths.HOME:
+            hideArtices()
             scrollToShop()
             break;
         case Paths.SHOP:
+            hideArtices()
             scrollToShop()
             break;
-        case Paths.SHIPPING_AND_PLAYMENT:
-            scrollToShippingAndPlayment()
+        case Paths.ARTICLES:
+            showArtices()
             break;
         case Paths.SERVICES:
+            hideArtices()
             scrollToService()
             break;
         case Paths.CONTACTS:
+            hideArtices()
             scrollToContacts()
             showMedia()
             break;

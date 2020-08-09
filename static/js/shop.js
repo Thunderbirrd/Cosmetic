@@ -14,13 +14,6 @@ shop.querySelectorAll(".row").forEach(el => {
     })
 })
 
-//при щелчке по карточке в магазине показывать подробную информацию о продукте
-shop.querySelectorAll(".card").forEach(el => {
-    el.addEventListener("click", () => {
-        showAboutProduct(el.dataset.id)
-    })
-})
-
 const shopSearchInput = shop.querySelector(".search_input")
 
 const divNothingFound = shop.querySelector(".nothing_found")
