@@ -1,6 +1,18 @@
-$('#visit-input').dateDropper({});
+const formatDateToDateDroper = (date) => {
+    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+};
 
-$('#date_visit_client').dateDropper({});
+$('#visit-input').dateDropper({
+    disabledDays: blockDate(formatDateToDateDroper),
+    lock: 'from',
+    maxDate: getFinalDay(formatDateToDateDroper)
+});
+
+$('#date_visit_client').dateDropper({
+    disabledDays: blockDate(formatDateToDateDroper),
+    lock: 'from',
+    maxDate: getFinalDay(formatDateToDateDroper)
+});
 
 const vistInput = document.getElementById("visit-input")
 const labelCalendar = document.querySelector(".input_calendar")

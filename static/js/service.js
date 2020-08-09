@@ -39,30 +39,11 @@ const formatDate = (date) => {
     return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 };
 
-//блокируем даты записи среду и воскресенье
-(() => {
-    let resultArr = []
-    let currentDate = new Date()
-
-    const finalDay = new Date()
-    finalDay.setMonth(finalDay.getMonth() + 3)
-    const finalDayMilliseconds = finalDay.getTime()
-
-    while (currentDate.getTime() <= finalDayMilliseconds) {
-        if (currentDate.getDay() === 0 || currentDate.getDay() === 3) {
-            resultArr.push(formatDate(currentDate))
-        }
-
-        //увеличваем дату
-        currentDate.setDate(currentDate.getDate() + 1)
-    }
-
-    $('#date-input').dateDropper({
-        disabledDays: resultArr.join(","),
-        lock: 'from',
-        maxDate: formatDate(finalDay)
-    });
-})();
+$('#date-input').dateDropper({
+    disabledDays: blockDate(formatDate),
+    lock: 'from',
+    maxDate: getFinalDay(formatDate)
+});
 
 const dateedInput = document.getElementById("date-input")
 
