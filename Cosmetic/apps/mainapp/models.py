@@ -90,3 +90,9 @@ class Visit(models.Model):
 class ForBot(models.Model):
     token = models.CharField(verbose_name="bot_token", null=False, max_length=60)
     chat_id = models.CharField(verbose_name="chat_id", null=False, max_length=20)
+
+
+class Article(models.Model):
+    title = models.CharField(verbose_name="Заголовок", max_length=64, default="")
+    text = models.TextField(verbose_name="Текст статьи", default="", max_length=100000)
+    image = models.ImageField(upload_to="static/article_img/", blank=True)
