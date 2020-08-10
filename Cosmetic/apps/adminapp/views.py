@@ -108,19 +108,19 @@ def change_status(request, pk):
 @csrf_exempt
 @user_passes_test(lambda user: user.is_superuser)
 def create_visit(request):
-    try:
-        data = json.loads(request.body)
-        new_visit = Visit()
-        client = ShopUser.objects.filter(first_name=data['name'], last_name=data['surname'], phone=data['phone']).first()
+    data = json.loads(request.body)
+    new_visit = Visit()
+    client = ShopUser.objects.filter(phone=data['phone']).first()
+    if client:
         new_visit.client_id = client.id
         new_visit.service_id = Service.objects.get(name=data['service']).id
         new_visit.time = data['time']
         new_visit.date = data['date']
         new_visit.status = 'PAY'
         new_visit.save()
-    except ObjectDoesNotExist:
-        return HttpResponse('Error')
-    return HttpResponse('Success')
+        return HttpResponse('Success')
+    else:
+        return HttpResponse('Not Success')
 
 
 @csrf_exempt
