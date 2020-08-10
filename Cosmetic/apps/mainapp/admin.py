@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import ShopUser, Product, Category, Service, Brand, Visit, ForBot, Article, ImageForArticle, ProductCompilation
+from .models import ShopUser, Product, Category, Service, Brand, Visit, ForBot, Article, ImageForArticle,\
+    ProductCompilation
 
 admin.site.register(ShopUser)
 admin.site.register(Product)
