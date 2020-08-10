@@ -100,6 +100,7 @@ class Article(models.Model):
 class ImageForArticle(models.Model):
     main_image = models.ImageField(upload_to="static/article_img/", blank=True)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    number_in_article = models.PositiveIntegerField(verbose_name="порядковый номер в статье", null=False, default=1)
 
 
 class ProductCompilation(models.Model):
