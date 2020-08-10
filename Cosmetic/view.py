@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.core.cache import cache
 from django.views.decorators.csrf import csrf_exempt
-from .apps.mainapp.models import Product, Visit, Service
+from .apps.mainapp.models import Product, Visit, Service, ProductCompilation
 from .settings import LOW_CACHE
 import json
 
@@ -16,12 +16,18 @@ def home(request):
         if product_list is None:
             product_list = Product.objects.filter(is_active=True)
             cache.set(key, product_list)
+        key = "compilations"
+        product_compilation_list = cache.get(key)
+        if product_compilation_list is None:
+            product_compilation_list = ProductCompilation.objects.filter(is_active=True)
+            cache.set(key, product_compilation_list)
             
         content = {
             'title': title,
             'products': product_list,
             'occupied_dates': visits(datetime.date.today()),
             'service_names': services(),
+            'product_compilation_list': product_compilation_list
         }
         return render(request, 'index.html', content)
 
