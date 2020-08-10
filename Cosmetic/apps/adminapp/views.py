@@ -110,14 +110,17 @@ def change_status(request, pk):
 def create_visit(request):
     data = json.loads(request.body)
     new_visit = Visit()
-    client = ShopUser.objects.filter(first_name=data['name'], last_name=data['surname'], phone=data['phone']).first()
-    new_visit.client_id = client.id
-    new_visit.service_id = Service.objects.get(name=data['service']).id
-    new_visit.time = data['time']
-    new_visit.date = data['date']
-    new_visit.status = 'PAY'
-    new_visit.save()
-    return HttpResponse('Success')
+    client = ShopUser.objects.filter(phone=data['phone']).first()
+    if client:
+        new_visit.client_id = client.id
+        new_visit.service_id = Service.objects.get(name=data['service']).id
+        new_visit.time = data['time']
+        new_visit.date = data['date']
+        new_visit.status = 'PAY'
+        new_visit.save()
+        return HttpResponse('Success')
+    else:
+        return HttpResponse('Not Success')
 
 
 @csrf_exempt
