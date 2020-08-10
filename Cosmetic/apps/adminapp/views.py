@@ -23,10 +23,15 @@ def visits_calendar(request):
         dct['phone'] = user.phone
         dct['service_name'] = Service.objects.get(id=visit.service_id).name
         dct['status'] = visit.status
-        dct['all_services'] = Service.objects.all()
         lst.append(dct)
 
     return HttpResponse(json.dumps(lst, ensure_ascii=False))
+
+
+@csrf_exempt
+@user_passes_test(lambda user: user.is_superuser)
+def get_all_visits(request):
+    return HttpResponse(json.dumps(Service.objects.all(), ensure_ascii=False))
 
 
 @csrf_exempt
