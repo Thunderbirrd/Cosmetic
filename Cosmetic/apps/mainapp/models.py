@@ -95,4 +95,18 @@ class ForBot(models.Model):
 class Article(models.Model):
     title = models.CharField(verbose_name="Заголовок", max_length=64, default="")
     text = models.TextField(verbose_name="Текст статьи", default="", max_length=100000)
-    image = models.ImageField(upload_to="static/article_img/", blank=True)
+
+
+class ImageForArticle(models.Model):
+    main_image = models.ImageField(upload_to="static/article_img/", blank=True)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+
+
+class ProductCompilation(models.Model):
+    name = models.CharField(verbose_name="название товара", unique=True, db_index=True, null=False, max_length=64)
+    description = models.CharField(verbose_name="описание товара", max_length=256, default="")
+    image = models.ImageField(upload_to="static/compilation_img/", blank=True)
+    quantity = models.PositiveIntegerField(verbose_name='количество на складе', default=0, null=False)
+    discount = models.PositiveIntegerField(verbose_name='скидка на товар в процентах', default=0)
+    is_active = models.BooleanField(verbose_name='активен ли продукт', default=True)
+    product_list = models.ManyToManyField(Product, related_name="compilation_items")
