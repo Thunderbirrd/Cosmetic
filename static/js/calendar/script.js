@@ -14,6 +14,12 @@ $('#date_visit_client').dateDropper({
     maxDate: getFinalDay(formatDateToDateDroper)
 });
 
+let date_visit_client = document.getElementById("date_visit_client")
+
+date_visit_client.onchange = async () => {
+    await blockedOptionsByInputDate()
+}
+
 const vistInput = document.getElementById("visit-input")
 const labelCalendar = document.querySelector(".input_calendar")
 
@@ -44,10 +50,12 @@ const divCards = document.querySelectorAll(".card")
 const tdButtons = document.querySelectorAll(".buttons")
 
 //удаляет запись
-const deleteVisit = (visitId) => {
-    Urls.deleteVisit(visitId)
+const deleteVisit = async (visitId) => {
+    await Urls.deleteVisit(visitId)
+    await blockedOptionsByInputDate()
 
     const tr = document.querySelector(`[data-id='${visitId}']`)
+
     const card = tr.querySelector(`.card`)
 
     card.classList.add("empty")
@@ -146,12 +154,20 @@ const fillTable = async (date) => {
     })
 }
 
-//устанавливает время
-const setDate = async (objDdate=new Date()) => {
+//устанавливает время vistInput
+const setDateVistInput = async (objDdate=new Date()) => {
     const date = formatDate(objDdate)
     vistInput.value = date
     labelCalendar.textContent = formatDateToLabelFromCalendar(date)
     await fillTable(formatDateToBDFromCalendar(date))
+}
+
+//устанавливает время date_visit_client
+const setDateCreateVisitInput = async (objDdate=new Date()) => {
+    const date = formatDate(objDdate)
+    date_visit_client.value = date
+
+    await blockedOptionsByInputDate()
 }
 
 document.querySelector(".create_visit form").onsubmit = async (e) => {
@@ -159,7 +175,8 @@ document.querySelector(".create_visit form").onsubmit = async (e) => {
     let {name, surname, phone, date, time, service} = e.target.elements
     await Urls.createVisit(name.value, surname.value, phone.value, 
         formatDateToBDFromCalendar(date.value), time.options[time.selectedIndex].value, service.value)
-    await setDate()
+    await fillTable(formatDateToBDFromCalendar(date.value))
+    await blockedOptionsByInputDate()
 }
 
 vistInput.onchange = () => {
@@ -168,7 +185,8 @@ vistInput.onchange = () => {
 }
 
 window.onload = () => {
-    setDate()
+    setDateVistInput()
+    setDateCreateVisitInput()
 }
 
 const calendar = document.querySelector(".сalendar")
@@ -181,4 +199,60 @@ const hideCalendar = () => {
 //показывает calendar
 const showCalendar = () => {
     calendar.classList.remove("hide")
+}
+
+//заполняем список услуги
+(async () => {
+    let selects = document.querySelector(".create_visit select[name='service']");
+
+    (await Urls.getListSerices()).forEach(service => {
+        let option = document.createElement("option");
+
+        option.value = service;
+        option.textContent = service;
+
+        selects.appendChild(option);
+    });
+})();
+
+const selectTime = document.querySelector(".create_visit select[name='time']")
+const timeOptions = selectTime.querySelectorAll("option")
+const spanIsAllOtionsHide = document.querySelector(".create_visit .is_all_otions_hide")
+
+//блокирует option времени в создании записи
+const blockedOptions = (times) => {
+
+    timeOptions.forEach(option => { 
+        option.classList.remove("hide") 
+        option.removeAttribute("selected")
+    })
+
+    times.forEach(time => {
+        timeOptions.forEach(option => {
+            if (option.value === time)
+                option.classList.add("hide")
+        })
+    })
+
+    let isAllOtionsHide = true
+
+    for (const option of timeOptions) {
+        if (!option.classList.contains("hide")) {
+            option.setAttribute("selected", true)
+            isAllOtionsHide = false
+            break;
+        }
+    }
+
+    if (isAllOtionsHide) {
+        selectTime.classList.add("hide")
+        spanIsAllOtionsHide.classList.remove("hide")
+    } else {
+        selectTime.classList.remove("hide")
+        spanIsAllOtionsHide.classList.add("hide")
+    }
+}
+
+const blockedOptionsByInputDate = async () => {
+    blockedOptions(await Urls.getBlockedTimeByDate(formatDateToBDFromCalendar(date_visit_client.value)))
 }

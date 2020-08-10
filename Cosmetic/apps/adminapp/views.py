@@ -35,7 +35,7 @@ def get_all_visits(request):
     lst = []
     for service in service_list:
         lst.append(service.name)
-    return HttpResponse(json.dumps(lst), ensure_ascii=False)
+    return HttpResponse(json.dumps(lst, ensure_ascii=False))
 
 
 @csrf_exempt

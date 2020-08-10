@@ -13,8 +13,6 @@ const Urls = {
 
         let result = await responce.json()
 
-        console.log(date, result)
-
         return result
     },
 
@@ -55,6 +53,27 @@ const Urls = {
             headers: {
                 'X-CSRFToken': CRF_TOKEN + ""
             }
+        })
+
+        return await responce.json()
+    },
+
+    async getListSerices() {
+        let responce = await fetch(`/admin_app/visits/get_services/`)
+
+        return await responce.json()
+    },
+    
+    async getBlockedTimeByDate(date) {
+        let responce = await fetch("/refresh/", {
+            method: "Post",
+            headers: {
+                'Content-type': 'application/json;charset=utf-8',
+                'X-CSRFToken': CRF_TOKEN + ""
+            },
+            body: JSON.stringify({
+                date
+            })
         })
 
         return await responce.json()
