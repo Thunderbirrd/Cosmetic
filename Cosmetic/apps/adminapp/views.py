@@ -120,7 +120,7 @@ def create_visit(request):
         new_visit.save()
         return HttpResponse('Success')
     else:
-        return HttpResponse('Not Success')
+        return HttpResponse('Error')
 
 
 @csrf_exempt
