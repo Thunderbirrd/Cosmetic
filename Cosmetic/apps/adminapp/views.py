@@ -31,7 +31,11 @@ def visits_calendar(request):
 @csrf_exempt
 @user_passes_test(lambda user: user.is_superuser)
 def get_all_visits(request):
-    return HttpResponse(json.dumps(Service.objects.all(), ensure_ascii=False))
+    service_list = Service.objects.all()
+    lst = []
+    for service in service_list:
+        lst.append(service.name)
+    return HttpResponse(json.dumps(lst), ensure_ascii=False)
 
 
 @csrf_exempt
