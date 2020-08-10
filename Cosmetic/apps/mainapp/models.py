@@ -93,7 +93,7 @@ class ForBot(models.Model):
 
 
 class Article(models.Model):
-    title = models.CharField(verbose_name="Заголовок", max_length=64, default="")
+    title = models.CharField(verbose_name="Заголовок", max_length=64, default="", unique=True)
     text = models.TextField(verbose_name="Текст статьи", default="", max_length=100000)
 
 
