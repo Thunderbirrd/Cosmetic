@@ -70,6 +70,7 @@
                 image: "{{ product.image }}",
                 quantity: {{ product.quantity }},
                 description: "{{ product.description }}",
+                discount: {{product.discount}},
                 is_active: "{{ product.is_active }}" === "True"
             })
         {% endfor %}
@@ -93,9 +94,6 @@
         {% for time in occupied_dates  %}
             servicecontent.push("{{ time }}")
         {% endfor %}
-
-
-        console.log(servicecontent);
     </script>
     <script src="{% static 'js/number_input.js' %}"></script>
 

@@ -16,7 +16,7 @@
                 const rowsInShop = document.querySelectorAll("main .shop .row")
 
                 //создаёт карточку
-                const createCardInShop = (id, brand, name, price, image, quantity) => {
+                const createCardInShop = (id, brand, name, price, image, quantity, discount) => {
                     const divCard = document.createElement("div")
                     divCard.dataset.id = id
                     divCard.dataset.brand = brand
@@ -56,10 +56,23 @@
                     divCard.appendChild(divCardTitle)
 
                     const divCardPrice = document.createElement("div")
-                    divCardPrice.classList.add("card__price")
-                    divCardPrice.innerHTML = price + " &#8381;"
+                    if (discount === 0) {
+                        divCardPrice.classList.add("card__new_price")
+                        divCardPrice.innerHTML = price + " &#8381;"
+                    } else {
+                        divCardPrice.classList.add("card__price")
+                        divCardPrice.innerHTML = `<strike>${price} &#8381;</strike><span class="card__discount"> -${discount}%</span>`
+                    }
 
                     divCard.appendChild(divCardPrice)
+
+                    if (discount !== 0) {
+                        const divCardNewPrice =document.createElement("div")
+                        divCardNewPrice.classList.add("card__new_price")
+                        let newPrice = Math.round(price * (1 - discount / 100))
+                        divCardNewPrice.innerHTML = newPrice + " &#8381;"
+                        divCard.appendChild(divCardNewPrice)
+                    }
 
                     return divCard
                 }
@@ -70,7 +83,7 @@
                 arrayProducts.forEach((p, i) => {
                     let index = Math.floor(i / countInRow)
                     rowsInShop[index].appendChild(
-                        createCardInShop(p.id, p.brand, p.name, p.price, p.image, p.quantity)
+                        createCardInShop(p.id, p.brand, p.name, p.price, p.image, p.quantity, p.discount)
                     )
                 });
             </script>

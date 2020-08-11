@@ -14,7 +14,16 @@ main .hide {
 }
 
 .card__price{
+    color: grey;
     font-size: 13px;
+}
+
+.card__new_price {
+    font-size: 1.1rem;
+}
+
+.card__discount{
+    font-size: 1rem;
     color: #F72464;
 }
 
