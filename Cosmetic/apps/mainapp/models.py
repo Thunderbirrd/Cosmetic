@@ -112,3 +112,8 @@ class ProductCompilation(models.Model):
     discount = models.PositiveIntegerField(verbose_name='скидка на товар в процентах', default=0)
     is_active = models.BooleanField(verbose_name='активен ли продукт', default=True)
     product_list = models.ManyToManyField(Product, related_name="compilation_items")
+
+
+class Months(models.Model):
+    month_number = models.IntegerField(verbose_name="номер месяца", unique=True, db_index=True, null=False, default=0)
+    is_active = models.BooleanField(verbose_name='активен ли месяц', default=False)

@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.forms import model_to_dict
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from Cosmetic.apps.mainapp.models import Visit, Service, ShopUser, ForBot
+from Cosmetic.apps.mainapp.models import Visit, Service, ShopUser, ForBot, Months
 import json
 
 
@@ -30,7 +30,7 @@ def visits_calendar(request):
 
 @csrf_exempt
 @user_passes_test(lambda user: user.is_superuser)
-def get_all_visits(request):
+def get_all_services(request):
     service_list = Service.objects.all()
     lst = []
     for service in service_list:
@@ -134,13 +134,22 @@ def change_chat(request):
 
 
 @csrf_exempt
-@user_passes_test(lambda user: user.is_superuser)
-def open_month(request):
-    
-    return HttpResponse('Success')
+@user_passes_test(lambda user: user.is_superuser)  # меняет активность месяца
+def change_month(request, pk):                      # admin_app/visits/months/(номер месяца)
+    month = Months.objects.get(month_number=pk)
+    if month:
+        month.is_active = not month.is_active
+        month.save()
+        return show_months(request)
+    else:
+        return HttpResponse('Error')
 
 
 @csrf_exempt
-@user_passes_test(lambda user: user.is_superuser)
-def close_month(request):
-    return HttpResponse('Success')
+@user_passes_test(lambda user: user.is_superuser)  # возвращает словарь с номером
+def show_months(request):                          # месяца как ключ и его активность как значение
+    months = Months.objects.all()                  # admin_app/visits/months/
+    dct = {}
+    for month in months:
+        dct[str(month.month_number)] = month.is_active
+    return HttpResponse(json.dumps(dct))
