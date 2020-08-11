@@ -131,3 +131,16 @@ def change_chat(request):
     bot_info.chat_id = new_chat_id
     bot_info.save()
     return HttpResponse('Success')
+
+
+@csrf_exempt
+@user_passes_test(lambda user: user.is_superuser)
+def open_month(request):
+    
+    return HttpResponse('Success')
+
+
+@csrf_exempt
+@user_passes_test(lambda user: user.is_superuser)
+def close_month(request):
+    return HttpResponse('Success')

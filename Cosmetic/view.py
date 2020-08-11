@@ -33,11 +33,14 @@ def home(request):
 
 
 def visits(date):
+    date
     visit_list = Visit.objects.filter(date=date)
     occupied_dates = []
 
     for visit in visit_list:
         occupied_dates.append(visit.time)
+
+    # проверка на открытость месяца
     return occupied_dates
 
 
