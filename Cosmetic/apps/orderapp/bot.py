@@ -75,7 +75,7 @@ def do_echo_service(bot: Bot, data: DataService):
              f"ФИО клиента: {data.client_surname} {data.client_name} {data.client_last_name}\n"
              f"Телефон клиента: {data.client_phone}\n"
              f"Услуга: {data.service_name}\n"
-             f"Дата и время записи {data.date} {data.time}\n"
+             f"Дата и время записи: {data.date} {data.time}\n"
     )
 
 
