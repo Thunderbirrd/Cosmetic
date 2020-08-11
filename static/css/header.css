@@ -10,6 +10,10 @@ header {
     z-index: 2;
 }
 
+header .hide {
+    display: none;
+}
+
 header .wrap_header {
     padding-top: 15px;
 }
