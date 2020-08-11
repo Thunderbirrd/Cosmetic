@@ -2,7 +2,7 @@ import json
 import threading
 import time
 from . import bot
-from .bot import Data
+from .bot import DataOrder
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from Cosmetic.apps.mainapp.models import Product
@@ -97,9 +97,9 @@ def form_order(request):
 
         price = order.get_total_cost()
         product_list = get_order_items_list(data['id'])
-        data = Data(order_information['phone'], order_information['order_type'],
-                    order_information['name'], order_information['surname'],
-                    price, product_list, order_information['address'])
+        data = DataOrder(order_information['phone'], order_information['order_type'],
+                         order_information['name'], order_information['surname'],
+                         price, product_list, order_information['address'])
         bot.main(data)
 
     except ObjectDoesNotExist:

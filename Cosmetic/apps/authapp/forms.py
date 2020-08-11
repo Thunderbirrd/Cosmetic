@@ -30,23 +30,26 @@ class ShopUserLoginForm(AuthenticationForm):
             field.widget.attrs['class'] = 'form-control'
 
             if field_name == 'password':
-                field.widget.attrs['minlength'] = 6
+                field.widget.attrs['minlength'] = 8
 
 
 class ShopUserRegisterForm(UserCreationForm):
     class Meta:
         model = ShopUser
-        fields = ('phone', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        fields = ('phone', 'email', 'last_name', 'first_name', 'father_name', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
         super(ShopUserRegisterForm, self).__init__(*args, **kwargs)
-        for field_name, field in self.fields.items():
-            for field_name in ['phone']:
-                self.fields[field_name].label = 'Телефон (+7)'
+        for field_name in ['phone']:
+            self.fields[field_name].label = 'Телефон (+7)'
 
-                if field_name == 'phone':
-                    field.widget.attrs['maxlength'] = 10
-                    field.widget.attrs['minlength'] = 10
+        for field_name, field in self.fields.items():
+            if field_name == 'phone':
+                field.widget.attrs['maxlength'] = 10
+                field.widget.attrs['minlength'] = 10
+            if field_name == 'password':
+                field.widget.attrs['minlength'] = 8
+
             field.widget.attrs['class'] = 'form-control'
             field.help_text = ''
 
