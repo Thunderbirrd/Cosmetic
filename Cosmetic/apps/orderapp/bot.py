@@ -6,7 +6,7 @@ chatID = bot_info.chat_id
 token = bot_info.token
 
 
-class Data:
+class DataOrder:
     phone = ""
     order_type = ""
     name = ""
@@ -25,7 +25,26 @@ class Data:
         self.address = address
 
 
-def do_echo(bot: Bot, data):
+class DataService:
+    date = ""
+    time = ""
+    client_name = ""
+    client_surname = ""
+    client_last_name = ""
+    client_phone = ""
+    service_name = ""
+
+    def __init__(self, date, time, name, surname, last_name, service_name, phone):
+        self.date = date
+        self.time = time
+        self.client_name = name
+        self.client_surname = surname
+        self.client_last_name = last_name
+        self.service_name = service_name
+        self.client_phone = phone
+
+
+def do_echo_order(bot: Bot, data):
     text = ''
     address = ''
     first = True
@@ -49,6 +68,23 @@ def do_echo(bot: Bot, data):
     )
 
 
-def main(data: Data):
+def do_echo_service(bot: Bot, data: DataService):
+    bot.send_message(
+        chat_id=chatID,
+        text=f"Клиент хочет записаться на услугу!\n"
+             f"ФИО клиента: {data.client_surname} {data.client_name} {data.client_last_name}\n"
+             f"Телефон клиента: {data.client_phone}\n"
+             f"Услуга: {data.service_name}\n"
+             f"Дата и время записи {data.date} {data.time}\n"
+    )
+
+
+def service(data: DataService):
     bot = Bot(token=token)
-    do_echo(bot, data)
+    do_echo_service(bot, data)
+
+
+def main(data: DataOrder):
+    bot = Bot(token=token)
+    do_echo_order(bot, data)
+
