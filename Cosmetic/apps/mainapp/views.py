@@ -9,7 +9,9 @@ def all_articles(request):
     articles_list = []
     articles = Article.objects.all()
     for article in articles:
-        articles_list.append({'id': article.id, 'title': article.title})
+        articles_list.append({'id': article.id, 'title': article.title, 'text': article.text[0:80],
+                              'image': str(ImageForArticle.objects
+                                           .get(article=article.id, number_in_article=1).main_image)})
     return HttpResponse(json.dumps(articles_list, ensure_ascii=False))
 
 
