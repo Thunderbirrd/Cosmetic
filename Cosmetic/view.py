@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.core.cache import cache
 from django.views.decorators.csrf import csrf_exempt
-from .apps.mainapp.models import Product, Visit, Service, ProductCompilation
+from .apps.mainapp.models import Product, Visit, Service, ProductCompilation, Months
 from .settings import LOW_CACHE
 import json
 
@@ -33,15 +33,16 @@ def home(request):
 
 
 def visits(date):
-    date
-    visit_list = Visit.objects.filter(date=date)
-    occupied_dates = []
+    month = Months.objects.get(month_number=date.month)
+    if month.is_active:
+        visit_list = Visit.objects.filter(date=date)
+        occupied_dates = []
 
-    for visit in visit_list:
-        occupied_dates.append(visit.time)
-
-    # проверка на открытость месяца
-    return occupied_dates
+        for visit in visit_list:
+            occupied_dates.append(visit.time)
+        return occupied_dates
+    else:
+        return None
 
 
 @csrf_exempt
