@@ -205,7 +205,7 @@ const showCalendar = () => {
 (async () => {
     let selects = document.querySelector(".create_visit select[name='service']");
 
-    (await Urls.getListSerices()).forEach(service => {
+    (await Urls.getListServices()).forEach(service => {
         let option = document.createElement("option");
 
         option.value = service;

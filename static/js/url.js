@@ -94,56 +94,31 @@ const Urls = {
         return await responce.json()
     },
     async getArticlesContents() {
-        return [
-            {
-                id: 1,
-                title: "Интересная статья",
-                text: "Интересный текст. Интересный текст. Интересный текст. Интересный текст. Интересный тек",
-                img: "/static/img/200x200.jpeg"
-            },
-            {
-                id: 1,
-                title: "Интересная статья",
-                text: "Интересный текст. Интересный текст. Интересный текст. Интересный текст. Интересный тек",
-                img: "/static/img/200x200.jpeg"
-            },
-            {
-                id: 1,
-                title: "Интересная статья",
-                text: "Интересный текст. Интересный текст. Интересный текст. Интересный текст. Интересный тек",
-                img: "/static/img/200x200.jpeg"
-            },
-            {
-                id: 1,
-                title: "Интересная статья",
-                text: "Интересный текст. Интересный текст. Интересный текст. Интересный текст. Интересный тек",
-                img: "/static/img/200x200.jpeg"
-            },
-            {
-                id: 1,
-                title: "Интересная статья",
-                text: "Интересный текст. Интересный текст. Интересный текст. Интересный текст. Интересный тек",
-                img: "/static/img/200x200.jpeg"
-            },
-            {
-                id: 1,
-                title: "Интересная статья",
-                text: "Интересный текст. Интересный текст. Интересный текст. Интересный текст. Интересный тек",
-                img: "/static/img/200x200.jpeg"
+        let responce = await fetch('/articles/', {
+            method: "Get",
+            headers: {
+                'X-CSRFToken': CRF_TOKEN + ""
             }
-        ]
+        })
+        
+        let result = await responce.json()
+
+        console.log(result)
+
+        return result
     },
     async getArticle(id) {
-        return {
-            title: "Интересная статья",
-            text: "Интересный текст. Интересный текст. Интересный текст. Интересный текст. Интересный текст. Интересный текст. Интересный текст. Интересный текст. Интересный текст. Интересный текст.",
-            images: [
-                "/static/img/200x200.jpeg",
-                "/static/img/200x200.jpeg",
-                "/static/img/200x200.jpeg",
-                "/static/img/200x200.jpeg",
-                "/static/img/200x200.jpeg"
-            ] 
-        }
+        let responce = await fetch(`/articles/${id}/`, {
+            method: "Get",
+            headers: {
+                'X-CSRFToken': CRF_TOKEN + ""
+            }
+        })
+
+        let result = await responce.json()
+
+        console.log(result)
+
+        return result
     }
 }

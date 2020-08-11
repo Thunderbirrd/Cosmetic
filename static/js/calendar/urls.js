@@ -58,7 +58,7 @@ const Urls = {
         return await responce.json()
     },
 
-    async getListSerices() {
+    async getListServices() {
         let responce = await fetch(`/admin_app/visits/get_services/`)
 
         return await responce.json()
