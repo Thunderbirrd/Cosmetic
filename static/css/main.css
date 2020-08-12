@@ -27,15 +27,19 @@ main .hide {
     color: #F72464;
 }
 
+.rows {
+    margin-top: 60px;
+}
+
+.shop .categories, .shop .lines{
+    margin-top: 60px;
+}
+
 .row{
     display: flex;
     justify-content: start;
     overflow-y: hidden;
     overflow-x: auto;
-}
-
-.row:nth-child(2){
-    margin-top: 60px;
 }
 
 .row:not(:nth-child(2)){

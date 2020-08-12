@@ -13,13 +13,15 @@ const store = {
     //хранилище списка магазина
     //{
     // name
-    // price
-    // category
-    // brand
-    // image
-    // quantity
-    // is_active 
-    // description
+        // price
+        // category
+        // brand
+        // line
+        // image
+        // quantity
+        // is_active
+        // discount 
+        // description
     //}
     get stateShop() {
         return arrayProducts
@@ -37,6 +39,10 @@ const store = {
 
     brands: [],
 
+    lines: [],
+
+    categories: [],
+
     filter: {
         _name: "",
 
@@ -46,7 +52,7 @@ const store = {
 
         set name(value="") {
             this._name = value
-            showProductByFilter(this._name, this._brand)
+            showProductByFilter(this.name, this.brand, this.line, this.category)
         },
 
         _brand: "",
@@ -57,7 +63,29 @@ const store = {
 
         set brand(value="") {
             this._brand = value
-            showProductByFilter(this._name, this._brand)
+            showProductByFilter(this.name, this.brand, this.line, this.category)
+        },
+
+        _line: "",
+
+        get line() {
+            return this._line
+        },
+
+        set line(value="") {
+            this._line = value
+            showProductByFilter(this.name, this.brand, this.line, this.category)
+        },
+
+        _category: "",
+
+        get category() {
+            return this._category
+        },
+
+        set category(value="") {
+            this._category = value
+            showProductByFilter(this.name, this.brand, this.line, this.category)
         }
     },
 
@@ -109,9 +137,19 @@ const store = {
     }
 }
 
-//заполняем список брендов
 arrayProducts.forEach(product => {
+    //заполняем список брендов
     if (!store.brands.includes(product.brand)) {
         store.brands.push(product.brand)
+    }
+
+    //заполняем список линий
+    if (!store.lines.includes(product.line)) {
+        store.lines.push(product.line)
+    }
+
+    //заполняем список категорий
+    if (!store.categories.includes(product.category)) {
+        store.categories.push(product.category)
     }
 })

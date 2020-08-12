@@ -55,9 +55,11 @@
         // price
         // category
         // brand
+        // line
         // image
         // quantity
-        // is_active 
+        // is_active
+        // discount 
         // description
         
         {% for product in products %}
@@ -67,6 +69,7 @@
                 price: parseInt({{ product.price }}),
                 category: "{{ product.category }}",
                 brand: "{{ product.brand }}",
+                line: "{{ product.line }}",
                 image: "{{ product.image }}",
                 quantity: {{ product.quantity }},
                 description: "{{ product.description }}",
