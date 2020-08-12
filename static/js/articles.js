@@ -31,6 +31,7 @@ const loadArticlesContents = async () => {
     contents.forEach(content => {
         const li = document.createElement("li")
         li.dataset.id = content.id
+        li.dataset.title = content.title
         li.addEventListener("click", () => { showArticle(content.id) })
 
         const h3 = document.createElement("h3")
@@ -42,7 +43,7 @@ const loadArticlesContents = async () => {
         li.appendChild(p)
 
         const img = document.createElement("img")
-        img.src = content.img
+        img.src = content.image
         img.alt = content.title
         li.appendChild(img)
 
@@ -52,30 +53,57 @@ const loadArticlesContents = async () => {
 
 const elementArticle = document.querySelector(".articles article")
 
+const listArticles = document.querySelector(".articles .list_articles")
+const wrapArticle = document.querySelector(".articles .wrap_article")
+
+const h3 = elementArticle.querySelector("h3")
+const articlesText = elementArticle.querySelector(".articles_text")
+const articlesImages = elementArticle.querySelector(".articles_images")
 //показывает статью
 const showArticle = async (id) => {
-    ulContents.classList.add("hide")
-    elementArticle.classList.remove("hide")
+    listArticles.classList.add("hide")
+
+    articlesImages.innerHTML = ""
 
     const article = await Urls.getArticle(id)
 
-    const h3 = elementArticle.querySelector("h3")
     h3.textContent = article.title
 
-    const articlesText = elementArticle.querySelector(".articles_text")
     articlesText.textContent = article.text
 
-    const articlesImages = elementArticle.querySelector(".articles_images")
     article.images.forEach(src => {
         const img = document.createElement("img")
         img.src = src
         img.alt = ""
         articlesImages.appendChild(img)
     })
+    
+    wrapArticle.classList.remove("hide")
 }
 
 //прячет статью и показывает оглавление
 const hideArticle = () => {
-    ulContents.classList.remove("hide")
-    elementArticle.classList.add("hide")
+    listArticles.classList.remove("hide")
+    wrapArticle.classList.add("hide")
 }
+
+wrapArticle.querySelector(".back").addEventListener("click", hideArticle)
+
+//показывает статьи по названию
+const showArticleByTitle = (title) => {
+    ulContents.querySelectorAll("li").forEach(el => {
+        console.log(title, el.dataset.title)
+        if (String(el.dataset.title).toLocaleLowerCase().includes(String(title).toLocaleLowerCase())) {
+            el.classList.remove("hide")
+        } else {
+            el.classList.add("hide")
+        }
+    })
+}
+
+const articlesSeachInput = listArticles.querySelector(".search_input")
+
+//ищем статьи по названию
+articlesSeachInput.addEventListener("input", (e) => {
+    showArticleByTitle(articlesSeachInput.value)
+});

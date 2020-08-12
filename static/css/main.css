@@ -35,7 +35,7 @@ main .hide {
 }
 
 .row:nth-child(2){
-    margin-top: 50px;
+    margin-top: 60px;
 }
 
 .row:not(:nth-child(2)){
