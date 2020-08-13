@@ -51,16 +51,67 @@ header .dropdown_content, header .dropup_content{
     position: absolute;
     min-width: 160px;
     width: 100%;
-    overflow: auto;
+    overflow: hidden;
     background-color: #fefefe;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
-.dropdown_content a:hover, .dropup_content a:hover{
+header .dropdown_content > :nth-child(2n), header .dropup_content > :nth-child(2n) {
+    margin-top: 10px;
+}
+
+header .dropdown_content > :nth-child(n), header .dropup_content > :nth-child(n) {
+    background-color: rgb(253, 255, 163);
+}
+
+.dropdown_content .brands_content > :nth-child(n), .dropup_content .brands_content > :nth-child(n) {
+    background-color: rgb(187, 189, 81);
+}
+
+.dropdown_content .brands_content .lines, .dropup_content .brands_content .lines {
+    margin-top: 5px;
+}
+
+.dropdown_content .brands_content .lines, .dropup_content .brands_content .lines {
+    margin-top: 5px;
+}
+
+.dropdown_content .brands_content .lines_content, .dropup_content .brands_content .lines_content {
+    border-top: 1px solid black;
+}
+
+.dropdown_content .brands_content .all:hover, .dropup_content .brands_content .all:hover,
+.dropdown_content a:hover, .dropup_content a:hover, 
+.dropdown_content .categories:hover, .dropup_content .categories:hover,
+.dropdown_content .brands:hover, .dropup_content .brands:hover,
+.dropdown_content .lines:hover, .dropup_content .lines:hover{
     color: black;
     background-color: #fffee8;
 }
+
+.dropdown .list {
+    overflow-y: auto;
+    max-height: 161px;
+}
+
+.dropdown .large_list {
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.dropdown .large_list::-webkit-scrollbar,
+.dropdown .list::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 4px;
+}
+
+.dropdown .large_list::-webkit-scrollbar-thumb,
+.dropdown .list::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 .dropdown_content a, .dropup_content a{
     color: black;
     padding: 12px 16px;
@@ -84,6 +135,42 @@ header .dropup_content{
 header .menu li.dropdown{
     position: relative;
     padding: 0;
+}
+
+.dropdown_content .categories, .dropup_content .categories, 
+.dropdown_content .brands, .dropup_content .brands{
+    padding: 12px 16px;
+    position: relative;
+}
+
+.dropdown_content .categories_content, .dropup_content .categories_content, 
+.dropdown_content .brands_content, .dropup_content .brands_content {
+    border-top: 1px solid black;
+}
+
+.dropdown_content .lines, .dropup_content .lines {
+    position: relative;
+}
+
+.dropdown_content .brands::after, .dropup_content .brands::after,
+.dropdown_content .categories::after, .dropup_content .categories::after,
+.dropdown_content .lines::after, .dropup_content .lines::after{
+    content: "";
+    background-image: url("/static/img/arrow-down-black.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.dropdown_content .brands.active::after, .dropup_content .brands.active::after,
+.dropdown_content .categories.active::after, .dropup_content .categories.active::after,
+.dropdown_content .lines.active::after, .dropup_content .lines.active::after{
+    transform: translate(0, -50%) rotate(180deg);
 }
 
 .dropdown .shop {

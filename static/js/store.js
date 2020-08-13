@@ -37,9 +37,14 @@ const store = {
         this._stateCheckout = value
     },
 
+    //brands
+    //[
+    //    {
+    //          brand: бренд,
+    //          lines: [ линия, линия]
+    //    }
+    //]
     brands: [],
-
-    lines: [],
 
     categories: [],
 
@@ -63,6 +68,12 @@ const store = {
 
         set brand(value="") {
             this._brand = value
+
+            if (value !== "" && !store.brands.find(b => b.brand === value).lines.some(line => line === this._line)) {
+
+                this._line = ""
+            }
+
             showProductByFilter(this.name, this.brand, this.line, this.category)
         },
 
@@ -74,6 +85,13 @@ const store = {
 
         set line(value="") {
             this._line = value
+
+            let brand = store.brands.find(brand => brand.lines.some(line => line === value))
+
+            if (brand !== undefined) {
+                this._brand = brand.brand
+            }
+
             showProductByFilter(this.name, this.brand, this.line, this.category)
         },
 
@@ -138,15 +156,16 @@ const store = {
 }
 
 arrayProducts.forEach(product => {
-    //заполняем список брендов
-    if (!store.brands.includes(product.brand)) {
-        store.brands.push(product.brand)
-    }
-
-    //заполняем список линий
-    if (!store.lines.includes(product.line)) {
-        store.lines.push(product.line)
-    }
+    //заполняем список брендов и линий
+    const indexBrand = store.brands.findIndex(b => b.brand === product.brand)
+    if (indexBrand < 0) {
+        store.brands.push({
+            brand: product.brand,
+            lines: [product.line]
+        })
+    } else if (!store.brands[indexBrand].lines.includes(product.line)) {
+        store.brands[indexBrand].lines.push(product.line)
+    }    
 
     //заполняем список категорий
     if (!store.categories.includes(product.category)) {

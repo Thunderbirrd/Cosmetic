@@ -31,6 +31,8 @@ window.addEventListener('resize', () => {
 })
 
 window.onpopstate = (event) => {
+    if (event.state === null) return false;
+
     switch (event.state.type) {
         case DO_ACTION:
             doActionByCurentURL()

@@ -133,33 +133,163 @@ const addClassNameActiveMenu = () => {
 }
 
 //функция показывающая список продуктов с указанным brand, если brand не указан то показываются все товары
-const showProductByBrand = (brand) => {
+const showProductByBrand = (brand="") => {
     store.filter.brand = brand
+}
+
+//сортирует продукты по категориям
+const showProductByLine = (line="") => {
+    store.filter.line = line
+}
+
+//сортирует продукты по категориям
+const showProductByCategory = (category="") => {
+    store.filter.category = category
 }
 
 const dropdownContent = document.querySelector("header .dropdown_content");
 const dropupContent = document.querySelector("header .dropup_content");
 
-//добавляем список брендов в всплывающем меню в поле магазин в header
-(() => {
-    store.brands.forEach(brand => {
-        let a = document.createElement("a")
-        a.href = "#"
-        a.textContent = brand
+
+//добавляет brand и список линий к element
+const addBrandAndLinesContentToElement = (element, brand, lines) => {
+    let divBrand = document.createElement("div")
+    divBrand.classList.add("lines") 
+
+    let a = document.createElement("a")
+    a.href = "#"
+    a.textContent = brand
+
+    a.addEventListener("click", (e) => {
+        e.preventDefault()
+        showProductByBrand(brand)
+    })
+
+    divBrand.appendChild(a)
+
+    const divLinesContent = createLinesContent(lines)
+    divLinesContent.classList.add("hide")
+
+    divBrand.addEventListener("click", () => {
+        divBrand.classList.toggle("active")
+        divLinesContent.classList.toggle("hide")
+    })
+    
+    element.appendChild(divBrand)
+    element.appendChild(divLinesContent)
+}
+
+//создаёт список линий
+const createLinesContent = (lines) => {
+    const divLinesContent = document.createElement("div")
+    divLinesContent.classList.add("lines_content")
+    divLinesContent.classList.add("list")
+
+    const allElement = document.createElement("a")
+    allElement.href = "/all"
+    allElement.textContent = "Все линии"
+
+    allElement.addEventListener("click", e => {
+        e.preventDefault()
+        showProductByLine("")
+    })
+
+    divLinesContent.appendChild(allElement)
+
+    lines.forEach(line => {
+        const a = document.createElement("a")
+        a.href = "/" + line
+        a.textContent = line
 
         a.addEventListener("click", (e) => {
             e.preventDefault()
-            showProductByBrand(brand)
+            showProductByLine(line)
         })
+
+        divLinesContent.appendChild(a)
+    })
+
+    return divLinesContent
+}
+
+//добавляем список брендов в всплывающем меню в поле магазин в header
+(() => {
+    const brandsContentDown = dropdownContent.querySelector(".brands_content")
+    const brandsContentUp = dropupContent.querySelector(".brands_content")
+
+    //при щелчке по "Категории" показываем и скрываем список категорий 
+    const brandsUp = dropupContent.querySelector(".brands")
+    brandsUp.addEventListener("click", () => {
+        brandsUp.classList.toggle("active")
+        brandsContentUp.classList.toggle("hide")
+    })
+
+    const brandsDown = dropdownContent.querySelector(".brands")
+    brandsDown.addEventListener("click", () => {
+        brandsDown.classList.toggle("active")
+        brandsContentDown.classList.toggle("hide")
+    })
+
+    //сбрасываем фильтры
+    const resetFilter = (e) => {
+        e.preventDefault()
+        showProductByBrand("")
+    }
+
+    brandsContentUp.querySelector(".all").addEventListener("click", resetFilter)
+    brandsContentDown.querySelector(".all").addEventListener("click", resetFilter)    
+
+    store.brands.forEach(({brand, lines}) => {
+        addBrandAndLinesContentToElement(brandsContentDown, brand, lines)
+        addBrandAndLinesContentToElement(brandsContentUp, brand, lines)
+    })
+})();
+
+//добавляем список категорий в всплывающем меню в поле магазин в header
+(() => {
+    const categoriesContentDown = dropdownContent.querySelector(".categories_content")
+    const categoriesContentUp = dropupContent.querySelector(".categories_content")
+
+    //при щелчке по "Категории" показываем и скрываем список категорий 
+    const categotiesUp = dropupContent.querySelector(".categories")
+    categotiesUp.addEventListener("click", () => {
+        categotiesUp.classList.toggle("active")
+        categoriesContentUp.classList.toggle("hide")
+    })
+
+    const categotiesDown = dropdownContent.querySelector(".categories")
+    categotiesDown.addEventListener("click", () => {
+        categotiesDown.classList.toggle("active")
+        categoriesContentDown.classList.toggle("hide")
+    })
+
+    //сбрасываем фильтр по категориям
+    const resetFilter = (e) => {
+        e.preventDefault()
+        showProductByCategory("")
+    }
+
+    categoriesContentUp.querySelector(".all").addEventListener("click", resetFilter)
+    categoriesContentDown.querySelector(".all").addEventListener("click", resetFilter)
+
+    //заполням списки категорий
+    store.categories.forEach(category => {
+        let a = document.createElement("a")
+        a.href = "/" + category
+        a.textContent = category
+
+        const clickListener = (e) => {
+            e.preventDefault()
+            showProductByCategory(category)
+        }
+
+        a.addEventListener("click", clickListener)
 
         let clone = a.cloneNode(true)
-        clone.addEventListener("click", (e) => {
-            e.preventDefault()
-            showProductByBrand(brand)
-        })
+        clone.addEventListener("click", clickListener)
 
-        dropdownContent.appendChild(a)
-        dropupContent.appendChild(clone)
+        categoriesContentDown.appendChild(a)
+        categoriesContentUp.appendChild(clone)
     })
 })();
 
@@ -174,7 +304,12 @@ const setVisiabilityMenuShop = () => {
     }
 }
 
-//показываем все продукты, убираем фильтры при клике по "магазину"
-document.querySelector("header .menu .shop").addEventListener("click", () => {
+const resetAllFilter = () => {
     showProductByBrand()
+    showProductByLine()
+    showProductByCategory()
+}
+
+document.querySelectorAll("header .dropdown .reset_all_filter").forEach(el => {
+    el.addEventListener("click", resetAllFilter)
 })
