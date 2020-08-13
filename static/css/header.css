@@ -62,11 +62,11 @@ header .dropdown_content > :nth-child(2n), header .dropup_content > :nth-child(2
 }
 
 header .dropdown_content > :nth-child(n), header .dropup_content > :nth-child(n) {
-    background-color: rgb(253, 255, 163);
+    background-color: rgba(251, 255, 7, 0.8);
 }
 
 .dropdown_content .brands_content > :nth-child(n), .dropup_content .brands_content > :nth-child(n) {
-    background-color: rgb(187, 189, 81);
+    background-color: rgb(253, 255, 163);
 }
 
 .dropdown_content .brands_content .lines, .dropup_content .brands_content .lines {
