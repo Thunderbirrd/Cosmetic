@@ -42,11 +42,11 @@ class Product(models.Model):
     description = models.CharField(verbose_name="описание товара", max_length=256, default="")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
-    line = models.ForeignKey(Line, on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to="static/product_img/", blank=True)
     quantity = models.PositiveIntegerField(verbose_name='количество на складе', default=0, null=False)
-    discount = models.PositiveIntegerField(verbose_name='скидка на товар в процентах', default=0)
     is_active = models.BooleanField(verbose_name='активен ли продукт', default=True)
+    line = models.ForeignKey(Line, on_delete=models.CASCADE, null=True)
+    discount = models.PositiveIntegerField(verbose_name='скидка на товар в процентах', default=0)
 
     def __str__(self):
         return self.name

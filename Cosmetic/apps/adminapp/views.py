@@ -113,9 +113,11 @@ def create_visit(request):
     client = ShopUser.objects.filter(phone=data['phone']).first()
     if client:
         new_visit.client_id = client.id
-        new_visit.service_id = Service.objects.get(name=data['service']).id
+        service = Service.objects.get(name=data['service'])
+        new_visit.service_id = service.id
         new_visit.time = data['time']
         new_visit.date = data['date']
+        new_visit.price = service.price
         new_visit.status = 'PAY'
         new_visit.save()
         return HttpResponse('Success')

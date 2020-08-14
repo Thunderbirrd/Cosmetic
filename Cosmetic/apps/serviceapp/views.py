@@ -1,5 +1,4 @@
 import json
-
 from django.db import IntegrityError
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -14,15 +13,11 @@ from Cosmetic.apps.orderapp.bot import DataService
 def form_service(request):
     queryset = json.load(request)
     try:
-        visit = models.Visit()
-        visit.client_id = request.user.id
+
         data = queryset['date'].split()
-        visit.date = data[0]
-        visit.time = data[1]
-        visit.service_id = models.Service.get_id_by_name(queryset['service_name'])
-        visit.price = models.ShopUser.get_sale(visit.client_id) * models.Service.get_price(visit.service_id)
-        client = models.ShopUser.objects.get(id=visit.client_id)
-        service = models.Service.objects.get(id=visit.service_id)
+        client = models.ShopUser.objects.get(id=request.user.id)
+        service = models.Service.objects.get(id=models.Service.get_id_by_name(queryset['service_name']).service_id)
+
         data = DataService(data[0], data[1], client.first_name, client.last_name, client.father_name,
                            service.name, client.phone)
         bot.service(data)
