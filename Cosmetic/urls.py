@@ -35,6 +35,7 @@ urlpatterns = [
     re_path(r'^form_service/', include('Cosmetic.apps.serviceapp.urls')),
     re_path(r'^auth/', include('Cosmetic.apps.authapp.urls', namespace='auth')),
     re_path(r'^calendar/', view.calendar, name='calendar'),
+    re_path(r'^months/', view.show_months, name='show month'),
     re_path(r'^admin_app/', include('Cosmetic.apps.adminapp.urls', namespace='admin')),
     re_path(r'^refresh/', view.refresh, name='refresh'),
     re_path(r'^password_reset/complete/', PasswordResetCompleteView.as_view(

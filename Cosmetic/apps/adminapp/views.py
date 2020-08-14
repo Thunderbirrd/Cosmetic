@@ -6,6 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from Cosmetic.apps.mainapp.models import Visit, Service, ShopUser, ForBot, Months
 import json
 
+from Cosmetic.view import show_months
+
 
 @csrf_exempt
 @user_passes_test(lambda user: user.is_superuser)
@@ -147,11 +149,3 @@ def change_month(request, pk):                      # admin_app/visits/months/(�
         return HttpResponse('Error')
 
 
-@csrf_exempt
-@user_passes_test(lambda user: user.is_superuser)  # возвращает словарь с номером
-def show_months(request):                          # месяца как ключ и его активность как значение
-    months = Months.objects.all()                  # admin_app/visits/months/
-    dct = {}
-    for month in months:
-        dct[str(month.month_number)] = month.is_active
-    return HttpResponse(json.dumps(dct))

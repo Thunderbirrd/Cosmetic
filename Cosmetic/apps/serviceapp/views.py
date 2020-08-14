@@ -16,7 +16,7 @@ def form_service(request):
 
         data = queryset['date'].split()
         client = models.ShopUser.objects.get(id=request.user.id)
-        service = models.Service.objects.get(id=models.Service.get_id_by_name(queryset['service_name']).service_id)
+        service = models.Service.objects.get(id=(models.Service.get_id_by_name(queryset['service_name'])))
 
         data = DataService(data[0], data[1], client.first_name, client.last_name, client.father_name,
                            service.name, client.phone)

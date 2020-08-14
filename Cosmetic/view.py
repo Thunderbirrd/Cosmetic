@@ -57,3 +57,12 @@ def services():
 
 def calendar(request):
     return render(request, 'calendar/index.html')
+
+
+@csrf_exempt                                       # возвращает словарь с номером
+def show_months(request):                          # месяца как ключ и его активность как значение
+    months = Months.objects.all()                  # /months/
+    dct = {}
+    for month in months:
+        dct[str(month.month_number)] = month.is_active
+    return HttpResponse(json.dumps(dct))
