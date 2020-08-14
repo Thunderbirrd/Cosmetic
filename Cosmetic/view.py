@@ -25,7 +25,7 @@ def home(request):
         content = {
             'title': title,
             'products': product_list,
-            'occupied_dates': visits(datetime.date.today()),
+            'occupied_dates': visits(str(datetime.date.today())),
             'service_names': services(),
             'product_compilation_list': product_compilation_list
         }
@@ -33,7 +33,7 @@ def home(request):
 
 
 def visits(date):
-    month = Months.objects.get(month_number=date.month)
+    month = Months.objects.get(month_number=date.split(sep='-')[1])
     if month.is_active:
         visit_list = Visit.objects.filter(date=date)
         occupied_dates = []
@@ -47,8 +47,8 @@ def visits(date):
 
 @csrf_exempt
 def refresh(request):
-    date = json.loads(request.body)["date"]
-    return HttpResponse(json.dumps(visits(date)))
+    current_date = json.loads(request.body)["date"]
+    return HttpResponse(json.dumps(visits(current_date)))
 
 
 def services():
