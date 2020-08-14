@@ -4,6 +4,7 @@ body {
 
 ul {
     padding: 0;
+    margin: 0 20px;
 }
 
 h2 {
@@ -70,6 +71,12 @@ h2 {
 @media screen and (min-width: 555px){
     .btnreg{
         width: 40%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .register {
+        width: auto;
     }
 }
 

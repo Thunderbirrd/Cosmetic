@@ -7,7 +7,8 @@ shop.querySelectorAll(".row").forEach(el => {
 
         let delta = e.deltaY === 0 ? e.deltaX : e.deltaY
 
-        if ((delta > 0 && el.scrollLeft + el.clientWidth < el.scrollWidth) || (delta < 0 && el.scrollLeft > 0)) {
+        //поправка на 1 пиксель
+        if ((delta > 0 && el.scrollLeft + el.offsetWidth + 1 < el.scrollWidth) || (delta < 0 && el.scrollLeft > 0)) {
             e.preventDefault()
             el.scrollBy(delta, 0)
         }

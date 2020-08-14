@@ -37,8 +37,8 @@ const message = {
         body.appendChild(p)
 
         if (position === message.CENTER) {
-            let top = document.documentElement.clientHeight / 2 - p.clientHeight / 2
-            let left = document.documentElement.clientWidth / 2 - p.clientWidth / 2
+            let top = document.documentElement.clientHeight / 2 - p.offsetHeight / 2
+            let left = document.documentElement.clientWidth / 2 - p.offsetWidth / 2
 
             p.style.top = top + 'px'
             p.style.left = left + 'px'

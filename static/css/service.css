@@ -134,7 +134,7 @@
     transition: 1s all ease;
 }
 
-#service .active {
+#service .time .active {
     background: #ff7675;
 }
 
@@ -189,6 +189,14 @@
     display: none;
 }
 
+.instruction {
+    margin-top: 20px;
+}
+
+.instruction p {
+    margin: 0 10px;
+}
+
 @media screen and (max-width: 1000px) {
     .service_content {
         display: grid;
@@ -232,6 +240,12 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .instruction p {
+        font-size: 11pt;
     }
 }
 

@@ -17,7 +17,10 @@ const hideOptionsContainer = () => {
 /////// Service type   //////
 optionslist.forEach(o => {
     o.addEventListener("click", () => {
-        selected.innerHTML = o.querySelector("label").innerHTML;
+        let label = o.querySelector("label")
+        selected.innerHTML = label.innerHTML;
+        selected.dataset.name = label.dataset.name
+        selected.dataset.price = label.dataset.price
         hideOptionsContainer()
     });
 });
@@ -88,11 +91,22 @@ checkTimeButtons();
 
         checkTimeButtons()
 
-        await Urls.signUpForServices(selected.textContent, `${date} ${time}`)
+        let result = await Urls.signUpForServices(selected.dataset.name, `${date} ${time}`)
 
-        store.servicecontent = await Urls.refreshServiceContent(date)
+        if (result === 'Success') {
+            message.showMessage("Вы успешно оставаили заявку на запись на услугу.\nВыполните условия, указанные в инструкции",
+                    message.SUCCESS, 4000, message.CENTER)
 
-        checkTimeButtons()
+            //store.servicecontent = await Urls.refreshServiceContent(date)
+    
+            checkTimeButtons()
+
+            showInstruction(selected.dataset.price)
+        } else if (result !== Urls.ERROR){
+            document.documentElement.innerHTML = result
+            window.history.pushState({}, '', "/auth/login/")
+        }
+
     });
 
     dateedInput.onchange = async () => {
@@ -103,3 +117,20 @@ checkTimeButtons();
         checkTimeButtons()
     }
 })();
+
+const elementInstruction = document.querySelector("#service .instruction")
+const pInstruction = elementInstruction.querySelector("p")
+
+//заполняет инструкцию
+const showInstruction = (price) => {
+    pInstruction.innerText = `Инструкция: Запись на процедуру строго по
+        задатку от 50% от стоимости процедуры. Стоимость выбранной вами
+        процедуры: ${price} рублей. 
+        В случае отмены записи с вашей стороны задаток не возвращается. 
+        Переносов записи нет. Если согласны с нашими условиями, ждём задаток 
+        в размере ${price / 2} рублей на номер 89841027756(Сбербанк онлайн), получатель 
+        Виктория Валентиновна К. После оплаты скриншот чека и своё ПОЛНОЕ 
+        ФИО (например, Иванов Иван Иванович) отправьте на ранее указанный 
+        номер в WhatsApp. Большое спасибо за запись!`.replace(/\n/g, " ")
+    elementInstruction.classList.remove("hide")
+}
