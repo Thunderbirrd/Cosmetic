@@ -1,4 +1,6 @@
 const Urls = {
+    ERROR: "ERROR",
+
     goToUrl(url) {
         window.history.replaceState({
             type: FORWARD,
@@ -68,15 +70,10 @@ const Urls = {
 
             console.log(result)
 
-            if (result === 'Success') {
-                message.showMessage("Вы успешно записались на услугу", message.SUCCESS, 4000, message.CENTER)
-                return;
-            }
-
-            document.documentElement.innerHTML = result
-            window.history.pushState({}, '', "/auth/login/")
+            return result      
         } catch (e) {
             console.error(e)
+            return this.ERROR;
         }
     },
     async refreshServiceContent(date) {

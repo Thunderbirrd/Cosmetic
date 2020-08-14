@@ -35,15 +35,32 @@ main .hide {
     margin-top: 60px;
 }
 
+:root {
+    --row_card-shadow-size: 5px;
+    --row-padding: 7px;
+}
+
 .row{
     display: flex;
     justify-content: start;
     overflow-y: hidden;
     overflow-x: auto;
+    padding: var(--row-padding);
+}
+
+.row::after {
+    content: ".";
+    width: 0;
+    visibility: hidden;
+    margin-left: calc(var(--row-padding) - var(--row_card-shadow-size) );
 }
 
 .row:not(:nth-child(2)){
     margin-top: 20px;
+}
+
+.row .card{
+    box-shadow: 0 0 var(--row_card-shadow-size) 0 black;
 }
 
 .row .card:not(:last-child) {

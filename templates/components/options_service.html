@@ -1,4 +1,4 @@
-{% for name in service_names %}
+{% for service in service_names %}
 <div class="option">
     <input
             type="radio"
@@ -6,7 +6,9 @@
             id="cleaning"
             name="category"
     />
-    <label for="cleaning">{{ name }}</label>
+    <label for="cleaning" data-name="{{ service.name }}" data-price="{{ service.price }}">
+        {{ service.name }} {{ service.price }}&#8381;
+    </label>
 </div>
 {% endfor %}
 
