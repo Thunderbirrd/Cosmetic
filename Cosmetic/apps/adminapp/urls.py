@@ -6,7 +6,6 @@ app_name = "adminapp"
 urlpatterns = [
     re_path(r'^visits/get_services/$', admin_app.get_all_services, name="get services"),
     re_path(r'^visits/months/(?P<pk>\d+)/$', admin_app.change_month, name='change month'),
-    re_path(r'^visits/months/$', admin_app.show_months, name='show month'),
     re_path(r'^visits/$', admin_app.visits_calendar, name='visits calendar'),
     re_path(r'^visit/delete/(?P<pk>\d+)/$', admin_app.delete_visit, name='delete visit'),
     re_path(r'^visit/change/(?P<pk>\d+)/$', admin_app.change_status, name='change status'),
