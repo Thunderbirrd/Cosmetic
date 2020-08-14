@@ -30,21 +30,8 @@ window.addEventListener('resize', () => {
     setVisiabilityMenuShop()
 })
 
-window.onpopstate = (event) => {
-    if (event.state === null) return false;
-
-    switch (event.state.type) {
-        case DO_ACTION:
-            doActionByCurentURL()
-            break;
-        case FORWARD:
-            window.history.forward()
-            break;
-        case NOT_DO_POPSTATE:
-            break;
-        default:
-            break;
-    }
+window.onpopstate = () => {
+    doActionByCurentURL()
 }
 
 //выключаю прокрутку страницы автоматически

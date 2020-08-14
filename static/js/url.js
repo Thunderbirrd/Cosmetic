@@ -2,17 +2,13 @@ const Urls = {
     ERROR: "ERROR",
 
     goToUrl(url) {
-        window.history.replaceState({
-            type: FORWARD,
-            newPath: url
-        }, '')
-
         window.history.pushState({
             type: DO_ACTION
         }, '', url)
-
-        window.history.back()
+        
+        doActionByCurentURL()
     },
+
     async checkout(data) {
         try {
             let responce = await fetch("/form_basket/", {

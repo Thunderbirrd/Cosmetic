@@ -6,6 +6,9 @@ const DO_ACTION = 'DO_ACTION'
 //переход на новый url
 const FORWARD = 'FORWARD'
 
+//переход на предыдущий url
+const BACK = 'BACK'
+
 //не совершать никаких действий при переходе на новый url
 const NOT_DO_POPSTATE = 'NOT_DO_POPSTATE'
 
