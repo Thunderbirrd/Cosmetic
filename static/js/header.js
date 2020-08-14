@@ -305,9 +305,7 @@ const setVisiabilityMenuShop = () => {
 }
 
 const resetAllFilter = () => {
-    showProductByBrand()
-    showProductByLine()
-    showProductByCategory()
+    store.filter.resetAllFilter()
 }
 
 document.querySelectorAll("header .dropdown .reset_all_filter").forEach(el => {

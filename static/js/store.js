@@ -104,6 +104,14 @@ const store = {
         set category(value="") {
             this._category = value
             showProductByFilter(this.name, this.brand, this.line, this.category)
+        },
+
+        resetAllFilter() {
+            this._line = ""
+            this._brand = ""
+            this._category = ""
+
+            showProductByFilter(this.name, this.brand, this.line, this.category)
         }
     },
 
@@ -137,6 +145,10 @@ const store = {
 
     changeCountBasket(title, count) {
         this.stateBasket.find(item => item.title === title).count = count
+    },
+
+    getCountBasket(title) {
+        return Number(this.stateBasket.find(item => item.title === title).count)
     },
 
     deleteProductFromBasket(title) {

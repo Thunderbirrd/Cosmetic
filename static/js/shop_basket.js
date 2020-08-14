@@ -13,8 +13,9 @@ const imgProduct = document.querySelector(".about_product .card__image img")
 //добавляем товар в корзину
 const addProductToShop = () => {
     if (store.hasItemInBasket(divTitle.textContent)) {
-        store.changeCountBasket(divTitle.textContent, Number(inputCount.value))
-        updateCountProducts(divTitle.textContent, Number(inputCount.value))
+        let newNumber = Math.min(Number(inputCount.value) + store.getCountBasket(divTitle.textContent), 99)
+        store.changeCountBasket(divTitle.textContent, newNumber)
+        updateCountProducts(divTitle.textContent, newNumber)
     } else {
         store.stateBasket.push({
             src: imgProduct.src,
