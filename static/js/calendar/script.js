@@ -170,12 +170,17 @@ const setDateCreateVisitInput = async (objDdate=new Date()) => {
     await blockedOptionsByInputDate()
 }
 
+//создаём запись
 document.querySelector(".create_visit form").onsubmit = async (e) => {
     e.preventDefault()
     let {name, surname, phone, date, time, service} = e.target.elements
     await Urls.createVisit(name.value, surname.value, phone.value, 
         formatDateToBDFromCalendar(date.value), time.options[time.selectedIndex].value, service.value)
-    await fillTable(formatDateToBDFromCalendar(date.value))
+
+    if (date.value === vistInput.value) {
+        await fillTable(formatDateToBDFromCalendar(date.value))
+    }
+
     await blockedOptionsByInputDate()
 }
 
@@ -227,8 +232,8 @@ const blockedOptions = (times) => {
         option.removeAttribute("selected")
     })
 
-    times.forEach(time => {
-        timeOptions.forEach(option => {
+    timeOptions.forEach(option => {        
+        times.forEach(time => {
             if (option.value === time)
                 option.classList.add("hide")
         })
