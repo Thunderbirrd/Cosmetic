@@ -89,6 +89,10 @@
     width: 200px;
 }
 
+#footer_site .address{
+    padding: 0 10px;
+}
+
 @media screen and (max-width: 720px) {
     #footer_site{
         grid-template-columns: auto;

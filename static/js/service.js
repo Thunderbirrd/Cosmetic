@@ -42,27 +42,42 @@ const formatDate = (date) => {
     return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 };
 
-$('#date-input').dateDropper({
-    disabledDays: blockDate(formatDate),
-    lock: 'from',
-    maxDate: getFinalDay(formatDate)
-});
+(async () => {
+    let disabledDays = await blockDate(formatDate);
+    let maxDate = await getFinalDay(formatDate);
+
+    $('#date-input').dateDropper({
+        disabledDays,
+        lock: 'from',
+        maxDate
+    });
+})()
 
 const dateedInput = document.getElementById("date-input")
 
 //из Y.m.d в d.m.Y
 const changeFromYMDToDMY = (date) => date.split("-").reverse().join("-")
 
+const divbusyAllTime = document.querySelector("#service .busy_all_time")
+
 //проверяет время
 const checkTimeButtons = () => {
+    let isAllTimeBusy = true
     // Надо добавлять класс occupied кнопке, value которой совпадает с service.time
     buttom.forEach(knopka => {
-        if (store.servicecontent.findIndex(time => time === knopka.textContent) >= 0) {
+        if (store.servicecontent === null || store.servicecontent.findIndex(time => time === knopka.textContent) >= 0) {
             knopka.classList.add("occupied")
         } else {
+            isAllTimeBusy = false
             knopka.classList.remove("occupied")
         }
     })
+
+    if (isAllTimeBusy) {
+        divbusyAllTime.classList.remove("hide")
+    } else {
+        divbusyAllTime.classList.add("hide")
+    }
 }
 
 const formatDateToDMY = (date) => {

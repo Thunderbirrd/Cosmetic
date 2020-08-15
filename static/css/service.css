@@ -156,7 +156,6 @@
 }
 
 .approve {
-    margin-top: 5%;
     text-align: center;
 }
 
@@ -194,6 +193,11 @@
 
 .instruction p {
     margin: 0 10px;
+}
+
+#service .busy_all_time p {
+    font-size: 1.2rem;
+    color: rgb(255 132 132);
 }
 
 @media screen and (max-width: 1000px) {

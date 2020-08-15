@@ -1,10 +1,11 @@
 //блокируем даты записи среду и воскресенье
-const blockDate = (formatDate) => {
+const blockDate = async (formatDate) => {
+    let monthsNumber = await Urls.getMonths()
+    
     let resultArr = []
     let currentDate = new Date()
 
-    const finalDay = new Date()
-    finalDay.setMonth(finalDay.getMonth() + 3)
+    const finalDay = formatStringToDate(await getFinalDay(formatDate, monthsNumber));
     const finalDayMilliseconds = finalDay.getTime()
 
     while (currentDate.getTime() <= finalDayMilliseconds) {
@@ -16,12 +17,37 @@ const blockDate = (formatDate) => {
         currentDate.setDate(currentDate.getDate() + 1)
     }
 
+    console.log(resultArr.join(","))
     return resultArr.join(",")
 }
 
 //получаем последний день для записи
-const getFinalDay = (formatDate) => {
+const getFinalDay = async (formatDate, monthsNumber) => {
     const finalDay = new Date()
-    finalDay.setMonth(finalDay.getMonth() + 3)
+    
+    if (monthsNumber === undefined) {
+        monthsNumber = await Urls.getMonths()
+    }
+    
+    for (monthName of Object.getOwnPropertyNames(monthsNumber).sort((a, b) => b - a)) {
+        if (!monthsNumber[monthName]) continue;
+
+        finalDay.setMonth(monthName - 1)
+
+        break;
+    };
+
+    finalDay.setDate(getLastDayOfMonth(finalDay.getMonth(), finalDay.getFullYear()))
+
     return formatDate(finalDay)
+}
+
+const getLastDayOfMonth = (month, year) => {
+    const date = new Date(year, month + 1, 0)
+    return date.getDate()
+}
+
+const formatStringToDate = (stringDate) => {
+    const arrStrings = stringDate.split('/')
+    return new Date(arrStrings[2], arrStrings[0], arrStrings[1])
 }

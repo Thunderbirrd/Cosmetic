@@ -1,8 +1,6 @@
 const Urls = {
     ERROR: "ERROR",
 
-
-
     goToUrl(url) {
         window.history.pushState({}, '', url)
         
@@ -138,5 +136,15 @@ const Urls = {
         console.log(result)
 
         return result
-    }
+    },
+    
+    async getMonths() {
+        let responce = await fetch("/months/", {
+            headers: {
+                'X-CSRFToken': CRF_TOKEN + ""
+            }
+        })
+
+        return await responce.json()
+    },
 }

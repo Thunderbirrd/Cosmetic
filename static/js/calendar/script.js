@@ -2,17 +2,22 @@ const formatDateToDateDroper = (date) => {
     return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 };
 
-$('#visit-input').dateDropper({
-    disabledDays: blockDate(formatDateToDateDroper),
-    lock: 'from',
-    maxDate: getFinalDay(formatDateToDateDroper)
-});
-
-$('#date_visit_client').dateDropper({
-    disabledDays: blockDate(formatDateToDateDroper),
-    lock: 'from',
-    maxDate: getFinalDay(formatDateToDateDroper)
-});
+(async () => {
+    let disabledDays = await blockDate(formatDateToDateDroper);
+    let maxDate = await getFinalDay(formatDateToDateDroper);
+    
+    $('#visit-input').dateDropper({
+        disabledDays: disabledDays,
+        lock: 'from',
+        maxDate
+    });
+    
+    $('#date_visit_client').dateDropper({
+        disabledDays,
+        lock: 'from',
+        maxDate
+    });
+})();
 
 let date_visit_client = document.getElementById("date_visit_client")
 
@@ -67,8 +72,8 @@ const deleteVisit = async (visitId) => {
 }
 
 //делает статус оплаченным
-const changeStatusToPay = (visitId) => {
-    Urls.changeStatusToPay(visitId)
+const changeStatusToPay = async (visitId) => {
+    await Urls.changeStatusToPay(visitId)
 
     const tr = document.querySelector(`[data-id='${visitId}']`)
 
@@ -112,12 +117,18 @@ const fillTable = async (date) => {
 
         tr.querySelector(".buttons").classList.remove("hide")
 
-        tr.querySelector(".status_paid").addEventListener("click", () => {
-            changeStatusToPay(item.visit_id)
+        const buttonStatusPaid = tr.querySelector(".status_paid");
+        buttonStatusPaid.addEventListener("click", async () => {
+            buttonStatusPaid.setAttribute("disabled", "disabled")
+            await changeStatusToPay(item.visit_id)
+            buttonStatusPaid.remove("disabled")
         })
     
-        tr.querySelector(".delete").addEventListener("click", () => {
-            deleteVisit(item.visit_id)
+        const buttonDelete = tr.querySelector(".delete");
+        buttonDelete.addEventListener("click", async () => {
+            buttonDelete.setAttribute("disabled", "disabled")
+            await deleteVisit(item.visit_id)
+            buttonDelete.remove("disabled")
         })
 
         const card = tr.querySelector(`.card`)
@@ -129,6 +140,7 @@ const fillTable = async (date) => {
         if (item.status === "NO") {
             card.classList.add("not_paid")
         } else if (item.status === "PAY") {
+            buttonStatusPaid.classList.add("hide")
             card.classList.add("paid")
         }
 
@@ -194,9 +206,14 @@ vistInput.onchange = () => {
     fillTable(formatDateToBDFromCalendar(vistInput.value))
 }
 
-window.onload = () => {
-    setDateVistInput()
+window.onload = async () => {
+    const tableElement = document.querySelector(".calendar table")
+    tableElement.classList.add("hide")
+
+    await setDateVistInput()
     setDateCreateVisitInput()
+    
+    tableElement.classList.remove("hide")
 }
 
 const calendar = document.querySelector(".сalendar")
