@@ -87,6 +87,9 @@ class Visit(models.Model):
     class Meta:
         unique_together = (('date', 'time'),)
 
+    def __str__(self):
+        return self.date+' '+self.time
+
 
 class ForBot(models.Model):
     token = models.CharField(verbose_name="bot_token", null=False, max_length=60)
@@ -97,11 +100,17 @@ class Article(models.Model):
     title = models.CharField(verbose_name="Заголовок", max_length=64, default="", unique=True)
     text = models.TextField(verbose_name="Текст статьи", default="", max_length=100000)
 
+    def __str__(self):
+        return self.title
+
 
 class ImageForArticle(models.Model):
     main_image = models.ImageField(upload_to="static/article_img/", blank=True)
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, editable=False)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
     number_in_article = models.PositiveIntegerField(verbose_name="порядковый номер в статье", null=False, default=1)
+
+    def __str__(self):
+        return self.main_image
 
 
 class ProductCompilation(models.Model):
@@ -112,6 +121,9 @@ class ProductCompilation(models.Model):
     discount = models.PositiveIntegerField(verbose_name='скидка на товар в процентах', default=0)
     is_active = models.BooleanField(verbose_name='активен ли продукт', default=True)
     product_list = models.ManyToManyField(Product, related_name="compilation_items")
+
+    def __str__(self):
+        return self.name
 
 
 class Months(models.Model):
