@@ -99,7 +99,7 @@ def form_order(request):
         product_list = get_order_items_list(data['id'])
         data = DataOrder(order_information['phone'], order_information['order_type'],
                          order_information['name'], order_information['surname'],
-                         price, product_list, order_information['address'])
+                         price, product_list, order_information['address'], order.id)
         bot.main(data)
 
     except ObjectDoesNotExist:

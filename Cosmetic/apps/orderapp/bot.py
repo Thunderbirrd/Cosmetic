@@ -14,8 +14,9 @@ class DataOrder:
     price = 0
     items = {}
     address = ""
+    id = 0
 
-    def __init__(self, phone, order_type, name, surname, price, items, address):
+    def __init__(self, phone, order_type, name, surname, price, items, address, id):
         self.phone = phone
         self.order_type = order_type
         self.name = name
@@ -23,6 +24,7 @@ class DataOrder:
         self.price = price
         self.items = items
         self.address = address
+        self.id = id
 
 
 class DataService:
@@ -59,6 +61,7 @@ def do_echo_order(bot: Bot, data):
     bot.send_message(
         chat_id=chatID,
         text=f"Оформлен новый заказ!\n"
+             f"Номер заказа: {data.id}\n"
              f"Номер клиента: 8{data.phone}\n"
              f"Тип заказа: {data.order_type}\n"
              f"Имя и фамилиия клиента: {data.name} {data.surname}\n"
