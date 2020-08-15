@@ -253,13 +253,18 @@ const checkForDataInconsistencies = (userData, serverData) => {
 }
 
 const addClickListenerForCheckoutButton = () => {
+    const buttonCheckout = document.querySelector(".checkout button");
+
     //оформляем заказ при клике на кнопку
-    document.querySelector(".checkout button").addEventListener("click", async () => {
+    buttonCheckout.addEventListener("click", async () => {
+        buttonCheckout.setAttribute("disabled", "disabled")
+
         const data = {}
 
         const list = ulListProduct.children
 
         if (list.length === 0) {
+            buttonCheckout.removeAttribute("disabled")
             message.showMessage("Список покупок пуст", message.WARNING, 1000)
             return;
         }
@@ -283,5 +288,7 @@ const addClickListenerForCheckoutButton = () => {
             hideListProduct()
             showShoppingWindow()
         }
+
+        buttonCheckout.removeAttribute("disabled")
     })
 }

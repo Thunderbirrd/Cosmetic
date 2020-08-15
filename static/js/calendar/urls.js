@@ -81,5 +81,25 @@ const Urls = {
         })
 
         return await responce.json()
+    },
+
+    async getMonths() {
+        let responce = await fetch("/months/", {
+            headers: {
+                'X-CSRFToken': CRF_TOKEN + ""
+            }
+        })
+
+        return await responce.json()
+    },
+
+    async changeStatusMonthsOnTable(number) {
+        let responce = await fetch(`/admin_app/visits/months/${number}/`, {
+            headers: {
+                'X-CSRFToken': CRF_TOKEN + ""
+            }
+        })
+
+        return await responce.json()
     }
 }

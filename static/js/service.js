@@ -81,8 +81,17 @@ checkTimeButtons();
 (() => {
     const dateInput = document.getElementById("date-input")
 
+    const approvebtn = document.querySelector("#service .approvebtn")
+
     //отправка данных на сервер и запись на услугу
-    document.querySelector("#service .approvebtn").addEventListener("click", async () => {
+    approvebtn.addEventListener("click", async () => {
+        if (document.querySelector(".btn.active") === null || selected.dataset.name === undefined) {
+            message.showMessage("Вы указали не все поля для записи на услугу", message.WARNING, 2000)
+            return false;
+        }
+
+        approvebtn.setAttribute("disabled", "disabled")
+
         const dateArr = String(dateInput.value).split('-')
         const date = [dateArr[2], dateArr[1], dateArr[0]].join('-')
         const time = document.querySelector(".btn.active").textContent
@@ -107,6 +116,7 @@ checkTimeButtons();
             window.history.pushState({}, '', "/auth/login/")
         }
 
+        approvebtn.removeAttribute("disabled")
     });
 
     dateedInput.onchange = async () => {

@@ -170,8 +170,11 @@ const setDateCreateVisitInput = async (objDdate=new Date()) => {
     await blockedOptionsByInputDate()
 }
 
+const createVisitButton = document.querySelector(".create_visit form button");
 //создаём запись
 document.querySelector(".create_visit form").onsubmit = async (e) => {
+    createVisitButton.setAttribute("disabled", "disabled")
+
     e.preventDefault()
     let {name, surname, phone, date, time, service} = e.target.elements
     await Urls.createVisit(name.value, surname.value, phone.value, 
@@ -182,6 +185,8 @@ document.querySelector(".create_visit form").onsubmit = async (e) => {
     }
 
     await blockedOptionsByInputDate()
+
+    createVisitButton.removeAttribute("disabled")
 }
 
 vistInput.onchange = () => {

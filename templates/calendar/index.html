@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{% static 'css/history_client/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/history_client/about_client.css' %}">
     <link rel="stylesheet" href="{% static 'css/history_client/table_visits.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/calendar/table_month.css' %}">
 </head>
 
 <body>
@@ -38,6 +40,8 @@
             </div>
         </section>
         {% include "calendar/table_calendar.html" %}
+
+        {% include "calendar/table_month.html" %}
     </main>
 
     {% include 'history_client/history_client.html' %}
@@ -51,6 +55,7 @@
     <script src="{% static 'js/calendar/urls.js' %}"></script>
     <script src="{% static 'js/calendar/script.js' %}"></script>
     <script src="{% static 'js/calendar/history_client.js' %}"></script>
+    <script src="{% static 'js/calendar/table_month.js' %}"></script>
 
 </body>
 

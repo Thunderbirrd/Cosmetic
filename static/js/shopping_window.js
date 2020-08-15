@@ -344,10 +344,12 @@ const flatInput = shoppingWindow.querySelector(".data_fields .flat .my_input")
 //подъезд квартира
 
 //событие покупки товаров при клике по кнопке "Купить"
-shopButton.onclick = () => {
+shopButton.onclick = async () => {
     //id, address, phone, name, surname, order_type
 
     if (!checkCorrect()) return;
+
+    disableShopButton()
 
     const id = store.stateCheckout.id
     const address = cityCheckbox.checked
@@ -358,17 +360,17 @@ shopButton.onclick = () => {
     const surname = surnameInput.value
     const orderType = orderTypeTitle.dataset.value;
 
-    (async () => {
-        if (await Urls.buyProducts(id, address, phone, name, surname, orderType) === "Success"){
-            message.showMessage("Товар успешно заказан! Вам скоро перезвонят для уточнения", message.SUCCESS, 4000, message.CENTER)
-        } else {
-            message.showMessage("Извините, произошла ошибка", message.ERROR)
-        }
-    })()
+    if (await Urls.buyProducts(id, address, phone, name, surname, orderType) === "Success"){
+        message.showMessage("Товар успешно заказан! Вам скоро перезвонят для уточнения", message.SUCCESS, 4000, message.CENTER)
+    } else {
+        message.showMessage("Извините, произошла ошибка", message.ERROR)
+    }
 
     hideShoppingWindow()
     clearListProducts()
     scrollToShop()
+
+    enableShopButton()
 }
 
 //список видов доставок

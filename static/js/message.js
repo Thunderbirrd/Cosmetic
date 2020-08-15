@@ -34,6 +34,11 @@ const message = {
             p.classList.add("error")
         }
 
+        const oldMessage = document.querySelector("body > .message")
+        if (oldMessage !== null) {
+            oldMessage.remove()
+        }
+
         body.appendChild(p)
 
         if (position === message.CENTER) {
@@ -51,7 +56,7 @@ const message = {
         setTimeout(() => { 
             $(p).fadeOut(400)
             setTimeout(() => {
-                body.removeChild(p)
+                p.remove()
             }, 400)
         }, time)
     }
