@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import model_to_dict
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from Cosmetic.apps.mainapp.models import Visit, Service, ShopUser, ForBot, Months
 import json
@@ -149,3 +150,7 @@ def change_month(request, pk):                      # admin_app/visits/months/(Ð
         return HttpResponse('Error')
 
 
+@csrf_exempt
+@user_passes_test(lambda user: user.is_superuser)
+def calendar(request):
+    return render(request, 'calendar/index.html')

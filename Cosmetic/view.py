@@ -55,10 +55,6 @@ def services():
     return Service.objects.all()
 
 
-def calendar(request):
-    return render(request, 'calendar/index.html')
-
-
 @csrf_exempt                                       # возвращает словарь с номером
 def show_months(request):                          # месяца как ключ и его активность как значение
     months = Months.objects.all()                  # /months/
