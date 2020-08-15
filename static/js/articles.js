@@ -32,7 +32,10 @@ const loadArticlesContents = async () => {
         const li = document.createElement("li")
         li.dataset.id = content.id
         li.dataset.title = content.title
-        li.addEventListener("click", () => { showArticle(content.id) })
+        li.addEventListener("click", () => {  
+            Urls.addQueryParam("id", content.id)
+            doActionByCurentURL()
+        })
 
         const h3 = document.createElement("h3")
         h3.textContent = content.title
@@ -87,7 +90,10 @@ const hideArticle = () => {
     wrapArticle.classList.add("hide")
 }
 
-wrapArticle.querySelector(".back").addEventListener("click", hideArticle)
+wrapArticle.querySelector(".back").addEventListener("click", () => {
+    hideArticle()
+    Urls.goToUrl(Paths.ARTICLES)
+})
 
 //показывает статьи по названию
 const showArticleByTitle = (title) => {
@@ -104,6 +110,6 @@ const showArticleByTitle = (title) => {
 const articlesSeachInput = listArticles.querySelector(".search_input")
 
 //ищем статьи по названию
-articlesSeachInput.addEventListener("input", (e) => {
+articlesSeachInput.addEventListener("input", () => {
     showArticleByTitle(articlesSeachInput.value)
 });

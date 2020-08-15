@@ -1,12 +1,37 @@
 const Urls = {
     ERROR: "ERROR",
 
+
+
     goToUrl(url) {
-        window.history.pushState({
-            type: DO_ACTION
-        }, '', url)
+        window.history.pushState({}, '', url)
         
         doActionByCurentURL()
+    },
+
+    addQueryParam(key, value) {
+        let newSearch = window.location.search === ""  
+            ?`?${key}=${value}`
+            :`&${key}=${value}`
+
+        let newUrl = window.location.pathname + window.location.search + newSearch
+
+        window.history.pushState({}, '', newUrl)
+    },
+
+    getQueryParam(key) {
+        let search = window.location.search
+
+        let indexStartValue = search.indexOf(key)
+
+        if (search === "" || indexStartValue < 0) return ""
+
+        indexStartValue += key.length + 1
+        let indexFinishValue = search.indexOf("&", indexStartValue)
+
+        indexFinishValue = indexFinishValue === -1 ?search.length :indexFinishValue
+
+        return search.slice(indexStartValue, indexFinishValue)
     },
 
     async checkout(data) {

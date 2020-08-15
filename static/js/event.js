@@ -55,6 +55,14 @@ const doActionByCurentURL = () => {
             break;
         case Paths.ARTICLES:
             showArtices()
+
+            let id = Urls.getQueryParam('id')
+            if (id === "") {
+                hideArticle()
+            } else {            
+                showArticle(id) 
+            }
+
             break;
         case Paths.SERVICES:
             hideArtices()
