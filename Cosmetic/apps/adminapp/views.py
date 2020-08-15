@@ -23,6 +23,7 @@ def visits_calendar(request):
         dct['time'] = visit.time
         dct['first_name'] = user.first_name
         dct['last_name'] = user.last_name
+        dct['father_name'] = user.father_name
         dct['phone'] = user.phone
         dct['service_name'] = Service.objects.get(id=visit.service_id).name
         dct['status'] = visit.status
@@ -66,7 +67,8 @@ def current_visit(request, pk):
             "client's_sale": (client.sale - 1) * 100,
             "client's_name": client.first_name,
             "client's_surname": client.last_name,
-            "client's_email": client.email
+            "client's_email": client.email,
+            'father_name':client.father_name
         }
         return HttpResponse(json.dumps(content, ensure_ascii=False))
     except ObjectDoesNotExist:
