@@ -78,3 +78,7 @@ def edit(request):
 
     content = {'title': title, 'edit_form': edit_form}
     return render(request, 'authapp/edit.html', content)
+
+
+def personal_data(request):
+    return render(request, 'personal_data.html')

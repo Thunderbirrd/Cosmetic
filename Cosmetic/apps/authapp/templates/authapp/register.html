@@ -5,6 +5,12 @@
     <form class="form-horizontal" action="{% url 'auth:register' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ register_form.as_p }}
+
+        <input type="checkbox" required name="personal_data" id="personal_data">
+        <label for="personal_data">
+            <a href="/auth/personal_data/">Согласие на обработку персональных данных</a>
+        </label>
+
         <input class="register" type="submit" value="Зарегистрироваться" style="font-size: 20px">
     </form>
 
