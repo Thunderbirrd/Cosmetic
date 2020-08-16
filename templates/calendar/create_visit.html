@@ -11,17 +11,19 @@
                 //     "service": услуга, 
                 // } -->
     
-            <p>Имя: <input type="text" placeholder="Имя" name="name"></p>
+            <p>Имя: <input type="text" placeholder="Имя" name="name" required></p>
     
-            <p>Фамилия: <input type="text" placeholder="Фамилия" name="surname"></p>
+            <p>Фамилия: <input type="text" placeholder="Фамилия" name="surname" required></p>
+
+            <p>Отчество: <input type="text" placeholder="Отчество" name="father_name" required></p>
     
-            <p>Номер: +7 <input type="text" placeholder="Номер телефона" name="phone" minlength="10" maxlength="10"></p>
+            <p>Номер: +7 <input type="text" placeholder="Номер телефона" name="phone" minlength="10" maxlength="10" required></p>
     
             <p>Дата: <input type="text" placeholder="Дата" id="date_visit_client"data-dd-format="d-m-Y"
                 data-dd-theme="calendar" data-dd-lang="ru" data-dd-modal="true" data-dd-large-only="true"
-                data-dd-show-only-enabled-days="true" type="text" id="visit-input" name="date"></p>
+                data-dd-show-only-enabled-days="true" type="text" id="visit-input" name="date" required></p>
     
-            <p>Время: <select name="time">
+            <p>Время: <select name="time" required>
                     <option selected value="09:30">09:30</option>
                     <option value="11:00">11:00</option>
                     <option value="12:30">12:30</option>
@@ -33,7 +35,7 @@
                 <span class="is_all_otions_hide">Всё занято на эту дату</span>
             </p>
     
-            <p>Услуга: <select  name="service"></select></p>
+            <p>Услуга: <select  name="service" required></select></p>
     
             <button type="submit">Создать</button>
         </form>  

@@ -154,6 +154,11 @@ const fillTable = async (date) => {
         pSurname.textContent = item.last_name
         card.appendChild(pSurname)
 
+        const pFatherName = document.createElement("p")
+        pFatherName.classList.add("father_name")
+        pFatherName.textContent = item.father_name
+        card.appendChild(pFatherName)
+
         const pServie = document.createElement("p")
         pServie.classList.add("service")
         pServie.textContent = item.phone
@@ -188,8 +193,8 @@ document.querySelector(".create_visit form").onsubmit = async (e) => {
     createVisitButton.setAttribute("disabled", "disabled")
 
     e.preventDefault()
-    let {name, surname, phone, date, time, service} = e.target.elements
-    await Urls.createVisit(name.value, surname.value, phone.value, 
+    let {name, surname, father_name, phone, date, time, service} = e.target.elements
+    await Urls.createVisit(name.value, surname.value, father_name.value, phone.value, 
         formatDateToBDFromCalendar(date.value), time.options[time.selectedIndex].value, service.value)
 
     if (date.value === vistInput.value) {

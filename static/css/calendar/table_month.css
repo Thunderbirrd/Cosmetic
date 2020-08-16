@@ -73,7 +73,7 @@
     background-color: white;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 630px) {
     .table_month .months {
         grid-template-columns: repeat(2, 1fr);
     }
