@@ -14,6 +14,8 @@ const Urls = {
     
             let result = await responce.json()
     
+            console.log(result)
+
             return result
         } catch (error) {
             console.log(error)
@@ -28,10 +30,11 @@ const Urls = {
         let result= await fetch(`/admin_app/visit/change/${visitId}/`)
     },
 
-    async createVisit(name, surname, phone, date, time, service){
+    async createVisit(name, surname, father_name, phone, date, time, service){
         // data = { 
         //     "name": имя клиента, 
         //     "surname": фамилия клиента, 
+        //     "father_name": отчество клиента,
         //     "phone": номер телефона клиента, 
         //     "date": дата, 
         //     "time": время, 
@@ -44,7 +47,7 @@ const Urls = {
                 'X-CSRFToken': CRF_TOKEN + ""
             },
             body: `${JSON.stringify({
-                name, surname, phone, date, time, service
+                name, surname, father_name, phone, date, time, service
             })}`
         })
 

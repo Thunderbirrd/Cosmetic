@@ -77,7 +77,13 @@ a:link, a:visited {
 .calendar .card {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1fr;
     min-height: 50px;
+}
+
+.calendar .card .surname {
+    grid-column: 1;
+    grid-row: 2;
 }
 
 :root{
@@ -182,18 +188,17 @@ a:link, a:visited {
     .calendar tr td:last-child {
         width: auto;
     }
-}
 
-@media screen and (max-width: 700px) {
     .calendar .card {
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
     }
-    .calendar .card .surname {
+    .calendar .card .father_name {
         grid-column: 1;
-        grid-row: 2;
+        grid-row: 3;
     }
 }
+    
 
 @media screen and (max-width: 570px) {
     .calendar .card {
@@ -213,7 +218,7 @@ a:link, a:visited {
     .calendar .card {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, 1fr);
+        grid-template-rows: repeat(5, 1fr);
     }
     .calendar .card p:not(:last-child) {
         margin-bottom: var(--calendar-margin-card-item);
@@ -227,11 +232,11 @@ a:link, a:visited {
     }
     .calendar .card .service {
         grid-column: 1;
-        grid-row: 3;
+        grid-row: 4;
     }
     .calendar .card .phone {
         grid-column: 1;
-        grid-row: 4;
+        grid-row: 5;
     }
 
     .calendar .buttons div {

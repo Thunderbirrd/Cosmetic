@@ -17,7 +17,6 @@ const blockDate = async (formatDate) => {
         currentDate.setDate(currentDate.getDate() + 1)
     }
 
-    console.log(resultArr.join(","))
     return resultArr.join(",")
 }
 
