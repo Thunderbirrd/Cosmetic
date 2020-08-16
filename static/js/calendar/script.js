@@ -3,16 +3,21 @@ const formatDateToDateDroper = (date) => {
 };
 
 (async () => {
-    let disabledDays = await blockDate(formatDateToDateDroper);
-    let maxDate = await getFinalDay(formatDateToDateDroper);
-    
+    let monthsNumber = await Urls.getMonths()
+
+    let disabledDays = await blockDate(formatDateToDateDroper, monthsNumber);
+    let maxDate = await getFinalDay(formatDateToDateDroper, monthsNumber);
+    let defaultDate = await getMinDate(formatDateToDateDroper, monthsNumber);
+
     $('#visit-input').dateDropper({
+        defaultDate,
         disabledDays: disabledDays,
         lock: 'from',
         maxDate
     });
-    
+
     $('#date_visit_client').dateDropper({
+        defaultDate,
         disabledDays,
         lock: 'from',
         maxDate
@@ -30,11 +35,11 @@ const labelCalendar = document.querySelector(".input_calendar")
 
 //приводит объект класса Date к строке вида mm-dd-yyyy
 const formatDate = (date) => {
-    let month = date.getMonth() + 1 
-    month = month < 10 ?`0${month}` :`${month}`
+    let month = date.getMonth() + 1
+    month = month < 10 ? `0${month}` : `${month}`
 
     let day = date.getDate()
-    day = day < 10 ?`0${day}` :`${day}`
+    day = day < 10 ? `0${day}` : `${day}`
 
     return `${day}-${month}-${date.getFullYear()}`
 };
@@ -90,10 +95,10 @@ const fillTable = async (date) => {
         card.classList.add("empty")
         card.classList.remove("not_paid")
         card.classList.remove("paid")
-        
+
         //очищаем
         card.innerHTML = ""
-        card.onclick = () => {}
+        card.onclick = () => { }
     })
 
     tdButtons.forEach(td => {
@@ -123,7 +128,7 @@ const fillTable = async (date) => {
             await changeStatusToPay(item.visit_id)
             buttonStatusPaid.remove("disabled")
         })
-    
+
         const buttonDelete = tr.querySelector(".delete");
         buttonDelete.addEventListener("click", async () => {
             buttonDelete.setAttribute("disabled", "disabled")
@@ -172,7 +177,11 @@ const fillTable = async (date) => {
 }
 
 //устанавливает время vistInput
-const setDateVistInput = async (objDdate=new Date()) => {
+const setDateVistInput = async (objDdate) => {
+    if (objDdate === undefined) {
+        objDdate = formatStringToDate(await getMinDate(formatDateToDateDroper))
+    }
+
     const date = formatDate(objDdate)
     vistInput.value = date
     labelCalendar.textContent = formatDateToLabelFromCalendar(date)
@@ -180,7 +189,11 @@ const setDateVistInput = async (objDdate=new Date()) => {
 }
 
 //устанавливает время date_visit_client
-const setDateCreateVisitInput = async (objDdate=new Date()) => {
+const setDateCreateVisitInput = async (objDdate) => {
+    if (objDdate === undefined) {
+        objDdate = formatStringToDate(await getMinDate(formatDateToDateDroper))
+    }
+
     const date = formatDate(objDdate)
     date_visit_client.value = date
 
@@ -193,8 +206,8 @@ document.querySelector(".create_visit form").onsubmit = async (e) => {
     createVisitButton.setAttribute("disabled", "disabled")
 
     e.preventDefault()
-    let {name, surname, father_name, phone, date, time, service} = e.target.elements
-    await Urls.createVisit(name.value, surname.value, father_name.value, phone.value, 
+    let { name, surname, father_name, phone, date, time, service } = e.target.elements
+    await Urls.createVisit(name.value, surname.value, father_name.value, phone.value,
         formatDateToBDFromCalendar(date.value), time.options[time.selectedIndex].value, service.value)
 
     if (date.value === vistInput.value) {
@@ -217,7 +230,7 @@ window.onload = async () => {
 
     await setDateVistInput()
     setDateCreateVisitInput()
-    
+
     tableElement.classList.remove("hide")
 }
 
@@ -252,19 +265,25 @@ const timeOptions = selectTime.querySelectorAll("option")
 const spanIsAllOtionsHide = document.querySelector(".create_visit .is_all_otions_hide")
 
 //блокирует option времени в создании записи
-const blockedOptions = (times) => {
-
-    timeOptions.forEach(option => { 
-        option.classList.remove("hide") 
-        option.removeAttribute("selected")
-    })
-
-    timeOptions.forEach(option => {        
-        times.forEach(time => {
-            if (option.value === time)
-                option.classList.add("hide")
+const blockedOptions = async (times) => {
+    if (await hasOpenMonths()) {
+        timeOptions.forEach(option => {
+            option.classList.remove("hide")
+            option.removeAttribute("selected")
         })
-    })
+
+        timeOptions.forEach(option => {
+            times.forEach(time => {
+                if (option.value === time)
+                    option.classList.add("hide")
+            })
+        })
+    } else {
+        timeOptions.forEach(option => {
+            option.classList.add("hide")
+            option.removeAttribute("selected")
+        })
+    }
 
     let isAllOtionsHide = true
 

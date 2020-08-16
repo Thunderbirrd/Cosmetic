@@ -45,8 +45,10 @@ const formatDate = (date) => {
 (async () => {
     let disabledDays = await blockDate(formatDate);
     let maxDate = await getFinalDay(formatDate);
+    let defaultDate = await getMinDate(formatDateToDateDroper);
 
     $('#date-input').dateDropper({
+        defaultDate,
         disabledDays,
         lock: 'from',
         maxDate

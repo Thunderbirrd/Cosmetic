@@ -4,6 +4,7 @@ const tbodyHistoryClient = historyClient.querySelector("tbody")
 
 const spanName = document.querySelector(".about_client .name")
 const spanSurname = document.querySelector(".about_client .surname")
+const spanFatherName = document.querySelector(".about_client .father_name")
 const spanPhone = document.querySelector(".about_client .phone")
 const spanEmail = document.querySelector(".about_client .email")
 const spanSale = document.querySelector(".about_client .sale")
@@ -94,6 +95,7 @@ const showHistoryClient = async (visit_id) => {
 
     spanName.textContent = result["client's_name"]
     spanSurname.textContent = result["client's_surname"]
+    spanFatherName.textContent = result["father_name"]
     spanPhone.textContent = result["client's_phone"]
     spanEmail.textContent = result["client's_email"]
     spanSale.textContent = result["client's_sale"] + "%"

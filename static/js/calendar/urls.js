@@ -13,8 +13,6 @@ const Urls = {
             })
     
             let result = await responce.json()
-    
-            console.log(result)
 
             return result
         } catch (error) {
@@ -62,7 +60,11 @@ const Urls = {
             }
         })
 
-        return await responce.json()
+        let result = await responce.json()
+        console.log(result)
+        return result
+
+        // return await responce.json()
     },
 
     async getListServices() {
