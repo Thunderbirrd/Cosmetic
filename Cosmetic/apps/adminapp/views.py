@@ -68,7 +68,7 @@ def current_visit(request, pk):
             "client's_name": client.first_name,
             "client's_surname": client.last_name,
             "client's_email": client.email,
-            'father_name':client.father_name
+            'father_name': client.father_name
         }
         return HttpResponse(json.dumps(content, ensure_ascii=False))
     except ObjectDoesNotExist:
