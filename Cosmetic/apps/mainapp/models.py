@@ -131,11 +131,9 @@ class Months(models.Model):
     is_active = models.BooleanField(verbose_name='активен ли месяц', default=False)
 
 
-'''
 class Certificate(models.Model):
     name = models.CharField(verbose_name="название сертификата", unique=True, db_index=True, null=False, max_length=64)
     price = models.PositiveIntegerField(verbose_name="цена", default=0)
     image = models.ImageField(upload_to="static/product_img/", blank=True)
     description = models.CharField(verbose_name="описание сетификата", max_length=256, default="")
     quantity = models.PositiveIntegerField(verbose_name='количество на складе', default=0, null=False)
-'''
