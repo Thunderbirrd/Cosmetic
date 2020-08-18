@@ -1,0 +1,21 @@
+{% load static %}
+<section class="articles">
+    <div class="list_articles">
+        <h2>
+            Статьи
+        </h2>
+        {% include "components/loupe.html" %}
+        <ul class="contents">
+        </ul>
+    </div>
+    <div class="wrap_article hide">
+        <div class="wrap_back">
+            <button class="back">Назад</button>
+        </div>
+        <article>
+            <h3></h3>
+            <p class="articles_text"></p>
+            <p class="articles_images"></p>
+        </article>
+    </div>
+</section>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/wrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/calendar/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/calendar/create_visit.css' %}">
+    <link rel="stylesheet" href="{% static 'css/calendar/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/history_client/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/history_client/about_client.css' %}">
+    <link rel="stylesheet" href="{% static 'css/history_client/table_visits.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/calendar/table_month.css' %}">
+</head>
+
+<body>
+    {% include "calendar/header.html" %}
+
+    <main class="сalendar">
+        {% include 'calendar/create_visit.html' %}
+        <section class="visitdata">
+            <div class="wrap">
+                <span class="visit-text">Выберите дату:</span>
+                <input style="" data-dd-format="d-m-Y"
+                    data-dd-theme="calendar" data-dd-lang="ru" data-dd-modal="true" data-dd-large-only="true"
+                    data-dd-show-only-enabled-days="true" type="text" id="visit-input" size="10">
+            </div>
+        </section>
+        {% include "calendar/table_calendar.html" %}
+
+        {% include "calendar/table_month.html" %}
+    </main>
+
+    {% include 'history_client/history_client.html' %}
+
+    <script src="{% static 'js/datedropper.pro.min.js' %}"></script>
+    <script src="https://cdn.datedropper.com/get/mgonsm03x0cb8urluhctqkwkmd70wnec"></script>
+
+    <script src="{% static 'js/block_date.js' %}"></script>
+
+    <script src="{% static 'js/cookie.js' %}"></script>
+    <script src="{% static 'js/calendar/urls.js' %}"></script>
+    <script src="{% static 'js/calendar/script.js' %}"></script>
+    <script src="{% static 'js/calendar/history_client.js' %}"></script>
+    <script src="{% static 'js/calendar/table_month.js' %}"></script>
+
+</body>
+
+</html>

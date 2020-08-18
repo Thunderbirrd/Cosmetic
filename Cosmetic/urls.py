@@ -13,9 +13,33 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView,\
+    PasswordResetCompleteView
+from django.urls import path, re_path, include
+
+from Cosmetic import view
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    re_path(r'^password_reset/$', PasswordResetView.as_view(template_name="forget_password/email.html"),
+            name="password_reset"),
+    re_path(r'^password_reset/done/', PasswordResetDoneView.as_view(
+        template_name="forget_password/done.html"), name="password_reset_done"),
+    re_path(r'^password_reset/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
+            PasswordResetConfirmView.as_view(template_name="forget_password/change_password.html"),
+            name='password_reset_confirm'),
+    re_path(r'^form_basket/', include('Cosmetic.apps.orderapp.urls')),
+    re_path(r'^form_service/', include('Cosmetic.apps.serviceapp.urls')),
+    re_path(r'^auth/', include('Cosmetic.apps.authapp.urls', namespace='auth')),
+    re_path(r'^months/', view.show_months, name='show month'),
+    re_path(r'^admin_app/', include('Cosmetic.apps.adminapp.urls', namespace='admin')),
+    re_path(r'^refresh/', view.refresh, name='refresh'),
+    re_path(r'^password_reset/complete/', PasswordResetCompleteView.as_view(
+        template_name="forget_password/complete.html"), name="password_reset_complete"),
+    re_path(r'^articles/', include('Cosmetic.apps.mainapp.urls')),
+    re_path(r'^', view.home, name='home')
+
 ]

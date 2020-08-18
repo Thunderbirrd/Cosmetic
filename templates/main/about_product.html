@@ -1,0 +1,59 @@
+<section class="about_product hide">
+    <div class="wrap_about_product">
+        <div class="card">
+            <div class="card__image">
+                <img src="" alt="product">
+            </div>
+
+            <div class="card__title"></div>
+
+            <div class="card__price"></div>
+
+
+        </div>
+
+        <div class="description">
+            <p>
+            </p>
+        </div>
+
+        <div class="about_product_inputs">
+            <!-- {% with value=1 minLength="1" maxLength="2" className="input_count" size="2" %}
+        {% include "../components/number_input.html" %}
+        {% endwith %} -->
+            <script>
+                const aboutProductOptions = {
+                    maxNumber: 99,
+                    minNumber: 1
+                }
+
+                //создаём number input
+                const numberInput = createNumberInput({
+                    defaultValue: 1,
+                    minLength: 1,
+                    maxLength: 2,
+                    classNameInput: "input_count",
+                    size: 2,
+                    options: aboutProductOptions
+                })
+
+                document.querySelector(".about_product_inputs").appendChild(numberInput)
+
+                const numberInputPlus = numberInput.querySelector(".plus")
+
+
+                //изменяет максимальное maxNumber
+                const setMaxNumber = (maxNumber) => {
+                    aboutProductOptions.maxNumber = maxNumber
+                    if (maxNumber > 10) {
+                        numberInputPlus.classList.remove("show_tooltip")
+                    } else {
+                        numberInputPlus.classList.add("show_tooltip")
+                    }
+                }
+            </script>
+
+            {% include "../components/my_button.html" %}
+        </div>
+    </div>
+</section>

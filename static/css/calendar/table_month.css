@@ -1,0 +1,102 @@
+.table_month .wrap {
+    text-align: start;
+}
+
+.table_month .wrap > :nth-child(n) {
+    margin: 0 10px;
+}
+
+.table_month .months {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 760px;
+}
+
+:root {
+    --margin-between-month: 60px;
+    --color-disable-button: rgba(255, 131, 131);
+    --color-enable-button: rgba(181, 255, 121);
+}
+
+.table_month .month {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.table_month .month p {
+    border: 1px solid black;
+    border-right: none;
+    padding: 10px;
+}
+
+.table_month .month button {
+    border: 1px solid black;
+    border-left: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.table_month .month.enable button {
+    background-color: var(--color-disable-button);
+}
+
+.table_month .month.disable button {
+    background-color: var(--color-enable-button);
+}
+
+.table_month .month:nth-child(3n + 1) {
+    margin-right: calc(var(--margin-between-month) / 3 * 2);
+}
+
+.table_month .month:nth-child(3n + 2) {
+    margin-right: calc(var(--margin-between-month) / 3);
+    margin-left: calc(var(--margin-between-month) / 3);
+}
+
+.table_month .month:nth-child(3n) {
+    margin-left: calc(var(--margin-between-month) / 3 * 2);
+}
+
+.enable {
+    background: linear-gradient(-45deg, var(--transparent) 49.9%, var(--color-paid) 49.9%, var(--color-paid) 75%, var(--transparent) 60%), 
+        linear-gradient(-45deg, var(--color-paid) 25%, var(--transparent) 10%);
+    background-size: 2em 2em;
+    background-color: white;
+}
+
+.disable {
+    background: linear-gradient(-45deg, var(--transparent) 49.9%, var(--color-empty) 49.9%,
+            var(--color-empty) 75%, var(--transparent) 60%), 
+        linear-gradient(-45deg, var(--color-empty) 25%, var(--transparent) 10%);
+    background-size: 2em 2em;
+    background-color: white;
+}
+
+@media screen and (max-width: 630px) {
+    .table_month .months {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .table_month .month:nth-child(2n + 1) {
+        margin-right: calc(var(--margin-between-month) / 2);
+        margin-left: 0;
+    }
+    
+    .table_month .month:nth-child(2n) {
+        margin-right: 0;
+        margin-left: calc(var(--margin-between-month) / 2);
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .table_month .months {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+    }
+
+    .table_month .month:nth-child(n) {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}

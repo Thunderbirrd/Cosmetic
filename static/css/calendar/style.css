@@ -1,0 +1,262 @@
+:root {
+    --border-table: 1px solid black;
+    --margin-table: 10px;
+    --table-width: 600px;
+}
+
+html {
+    min-height: 100vh;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-size: 14px;
+    font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+    color: #333;
+    background: #fff;
+}
+
+main {
+    margin-bottom: 30px;
+}
+
+a:link, a:visited {
+    color: #447e9b;
+    text-decoration: none;
+}
+
+.hide {
+    display: none;
+}
+
+.calendar table {
+    border-collapse: collapse;
+    margin: var(--margin-table);
+}
+
+.calendar tr th .master_name {
+    font-size: 1.2rem;
+}
+
+.calendar tr td:not(:last-child) {
+    border: var(--border-table);
+}
+
+.calendar tr td p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar tr td:first-child {
+    width: 90px;
+}
+
+.calendar tr td:nth-child(2) {
+    width: var(--table-width);
+}
+
+.calendar tr td:first-child p {
+    min-height: 50px;
+}
+
+.input_calendar {
+    background-color: white;
+    color: black;
+    border-width: 0;
+    text-align: center;
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+/* paid not_paid */
+
+.calendar .card {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1fr;
+    min-height: 50px;
+}
+
+.calendar .card .surname {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+:root{
+    --transparent: rgba(0, 0, 0, 0);
+    --color-paid: rgba(181, 255, 121, 0.4);
+    --color-not-paid: rgba(255, 131, 131, 0.4);
+    --color-empty: rgba(189, 189, 189, 0.4);
+}
+
+.paid {
+    background: linear-gradient(-45deg, var(--transparent) 49.9%, var(--color-paid) 49.9%, var(--color-paid) 75%, var(--transparent) 60%), 
+        linear-gradient(-45deg, var(--color-paid) 25%, var(--transparent) 10%);
+    background-size: 2em 2em;
+    background-color: white;
+    cursor: pointer;
+}
+
+.not_paid {
+    background: linear-gradient(-45deg, var(--transparent) 49.9%, var(--color-not-paid) 49.9%,
+            var(--color-not-paid) 75%, var(--transparent) 60%), 
+        linear-gradient(-45deg, var(--color-not-paid) 25%, var(--transparent) 10%);
+    background-size: 2em 2em;
+    background-color: white;
+    cursor: pointer;
+}
+
+.empty {
+    background: linear-gradient(-45deg, var(--transparent) 49.9%, var(--color-empty) 49.9%,
+            var(--color-empty) 75%, var(--transparent) 60%), 
+        linear-gradient(-45deg, var(--color-empty) 25%, var(--transparent) 10%);
+    background-size: 2em 2em;
+    background-color: white;
+}
+
+.calendar .buttons div {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 1fr 1fr;
+    height: 40px;
+}
+
+.calendar .buttons button{
+    background-color: white;
+    border: none;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.calendar .buttons button:first-child, .calendar .buttons button:last-child{
+    border-top: var(--border-table);
+    border-right: var(--border-table);
+    border-bottom: var(--border-table);
+}
+
+.calendar .buttons button:first-child {
+    margin-bottom: 5px;
+}
+
+.calendar .buttons .status_paid:hover{
+    background-color: var(--color-paid);
+}
+
+.calendar .buttons .delete:hover{
+    background-color: var(--color-not-paid);
+}
+
+.visitdata {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+.visitdata .wrap {
+    text-align: start;
+}
+
+.visit-text {
+    font-size: 14pt;
+    margin-left: 7px;
+}
+
+#visit-input {
+    font-size: 14pt;
+    border: 2px solid black;
+    padding: 2px 7px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 7px;
+}
+
+#visit-input:hover{
+    background-color: rgba(189, 189, 189, 0.4);
+}
+
+@media screen and (max-width: 700px) {
+    .calendar tbody {
+        width: calc(100% - 2 * var(--margin-table));
+    }
+    .calendar table {
+        width: calc(100% - 2 * var(--margin-table));
+    }
+    .calendar tr td:last-child {
+        width: auto;
+    }
+
+    .calendar .card {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+    .calendar .card .father_name {
+        grid-column: 1;
+        grid-row: 3;
+    }
+}
+    
+
+@media screen and (max-width: 570px) {
+    .calendar .card {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+    .calendar .card .phone {
+        grid-column: 2;
+        grid-row: 2;
+    }
+}
+
+@media screen and (max-width: 440px) {
+    :root {
+        --calendar-margin-card-item: 5px
+    }
+    .calendar .card {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 1fr);
+    }
+    .calendar .card p:not(:last-child) {
+        margin-bottom: var(--calendar-margin-card-item);
+    }
+    .calendar .card p:first-child {
+        margin-top: var(--calendar-margin-card-item);
+    }
+    .calendar .card p:last-child {
+        display: flex;
+        align-items: flex-start;
+    }
+    .calendar .card .service {
+        grid-column: 1;
+        grid-row: 4;
+    }
+    .calendar .card .phone {
+        grid-column: 1;
+        grid-row: 5;
+    }
+
+    .calendar .buttons div {
+        height: 60px;
+    }
+
+    .calendar .buttons div button{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .visitdata .wrap {
+        text-align: center;
+    }
+    
+    .visit-text {
+        margin-left: 0;
+    }
+    
+    #visit-input {
+        margin-right: 0;
+    }
+}

@@ -1,0 +1,108 @@
+.articles img {
+    width: 200px;
+    height: 200px;
+}
+
+.contents {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 30px;
+}
+
+:root{
+    --margin-betwen-li: 30px;
+    --transition-translate-z: transform 1s;
+}
+
+.contents li:nth-child(3n+1) {
+    margin-right: calc(var(--margin-betwen-li) / 3 * 2);
+}
+
+.contents li:nth-child(3n+2) {
+    margin-left: calc(var(--margin-betwen-li) / 3);
+    margin-right: calc(var(--margin-betwen-li) / 3);
+}
+
+.contents li:nth-child(3n) {
+    margin-left: calc(var(--margin-betwen-li) / 3 * 2);
+}
+
+.contents li{
+    background-color: white;
+    padding: 5px;
+    margin-top: var(--margin-betwen-li);
+    box-shadow: 0 0 15px 0 rgb(182, 182, 182);
+    -webkit-transition: var(--transition-translate-z);
+    -moz-transition: var(--transition-translate-z);
+    -o-transition: var(--transition-translate-z);
+    transition: var(--transition-translate-z);
+}
+
+.contents li:hover {
+    cursor: pointer;
+    transform: scale(1.08)
+}
+
+.articles .articles_text {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.articles .wrap_back {
+    text-align: start;
+}
+
+.articles .wrap_back .back {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+@media screen and (max-width: 980px){
+    .contents {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contents li:nth-child(2n+1) {
+        margin-right: calc(var(--margin-betwen-li) / 2);
+        margin-left: 0;
+    }
+    
+    .contents li:nth-child(2n) {
+        margin-left: calc(var(--margin-betwen-li) / 2);
+        margin-right: 0;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .contents {
+        grid-template-columns: 1fr;
+    }
+
+    .contents li:nth-child(n){
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .contents {
+        margin-top: 35px;
+    }
+    
+    .list_articles .search_wrap {
+        margin-bottom: 25px;
+    }
+}
+
+@media screen and (max-width: 448px){
+    .contents {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .articles .articles_text {
+        font-size: 1.1rem;
+    }
+}

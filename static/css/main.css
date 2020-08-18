@@ -1,0 +1,104 @@
+main {
+    margin-top: calc(-1 * var(--basket-width) + 5);
+}
+
+main .hide {
+    display: none;
+}
+
+.card__title{
+    color: #222;
+    font-family: 'Lucida Grande';
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card__price{
+    color: grey;
+    font-size: 13px;
+}
+
+.card__new_price {
+    font-size: 1.1rem;
+}
+
+.card__discount{
+    font-size: 1rem;
+    color: #F72464;
+}
+
+.rows {
+    margin-top: 60px;
+}
+
+.shop .categories, .shop .lines{
+    margin-top: 60px;
+}
+
+:root {
+    --row_card-shadow-size: 5px;
+    --row-padding: 7px;
+}
+
+.row{
+    display: flex;
+    justify-content: start;
+    overflow-y: hidden;
+    overflow-x: auto;
+    padding: var(--row-padding);
+}
+
+.row::after {
+    content: ".";
+    width: 0;
+    visibility: hidden;
+    margin-left: calc(var(--row-padding) - var(--row_card-shadow-size) );
+}
+
+.row:not(:nth-child(2)){
+    margin-top: 20px;
+}
+
+.row .card{
+    box-shadow: 0 0 var(--row_card-shadow-size) 0 black;
+}
+
+.row .card:not(:last-child) {
+    margin-right: 10px;
+}
+
+.row .card:hover {
+    cursor: pointer;
+}
+
+.row::-webkit-scrollbar{
+    -webkit-appearance: none;
+    height: 7px;
+}
+
+.row::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+section {
+    padding: 25px;
+}
+
+.nothing_found {
+    font-size: 20pt;
+    margin: 60px 0 20px 0;
+}
+
+.no_products {
+    padding: 5px;
+    font-size: 1.2rem;
+    color: rgb(255, 0, 0);
+    text-align: center;
+}
+
+@media screen and (max-width: 449px) {
+    section {
+        padding: 5px;
+    } 
+}

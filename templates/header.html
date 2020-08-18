@@ -1,0 +1,50 @@
+<header>
+    <div class="wrap">
+        <div class="wrap_header">
+            <h1>Cosmetic Center</h1>
+            <ul class="menu">
+                <li class="dropdown" data-path="SHOP">
+                    <div class="dropup_content">
+                        <a href="/all" class="reset_all_filter">Сбросить все фильтры</a>
+
+                        <div class="brands">Бренды</div>
+                        <div class="brands_content large_list hide">
+                            <a href="/all" class="all">Все бренды</a>
+                        </div>
+
+                        <div class="categories">Категории</div>
+                        <div class="categories_content list hide">
+                            <a href="/all" class="all">Все категории</a>
+                        </div>
+                    </div>
+                    <div class="shop">Магазин</div>
+                    <!-- Магазин -->
+                    <div class="dropdown_content">
+                        <a href="/all" class="reset_all_filter">Сбросить все фильтры</a>
+
+                        <div class="brands">Бренды</div>
+                        <div class="brands_content large_list hide">
+                            <a href="/all" class="all">Все бренды</a>
+                        </div>
+
+                        <div class="categories">Категории</div>
+                        <div class="categories_content list hide">
+                            <a href="/all" class="all">Все категории</a>
+                        </div>
+                    </div>
+                </li>
+                <li data-path="SERVICES">Услуги</li>
+                <li data-path="ARTICLES">Статьи</li>
+                <li data-path="CONTACTS">Контакты</li>
+            </ul>
+        </div>
+
+        <div class="wrap_basket without_articles">
+            <p id="count_productes">12</p>
+            {% load static %}
+            <img src="{% static 'img/shopping-cart.svg' %}" width="35px" height="35px" alt="Корзина" class="basket">
+        </div>
+
+        {% include "header/list_product.html" %}
+    </div>
+</header>

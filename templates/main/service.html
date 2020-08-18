@@ -1,0 +1,60 @@
+<section id="service" class="without_articles">
+
+    <div class="service_header pop_up_element">
+        <h2>Услуги</h2>
+    </div>
+    <ul class="service_content pop_up_element">
+
+        <li class="service_type">
+            <span class="text_service">Выберите услугу</span>
+
+
+            <div class="select_box">
+                <div class="options_container">
+                    {% include "components/options_service.html"%}
+                </div>
+                <div class="selected">Выбор услуги</div>
+            </div>
+        </li>
+
+
+        <li class="date">
+            <span class="text_service">Выберите дату посещения</span>
+            <br>
+            <input style="margin-top: 2%; background-color: #2f3640; color: white; border-color: #2f3640;
+                 border-style: dashed; font-size: 1.2rem; padding: 10px; text-align: center;
+                 border-radius: 8px"
+                   data-dd-format="d-m-Y"
+                   data-dd-theme="calendar"
+                   data-dd-lang="ru"
+                   data-dd-modal="true"
+                   data-dd-large-only="true"
+                   data-dd-show-only-enabled-days="true"
+                   type="text" id="date-input">
+        </li>
+
+
+        <li class="cont_time">
+            <span class="text_service">Выберите время посещения</span>
+            <div class="time">
+                <div>
+                    <div class="btn" data-path="1">09:30</div>
+                    <div class="btn" data-path="2">11:00</div>
+                    <div class="btn" data-path="3">12:30</div>
+                    <div class="btn" data-path="4">14:00</div>
+                </div>
+                <div>
+                    <div class="btn" data-path="5">15:30</div>
+                    <div class="btn" data-path="6">17:00</div>
+                    <div class="btn" data-path="7">18:30</div>
+                </div>
+            </div>
+            <div class="busy_all_time hide"><p>На эту дату всё занято</p></div>
+        </li>
+    </ul>
+    <div class="instruction hide"><p></p></div>
+    <div class="approve pop_up_element">
+        <button class="approvebtn">Записаться на услугу</button>
+        <!-- Записаться на услугу -->
+    </div>
+</section>

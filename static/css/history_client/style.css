@@ -1,0 +1,42 @@
+.history_client section {
+    margin-top: 20px;
+}
+
+.history_client.wrap {
+    text-align: start;
+    margin-bottom: 30px;
+}
+
+.history_client .back {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.history_client .back a{
+    color: #447e9b;
+}
+
+.history_client .back a:hover {
+    color: #036;
+}
+
+.history_client h2 {
+    text-align: center;
+}
+
+.history_client .data {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 660px) {
+    .history_client .data {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column-reverse;
+    }
+
+    .history_client .data .table_visits {
+        margin-top: 20px;
+    }
+}

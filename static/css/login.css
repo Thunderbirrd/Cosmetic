@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+    margin: 0 20px;
+}
+
+h2 {
+    margin-top: 0.8em; 
+    text-align: center; 
+}
+
+.form-horizontal{
+    background-color: #ddc0d8;
+    margin: auto;
+    width: 50%;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 5%;
+}
+.log_in{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 35px;
+    background-color: #d8d8d8;
+    border-radius: 8px;
+    font-size: 18px;
+    font-family: "Lucida Grande";
+}
+.btnreg{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    text-align: center;
+    background-color: #858585;
+    border-radius: 8px;
+    alignment: center;
+    height: 35px;
+}
+
+.btnreg a {
+    display: block;
+}
+
+.register{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    text-align: center;
+    background-color: #858585;
+    border: 1px solid black;
+    border-radius: 8px;
+    alignment: center;
+    height: 35px;
+}
+.texthelp{
+    font-size: 20px;
+}
+
+@media screen and (max-width: 700px) {
+    .form-horizontal {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 555px){
+    .btnreg{
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .register {
+        width: auto;
+    }
+}
+

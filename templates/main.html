@@ -1,0 +1,107 @@
+<main>
+    <div class="wrap">
+        <section class="shop without_articles">
+            {% include "components/loupe.html" %}
+
+            <div class="rows">
+                <div class="row pop_up_element">
+                </div>
+    
+                <div class="row pop_up_element">
+                </div>
+    
+                <div class="row pop_up_element">
+                </div>
+            </div>
+
+            <script>
+                const rowsInShop = document.querySelectorAll("main .shop .row")
+
+                //создаёт карточку
+                const createCardInShop = (id, brand, name, price, image, quantity, discount, line, category) => {
+                    const divCard = document.createElement("div")
+                    divCard.dataset.id = id
+                    divCard.dataset.brand = brand
+                    divCard.dataset.line = line
+                    divCard.dataset.category = category
+                    divCard.dataset.name = name
+                    divCard.classList.add("card")
+
+                    const divCardImage = document.createElement("div")
+                    divCardImage.classList.add("card__image")
+
+                    const img = document.createElement("img")
+                    img.src = image
+                    img.width = 200
+                    img.height = 200
+                    img.alt = "product"
+
+                    divCard.appendChild(divCardImage)
+                    
+                    divCardImage.appendChild(img)
+                    
+                    if (quantity === 0) {
+                        const divMess = document.createElement("div")
+                        divMess.classList.add("no_products")
+                        divMess.textContent = "ожидается поступление"
+                        divCard.appendChild(divMess)
+                
+                    } else if (quantity > 0) {
+                        //при щелчке по карточке в магазине показывать подробную информацию о продукте
+                        divCard.addEventListener("click", () => {
+                            showAboutProduct(id)
+                        })
+                    }
+
+                    const divCardTitle = document.createElement("div")
+                    divCardTitle.classList.add("card__title")
+                    divCardTitle.textContent = name
+
+                    divCard.appendChild(divCardTitle)
+
+                    const divCardPrice = document.createElement("div")
+                    if (discount === 0) {
+                        divCardPrice.classList.add("card__new_price")
+                        divCardPrice.innerHTML = price + " &#8381;"
+                    } else {
+                        divCardPrice.classList.add("card__price")
+                        divCardPrice.innerHTML = `<strike>${price} &#8381;</strike><span class="card__discount"> -${discount}%</span>`
+                    }
+
+                    divCard.appendChild(divCardPrice)
+
+                    if (discount !== 0) {
+                        const divCardNewPrice =document.createElement("div")
+                        divCardNewPrice.classList.add("card__new_price")
+                        let newPrice = Math.round(price * (1 - discount / 100))
+                        divCardNewPrice.innerHTML = newPrice + " &#8381;"
+                        divCard.appendChild(divCardNewPrice)
+                    }
+
+                    return divCard
+                }
+
+                //создаём карточки товаров в магазине
+                const countInRow = Math.max(10, arrayProducts.length / 3)
+
+                arrayProducts.forEach((p, i) => {
+                    let index = Math.floor(i / countInRow)
+                    rowsInShop[index].appendChild(
+                        createCardInShop(p.id, p.brand, p.name, p.price, p.image, 
+                            p.quantity, p.discount, p.line, p.category)
+                    )
+                });
+            </script>
+
+            <div class="nothing_found hide">Ничего не найдено</div>
+        </section>
+
+        {% include "main/about_product.html" %}
+        {% include "main/shopping_window.html" %}
+
+        {% include "main/articles.html" %}
+
+    </div>
+
+    {% include "main/service.html" %}
+</main>

@@ -1,0 +1,115 @@
+<!-- вводит пользователь: номер, адрес, фамилия, имя, тип доставки -->
+<!-- программа: id, время доставки -->
+
+<section class="shopping_window hide pop_up_element">
+    <h2>Оформление заказа</h2>
+    <div class="list">
+        <ul>
+        </ul>
+        <div class="total_amount"></div>
+    </div>
+
+    <div class="data_fields">
+
+        <div class="field number">
+            <p>Номер телефона:</p>
+            <span class="prefix">+7</span>
+            {% with type="text" placeholder="Номер телефона" minlength="10" maxlength="10" %}
+            {% include "../components/my_input.html" %}
+            {% endwith %}
+            <span class="error_message">В номере должно быть 10 цифр, не считая +7</span>
+        </div>
+
+        <div class="address">
+            <div class="field city">
+                <p>Город:</p>
+                <div class="cityYakutsk">
+                    <input type="checkbox" name="isCityYakutsk" id="isCityYakutsk">
+                    <label for="isCityYakutsk">Якутск</label>
+                </div>
+
+                <p class="additionally not">или</p>
+
+                <div class="additionally not">
+                    {% with type="text" placeholder="Населённый пункт" %}
+                    {% include "../components/my_input.html" %}
+                    {% endwith %}
+                </div>
+
+                <span class="error_message">Поле не указано</span>
+            </div>
+
+            <div class="field additionally hide street">
+                <p>Улица:</p>
+                {% with type="text" placeholder="Улица" %}
+                {% include "../components/my_input.html" %}
+                {% endwith %}
+
+                <span class="error_message">Поле не указано</span>
+            </div>
+
+            <div class="field additionally hide home">
+                <p>Номер дома:</p>
+                {% with type="text" placeholder="Дом" %}
+                {% include "../components/my_input.html" %}
+                {% endwith %}
+
+                <span class="error_message">Поле не указано</span>
+            </div>
+
+            <div class="field additionally hide entrance">
+                <p>Номер подъезда:</p>
+                {% with type="text" placeholder="Подъезд" %}
+                {% include "../components/my_input.html" %}
+                {% endwith %}
+
+                <span class="error_message">Поле не указано</span>
+            </div>
+
+            <div class="field additionally hide flat">
+                <p>Номер квартиры:</p>
+                {% with type="text" placeholder="Квартира" %}
+                {% include "../components/my_input.html" %}
+                {% endwith %}
+
+                <span class="error_message">Поле не указано</span>
+            </div>
+        </div>
+
+        <div class="field surname">
+            <p>Фамилия:</p>
+            {% with type="text" placeholder="Фамилия" %}
+            {% include "../components/my_input.html" %}
+            {% endwith %}
+
+            <span class="error_message">Поле не указано</span>
+        </div>
+
+        <div class="field name">
+            <p>Имя:</p>
+            {% with type="text" placeholder="Имя" %}
+            {% include "../components/my_input.html" %}
+            {% endwith %}
+
+            <span class="error_message">Поле не указано</span>
+        </div>
+
+        <div class="field order_type">
+            <p>Тип доставки:</p>
+            <div id="order_type">
+                <div class="title" data-value="NONE" data-default="NONE">
+                    Тип доставки
+                </div>
+                <ul class="order_type_list_options">
+                    <li class="order_type_option" data-value="YKT">По городу</li>
+                    <li class="order_type_option" data-value="OUT">Почтой РФ</li>
+                    <li class="order_type_option" data-value="SAM">Самовывоз</li>
+                </ul>
+            </div>
+
+            <span class="error_message">Поле не указано</span>
+        </div>
+
+        <button class="buy">Купить</button>
+    </div>
+</section>

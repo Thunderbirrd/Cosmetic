@@ -1,0 +1,25 @@
+{% extends 'authapp/base.html' %}
+
+
+{% block content %}
+    <form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
+        {% csrf_token %}
+        {% if next %}
+            <input type="hidden" name="next" value="{{ next }}">
+        {% endif %}
+
+        {{ login_form.as_p}}
+        <input class="log_in" type="submit" value="Войти">
+    </form>
+    <button class="btnreg">
+        <a href="{% url 'auth:register' %}" class="" style="font-size: 20px; text-decoration: none; color: black; ">
+            Зарегистрироваться
+        </a>
+    </button>
+    <button class="btnreg">
+        <!-- изменить путь -->
+        <a href="/password_reset/" class="" style="font-size: 20px; text-decoration: none; color: black; ">
+            Забыли пароль?
+        </a>
+    </button>
+{% endblock %}
