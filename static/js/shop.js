@@ -19,6 +19,8 @@ const shopSearchInput = shop.querySelector(".search_input")
 
 const divNothingFound = shop.querySelector(".nothing_found")
 
+const divRows = shop.querySelector(".rows")
+
 const showProductByFilter = (name, brand, line, category) => {
     const all = ""
 
@@ -37,8 +39,10 @@ const showProductByFilter = (name, brand, line, category) => {
     })
 
     if (isNothingFound) {
+        divRows.classList.add("hide")
         divNothingFound.classList.remove("hide")
     } else {
+        divRows.classList.remove("hide")
         divNothingFound.classList.add("hide")
     }
 }

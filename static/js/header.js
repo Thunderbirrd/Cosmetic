@@ -167,7 +167,7 @@ const addBrandAndLinesContentToElement = (element, brand, lines) => {
 
     divBrand.appendChild(a)
 
-    const divLinesContent = createLinesContent(lines)
+    const divLinesContent = createLinesContent(brand, lines)
     divLinesContent.classList.add("hide")
 
     divBrand.addEventListener("click", () => {
@@ -180,7 +180,7 @@ const addBrandAndLinesContentToElement = (element, brand, lines) => {
 }
 
 //создаёт список линий
-const createLinesContent = (lines) => {
+const createLinesContent = (brand, lines) => {
     const divLinesContent = document.createElement("div")
     divLinesContent.classList.add("lines_content")
     divLinesContent.classList.add("list")
@@ -191,6 +191,7 @@ const createLinesContent = (lines) => {
 
     allElement.addEventListener("click", e => {
         e.preventDefault()
+        showProductByBrand(brand)
         showProductByLine("")
     })
 
@@ -234,6 +235,7 @@ const createLinesContent = (lines) => {
     const resetFilter = (e) => {
         e.preventDefault()
         showProductByBrand("")
+        showProductByLine("")
     }
 
     brandsContentUp.querySelector(".all").addEventListener("click", resetFilter)
@@ -309,5 +311,8 @@ const resetAllFilter = () => {
 }
 
 document.querySelectorAll("header .dropdown .reset_all_filter").forEach(el => {
-    el.addEventListener("click", resetAllFilter)
+    el.addEventListener("click", (e) => {
+        e.preventDefault()
+        resetAllFilter()
+    })
 })
