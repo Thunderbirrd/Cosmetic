@@ -32,8 +32,7 @@ def home(request):
             cache.set(key, product_compilation_list)
 
         product_compilation_json = serializers.serialize("json", product_compilation_list)
-        product_compilation_many_to_many = []
-        
+
         content = {
             'title': title,
             'products': product_list,
