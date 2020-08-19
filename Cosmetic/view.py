@@ -28,7 +28,6 @@ def home(request):
             for product in c.product_list.prefetch_related():
                 product_compilation_list_product_list.append([c.id, product.id])
 
-        print(product_compilation_list_product_list)
         content = {
             'title': title,
             'products': product_list,
