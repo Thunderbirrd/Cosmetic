@@ -3,9 +3,18 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.core.cache import cache
 from django.views.decorators.csrf import csrf_exempt
+from django.core.serializers.json import DjangoJSONEncoder
+from django.core import serializers
 from .apps.mainapp.models import Product, Visit, Service, ProductCompilation, Months
 from .settings import LOW_CACHE
 import json
+
+
+class LazyEncoder(DjangoJSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, ProductCompilation):
+            return str(obj)
+        return super().default(obj)
 
 
 def home(request):
@@ -22,12 +31,16 @@ def home(request):
             product_compilation_list = ProductCompilation.objects.filter(is_active=True)
             cache.set(key, product_compilation_list)
 
+        product_compilation_json = serializers.serialize("json", product_compilation_list)
+        product_compilation_many_to_many = []
+        
         content = {
             'title': title,
             'products': product_list,
             'occupied_dates': visits(str(datetime.date.today())),
             'service_names': services(),
             'product_compilation_list': product_compilation_list,
+            'product_compilation_json': product_compilation_json
         }
         return render(request, 'index.html', content)
 
