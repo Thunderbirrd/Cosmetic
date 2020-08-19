@@ -46,7 +46,7 @@ class Order(models.Model):
         return len(items)
 
     def get_total_cost(self):
-        items = self.order_items.select_related()
+        items = OrderItem.objects.filter(order_id=self.id).all()
         return sum(list(map(lambda x: x.quantity * x.product.price, items)))
 
     def get_summary(self):
