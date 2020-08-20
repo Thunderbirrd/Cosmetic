@@ -76,7 +76,8 @@ def form_basket(request):
             lst.append(Product(product['id'], product['name'],
                                product['price'], product['description'],
                                product['category_id'], product['brand_id'],
-                               product['image'], product['quantity']))
+                               product['image'], product['quantity'], product['is_active'],
+                               product['line_id'], product['discount']))
 
     except ObjectDoesNotExist:
         return HttpResponse(json.dumps('Error. Product not found.'))

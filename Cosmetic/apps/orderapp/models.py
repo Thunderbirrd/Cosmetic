@@ -1,5 +1,6 @@
 from django.db import models
 import Cosmetic.apps.mainapp.models as m
+from math import ceil
 
 
 class Order(models.Model):
@@ -47,7 +48,9 @@ class Order(models.Model):
 
     def get_total_cost(self):
         items = OrderItem.objects.filter(order_id=self.id).all()
-        return sum(list(map(lambda x: x.quantity * x.product.price, items)))
+        for item in items:
+            print(ceil(item.quantity * item.product.price * (1 - (item.product.discount / 100))))
+        return sum(list(map(lambda x: ceil(x.quantity * x.product.price * (1 - (x.product.discount / 100))), items)))
 
     def get_summary(self):
         return {
