@@ -119,8 +119,6 @@ const Urls = {
         
         let result = await responce.json()
 
-        console.log(result)
-
         return result
     },
     async getArticle(id) {

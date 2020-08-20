@@ -62,24 +62,28 @@
         // image
         // quantity
         // is_active
+        // newPrice
         // discount 
         // description
         
         {% for product in products %}
-            arrayProducts.push({ 
-                id: {{ product.id }},
-                type: TYPE_PRODUCT,
-                name: "{{ product.name }}",
-                price: parseInt({{ product.price }}),
-                category: "{{ product.category }}",
-                brand: "{{ product.brand }}",
-                line: "{{ product.line.name }}",
-                image: "{{ product.image }}",
-                quantity: {{ product.quantity }},
-                description: "{{ product.description }}",
-                discount: {{product.discount}},
-                is_active: "{{ product.is_active }}" === "True"
-            });
+            if ("{{ product.brand }}" !== "Подборка") {
+                arrayProducts.push({ 
+                    id: {{ product.id }},
+                    type: TYPE_PRODUCT,
+                    name: "{{ product.name }}",
+                    price: parseInt({{ product.price }}),
+                    category: "{{ product.category }}",
+                    brand: "{{ product.brand }}",
+                    line: "{{ product.line.name }}",
+                    image: "{{ product.image }}",
+                    quantity: {{ product.quantity }},
+                    description: "{{ product.description }}",
+                    discount: {{product.discount}},
+                    newPrice: Math.round(parseInt({{ product.price }}) * (1 - {{product.discount}} / 100)),
+                    is_active: "{{ product.is_active }}" === "True"
+                });
+            }
         {% endfor %}
 
         const arrProductCompilation = [];

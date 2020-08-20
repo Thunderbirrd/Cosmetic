@@ -3,10 +3,12 @@
 const store = {
     //хранилище корзины покупок
     //{
-    //     src: 
-    //     title: 
-    //     count: 
-    //     price: 
+    //     id,
+    //     type,
+    //     src,
+    //     title, 
+    //     count, 
+    //     price, 
     // }
     stateBasket: [],
 
@@ -20,6 +22,7 @@ const store = {
         // image
         // quantity
         // is_active
+        // newPrice
         // discount 
         // description
     //}
@@ -142,16 +145,16 @@ const store = {
         return this.stateBasket.findIndex(item => item.title === title) > -1
     },
 
-    changeCountBasket(title, count) {
-        this.stateBasket.find(item => item.title === title).count = count
+    changeCountBasket(id, type, count) {
+        this.stateBasket.find(item => item.id == id || item.type == type).count = count
     },
 
     getCountBasket(title) {
         return Number(this.stateBasket.find(item => item.title === title).count)
     },
 
-    deleteProductFromBasket(title) {
-        let index = this.stateBasket.findIndex(item => item.title === title)
+    deleteProductFromBasket(id, type) {
+        let index = this.stateBasket.findIndex(item => item.id == id && item.type == type)
         this.stateBasket.splice(index, 1)
     },
 
@@ -167,6 +170,8 @@ const store = {
 }
 
 arrayProducts.forEach(product => {
+    if (product.category === "Сертификаты") return;
+
     //заполняем список брендов и линий
     const indexBrand = store.brands.findIndex(b => b.brand === product.brand)
     if (indexBrand < 0) {
@@ -183,3 +188,6 @@ arrayProducts.forEach(product => {
         store.categories.push(product.category)
     }
 })
+
+store.categories.push("Сертификаты")
+store.categories.push("Подборка")

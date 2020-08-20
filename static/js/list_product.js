@@ -69,7 +69,7 @@ const _createPrice = (price) => {
     return div
 }
 
-const _createCount = (title, count) => {
+const _createCount = (id, type, count) => {
     const div = document.createElement("div")
     div.classList.add("count")
 
@@ -85,20 +85,20 @@ const _createCount = (title, count) => {
         if (data < "0" || data > "9") event.preventDefault();
     }
     input.oninput = () => {
-        const maxNumber = Math.min(99, store.getProductByTitle(title).quantity)
+        const maxNumber = Math.min(99, store.getProductByIdAndType(id, type).quantity)
 
         if (Number(input.value) >= maxNumber) {
             input.value = maxNumber
         }
 
-        store.changeCountBasket(title, input.value)
+        store.changeCountBasket(id, type, input.value)
 
         setAmountProductes()
         setTextInSpanAmount()
     }
     input.onchange = () => {
         if (Number(input.value) <= 0) {
-            deleteListItem(title)
+            deleteListItem(id, type)
             return;
         }
     }
@@ -110,11 +110,11 @@ const _createCount = (title, count) => {
         input.value--
 
         if (Number(input.value) <= 0) {
-            deleteListItem(title)
+            deleteListItem(id, type)
             return;
         }
 
-        store.changeCountBasket(title, input.value)
+        store.changeCountBasket(id, type, input.value)
 
         setAmountProductes()
         setTextInSpanAmount()
@@ -125,7 +125,7 @@ const _createCount = (title, count) => {
     buttonPlus.textContent = "+"
     buttonPlus.dataset.title = "Данного товара на складе очень мало"
     buttonPlus.addEventListener("click", () => {
-        const maxNumber = Math.min(99, store.getProductByTitle(title).quantity)
+        const maxNumber = Math.min(99, store.getProductByIdAndType(id, type).quantity)
 
         if (Number(input.value) >= maxNumber) {
             input.value = maxNumber
@@ -134,12 +134,12 @@ const _createCount = (title, count) => {
 
         input.value++
 
-        store.changeCountBasket(title, input.value)
+        store.changeCountBasket(id, type, input.value)
 
         setAmountProductes()
         setTextInSpanAmount()
     })
-    if (store.getProductByTitle(title).quantity > 10) {
+    if (store.getProductByIdAndType(id, type).quantity > 10) {
         buttonPlus.classList.remove("show_tooltip") 
     } else {
         buttonPlus.classList.add("show_tooltip") 
@@ -153,12 +153,12 @@ const _createCount = (title, count) => {
 }
 
 //удаляет в всплывающем окне запись
-const deleteListItem = (title) => {
+const deleteListItem = (id, type) => {
     //удаляем из store
-    store.deleteProductFromBasket(title)
+    store.deleteProductFromBasket(id, type)
 
     //удаляем из списка
-    ulListProduct.removeChild(document.querySelector(`.list_product li[data-title='${title}']`))
+    ulListProduct.removeChild(document.querySelector(`.list_product li[data-id='${id}'][data-type='${type}']`))
 
     //проверяем видимость надписи, что список пуст
     togleDisplayListIsEmpty()
@@ -166,13 +166,13 @@ const deleteListItem = (title) => {
     setAmountProductes()
 }
 
-const _createDelete = (title) => {
+const _createDelete = (id, type) => {
     const div = document.createElement("div")
     div.classList.add("delete")
 
     const button = document.createElement("button")
     button.addEventListener("click", () => {
-        deleteListItem(title)
+        deleteListItem(id, type)
     })
 
     const img = document.createElement("img")
@@ -230,16 +230,16 @@ const createListItem = (src, title, price, count, id, type) => {
     li.appendChild(_createImgProduct(src))
     li.appendChild(_createTitle(title))
     li.appendChild(_createPrice(price))
-    li.appendChild(_createCount(title, count))
-    li.appendChild(_createDelete(title))
+    li.appendChild(_createCount(id, type, count))
+    li.appendChild(_createDelete(id, type))
     li.appendChild(_createWarning())
 
     ulListProduct.appendChild(li)
 }
 
 //обновляет количество товаров
-const updateCountProducts = (title, count) => {
-    document.querySelector(`.list_product li[data-title='${title}'] .count input`).value = count
+const updateCountProducts = (id, type, count) => {
+    document.querySelector(`.list_product li[data-type='${type}'][data-id='${id}'] .count input`).value = count
 }
 
 //проверка на несоответствия данных количество товаров
