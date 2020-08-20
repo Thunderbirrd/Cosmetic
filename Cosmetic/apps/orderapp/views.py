@@ -16,20 +16,13 @@ def form_basket(request):
     is_correct = True
     lst = []
     basket_list = json.load(request)  # Список в корзине
-    basket_list = basket_list["products"]
+    try:
+        basket_list = basket_list["products"]
+    except KeyError:
+        return HttpResponse("No products in order")
     if not basket_list:
         return HttpResponse('Error. Empty request.')
     queryset = Product.objects.filter(is_active=True)  # Set из таблицы
-    # добавление товаров из подборки в список
-    product_compilations = basket_list["product_compilation"]
-    if product_compilations:
-        for com in product_compilations:
-            product_list = com.product_list.prefetch_related()
-            product = product_list[0]
-            product.name = com.name
-            product.price = com.price
-            basket_list[f"{product.name}"] = com
-
     # создание пустого заказа
     new_order = Order()
     new_order.save()
