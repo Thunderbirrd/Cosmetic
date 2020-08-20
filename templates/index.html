@@ -49,7 +49,7 @@
 
 <body>
     <script>
-        const arrayProducts = []
+        const arrayProducts = [];
 
         // name
         // price
@@ -75,8 +75,42 @@
                 description: "{{ product.description }}",
                 discount: {{product.discount}},
                 is_active: "{{ product.is_active }}" === "True"
-            })
+            });
         {% endfor %}
+
+        const arrProductCompilation = [];
+
+        // id
+        // name 
+        // description
+        // image
+        // price
+        // quantity
+        // discount
+        // is_active
+        // product_list: Product[]
+
+        {% for productCompilation in product_compilation_list %}
+            arrProductCompilation.push({
+                id: {{ productCompilation.id }},
+                name: "{{ productCompilation.name }}",
+                description: "{{ productCompilation.description }}",
+                image: "{{ productCompilation.image }}",
+                price: parseInt({{ productCompilation.price }}),
+                quantity: {{ productCompilation.quantity }},
+                discount: {{ productCompilation.discount }},
+                is_active: "{{ productCompilation.is_active }}" === "True",
+                product_list: []
+            });
+        {% endfor %}
+
+        {{ product_compilation_list_product_list }}.forEach(el => {
+            arrProductCompilation.find(pC => pC.id === el[0]).product_list.push(el[1])
+        });
+
+        arrProductCompilation.forEach(pC => {pC.id = `productCompilation${pC.id}`})
+
+        const arrShop = [...arrayProducts, ...arrProductCompilation];
     </script>
     <script>
         const servicecontent = []

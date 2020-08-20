@@ -19,9 +19,7 @@ const aboutProductDescription =aboutProduct.querySelector(".description p")
 
 //показывает подробные данные о товаре
 const showAboutProduct = (id) => {
-    id = Number(id)
-
-    const product = store.stateShop.find(product => product.id === id)
+    const product = store.getProductById(id)
 
     aboutProductTitle.textContent = product.name
     aboutProductImage.src = product.image

@@ -24,7 +24,7 @@ const store = {
         // description
     //}
     get stateShop() {
-        return arrayProducts
+        return arrShop
     },
 
     _stateCheckout: {},
@@ -135,8 +135,7 @@ const store = {
     },
 
     getProductById(id){
-        id = Number(id)
-        return this.stateShop.find(product => product.id === id)
+        return this.stateShop.find(product => product.id == id)
     },
 
     hasItemInBasket(title) {

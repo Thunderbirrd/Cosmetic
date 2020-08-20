@@ -45,6 +45,7 @@
                         divMess.classList.add("no_products")
                         divMess.textContent = "ожидается поступление"
                         divCard.appendChild(divMess)
+                        divCard.style.cursor = "default"
                 
                     } else if (quantity > 0) {
                         //при щелчке по карточке в магазине показывать подробную информацию о продукте
@@ -82,9 +83,9 @@
                 }
 
                 //создаём карточки товаров в магазине
-                const countInRow = Math.max(10, arrayProducts.length / 3)
+                const countInRow = Math.max(10, arrShop.length / 3)
 
-                arrayProducts.forEach((p, i) => {
+                arrShop.forEach((p, i) => {
                     let index = Math.floor(i / countInRow)
                     rowsInShop[index].appendChild(
                         createCardInShop(p.id, p.brand, p.name, p.price, p.image, 

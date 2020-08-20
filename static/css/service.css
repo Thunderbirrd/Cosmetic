@@ -85,6 +85,7 @@
 }
 
 .selected {
+    margin-top: 2%;
     background-color: #2f3640;
     border-radius: 8px;
     margin-bottom: 8px;
@@ -200,6 +201,10 @@
     color: rgb(255 132 132);
 }
 
+.service_content .service_type{ 
+    margin-top: -150px;
+}
+
 @media screen and (max-width: 1000px) {
     .service_content {
         display: grid;
@@ -212,6 +217,7 @@
     }
 
     .service_content .service_type{
+        margin-top: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
