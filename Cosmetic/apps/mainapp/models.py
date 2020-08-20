@@ -124,6 +124,7 @@ class ProductCompilation(models.Model):
     discount = models.PositiveIntegerField(verbose_name='скидка на товар в процентах', default=0)
     is_active = models.BooleanField(verbose_name='активен ли продукт', default=True)
     product_list = models.ManyToManyField(Product, related_name="compilation_items")
+    price = models.IntegerField(verbose_name='стоимость подборки', null=False, default=0)
 
     def __str__(self):
         return self.name
