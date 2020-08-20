@@ -200,7 +200,7 @@ const _createWarning = () => {
 }
 
 //показ предупреждения
-const showWarningListItem = (text, id, newQuantity) => {
+const showWarningListItem = (text, id, type, newQuantity) => {
     const li = document.querySelector(`.list_product li[data-id='${id}']`)
     li.classList.add("warning_item")
 
@@ -210,7 +210,7 @@ const showWarningListItem = (text, id, newQuantity) => {
     const p = divWarning.querySelector("p")
     p.textContent = text
 
-    store.getProductById(id).quantity = newQuantity
+    store.getProductByIdAndType(id, type).quantity = newQuantity
 }
 
 //очищаем список покупок
@@ -221,10 +221,11 @@ const clearListProducts = () => {
 }
 
 //создаёт в всплывающем окне запись
-const createListItem = (src, title, price, count) => {
+const createListItem = (src, title, price, count, id, type) => {
     const li = document.createElement("li")
     li.dataset.title = title
-    li.dataset.id = store.getIdByTitle(title)
+    li.dataset.id = id
+    li.dataset.type = type
 
     li.appendChild(_createImgProduct(src))
     li.appendChild(_createTitle(title))
@@ -242,12 +243,12 @@ const updateCountProducts = (title, count) => {
 }
 
 //проверка на несоответствия данных количество товаров
-const checkForDataInconsistencies = (userData, serverData) => {
+const checkForDataInconsistencies = (userData, serverData, type) => {
     for (const id in userData) {
         if (userData.hasOwnProperty(id) && serverData[id] !== userData[id]) {
             let text = `К сожаление на складе количество товара: ${serverData[id]}, а не ${userData[id]} (как вы указали)`
-            showWarningListItem(text, id, serverData[id])
-            store.setQuantityById(id, serverData[id])
+            showWarningListItem(text, id, type, serverData[id])
+            store.setQuantityById(id, type, serverData[id])
         }
     }
 }
@@ -259,7 +260,10 @@ const addClickListenerForCheckoutButton = () => {
     buttonCheckout.addEventListener("click", async () => {
         buttonCheckout.setAttribute("disabled", "disabled")
 
-        const data = {}
+        const data = {
+            product_compilation: {},
+            products: {}
+        }
 
         const list = ulListProduct.children
 
@@ -270,9 +274,16 @@ const addClickListenerForCheckoutButton = () => {
         }
 
         for (let i = 0; i < list.length; i++) {
-            let product = store.stateShop.find(item => item.name === list[i].dataset.title )
+            let product = store.getProductByIdAndType(list[i].dataset.id, list[i].dataset.type);
 
-            data[product.id] = Number(list[i].querySelector(".count input").value)
+            let type;
+            if (product.type === TYPE_PRODUCT_COMPILATION) {
+                type = "product_compilation";
+            } else if (product.type === TYPE_PRODUCT) {
+                type = "products";
+            }
+
+            data[type][product.id] = Number(list[i].querySelector(".count input").value)
         }
 
         let result = await Urls.checkout(data)
