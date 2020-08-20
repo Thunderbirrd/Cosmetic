@@ -47,14 +47,12 @@ class Order(models.Model):
 
     def get_total_cost(self):
         items = OrderItem.objects.filter(order_id=self.id).all()
-        items_compilations = OrderItemProductCompilation.objects.filter(order_id=self.id).all()
-        return sum(list(map(lambda x: x.quantity * x.product.price, items))) + \
-            sum(list(map(lambda x: x.quantity * x.compilation.price, items_compilations)))
+        return sum(list(map(lambda x: x.quantity * x.product.price, items)))
 
     def get_summary(self):
         return {
             'total_cost': self.get_total_cost(),
-            'total_quantity': self.get_total_quantity() + self.get_total_quantity_compilation(),
+            'total_quantity': self.get_total_quantity(),
         }
 
         # переопределяем метод, удаляющий объект
@@ -62,20 +60,9 @@ class Order(models.Model):
         for item in self.order_items.select_related():
             item.product.quantity += item.quantity
             item.product.save()
-        for item in self.order_items_compilations.select_related():
-            item.compilation.quantity += item.quantity
-            item.compilation.save()
 
         self.is_active = False
         self.save()
-
-    def get_total_quantity_compilation(self):
-        items = self.order_items_compilations.select_related()
-        return sum(list(map(lambda x: x.quantity, items)))
-
-    def get_compilation_type_quantity(self):
-        items = self.order_items_compilations.select_related()
-        return len(items)
 
 
 class OrderItem(models.Model):
@@ -89,16 +76,3 @@ class OrderItem(models.Model):
     @staticmethod
     def get_item(pk):
         return OrderItem.objects.filter(pk=pk).first()
-
-
-class OrderItemProductCompilation(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, db_index=True, related_name="order_items_compilations")
-    compilation = models.ForeignKey(m.ProductCompilation, on_delete=models.CASCADE, verbose_name="подборка")
-    quantity = models.PositiveIntegerField(verbose_name="количество", default=0)
-
-    def get_compilation_cost(self):
-        return self.compilation.price * self.quantity
-
-    @staticmethod
-    def get_item(pk):
-        return OrderItemProductCompilation.objects.filter(pk=pk).first()

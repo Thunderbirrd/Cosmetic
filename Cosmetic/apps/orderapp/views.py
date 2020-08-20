@@ -5,7 +5,7 @@ from . import bot
 from .bot import DataOrder
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from Cosmetic.apps.mainapp.models import Product
+from Cosmetic.apps.mainapp.models import Product, ProductCompilation
 from Cosmetic.apps.orderapp.models import Order
 from Cosmetic.apps.orderapp.models import OrderItem
 from django.core.exceptions import ObjectDoesNotExist
@@ -15,11 +15,37 @@ from django.core.exceptions import ObjectDoesNotExist
 def form_basket(request):
     is_correct = True
     lst = []
-    basket_list = json.load(request)  # Список в корзине
+    request_list = json.load(request)  # Список в корзине
+    product_compilations = request_list["product_compilation"]
+    basket_list = {}
     try:
-        basket_list = basket_list["products"]
+        basket_list = request_list["products"]
     except KeyError:
-        return HttpResponse("No products in order")
+        pass
+    product_id = -1
+    for com in product_compilations:
+        compilation = ProductCompilation.objects.get(id=int(com))
+        product_list = Product.objects.filter(is_active=True).all()
+        flag = False
+        for product in product_list:
+            if product.name == compilation.name:
+                product_id = product.id
+                flag = True
+                break
+        if not flag:
+            product = Product()
+            product.name = compilation.name
+            product.price = compilation.price
+            product.category_id = 131
+            product.brand_id = 21
+            product.line_id = 51
+            product.quantity = compilation.quantity
+            product.discount = compilation.discount
+            product.save()
+            basket_list[product.id] = product_compilations[com]
+        else:
+            basket_list[product_id] = product_compilations[com]
+
     if not basket_list:
         return HttpResponse('Error. Empty request.')
     queryset = Product.objects.filter(is_active=True)  # Set из таблицы
