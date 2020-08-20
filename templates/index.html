@@ -49,6 +49,9 @@
 
 <body>
     <script>
+        const TYPE_PRODUCT = "TYPE_PRODUCT";
+        const TYPE_PRODUCT_COMPILATION = "TYPE_PRODUCT_COMPILATION"
+
         const arrayProducts = [];
 
         // name
@@ -65,6 +68,7 @@
         {% for product in products %}
             arrayProducts.push({ 
                 id: {{ product.id }},
+                type: TYPE_PRODUCT,
                 name: "{{ product.name }}",
                 price: parseInt({{ product.price }}),
                 category: "{{ product.category }}",
@@ -93,6 +97,7 @@
         {% for productCompilation in product_compilation_list %}
             arrProductCompilation.push({
                 id: {{ productCompilation.id }},
+                type: TYPE_PRODUCT_COMPILATION,
                 name: "{{ productCompilation.name }}",
                 description: "{{ productCompilation.description }}",
                 image: "{{ productCompilation.image }}",
@@ -107,8 +112,6 @@
         {{ product_compilation_list_product_list }}.forEach(el => {
             arrProductCompilation.find(pC => pC.id === el[0]).product_list.push(el[1])
         });
-
-        arrProductCompilation.forEach(pC => {pC.id = `productCompilation${pC.id}`})
 
         const arrShop = [...arrayProducts, ...arrProductCompilation];
     </script>

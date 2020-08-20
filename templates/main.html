@@ -18,7 +18,7 @@
                 const rowsInShop = document.querySelectorAll("main .shop .row")
 
                 //создаёт карточку
-                const createCardInShop = (id, brand, name, price, image, quantity, discount, line, category) => {
+                const createCardInShop = (id, type, brand, name, price, image, quantity, discount, line, category) => {
                     const divCard = document.createElement("div")
                     divCard.dataset.id = id
                     divCard.dataset.brand = brand
@@ -50,7 +50,7 @@
                     } else if (quantity > 0) {
                         //при щелчке по карточке в магазине показывать подробную информацию о продукте
                         divCard.addEventListener("click", () => {
-                            showAboutProduct(id)
+                            showAboutProduct(id, type)
                         })
                     }
 
@@ -88,7 +88,7 @@
                 arrShop.forEach((p, i) => {
                     let index = Math.floor(i / countInRow)
                     rowsInShop[index].appendChild(
-                        createCardInShop(p.id, p.brand, p.name, p.price, p.image, 
+                        createCardInShop(p.id, p.type, p.brand, p.name, p.price, p.image, 
                             p.quantity, p.discount, p.line, p.category)
                     )
                 });

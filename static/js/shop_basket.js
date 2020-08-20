@@ -10,6 +10,8 @@ const divPrice = document.querySelector(".about_product .card__price")
 //img товара
 const imgProduct = document.querySelector(".about_product .card__image img")
 
+const elementAboutProduct = document.querySelector(".about_product")
+
 //добавляем товар в корзину
 const addProductToShop = () => {
     if (store.hasItemInBasket(divTitle.textContent)) {
@@ -24,7 +26,9 @@ const addProductToShop = () => {
             price: Number(divPrice.textContent.slice(0, divPrice.textContent.length - 2))
         })
 
-        createListItem(imgProduct.src, divTitle.textContent, divPrice.textContent, Number(inputCount.value))
+        createListItem(imgProduct.src, divTitle.textContent, 
+            divPrice.textContent, Number(inputCount.value), 
+            elementAboutProduct.dataset.id, elementAboutProduct.dataset.type)
     }
 
     setAmountProductes()

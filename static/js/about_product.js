@@ -18,8 +18,11 @@ const aboutProductCount = aboutProduct.querySelector(".input_count")
 const aboutProductDescription =aboutProduct.querySelector(".description p")
 
 //показывает подробные данные о товаре
-const showAboutProduct = (id) => {
-    const product = store.getProductById(id)
+const showAboutProduct = (id, type) => {
+    const product = store.getProductByIdAndType(id, type)
+
+    aboutProduct.dataset.id = id;
+    aboutProduct.dataset.type = type;
 
     aboutProductTitle.textContent = product.name
     aboutProductImage.src = product.image
@@ -29,7 +32,7 @@ const showAboutProduct = (id) => {
     aboutProductCount.value = 1
     aboutProductDescription.textContent = product.description
 
-    setMaxNumber(store.getProductById(id).quantity)
+    setMaxNumber(store.getProductByIdAndType(id, type).quantity)
 
     if (aboutProduct.classList.contains("hide")){
         aboutProduct.classList.remove("hide")

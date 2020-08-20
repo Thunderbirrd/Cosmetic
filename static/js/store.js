@@ -121,8 +121,8 @@ const store = {
         this.stateBasket = []
     },
 
-    setQuantityById(id, quantity){
-        this.getProductById(id).quantity = quantity
+    setQuantityById(id, type, quantity){
+        this.getProductByIdAndType(id, type).quantity = quantity
         aboutProductOptions.maxNumber = quantity
     },
 
@@ -134,8 +134,8 @@ const store = {
         return this.stateShop.find(product => product.name === title)
     },
 
-    getProductById(id){
-        return this.stateShop.find(product => product.id == id)
+    getProductByIdAndType(id, type){
+        return this.stateShop.find(product => product.id == id && product.type == type)
     },
 
     hasItemInBasket(title) {
