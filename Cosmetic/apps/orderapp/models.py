@@ -49,7 +49,7 @@ class Order(models.Model):
         items = OrderItem.objects.filter(order_id=self.id).all()
         items_compilations = OrderItemProductCompilation.objects.filter(order_id=self.id).all()
         return sum(list(map(lambda x: x.quantity * x.product.price, items))) + \
-               sum(list(map(lambda x: x.quantity * x.compilation.price, items_compilations)))
+            sum(list(map(lambda x: x.quantity * x.compilation.price, items_compilations)))
 
     def get_summary(self):
         return {
@@ -58,7 +58,6 @@ class Order(models.Model):
         }
 
         # переопределяем метод, удаляющий объект
-
     def delete(self, **kwargs):
         for item in self.order_items.select_related():
             item.product.quantity += item.quantity
