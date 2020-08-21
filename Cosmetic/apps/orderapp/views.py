@@ -11,90 +11,100 @@ from Cosmetic.apps.orderapp.models import OrderItem
 from django.core.exceptions import ObjectDoesNotExist
 
 
+def quantity_check(object_list, object_model, object_id, order_id, is_correct):
+    item = OrderItem()
+    item.product_id = object_id
+    item.order_id = order_id
+    item.quantity = object_list[object_id]
+    item.save()
+
+    my_object = object_model.objects.filter(is_active=True).values().get(
+        id=object_id)  # нахождение товара в базе из списка корзины
+    dif = my_object['quantity'] - object_list[object_id]
+
+    if dif >= 0 and object_list[object_id] > 0:  # Расчитывает доступный товар
+        my_object['quantity'] = dif
+    else:
+        is_correct = False
+        object_list[object_id] = my_object['quantity']
+    return my_object, is_correct
+
+
+def return_products_switch(object_list, object_type, is_product):
+    for object_id in object_list:
+
+        my_object = object_type.objects.values().get(id=object_id)
+        my_object['quantity'] = my_object['quantity'] + object_list[object_id]
+
+        if is_product:
+            x = object_type(my_object['id'], my_object['name'],
+                            my_object['price'], my_object['description'],
+                            my_object['category_id'], my_object['brand_id'],
+                            my_object['image'], my_object['quantity'], my_object['is_active'],
+                            my_object['line_id'], my_object['discount'])
+        else:
+            x = object_type(my_object['id'], my_object['name'],
+                            my_object['description'], my_object['image'],
+                            my_object['quantity'], my_object['discount'],
+                            my_object['is_active'], my_object['price'])
+        x.save()
+
+
 @csrf_exempt
 def form_basket(request):
     is_correct = True
-    lst = []
+    lst1 = []
+    lst2 = []
     request_list = json.load(request)  # Список в корзине
     product_compilations = request_list["product_compilation"]
-    basket_list = {}
-    try:
-        basket_list = request_list["products"]
-    except KeyError:
-        pass
-    product_id = -1
-    for com in product_compilations:
-        compilation = ProductCompilation.objects.get(id=int(com))
-        product_list = Product.objects.filter(is_active=True).all()
-        flag = False
-        for product in product_list:
-            if product.name == compilation.name:
-                product_id = product.id
-                flag = True
-                break
-        if not flag:
-            product = Product()
-            product.name = compilation.name
-            product.price = compilation.price
-            product.category_id = 131
-            product.brand_id = 21
-            product.line_id = 51
-            product.quantity = compilation.quantity
-            product.discount = compilation.discount
-            product.save()
-            basket_list[product.id] = product_compilations[com]
-        else:
-            basket_list[product_id] = product_compilations[com]
-        compilation.quantity -= product_compilations[com]
-        compilation.save()
-    if not basket_list:
-        return HttpResponse('Error. Empty request.')
-    queryset = Product.objects.filter(is_active=True)  # Set из таблицы
+    basket_list = request_list["products"]
+
     # создание пустого заказа
     new_order = Order()
     new_order.save()
     order_id = new_order.id
+
     # заполнение заказанных продуктов
-    for product_id in basket_list:
-        item = OrderItem()
-        item.product_id = product_id
-        item.order_id = order_id
-        item.quantity = basket_list[product_id]
-        item.save()
-
     try:
-        for product_basket_id in basket_list:
-            product = queryset.values().get(
-                id=product_basket_id)  # нахождение товара в базе из списка корзины
-            dif = product['quantity'] - basket_list[product_basket_id]
+        for comp_id in product_compilations:
+            compilation, is_correct = quantity_check(product_compilations,
+                                                     ProductCompilation, comp_id, order_id, is_correct)
 
-            if dif >= 0 and basket_list[product_basket_id] > 0:  # Расчитывает доступный товар
-                product['quantity'] = dif
-            else:
-                is_correct = False
-                basket_list[product_basket_id] = product.get('quantity')
+            lst2.append(ProductCompilation(compilation['id'], compilation['name'],
+                                           compilation['description'], compilation['image'],
+                                           compilation['quantity'], compilation['discount'],
+                                           compilation['is_active'],  compilation['price']))
 
-            lst.append(Product(product['id'], product['name'],
-                               product['price'], product['description'],
-                               product['category_id'], product['brand_id'],
-                               product['image'], product['quantity'], product['is_active'],
-                               product['line_id'], product['discount']))
+        for product_id in basket_list:
+            product, is_correct = quantity_check(basket_list,
+                                                 Product, product_id, order_id, is_correct)
+
+            lst1.append(Product(product['id'], product['name'],
+                                product['price'], product['description'],
+                                product['category_id'], product['brand_id'],
+                                product['image'], product['quantity'], product['is_active'],
+                                product['line_id'], product['discount']))
 
     except ObjectDoesNotExist:
         return HttpResponse(json.dumps('Error. Product not found.'))
 
     if is_correct:
-        for prod in lst:
+        for prod in lst1:
             prod.save()
-        thread = threading.Thread(target=return_products, args=(basket_list, order_id,), daemon=True)
+        for comp in lst2:
+            comp.save()
+        thread = threading.Thread(target=return_products,
+                                  args=(basket_list, product_compilations, order_id,), daemon=True)
         thread.start()
     else:
         Order.objects.filter(id=order_id).delete()
         order_id = 0
-    return HttpResponse(json.dumps({'id': order_id, 'list': basket_list}))
+
+    return HttpResponse(json.dumps({'id': order_id, 'list': {'product': basket_list,
+                                                             'product_compilation': product_compilations}}))
 
 
-def return_products(product_list, order_id):
+def return_products(product_list, compilation_list, order_id):
     time.sleep(600)
     orders = Order.objects.filter(id=order_id)
     order = orders.get(id=order_id)
@@ -102,19 +112,11 @@ def return_products(product_list, order_id):
     if order.client_phone == "":
         orders.delete()
 
-        try:
-            for product_basket_id in product_list:
-                product = Product.objects.values().get(id=product_basket_id)
-                product['quantity'] = product.get('quantity') + product_list[product_basket_id]
-                compilation = ProductCompilation.objects.get(name=product.get('name'))
-                if compilation:
-                    compilation.quantity = product['quantity']
-                x = Product(product['id'], product['name'], product['price'],
-                            product['category_id'], product['brand_id'],
-                            product['image'], product['quantity'])
-                x.save()
-        except ObjectDoesNotExist:
-            return None
+    try:
+        return_products_switch(product_list, Product, True)
+        return_products_switch(compilation_list, ProductCompilation, False)
+    except ObjectDoesNotExist:
+        return None
 
 
 @csrf_exempt
