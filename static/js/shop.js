@@ -3,17 +3,17 @@ const shop = document.querySelector("main .shop")
 //замена прокрутки по оси OY на ось OX
 shop.querySelectorAll(".row").forEach(el => {
     el.addEventListener("wheel", (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 
-        // e = e || event
+        e = e || event
 
-        // let delta = e.deltaY === 0 ? e.deltaX : e.deltaY
+        let delta = e.deltaY === 0 ? e.deltaX : e.deltaY
 
-        // //поправка на 1 пиксель
-        // if ((delta > 0 && el.scrollLeft + el.offsetWidth + 1 < el.scrollWidth) || (delta < 0 && el.scrollLeft > 0)) {
-        //     e.preventDefault()
-        //     el.scrollBy(delta, 0)
-        // }
+        //поправка на 1 пиксель
+        if ((delta > 0 && el.scrollLeft + el.offsetWidth + 1 < el.scrollWidth) || (delta < 0 && el.scrollLeft > 0)) {
+            e.preventDefault()
+            el.scrollBy(delta, 0)
+        }
     })
 })
 

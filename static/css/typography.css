@@ -2,8 +2,13 @@ html {
     font-size: 0.875em;
 }
 
+@font-face {
+	font-family: sans-serif;
+	src: url('../fonts/sans-serif.ttf');
+}
+
 body {
-    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial, Helvetica, Verdana, sans-serif;
+    font-family: sans-serif;
     font-weight: 400;
     line-height: 1.45;
 }
