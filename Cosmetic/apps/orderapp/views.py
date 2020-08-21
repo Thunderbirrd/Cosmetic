@@ -45,7 +45,8 @@ def form_basket(request):
             basket_list[product.id] = product_compilations[com]
         else:
             basket_list[product_id] = product_compilations[com]
-
+        compilation.quantity -= product_compilations[com]
+        compilation.save()
     if not basket_list:
         return HttpResponse('Error. Empty request.')
     queryset = Product.objects.filter(is_active=True)  # Set из таблицы
@@ -105,6 +106,9 @@ def return_products(product_list, order_id):
             for product_basket_id in product_list:
                 product = Product.objects.values().get(id=product_basket_id)
                 product['quantity'] = product.get('quantity') + product_list[product_basket_id]
+                compilation = ProductCompilation.objects.get(name=product.get('name'))
+                if compilation:
+                    compilation.quantity = product['quantity']
                 x = Product(product['id'], product['name'], product['price'],
                             product['category_id'], product['brand_id'],
                             product['image'], product['quantity'])
