@@ -48,6 +48,8 @@ const PADDING_RIGHT_AND_LEFT_ROW = MARGIN_SHOP_CARD + ROW_CARD_SHADOW_SIZE;
 const setUpWidthRow = (element) => {
     const parent = element.parentElement;
 
+    element.scrollTo(0, 0)
+
     element.style.width = "auto";
 
     const marginAndWidth = WIDTH_SHOP_CARD + MARGIN_SHOP_CARD + ROW_CARD_SHADOW_SIZE * 2;
