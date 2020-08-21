@@ -7,6 +7,7 @@ class ShopUser(AbstractUser):
     is_staff = models.BooleanField(verbose_name="является ли пользователь админом", default=False)
     sale = models.FloatField(verbose_name="скидка пользователя", default=1.0)
     father_name = models.CharField(verbose_name="отчество", default="", max_length=64)
+    email = models.CharField(verbose_name="email", default="", max_length=255, unique=True)
 
     def __str__(self):
         return self.email
