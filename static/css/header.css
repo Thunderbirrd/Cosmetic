@@ -220,6 +220,7 @@ header .menu li.dropdown{
     }
 
     header .wrap_header {
+        background-color: black;
         padding-top: 0;
     }
 }
