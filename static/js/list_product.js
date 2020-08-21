@@ -291,7 +291,8 @@ const addClickListenerForCheckoutButton = () => {
         if (result === null) {
             message.showMessage("Произошла ошибка на стороне сервера", message.ERROR)
         } else if (result.id === 0) { //result.id === 0 не надо оформлять договор с сервером
-            checkForDataInconsistencies(data, result.list)
+            checkForDataInconsistencies(data.products, result.list.product, TYPE_PRODUCT);
+            checkForDataInconsistencies(data.product_compilation, result.list.product_compilation, TYPE_PRODUCT_COMPILATION);
             message.showMessage("Некоторые продукты недоступны в таком количестве", 
                 message.WARNING)
         } else {
