@@ -3,6 +3,10 @@
     color: white;
 }
 
+#service h2 {
+    margin-top: 0.3em;
+}
+
 .service_header {
     text-align: center;
 }

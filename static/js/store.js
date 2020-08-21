@@ -190,4 +190,4 @@ arrayProducts.forEach(product => {
 })
 
 store.categories.push("Сертификаты")
-store.categories.push("Подборка")
+store.categories.push(CATEGORY_COMPILATION)
