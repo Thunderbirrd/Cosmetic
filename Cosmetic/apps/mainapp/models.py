@@ -56,7 +56,7 @@ class Product(models.Model):
 
 
 class Service(models.Model):
-    name = models.CharField(verbose_name="название услуги", unique=True, max_length=25)
+    name = models.CharField(verbose_name="название услуги", unique=True, max_length=50)
     price = models.PositiveIntegerField(verbose_name="цена", default=0)
 
     def __str__(self):
