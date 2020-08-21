@@ -3,6 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content="Косметический салон">
+    <meta name="keywords" content="Cosmetic Center Косметический салон косметика">
+    <meta name="author" content="John Doe">
     <title>Cosmetic Center</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -49,6 +53,8 @@
 
 <body>
     <script>
+        const CATEGORY_COMPILATION = "Подборка";
+
         const TYPE_PRODUCT = "TYPE_PRODUCT";
         const TYPE_PRODUCT_COMPILATION = "TYPE_PRODUCT_COMPILATION"
 
@@ -101,6 +107,7 @@
         {% for productCompilation in product_compilation_list %}
             arrProductCompilation.push({
                 id: {{ productCompilation.id }},
+                category: CATEGORY_COMPILATION,
                 type: TYPE_PRODUCT_COMPILATION,
                 name: "{{ productCompilation.name }}",
                 description: "{{ productCompilation.description }}",
