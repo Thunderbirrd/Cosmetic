@@ -87,6 +87,7 @@ main .shop .row_wrap.hide {
 
 .row::after {
     content: ".";
+    font-size: 1px;
     width: 0;
     visibility: hidden;
 }

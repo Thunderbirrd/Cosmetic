@@ -121,13 +121,19 @@
 
                 //скрываем если строка пустая
                 const wrapsRowInShop = document.querySelectorAll("main .shop .row_wrap");
-                wrapsRowInShop.forEach(wrap => {
-                    const row = wrap.querySelector(".row");
 
-                    if (row.children.length === 0) {
-                        wrap.classList.add("hide");
-                    }
-                })
+                const hideRowInShop = () => {
+                    wrapsRowInShop.forEach(wrap => {
+                        const row = wrap.querySelector(".row");
+
+                        if (row.children.length === 0) {
+                            wrap.classList.add("hide");
+                        } else {
+                            wrap.classList.remove("hide");
+                        }
+                    });
+                }
+                hideRowInShop();
             </script>
 
             <div class="nothing_found hide">Ничего не найдено</div>

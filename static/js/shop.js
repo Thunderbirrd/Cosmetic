@@ -9,7 +9,7 @@ const MARGIN_BETWEEN_CARD = MARGIN_SHOP_CARD + ROW_CARD_SHADOW_SIZE * 2;
 const PADDING_RIGHT_AND_LEFT_ROW = MARGIN_SHOP_CARD + ROW_CARD_SHADOW_SIZE;
 
 //настраиваем тени, ширину и отступы справа у .card и .row в .shop
-(() => {
+const setUpCardRowShop = () => {
     //ширина кнопок
     wrapsRowInShop.forEach(wrap => {
         wrap.querySelectorAll("button").forEach(b => {
@@ -23,7 +23,9 @@ const PADDING_RIGHT_AND_LEFT_ROW = MARGIN_SHOP_CARD + ROW_CARD_SHADOW_SIZE;
         row.style.marginLeft = MARGIN_LEFT_AND_RIGHT_ROW + "px";
         row.style.marginRight = MARGIN_LEFT_AND_RIGHT_ROW + "px";
 
-        row.querySelectorAll(".card").forEach((el, i) => {
+        const cards = row.querySelectorAll(".card");
+
+        cards.forEach((el, i) => {
             //тень
             el.style.boxShadow = `0 0 ${ROW_CARD_SHADOW_SIZE}px 0 black`;
     
@@ -33,16 +35,20 @@ const PADDING_RIGHT_AND_LEFT_ROW = MARGIN_SHOP_CARD + ROW_CARD_SHADOW_SIZE;
             //отступы
             if (i === 0) {
                 el.style.marginLeft = PADDING_RIGHT_AND_LEFT_ROW + "px";
+            } else {
+                el.style.marginLeft = 0;
             }
     
-            if (i !== shopCard.length - 1) {
+            if (i !== cards.length - 1) {
                 el.style.marginRight = MARGIN_BETWEEN_CARD + "px";
             } else {
-                el.style.marginRight = MARGIN_SHOP_CARD + "px";
+                el.style.marginRight = PADDING_RIGHT_AND_LEFT_ROW + "px";
             }
         });
     });
-})();
+};
+
+setUpCardRowShop();
 
 //длина прокрутки влево или вправо
 const DISTANCE_SCROLL_ROW = MARGIN_SHOP_CARD + ROW_CARD_SHADOW_SIZE * 2 + WIDTH_SHOP_CARD;
@@ -116,7 +122,7 @@ const setUpWidthRow = (element) => {
 
     element.style.width = "auto";
 
-    const marginAndWidth = WIDTH_SHOP_CARD + MARGIN_SHOP_CARD + ROW_CARD_SHADOW_SIZE * 2;
+    const marginAndWidth = WIDTH_SHOP_CARD + MARGIN_BETWEEN_CARD;
     let countVisibleCardInRow;
 
     if (isWidthMobileScreen()) {
@@ -124,7 +130,7 @@ const setUpWidthRow = (element) => {
     } else {
         countVisibleCardInRow = Math.floor((parent.clientWidth - 
             WIDTH_BUTTON_IN_ROW_WRAP * 2 - MARGIN_LEFT_AND_RIGHT_ROW * 2 -
-            MARGIN_SHOP_CARD) / marginAndWidth);
+            PADDING_RIGHT_AND_LEFT_ROW * 2 - WIDTH_SHOP_CARD) / marginAndWidth) + 1;
     }
 
     element.style.width = (countVisibleCardInRow * WIDTH_SHOP_CARD + //карточки
@@ -202,22 +208,36 @@ const divNothingFound = shop.querySelector(".nothing_found")
 
 const divRows = shop.querySelector(".rows")
 
+const setUpShop = (newCards=shopCard) => {
+    for (let i = 0; i < newCards.length; i++) {
+        rowsInShop[Math.floor(i / countInRow)].appendChild(newCards[i]);        
+    }
+
+    hideRowInShop();
+    setUpCardRowShop();
+    setUpRows();
+}
+
 const showProductByFilter = (name, brand, line, category) => {
     const all = ""
 
-    let isNothingFound = true
+    let isNothingFound = true;
+
+    const newCards = [];
 
     shopCard.forEach(el => {
         if ((brand === all || el.dataset.brand === brand) &&
             (line === all || el.dataset.line === line) &&
             (category === all || el.dataset.category === category) &&
             String(el.dataset.name).toLocaleLowerCase().includes(name.toLocaleLowerCase())) {
-            el.classList.remove("hide")
+            newCards.push(el)
             isNothingFound = false
         } else {
-            el.classList.add("hide")
+            el.remove();
         }
     })
+
+    setUpShop(newCards);
 
     if (isNothingFound) {
         divRows.classList.add("hide")
