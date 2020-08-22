@@ -43,7 +43,7 @@ class Line(models.Model):
 class Product(models.Model):
     name = models.CharField(verbose_name="название товара", unique=True, db_index=True, null=False, max_length=64)
     price = models.PositiveIntegerField(verbose_name="цена", default=0)
-    description = models.CharField(verbose_name="описание товара", max_length=256, default="")
+    description = models.CharField(verbose_name="описание товара", max_length=800, default="")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="static/product_img/", blank=True)
