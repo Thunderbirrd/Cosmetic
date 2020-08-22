@@ -105,6 +105,10 @@
     grid-column: 3;
 }
 
+.list_product .count.hide {
+    display: none;
+}
+
 .list_product .count input {
     margin: 0 5px;
     text-align: center;

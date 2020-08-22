@@ -51,6 +51,10 @@
     display: inline;
 }
 
+.about_product .number_input.hide {
+    display: none;
+}
+
 .about_product .my_button {
     margin-left: 10px;
 }

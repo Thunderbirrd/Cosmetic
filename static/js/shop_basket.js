@@ -18,6 +18,8 @@ const addProductToShop = () => {
     const product = store.getProductByIdAndType(id, type)
 
     if (store.hasItemInBasket(divTitle.textContent)) {
+        if (product.category == "Сертификаты") return;
+
         let newNumber = Math.min(Number(inputCount.value) + store.getCountBasket(divTitle.textContent), 99)
         store.changeCountBasket(id, type, newNumber)
         updateCountProducts(id, type, newNumber)
