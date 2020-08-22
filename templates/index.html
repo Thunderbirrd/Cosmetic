@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="robots" content="index, follow" />
     <meta name="description" content="Косметический салон">
-    <meta name="keywords" content="Cosmetic Center Косметический салон косметика">
+    <meta name="keywords" content="Cosmetic Center Косметический салон косметика Якутск">
     <meta name="author" content="John Doe">
     <title>Cosmetic Center</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -85,7 +85,7 @@
                     line: "{{ product.line.name }}",
                     image: "{{ product.image }}",
                     quantity: {{ product.quantity }},
-                    description: "{{ product.description }}",
+                    description: `{{ product.description }}`,
                     discount: {{product.discount}},
                     newPrice: Math.round(parseInt({{ product.price }}) * (1 - {{product.discount}} / 100)),
                     is_active: "{{ product.is_active }}" === "True"
@@ -111,7 +111,7 @@
                 category: CATEGORY_COMPILATION,
                 type: TYPE_PRODUCT_COMPILATION,
                 name: "{{ productCompilation.name }}",
-                description: "{{ productCompilation.description }}",
+                description: `{{ productCompilation.description }}`,
                 image: "{{ productCompilation.image }}",
                 price: parseInt({{ productCompilation.price }}),
                 newPrice: parseInt({{ productCompilation.price }}), 

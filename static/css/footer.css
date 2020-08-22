@@ -17,6 +17,10 @@
     display: none;
 }
 
+#footer_site.hide_without_articles {
+    display: none;
+}
+
 #footer_site .address {
     color: white;
     grid-column: 1;

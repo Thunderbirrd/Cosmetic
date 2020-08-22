@@ -22,27 +22,91 @@ const PADDING_RIGHT_AND_LEFT_ROW = MARGIN_SHOP_CARD + ROW_CARD_SHADOW_SIZE;
     shopRows.forEach(row => {
         row.style.marginLeft = MARGIN_LEFT_AND_RIGHT_ROW + "px";
         row.style.marginRight = MARGIN_LEFT_AND_RIGHT_ROW + "px";
-    });
 
-    shopCard.forEach((el, i) => {
-        //тень
-        el.style.boxShadow = `0 0 ${ROW_CARD_SHADOW_SIZE}px 0 black`;
-
-        //ширина
-        el.style.width = WIDTH_SHOP_CARD + "px";
-
-        //отступы
-        if (i === 0) {
-            el.style.marginLeft = PADDING_RIGHT_AND_LEFT_ROW + "px";
-        }
-
-        if (i !== shopCard.length - 1) {
-            el.style.marginRight = MARGIN_BETWEEN_CARD + "px";
-        } else {
-            el.style.marginRight = MARGIN_SHOP_CARD + "px";
-        }
+        row.querySelectorAll(".card").forEach((el, i) => {
+            //тень
+            el.style.boxShadow = `0 0 ${ROW_CARD_SHADOW_SIZE}px 0 black`;
+    
+            //ширина
+            el.style.width = WIDTH_SHOP_CARD + "px";
+    
+            //отступы
+            if (i === 0) {
+                el.style.marginLeft = PADDING_RIGHT_AND_LEFT_ROW + "px";
+            }
+    
+            if (i !== shopCard.length - 1) {
+                el.style.marginRight = MARGIN_BETWEEN_CARD + "px";
+            } else {
+                el.style.marginRight = MARGIN_SHOP_CARD + "px";
+            }
+        });
     });
 })();
+
+//длина прокрутки влево или вправо
+const DISTANCE_SCROLL_ROW = MARGIN_SHOP_CARD + ROW_CARD_SHADOW_SIZE * 2 + WIDTH_SHOP_CARD;
+
+//прокручивает на одну карточку влево
+const scrollLeft = (row, time) => {
+    // row.scrollBy(-DISTANCE_SCROLL_ROW, 0)
+    jQuery(row).animate({scrollLeft: row.scrollLeft - DISTANCE_SCROLL_ROW}, time);
+}
+
+//прокручивает на одну карточку вправо
+const scrollRight = (row, time) => {
+    // row.scrollBy(DISTANCE_SCROLL_ROW, 0)
+    jQuery(row).animate({scrollLeft: row.scrollLeft + DISTANCE_SCROLL_ROW}, time);
+}
+
+//прокручивает на count карточек вправо
+const scrollRowTo = (row, count, time) => {
+    // row.scrollToy(DISTANCE_SCROLL_ROW * count, 0)
+    jQuery(row).animate({scrollLeft: DISTANCE_SCROLL_ROW * count}, time);
+}
+
+const elementsFlexControl = shop.querySelectorAll(".flex_control");
+
+//заполняем .flex_control
+const setUpFlexControl = (numberFlexControl, countVisibleCardInRow, countCard, row) => {
+    const flexControl = shop.querySelector(`.flex_control[data-number="${numberFlexControl}"]`);
+    const countLi = Math.ceil(countCard / countVisibleCardInRow);
+
+    flexControl.innerHTML = "";
+
+    for (let i = 0; i < countLi; i++) {
+        const li = document.createElement("li");
+
+        if (i === 0) {
+            li.classList.add("active")
+        }
+
+        const span = document.createElement("span");
+        li.appendChild(span);
+
+        flexControl.appendChild(li)
+
+        const clickListener = (e) => {
+            flexControl.querySelectorAll("li").forEach(li => {
+                li.classList.remove("active")
+            })
+
+            li.classList.add("active")
+
+            const time = 250;
+
+            scrollRowTo(row, i * countVisibleCardInRow, time);
+
+            li.removeEventListener("click", clickListener);
+
+            setTimeout(() => {
+                li.addEventListener("click", clickListener);
+            }, time + 100);
+        }
+        
+        li.addEventListener("click", clickListener);
+    }
+}
 
 //настраиваем ширину класс .row
 const setUpWidthRow = (element) => {
@@ -66,6 +130,9 @@ const setUpWidthRow = (element) => {
     element.style.width = (countVisibleCardInRow * WIDTH_SHOP_CARD + //карточки
         (countVisibleCardInRow - 1) * MARGIN_BETWEEN_CARD + //отступы между карточками
         2 * PADDING_RIGHT_AND_LEFT_ROW) + "px";
+
+    setUpFlexControl(parent.dataset.number, countVisibleCardInRow, 
+        element.children.length, element);
 }
 
 //настраиваем ширину всех строк
@@ -75,21 +142,6 @@ const setUpRows = () => {
     });
 }
 setUpRows();
-
-//длина прокрутки влево или вправо
-const DISTANCE_SCROLL_ROW = MARGIN_SHOP_CARD + ROW_CARD_SHADOW_SIZE * 2 + WIDTH_SHOP_CARD;
-
-//прокручивает на одну карточку влево
-const scrollLeft = (row, time) => {
-    // row.scrollBy(-DISTANCE_SCROLL_ROW, 0)
-    jQuery(row).animate({scrollLeft: row.scrollLeft - DISTANCE_SCROLL_ROW}, time);
-}
-
-//прокручивает на одну карточку вправо
-const scrollRight = (row, time) => {
-    // row.scrollBy(DISTANCE_SCROLL_ROW, 0)
-    jQuery(row).animate({scrollLeft: row.scrollLeft + DISTANCE_SCROLL_ROW}, time);
-}
 
 //прокрутка налево, направо на кнопки
 wrapsRowInShop.forEach(wrap => {
@@ -126,12 +178,12 @@ shopRows.forEach(el => {
         //поправка на 1 пиксель
         if ((delta > 0 && el.scrollLeft + el.offsetWidth + 1 < el.scrollWidth) || (delta < 0 && el.scrollLeft > 0)) {
             // el.scrollBy(delta, 0)
-            let time = 350;
+            let time = 250;
 
             el.removeEventListener("wheel", listenerScrollRows);
             setTimeout(() => {
                 el.addEventListener("wheel", listenerScrollRows);
-            }, time + 150)
+            }, time + 100)
 
             if (delta > 0) {
                 scrollRight(el, time);
