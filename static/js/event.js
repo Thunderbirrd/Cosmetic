@@ -11,6 +11,9 @@ window.onload = () => {
     //настраивает видимость меню магазина
     setVisiabilityMenuShop()
 
+    //показывает корзинку с товарами и её кружочек
+    showWrapBasket()
+
     //делаем действия при начальной загрузке страницы
     doActionByCurentURL()
     
@@ -28,6 +31,9 @@ window.addEventListener('resize', () => {
 
     //настраивает видимость меню магазина
     setVisiabilityMenuShop()
+
+    //настраиваем ширину строк магазина
+    setUpRows()
 })
 
 window.onpopstate = () => {

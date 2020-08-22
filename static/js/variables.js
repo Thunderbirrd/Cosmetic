@@ -33,3 +33,18 @@ const service = document.getElementById("service")
 
 //карточки товаров в магазине
 const shopCard = document.querySelectorAll("main .shop .card")
+
+//правый отступ у shopCard
+const MARGIN_SHOP_CARD = 10
+
+//ширина shopCard
+const WIDTH_SHOP_CARD = 200
+
+//размер тени у карточки в магазине
+const ROW_CARD_SHADOW_SIZE = 5;
+
+//размер кнопок в .show_row
+const WIDTH_BUTTON_IN_ROW_WRAP = 30;
+
+//размер кнопок в .show_row
+const MARGIN_LEFT_AND_RIGHT_ROW = 5;

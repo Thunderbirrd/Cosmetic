@@ -10,6 +10,10 @@ header {
     z-index: 2;
 }
 
+header .invisible {
+    visibility: hidden;
+}
+
 header .hide {
     display: none;
 }
@@ -216,6 +220,7 @@ header .menu li.dropdown{
     }
 
     header .wrap_header {
+        background-color: black;
         padding-top: 0;
     }
 }

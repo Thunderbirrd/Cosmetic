@@ -4,13 +4,22 @@
             {% include "components/loupe.html" %}
 
             <div class="rows">
-                <div class="row pop_up_element">
+                <div class="row_wrap">
+                    <button class="back">&lt;</button>
+                    <div class="row pop_up_element"></div>
+                    <button class="forward">&gt;</button>
                 </div>
-    
-                <div class="row pop_up_element">
+
+                <div class="row_wrap">
+                    <button class="back">&lt;</button>
+                    <div class="row pop_up_element"></div>
+                    <button class="forward">&gt;</button>
                 </div>
-    
-                <div class="row pop_up_element">
+
+                <div class="row_wrap">
+                    <button class="back">&lt;</button>
+                    <div class="row pop_up_element"></div>
+                    <button class="forward">&gt;</button>
                 </div>
             </div>
 
@@ -37,16 +46,16 @@
                     img.alt = "product"
 
                     divCard.appendChild(divCardImage)
-                    
+
                     divCardImage.appendChild(img)
-                    
+
                     if (quantity === 0) {
                         const divMess = document.createElement("div")
                         divMess.classList.add("no_products")
                         divMess.textContent = "ожидается поступление"
                         divCard.appendChild(divMess)
                         divCard.style.cursor = "default"
-                
+
                     } else if (quantity > 0) {
                         //при щелчке по карточке в магазине показывать подробную информацию о продукте
                         divCard.addEventListener("click", () => {
@@ -72,7 +81,7 @@
                     divCard.appendChild(divCardPrice)
 
                     if (discount !== 0) {
-                        const divCardNewPrice =document.createElement("div")
+                        const divCardNewPrice = document.createElement("div")
                         divCardNewPrice.classList.add("card__new_price")
                         let newPrice = Math.round(price * (1 - discount / 100))
                         divCardNewPrice.innerHTML = newPrice + " &#8381;"
@@ -88,10 +97,20 @@
                 arrShop.forEach((p, i) => {
                     let index = Math.floor(i / countInRow)
                     rowsInShop[index].appendChild(
-                        createCardInShop(p.id, p.type, p.brand, p.name, p.price, p.image, 
+                        createCardInShop(p.id, p.type, p.brand, p.name, p.price, p.image,
                             p.quantity, p.discount, p.line, p.category)
                     )
                 });
+
+                //скрываем если строка пустая
+                const wrapsRowInShop = document.querySelectorAll("main .shop .row_wrap");
+                wrapsRowInShop.forEach(wrap => {
+                    const row = wrap.querySelector(".row");
+
+                    if (row.children.length === 0) {
+                        wrap.classList.add("hide");
+                    }
+                })
             </script>
 
             <div class="nothing_found hide">Ничего не найдено</div>
