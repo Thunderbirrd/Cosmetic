@@ -13,13 +13,34 @@ from django.core.exceptions import ObjectDoesNotExist
 
 def quantity_check(object_list, object_model, object_id, order_id, is_correct):
     item = OrderItem()
-    item.product_id = object_id
+    my_object = object_model.objects.filter(is_active=True).values().get(
+        id=object_id)
+
+    if object_model == ProductCompilation:
+        try:
+            product = Product.objects.get(name=my_object['name'])
+            item.product_id = product.id
+        except ObjectDoesNotExist:
+            product = Product()
+            product.name = my_object['name']
+            product.price = my_object['price']
+            product.quantity = 0
+            product.brand_id = 21
+            product.category_id = 131
+            product.image = my_object['image']
+            product.is_active = my_object['is_active']
+            product.description = my_object['description']
+            product.discount = my_object['discount']
+            product.line_id = 51
+            product.save()
+            item.product_id = product.id
+    else:
+        item.product_id = object_id
     item.order_id = order_id
     item.quantity = object_list[object_id]
     item.save()
 
-    my_object = object_model.objects.filter(is_active=True).values().get(
-        id=object_id)  # нахождение товара в базе из списка корзины
+    # нахождение товара в базе из списка корзины
     dif = my_object['quantity'] - object_list[object_id]
 
     if dif >= 0 and object_list[object_id] > 0:  # Расчитывает доступный товар
@@ -30,13 +51,13 @@ def quantity_check(object_list, object_model, object_id, order_id, is_correct):
     return my_object, is_correct
 
 
-def return_products_switch(object_list, object_type, is_product):
+def return_products_switch(object_list, object_type):
     for object_id in object_list:
 
         my_object = object_type.objects.values().get(id=object_id)
         my_object['quantity'] = my_object['quantity'] + object_list[object_id]
 
-        if is_product:
+        if object_type == Product:
             x = object_type(my_object['id'], my_object['name'],
                             my_object['price'], my_object['description'],
                             my_object['category_id'], my_object['brand_id'],
@@ -73,7 +94,7 @@ def form_basket(request):
             lst2.append(ProductCompilation(compilation['id'], compilation['name'],
                                            compilation['description'], compilation['image'],
                                            compilation['quantity'], compilation['discount'],
-                                           compilation['is_active'],  compilation['price']))
+                                           compilation['is_active'], compilation['price']))
 
         for product_id in basket_list:
             product, is_correct = quantity_check(basket_list,
@@ -113,8 +134,8 @@ def return_products(product_list, compilation_list, order_id):
         orders.delete()
 
     try:
-        return_products_switch(product_list, Product, True)
-        return_products_switch(compilation_list, ProductCompilation, False)
+        return_products_switch(product_list, Product)
+        return_products_switch(compilation_list, ProductCompilation)
     except ObjectDoesNotExist:
         return None
 
