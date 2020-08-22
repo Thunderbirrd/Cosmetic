@@ -17,10 +17,10 @@ const hideOptionsContainer = () => {
 /////// Service type   //////
 optionslist.forEach(o => {
     o.addEventListener("click", () => {
-        let label = o.querySelector("label")
-        selected.innerHTML = label.innerHTML;
-        selected.dataset.name = label.dataset.name
-        selected.dataset.price = label.dataset.price
+        let p = o.querySelector("p")
+        selected.innerHTML = p.innerHTML;
+        selected.dataset.name = p.dataset.name
+        selected.dataset.price = p.dataset.price
         hideOptionsContainer()
     });
 });

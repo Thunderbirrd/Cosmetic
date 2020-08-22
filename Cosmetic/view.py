@@ -22,12 +22,19 @@ def home(request):
             product_compilation_list = ProductCompilation.objects.filter(is_active=True)
             cache.set(key, product_compilation_list)
 
+        product_compilation_list_product_list = []
+        for c in product_compilation_list:
+            for product in c.product_list.prefetch_related():
+                product_compilation_list_product_list.append([c.id, product.id])
+
         content = {
             'title': title,
             'products': product_list,
             'occupied_dates': visits(str(datetime.date.today())),
             'service_names': services(),
             'product_compilation_list': product_compilation_list,
+            # Формат следующего поля: [[compilation.id, product.id], ... ]
+            'product_compilation_list_product_list': product_compilation_list_product_list,
         }
         return render(request, 'index.html', content)
 

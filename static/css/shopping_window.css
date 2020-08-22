@@ -167,8 +167,8 @@
 
 .shopping_window .list li {
     display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-template-rows: 80px 20px;
+    grid-template-columns: 120px repeat(3, auto);
+    grid-template-rows: 80px auto;
 }
 
 .shopping_window .list li:not(:last-child) {
@@ -184,6 +184,7 @@
 }
 
 .shopping_window .list .title {
+    margin: 0 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -239,7 +240,7 @@
 @media screen and (max-width: 1249px) {
     .shopping_window .list li {
         display: grid;
-        grid-template-columns: repeat(3, auto);
+        grid-template-columns: 120px repeat(2, auto);
     }
     .shopping_window .list .price {
         grid-column: 2;
@@ -261,7 +262,7 @@
 @media screen and (max-width: 1049px) {
     .shopping_window .list li {
         display: grid;
-        grid-template-columns: repeat(2, auto);
+        grid-template-columns: 120px auto;
     }
     .shopping_window .list .price {
         grid-column: 2;
@@ -308,7 +309,7 @@
     }
     .shopping_window .list li {
         display: grid;
-        grid-template-columns: repeat(4, auto);
+        grid-template-columns: 120px repeat(3, auto);
     }
     .shopping_window .list .price {
         grid-column: 2;
@@ -332,7 +333,7 @@
 @media screen and (max-width: 769px) {
     .shopping_window .list li {
         display: grid;
-        grid-template-columns: repeat(3, auto);
+        grid-template-columns: 120px repeat(2, auto);
     }
     .shopping_window .list .price {
         grid-column: 2;
@@ -354,7 +355,7 @@
 @media screen and (max-width: 680px) {
     .shopping_window .list li {
         display: grid;
-        grid-template-columns: repeat(2, auto);
+        grid-template-columns: 120px auto;
     }
     .shopping_window .list .price {
         grid-column: 2;

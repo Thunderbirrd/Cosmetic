@@ -33,15 +33,14 @@ const _setPositionHeader = () => {
 const count_productes = document.getElementById('count_productes')
 const basket = document.querySelector('.wrap_basket img')
 
+const wrapBasket = document.querySelector('.wrap_basket')
+
 // задаёт положение корзинки покупок
 const _setPositionShoppingBasket = () => {
     const wrapHeader = document.querySelector('.wrap_header')
 
     const wrapHeaderBox = wrapHeader.getBoundingClientRect()
 
-    const wrapBasket = document.querySelector('.wrap_basket')
-
-    
     if (isWidthMobileScreen()) {
         wrapBasket.style.left = 10 + 'px'
         wrapBasket.style.top = 10 + 'px'
@@ -68,6 +67,11 @@ const _setPositionShoppingBasketCircle = () => {
 
     let top = basket.clientHeight + basketBox.top - count_productes.offsetHeight / 2 - 5
     count_productes.style.top = top + 'px'
+}
+
+// показывает .wrap_basket
+const showWrapBasket = () => {
+    wrapBasket.classList.remove("invisible");
 }
 
 // задаёт видимость кружочка корзинки покупок

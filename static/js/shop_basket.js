@@ -10,21 +10,30 @@ const divPrice = document.querySelector(".about_product .card__price")
 //img товара
 const imgProduct = document.querySelector(".about_product .card__image img")
 
+const elementAboutProduct = document.querySelector(".about_product")
+
 //добавляем товар в корзину
 const addProductToShop = () => {
+    let {id, type} = elementAboutProduct.dataset;
+    const product = store.getProductByIdAndType(id, type)
+
     if (store.hasItemInBasket(divTitle.textContent)) {
         let newNumber = Math.min(Number(inputCount.value) + store.getCountBasket(divTitle.textContent), 99)
-        store.changeCountBasket(divTitle.textContent, newNumber)
-        updateCountProducts(divTitle.textContent, newNumber)
+        store.changeCountBasket(id, type, newNumber)
+        updateCountProducts(id, type, newNumber)
     } else {
         store.stateBasket.push({
+            id,
+            type,
             src: imgProduct.src,
             title: divTitle.textContent,
             count: Number(inputCount.value),
-            price: Number(divPrice.textContent.slice(0, divPrice.textContent.length - 2))
+            price: product.newPrice
         })
 
-        createListItem(imgProduct.src, divTitle.textContent, divPrice.textContent, Number(inputCount.value))
+        createListItem(imgProduct.src, divTitle.textContent, 
+            divPrice.textContent, Number(inputCount.value), 
+            id, type)
     }
 
     setAmountProductes()

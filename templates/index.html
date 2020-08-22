@@ -2,7 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content="Косметический салон">
+    <meta name="keywords" content="Cosmetic Center Косметический салон косметика Якутск">
+    <meta name="author" content="John Doe">
     <title>Cosmetic Center</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -19,6 +23,7 @@
     
     {% load static %}
 
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/ico">
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/typography.css' %}">
     <link rel="stylesheet" href="{% static 'css/wrap.css' %}">
@@ -49,7 +54,12 @@
 
 <body>
     <script>
-        const arrayProducts = []
+        const CATEGORY_COMPILATION = "Подборка";
+
+        const TYPE_PRODUCT = "TYPE_PRODUCT";
+        const TYPE_PRODUCT_COMPILATION = "TYPE_PRODUCT_COMPILATION"
+
+        const arrayProducts = [];
 
         // name
         // price
@@ -59,24 +69,64 @@
         // image
         // quantity
         // is_active
+        // newPrice
         // discount 
         // description
         
         {% for product in products %}
-            arrayProducts.push({ 
-                id: {{ product.id }},
-                name: "{{ product.name }}",
-                price: parseInt({{ product.price }}),
-                category: "{{ product.category }}",
-                brand: "{{ product.brand }}",
-                line: "{{ product.line.name }}",
-                image: "{{ product.image }}",
-                quantity: {{ product.quantity }},
-                description: "{{ product.description }}",
-                discount: {{product.discount}},
-                is_active: "{{ product.is_active }}" === "True"
-            })
+            if ("{{ product.brand }}" !== "Подборка") {
+                arrayProducts.push({ 
+                    id: {{ product.id }},
+                    type: TYPE_PRODUCT,
+                    name: "{{ product.name }}",
+                    price: parseInt({{ product.price }}),
+                    category: "{{ product.category }}",
+                    brand: "{{ product.brand }}",
+                    line: "{{ product.line.name }}",
+                    image: "{{ product.image }}",
+                    quantity: {{ product.quantity }},
+                    description: `{{ product.description }}`,
+                    discount: {{product.discount}},
+                    newPrice: Math.round(parseInt({{ product.price }}) * (1 - {{product.discount}} / 100)),
+                    is_active: "{{ product.is_active }}" === "True"
+                });
+            }
         {% endfor %}
+
+        const arrProductCompilation = [];
+
+        // id
+        // name 
+        // description
+        // image
+        // price
+        // quantity
+        // discount
+        // is_active
+        // product_list: Product[]
+
+        {% for productCompilation in product_compilation_list %}
+            arrProductCompilation.push({
+                id: {{ productCompilation.id }},
+                category: CATEGORY_COMPILATION,
+                type: TYPE_PRODUCT_COMPILATION,
+                name: "{{ productCompilation.name }}",
+                description: `{{ productCompilation.description }}`,
+                image: "{{ productCompilation.image }}",
+                price: parseInt({{ productCompilation.price }}),
+                newPrice: parseInt({{ productCompilation.price }}), 
+                quantity: {{ productCompilation.quantity }},
+                discount: {{ productCompilation.discount }},
+                is_active: "{{ productCompilation.is_active }}" === "True",
+                product_list: []
+            });
+        {% endfor %}
+
+        {{ product_compilation_list_product_list }}.forEach(el => {
+            arrProductCompilation.find(pC => pC.id === el[0]).product_list.push(el[1])
+        });
+
+        const arrShop = [...arrayProducts, ...arrProductCompilation];
     </script>
     <script>
         const servicecontent = []

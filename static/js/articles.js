@@ -3,7 +3,7 @@ const withoutArticles = document.querySelectorAll(".without_articles ")
 //прячет "Стастьи" и показывает основной лендинг
 const hideArtices = () => {
     withoutArticles.forEach(el => { 
-        el.classList.remove("hide") 
+        el.classList.remove("hide_without_articles") 
     })
 
     articles.classList.add("hide")
@@ -12,7 +12,7 @@ const hideArtices = () => {
 //показывает "Стастьи" и прячет основной лендинг
 const showArtices = async () => {
     withoutArticles.forEach(el => { 
-        el.classList.add("hide") 
+        el.classList.add("hide_without_articles") 
     })
 
     articles.classList.remove("hide")

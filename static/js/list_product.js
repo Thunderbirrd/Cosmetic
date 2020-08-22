@@ -69,7 +69,7 @@ const _createPrice = (price) => {
     return div
 }
 
-const _createCount = (title, count) => {
+const _createCount = (id, type, count) => {
     const div = document.createElement("div")
     div.classList.add("count")
 
@@ -85,20 +85,20 @@ const _createCount = (title, count) => {
         if (data < "0" || data > "9") event.preventDefault();
     }
     input.oninput = () => {
-        const maxNumber = Math.min(99, store.getProductByTitle(title).quantity)
+        const maxNumber = Math.min(99, store.getProductByIdAndType(id, type).quantity)
 
         if (Number(input.value) >= maxNumber) {
             input.value = maxNumber
         }
 
-        store.changeCountBasket(title, input.value)
+        store.changeCountBasket(id, type, input.value)
 
         setAmountProductes()
         setTextInSpanAmount()
     }
     input.onchange = () => {
         if (Number(input.value) <= 0) {
-            deleteListItem(title)
+            deleteListItem(id, type)
             return;
         }
     }
@@ -110,11 +110,11 @@ const _createCount = (title, count) => {
         input.value--
 
         if (Number(input.value) <= 0) {
-            deleteListItem(title)
+            deleteListItem(id, type)
             return;
         }
 
-        store.changeCountBasket(title, input.value)
+        store.changeCountBasket(id, type, input.value)
 
         setAmountProductes()
         setTextInSpanAmount()
@@ -125,7 +125,7 @@ const _createCount = (title, count) => {
     buttonPlus.textContent = "+"
     buttonPlus.dataset.title = "Данного товара на складе очень мало"
     buttonPlus.addEventListener("click", () => {
-        const maxNumber = Math.min(99, store.getProductByTitle(title).quantity)
+        const maxNumber = Math.min(99, store.getProductByIdAndType(id, type).quantity)
 
         if (Number(input.value) >= maxNumber) {
             input.value = maxNumber
@@ -134,12 +134,12 @@ const _createCount = (title, count) => {
 
         input.value++
 
-        store.changeCountBasket(title, input.value)
+        store.changeCountBasket(id, type, input.value)
 
         setAmountProductes()
         setTextInSpanAmount()
     })
-    if (store.getProductByTitle(title).quantity > 10) {
+    if (store.getProductByIdAndType(id, type).quantity > 10) {
         buttonPlus.classList.remove("show_tooltip") 
     } else {
         buttonPlus.classList.add("show_tooltip") 
@@ -153,12 +153,12 @@ const _createCount = (title, count) => {
 }
 
 //удаляет в всплывающем окне запись
-const deleteListItem = (title) => {
+const deleteListItem = (id, type) => {
     //удаляем из store
-    store.deleteProductFromBasket(title)
+    store.deleteProductFromBasket(id, type)
 
     //удаляем из списка
-    ulListProduct.removeChild(document.querySelector(`.list_product li[data-title='${title}']`))
+    ulListProduct.removeChild(document.querySelector(`.list_product li[data-id='${id}'][data-type='${type}']`))
 
     //проверяем видимость надписи, что список пуст
     togleDisplayListIsEmpty()
@@ -166,13 +166,13 @@ const deleteListItem = (title) => {
     setAmountProductes()
 }
 
-const _createDelete = (title) => {
+const _createDelete = (id, type) => {
     const div = document.createElement("div")
     div.classList.add("delete")
 
     const button = document.createElement("button")
     button.addEventListener("click", () => {
-        deleteListItem(title)
+        deleteListItem(id, type)
     })
 
     const img = document.createElement("img")
@@ -200,7 +200,7 @@ const _createWarning = () => {
 }
 
 //показ предупреждения
-const showWarningListItem = (text, id, newQuantity) => {
+const showWarningListItem = (text, id, type, newQuantity) => {
     const li = document.querySelector(`.list_product li[data-id='${id}']`)
     li.classList.add("warning_item")
 
@@ -210,7 +210,7 @@ const showWarningListItem = (text, id, newQuantity) => {
     const p = divWarning.querySelector("p")
     p.textContent = text
 
-    store.getProductById(id).quantity = newQuantity
+    store.getProductByIdAndType(id, type).quantity = newQuantity
 }
 
 //очищаем список покупок
@@ -221,33 +221,34 @@ const clearListProducts = () => {
 }
 
 //создаёт в всплывающем окне запись
-const createListItem = (src, title, price, count) => {
+const createListItem = (src, title, price, count, id, type) => {
     const li = document.createElement("li")
     li.dataset.title = title
-    li.dataset.id = store.getIdByTitle(title)
+    li.dataset.id = id
+    li.dataset.type = type
 
     li.appendChild(_createImgProduct(src))
     li.appendChild(_createTitle(title))
     li.appendChild(_createPrice(price))
-    li.appendChild(_createCount(title, count))
-    li.appendChild(_createDelete(title))
+    li.appendChild(_createCount(id, type, count))
+    li.appendChild(_createDelete(id, type))
     li.appendChild(_createWarning())
 
     ulListProduct.appendChild(li)
 }
 
 //обновляет количество товаров
-const updateCountProducts = (title, count) => {
-    document.querySelector(`.list_product li[data-title='${title}'] .count input`).value = count
+const updateCountProducts = (id, type, count) => {
+    document.querySelector(`.list_product li[data-type='${type}'][data-id='${id}'] .count input`).value = count
 }
 
 //проверка на несоответствия данных количество товаров
-const checkForDataInconsistencies = (userData, serverData) => {
+const checkForDataInconsistencies = (userData, serverData, type) => {
     for (const id in userData) {
         if (userData.hasOwnProperty(id) && serverData[id] !== userData[id]) {
             let text = `К сожаление на складе количество товара: ${serverData[id]}, а не ${userData[id]} (как вы указали)`
-            showWarningListItem(text, id, serverData[id])
-            store.setQuantityById(id, serverData[id])
+            showWarningListItem(text, id, type, serverData[id])
+            store.setQuantityById(id, type, serverData[id])
         }
     }
 }
@@ -259,7 +260,10 @@ const addClickListenerForCheckoutButton = () => {
     buttonCheckout.addEventListener("click", async () => {
         buttonCheckout.setAttribute("disabled", "disabled")
 
-        const data = {}
+        const data = {
+            product_compilation: {},
+            products: {}
+        }
 
         const list = ulListProduct.children
 
@@ -270,9 +274,16 @@ const addClickListenerForCheckoutButton = () => {
         }
 
         for (let i = 0; i < list.length; i++) {
-            let product = store.stateShop.find(item => item.name === list[i].dataset.title )
+            let product = store.getProductByIdAndType(list[i].dataset.id, list[i].dataset.type);
 
-            data[product.id] = Number(list[i].querySelector(".count input").value)
+            let type;
+            if (product.type === TYPE_PRODUCT_COMPILATION) {
+                type = "product_compilation";
+            } else if (product.type === TYPE_PRODUCT) {
+                type = "products";
+            }
+
+            data[type][product.id] = Number(list[i].querySelector(".count input").value)
         }
 
         let result = await Urls.checkout(data)
@@ -280,7 +291,8 @@ const addClickListenerForCheckoutButton = () => {
         if (result === null) {
             message.showMessage("Произошла ошибка на стороне сервера", message.ERROR)
         } else if (result.id === 0) { //result.id === 0 не надо оформлять договор с сервером
-            checkForDataInconsistencies(data, result.list)
+            checkForDataInconsistencies(data.products, result.list.product, TYPE_PRODUCT);
+            checkForDataInconsistencies(data.product_compilation, result.list.product_compilation, TYPE_PRODUCT_COMPILATION);
             message.showMessage("Некоторые продукты недоступны в таком количестве", 
                 message.WARNING)
         } else {

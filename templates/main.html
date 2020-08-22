@@ -4,21 +4,47 @@
             {% include "components/loupe.html" %}
 
             <div class="rows">
-                <div class="row pop_up_element">
+                <div data-number="1" class="row_wrap pop_up_element">
+                    <button class="back">&lt;</button>
+                    <div class="row"></div>
+                    <button class="forward">&gt;</button>
                 </div>
-    
-                <div class="row pop_up_element">
+                <ul class="flex_control pop_up_element" data-number="1"></ul>
+
+                <div data-number="2" class="row_wrap pop_up_element">
+                    <button class="back">&lt;</button>
+                    <div class="row"></div>
+                    <button class="forward">&gt;</button>
                 </div>
-    
-                <div class="row pop_up_element">
+                <ul class="flex_control pop_up_element" data-number="2"></ul>
+
+                <div data-number="3" class="row_wrap pop_up_element">
+                    <button class="back">&lt;</button>
+                    <div class="row"></div>
+                    <button class="forward">&gt;</button>
                 </div>
+                <ul class="flex_control pop_up_element" data-number="3"></ul>
+
+                <div data-number="4" class="row_wrap pop_up_element">
+                    <button class="back">&lt;</button>
+                    <div class="row"></div>
+                    <button class="forward">&gt;</button>
+                </div>
+                <ul class="flex_control pop_up_element" data-number="4"></ul>
+
+                <div data-number="5" class="row_wrap pop_up_element">
+                    <button class="back">&lt;</button>
+                    <div class="row"></div>
+                    <button class="forward">&gt;</button>
+                </div>
+                <ul class="flex_control pop_up_element" data-number="5"></ul>
             </div>
 
             <script>
                 const rowsInShop = document.querySelectorAll("main .shop .row")
 
                 //создаёт карточку
-                const createCardInShop = (id, brand, name, price, image, quantity, discount, line, category) => {
+                const createCardInShop = (id, type, brand, name, price, image, quantity, discount, line, category) => {
                     const divCard = document.createElement("div")
                     divCard.dataset.id = id
                     divCard.dataset.brand = brand
@@ -37,19 +63,20 @@
                     img.alt = "product"
 
                     divCard.appendChild(divCardImage)
-                    
+
                     divCardImage.appendChild(img)
-                    
+
                     if (quantity === 0) {
                         const divMess = document.createElement("div")
                         divMess.classList.add("no_products")
                         divMess.textContent = "ожидается поступление"
                         divCard.appendChild(divMess)
-                
+                        divCard.style.cursor = "default"
+
                     } else if (quantity > 0) {
                         //при щелчке по карточке в магазине показывать подробную информацию о продукте
                         divCard.addEventListener("click", () => {
-                            showAboutProduct(id)
+                            showAboutProduct(id, type)
                         })
                     }
 
@@ -71,7 +98,7 @@
                     divCard.appendChild(divCardPrice)
 
                     if (discount !== 0) {
-                        const divCardNewPrice =document.createElement("div")
+                        const divCardNewPrice = document.createElement("div")
                         divCardNewPrice.classList.add("card__new_price")
                         let newPrice = Math.round(price * (1 - discount / 100))
                         divCardNewPrice.innerHTML = newPrice + " &#8381;"
@@ -82,15 +109,31 @@
                 }
 
                 //создаём карточки товаров в магазине
-                const countInRow = Math.max(10, arrayProducts.length / 3)
+                const countInRow = Math.max(6, arrShop.length / 3)
 
-                arrayProducts.forEach((p, i) => {
+                arrShop.forEach((p, i) => {
                     let index = Math.floor(i / countInRow)
                     rowsInShop[index].appendChild(
-                        createCardInShop(p.id, p.brand, p.name, p.price, p.image, 
+                        createCardInShop(p.id, p.type, p.brand, p.name, p.price, p.image,
                             p.quantity, p.discount, p.line, p.category)
                     )
                 });
+
+                //скрываем если строка пустая
+                const wrapsRowInShop = document.querySelectorAll("main .shop .row_wrap");
+
+                const hideRowInShop = () => {
+                    wrapsRowInShop.forEach(wrap => {
+                        const row = wrap.querySelector(".row");
+
+                        if (row.children.length === 0) {
+                            wrap.classList.add("hide");
+                        } else {
+                            wrap.classList.remove("hide");
+                        }
+                    });
+                }
+                hideRowInShop();
             </script>
 
             <div class="nothing_found hide">Ничего не найдено</div>

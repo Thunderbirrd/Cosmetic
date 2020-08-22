@@ -1,5 +1,6 @@
 from django.db import models
 import Cosmetic.apps.mainapp.models as m
+from math import ceil
 
 
 class Order(models.Model):
@@ -46,18 +47,18 @@ class Order(models.Model):
         return len(items)
 
     def get_total_cost(self):
-        items = self.order_items.select_related()
-        return sum(list(map(lambda x: x.quantity * x.product.price, items)))
+        items = OrderItem.objects.filter(order_id=self.id).all()
+        for item in items:
+            print(ceil(item.quantity * item.product.price * (1 - (item.product.discount / 100))))
+        return sum(list(map(lambda x: ceil(x.quantity * x.product.price * (1 - (x.product.discount / 100))), items)))
 
     def get_summary(self):
-        items = self.order_items.select_related()
         return {
-            'total_cost': sum(list(map(lambda x: x.quantity * x.product.price, items))),
-            'total_quantity': sum(list(map(lambda x: x.quantity, items)))
+            'total_cost': self.get_total_cost(),
+            'total_quantity': self.get_total_quantity(),
         }
 
         # переопределяем метод, удаляющий объект
-
     def delete(self, **kwargs):
         for item in self.order_items.select_related():
             item.product.quantity += item.quantity
