@@ -30,7 +30,7 @@ const showAboutProduct = (id, type) => {
     aboutProductImage.height = 200
     aboutProductPrice.innerHTML = product.newPrice + " &#8381;";
     aboutProductCount.value = 1
-    aboutProductDescription.textContent = product.description
+    aboutProductDescription.innerHTML = String(product.description).replace(/\n/, "<br>");
 
     setMaxNumber(store.getProductByIdAndType(id, type).quantity)
 

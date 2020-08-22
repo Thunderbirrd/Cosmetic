@@ -72,7 +72,7 @@ const showArticle = async (id) => {
 
     h3.textContent = article.title
 
-    articlesText.textContent = article.text
+    articlesText.innerHTML = article.text.replace(/\n/g, "<br>");
 
     article.images.forEach(src => {
         const img = document.createElement("img")

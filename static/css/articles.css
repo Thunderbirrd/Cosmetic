@@ -49,6 +49,7 @@
 
 .articles .articles_text {
     margin-bottom: 20px;
+    text-align: justify;
     font-size: 1.2rem;
 }
 
