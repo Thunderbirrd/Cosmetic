@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="robots" content="index, follow" />
     <meta name="description" content="Косметический салон">
     <meta name="keywords" content="Cosmetic Center Косметический салон косметика">
@@ -23,6 +23,7 @@
     
     {% load static %}
 
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/ico">
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/typography.css' %}">
     <link rel="stylesheet" href="{% static 'css/wrap.css' %}">
@@ -113,6 +114,7 @@
                 description: "{{ productCompilation.description }}",
                 image: "{{ productCompilation.image }}",
                 price: parseInt({{ productCompilation.price }}),
+                newPrice: parseInt({{ productCompilation.price }}), 
                 quantity: {{ productCompilation.quantity }},
                 discount: {{ productCompilation.discount }},
                 is_active: "{{ productCompilation.is_active }}" === "True",
