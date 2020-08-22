@@ -4,23 +4,40 @@
             {% include "components/loupe.html" %}
 
             <div class="rows">
-                <div class="row_wrap">
+                <div data-number="1" class="row_wrap pop_up_element">
                     <button class="back">&lt;</button>
-                    <div class="row pop_up_element"></div>
+                    <div class="row"></div>
                     <button class="forward">&gt;</button>
                 </div>
+                <ul class="flex_control pop_up_element" data-number="1"></ul>
 
-                <div class="row_wrap">
+                <div data-number="2" class="row_wrap pop_up_element">
                     <button class="back">&lt;</button>
-                    <div class="row pop_up_element"></div>
+                    <div class="row"></div>
                     <button class="forward">&gt;</button>
                 </div>
+                <ul class="flex_control pop_up_element" data-number="2"></ul>
 
-                <div class="row_wrap">
+                <div data-number="3" class="row_wrap pop_up_element">
                     <button class="back">&lt;</button>
-                    <div class="row pop_up_element"></div>
+                    <div class="row"></div>
                     <button class="forward">&gt;</button>
                 </div>
+                <ul class="flex_control pop_up_element" data-number="3"></ul>
+
+                <div data-number="4" class="row_wrap pop_up_element">
+                    <button class="back">&lt;</button>
+                    <div class="row"></div>
+                    <button class="forward">&gt;</button>
+                </div>
+                <ul class="flex_control pop_up_element" data-number="4"></ul>
+
+                <div data-number="5" class="row_wrap pop_up_element">
+                    <button class="back">&lt;</button>
+                    <div class="row"></div>
+                    <button class="forward">&gt;</button>
+                </div>
+                <ul class="flex_control pop_up_element" data-number="5"></ul>
             </div>
 
             <script>
@@ -92,7 +109,7 @@
                 }
 
                 //создаём карточки товаров в магазине
-                const countInRow = Math.max(10, arrShop.length / 3)
+                const countInRow = Math.max(6, arrShop.length / 3)
 
                 arrShop.forEach((p, i) => {
                     let index = Math.floor(i / countInRow)
@@ -104,13 +121,19 @@
 
                 //скрываем если строка пустая
                 const wrapsRowInShop = document.querySelectorAll("main .shop .row_wrap");
-                wrapsRowInShop.forEach(wrap => {
-                    const row = wrap.querySelector(".row");
 
-                    if (row.children.length === 0) {
-                        wrap.classList.add("hide");
-                    }
-                })
+                const hideRowInShop = () => {
+                    wrapsRowInShop.forEach(wrap => {
+                        const row = wrap.querySelector(".row");
+
+                        if (row.children.length === 0) {
+                            wrap.classList.add("hide");
+                        } else {
+                            wrap.classList.remove("hide");
+                        }
+                    });
+                }
+                hideRowInShop();
             </script>
 
             <div class="nothing_found hide">Ничего не найдено</div>

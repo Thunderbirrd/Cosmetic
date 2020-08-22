@@ -2,6 +2,10 @@ main {
     margin-top: calc(-1 * var(--basket-width) + 5);
 }
 
+main .hide_without_articles {
+    display: none;
+}
+
 main .hide {
     display: none;
 }
@@ -83,6 +87,7 @@ main .shop .row_wrap.hide {
 
 .row::after {
     content: ".";
+    font-size: 1px;
     width: 0;
     visibility: hidden;
 }
@@ -116,6 +121,45 @@ section {
     font-size: 1.2rem;
     color: rgb(255, 0, 0);
     text-align: center;
+}
+
+.shop .row .card__image {
+    width: 200px;
+}
+
+
+main .flex_control {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+}
+
+main .flex_control li {
+    border: 2px solid #ffdddd;
+    border-radius: 50%;
+    background-color: white;
+    padding: 4px;
+    width: 10px;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    cursor: pointer;
+    margin-right: 6px;
+    margin-bottom: 8px;
+}
+
+main .flex_control li span{
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+main .flex_control li.active span{
+    background-color: #ffdddd;
 }
 
 @media screen and (max-width: 449px) {

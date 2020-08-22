@@ -18,6 +18,10 @@ header .hide {
     display: none;
 }
 
+header .hide_without_articles {
+    display: none;
+}
+
 header .wrap_header {
     padding-top: 15px;
 }
