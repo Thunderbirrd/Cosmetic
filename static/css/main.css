@@ -50,7 +50,10 @@ main .shop .row_wrap.hide {
 }
 
 .shop .row_wrap button {
-    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
     border-radius: 50%;
     background-color: white;
     cursor: pointer;
@@ -61,8 +64,18 @@ main .shop .row_wrap.hide {
     transition: var(--transition-background-color-row-button);
 }
 
+.shop .row_wrap .forward img {
+    position: relative;
+    left: 3px;
+}
+
+.shop .row_wrap .back img {
+    position: relative;
+    right: 3px;
+}
+
 .shop .row_wrap button:hover {
-    background-color: #ffdddd;
+    background-color: #f9eded;
 }
 
 .rows {
