@@ -63,6 +63,21 @@
     margin: 0 35px;
 }
 
+.about_product .description {
+    overflow-y: auto;
+    padding: 0 4px;
+}
+
+.about_product .description::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 4px;
+}
+
+.about_product .description::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 .about_product .description p {
     text-align: justify;
 }
@@ -77,6 +92,7 @@
     }
 
     .about_product .card {
+        grid-row: 1;
         margin: 0 0 10px 0;
     }
 
@@ -87,6 +103,17 @@
 
     .about_product .card__image img {
         margin: 0;
+    }
+
+    .about_product .about_product_inputs {
+        padding-top: 10px;
+    }
+}
+
+@media screen and (max-width: 400px){ 
+    .about_product .card .card__image img {
+        width: 150px;
+        height: 150px;
     }
 }
 

@@ -1,7 +1,7 @@
 {% for service in service_names %}
 <div class="option">
     <p data-name="{{ service.name }}" data-price="{{ service.price }}">
-        {{ service.name }} {{ service.price }}&#8381;
+        {{ service.name }} {{ service.price }}<span style="font-family:Arial;">&#8381;</span>
     </p>
 </div>
 {% endfor %}

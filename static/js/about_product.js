@@ -30,7 +30,7 @@ const showAboutProduct = (id, type) => {
     aboutProductImage.src = product.image
     aboutProductImage.width = 200
     aboutProductImage.height = 200
-    aboutProductPrice.innerHTML = product.newPrice + " &#8381;";
+    aboutProductPrice.innerHTML = product.newPrice + ' <span style="font-family:Arial;">&#8381;</span>';
     aboutProductCount.value = 1
 
     if (product.category == "Сертификаты") {

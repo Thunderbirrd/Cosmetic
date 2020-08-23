@@ -111,10 +111,10 @@
                     const divCardPrice = document.createElement("div")
                     if (discount === 0) {
                         divCardPrice.classList.add("card__new_price")
-                        divCardPrice.innerHTML = price + " &#8381;"
+                        divCardPrice.innerHTML = price + " <span style='font-family:Arial;'>&#8381;</span>"
                     } else {
                         divCardPrice.classList.add("card__price")
-                        divCardPrice.innerHTML = `<strike>${price} &#8381;</strike><span class="card__discount"> -${discount}%</span>`
+                        divCardPrice.innerHTML = `<strike>${price} <span style="font-family:Arial;">&#8381;</span></strike><span class="card__discount"> -${discount}%</span>`
                     }
 
                     divCard.appendChild(divCardPrice)
@@ -123,7 +123,7 @@
                         const divCardNewPrice = document.createElement("div")
                         divCardNewPrice.classList.add("card__new_price")
                         let newPrice = Math.round(price * (1 - discount / 100))
-                        divCardNewPrice.innerHTML = newPrice + " &#8381;"
+                        divCardNewPrice.innerHTML = newPrice + ' <span style="font-family:Arial;">&#8381;</span>'
                         divCard.appendChild(divCardNewPrice)
                     }
 
