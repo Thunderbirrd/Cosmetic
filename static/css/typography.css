@@ -4,7 +4,8 @@ html {
 
 @font-face {
 	font-family: sans-serif;
-	src: url('http://127.0.0.1:8000/fonts/sans-serif.ttf');
+    src: url('http://127.0.0.1:8000/fonts/sans-serif.ttf');
+    unicode-range: U+000-52F, U+1E00-1FFF, U+2200–22FF, U+20BD;
 }
 
 body {

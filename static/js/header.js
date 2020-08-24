@@ -94,7 +94,7 @@ const _setPaddingShoppingBasket = () => {
 
 // изменяет количество продуктов в кружочке
 const setAmountProductes = (amount=store.getAmountBasket()) => {
-    count_productes.innerHTML = `${amount} <span style="font-family:Roboto;">&#x20bd;</span>`
+    count_productes.innerHTML = `${amount} <span style="font-family:Arial;">₽</span>`
 
     setTextInSpanAmount(amount)
 

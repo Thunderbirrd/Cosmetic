@@ -30,7 +30,7 @@ const _createPriceShoppingWindow = (price) => {
     div.classList.add("price")
 
     const p = document.createElement("p")
-    p.innerHTML = `Цена: ${price} <span style="font-family:Roboto;">&#x20bd;</span>`
+    p.innerHTML = `Цена: ${price} <span style="font-family:Arial;">₽</span>`
 
     div.appendChild(p)
 
@@ -54,7 +54,7 @@ const _createAmountShoppingWindow = (price, count) => {
     div.classList.add("amount")
 
     const p = document.createElement("p")
-    p.innerHTML = `Сумма: ${price * count} <span style="font-family:Roboto;">&#x20bd;</span>`
+    p.innerHTML = `Сумма: ${price * count} <span style="font-family:Arial;">₽</span>`
 
     div.appendChild(p)
 
