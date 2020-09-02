@@ -3,12 +3,19 @@ html {
 }
 
 @font-face {
-	font-family: sans-serif;
-	src: url('../fonts/sans-serif.ttf');
+	font-family: "GothamProRMedium";
+    src: url("/static/fonts/GothamProRMedium.eot"); /* IE9 Compat Modes */
+    src: url("/static/fonts/GothamProRMedium.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+        url("/static/fonts/GothamProRMedium.svg") format("svg"), /* Legacy iOS */
+        url("/static/fonts/GothamProRMedium.ttf") format("truetype"), /* Safari, Android, iOS */
+        url("/static/fonts/GothamProRMedium.woff") format("woff"), /* Modern Browsers */
+        url("/static/fonts/GothamProRMedium.woff2") format("woff2"); /* Modern Browsers */
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
-    font-family: sans-serif;
+    font-family: Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
     font-weight: 400;
     line-height: 1.45;
 }

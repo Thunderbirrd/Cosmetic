@@ -73,6 +73,10 @@ const _createCount = (id, type, count) => {
     const div = document.createElement("div")
     div.classList.add("count")
 
+    if (store.getProductByIdAndType(id, type).category == "Сертификаты") {
+        div.classList.add("hide")
+    }
+
     const input = document.createElement("input")
     input.type = "text"
     input.size = "2"

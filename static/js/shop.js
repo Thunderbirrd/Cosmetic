@@ -118,7 +118,11 @@ const setUpFlexControl = (numberFlexControl, countVisibleCardInRow, countCard, r
 const setUpWidthRow = (element) => {
     const parent = element.parentElement;
 
-    element.scrollTo(0, 0)
+    try {
+        element.scrollTo(0, 0);
+    } catch (e) {
+        element.scrollLeft = 0;
+    }
 
     element.style.width = "auto";
 
