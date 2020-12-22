@@ -1,6 +1,6 @@
 const shop = document.querySelector("main .shop");
 
-const shopRows = shop.querySelectorAll(".row");
+let shopRows = shop.querySelectorAll(".row");
 
 //отступы между карточками с учётом теней
 const MARGIN_BETWEEN_CARD = MARGIN_SHOP_CARD + ROW_CARD_SHADOW_SIZE * 2;
@@ -212,9 +212,71 @@ const divNothingFound = shop.querySelector(".nothing_found")
 
 const divRows = shop.querySelector(".rows")
 
-const setUpShop = (newCards=shopCard) => {
-    for (let i = 0; i < newCards.length; i++) {
-        rowsInShop[Math.floor(i / countInRow)].appendChild(newCards[i]);        
+const sortCardsByLine = (cards) => {
+    return cards.sort((el1, el2) => {
+        let line1 = el1.dataset.line;
+        let line2 = el2.dataset.line;
+
+        if (line1 > line2) {
+            return 1;
+        }
+
+        if (line1 === line2) {
+            return 0
+        }
+
+        return -1;
+    });
+}
+
+const createNewRow = (numberRow) => {
+    const rows = document.querySelector(".shop .rows");
+
+    const div = document.createElement("div");
+    div.outerHTML = `
+        <div data-number="${numberRow}" class="row_wrap pop_up_element">
+            <button class="back">
+                <img width="18" height="18" src="/static/img/arrow-left.svg" alt="">
+            </button>
+            <div class="row"></div>
+            <button class="forward">
+                <img width="18" height="18" src="/static/img/arrow-right.svg" alt="">
+            </button>
+        </div>`;
+
+    rows.appendChild(div);
+
+    const ul = `<ul class="flex_control pop_up_element" data-number="${numberRow}"></ul>`;
+
+    rows.appendChild(ul);
+
+    shopRows = shop.querySelectorAll(".row");
+    rowsInShop = document.querySelectorAll("main .shop .row");
+}
+
+const setUpShop = (newCards=shopCard, isFilledByLine = false) => {
+
+    if (isFilledByLine) {
+        // для всех линий одного бренда
+        let indexRowShop = 0;
+
+        sortCardsByLine(newCards).forEach((card, i, arrCards) => {
+            if (i > 0 && arrCards[i-1].dataset.line !== card.dataset.line) {
+                indexRowShop++;
+            }
+
+            if (indexRowShop >= rowsInShop.length) {
+                createNewRow(rowsInShop.length + 1);
+            }
+
+            rowsInShop[indexRowShop].appendChild(card); 
+        });
+
+    } else {
+        // обычное заполнение строк, зависящее от количества элементов
+        for (let i = 0; i < newCards.length; i++) {
+            rowsInShop[Math.floor(i / countInRow)].appendChild(newCards[i]);        
+        }
     }
 
     hideRowInShop();
@@ -241,7 +303,7 @@ const showProductByFilter = (name, brand, line, category) => {
         }
     })
 
-    setUpShop(newCards);
+    setUpShop(newCards, line === all && brand !== all && category === line);
 
     if (isNothingFound) {
         divRows.classList.add("hide")
